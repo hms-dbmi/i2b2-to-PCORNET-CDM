@@ -6,7 +6,7 @@ use strict;
 use warnings;
 use Carp;
 
-our @columnList = ("","","","","");
+our @columnList = ("VARIANT_FILE_VARIABLE_COLUMN","VARIANT_FILE_VALUE_COLUMN","COLUMN_DELIMITER","VARIABLE_NAME","CONCEPT_PATH","CONCEPT_CD");
 
 sub new {
     my $class = shift;

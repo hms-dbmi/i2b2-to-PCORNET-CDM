@@ -86,33 +86,20 @@ sub generateConceptDimensionFile
 		#Clean Input line.
 		chomp($line);
 	
-		if($line =~ m/^([^\t]+)\t([^\t]+)\t([^\t]+)\t([^\t]+)/)
+		if($line =~ m/^([^\t]+)\t([^\t]+)\t([^\t]+)\t([^\t]+)\t([^\t]+)/)
 		{
-			#This is the index in the data file that the concept corresponds to.
-			my $currentIndexField = $1;
-		
-			#This is the index where the data values can be extracted from.
-			my $currentValueIndexField = $2;
-		
-			#This is the delimiter we will find in the data values.
-			my $currentDelimiter = $3;
-		
-			#The fields (When the index and value index are the same) are separated by delimiters and have a two character naming convention (;AC=). Pull the two character name here.
-			my $currentFieldName = $4;
-		
-			my $currentConceptPath = $5;
-		
+
 			#Create a new concept code identifier.
 			$uuid1 = $ug->generate_v1();
 	
 			#Create the concept object so we can write it to a file.
-			my $conceptDimension = new ConceptDimension(CONCEPT_CD => $uuid1, CONCEPT_PATH => $currentConceptPath);
+			my $conceptDimension = new ConceptDimension(CONCEPT_CD => $uuid1, CONCEPT_PATH => $5);
 			print concept_dimension $conceptDimension->toTableFileLine();	
-		
-			my $variantFieldMapping = new VariantFieldMapping();
+			
+			my $variantFieldMapping = new VariantFieldMapping(VARIANT_FILE_VARIABLE_COLUMN => $1,  VARIANT_FILE_VALUE_COLUMN => $2, COLUMN_DELIMITER => $3, VARIABLE_NAME => $4, CONCEPT_PATH => $5, CONCEPT_CD => $uuid1);
 		
 			#Store an array of the Variant Field Mapping objects.
-			push(@conceptList, $conceptDimension);	
+			push(@conceptList, $variantFieldMapping);	
 	
 		}
 	}

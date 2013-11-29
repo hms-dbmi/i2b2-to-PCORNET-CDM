@@ -7,6 +7,7 @@ use warnings;
 use Carp;
 use UUID::Generator::PurePerl;
 use Data::Dumper;
+use List::Util qw(first);
 
 ###########################################
 #OBSERVATION_FACT FILE
@@ -18,7 +19,7 @@ sub generateObservationFactFile
 
 	my $patientHash = $params->{PATIENT_HASH};
 	my $conceptHash = $params->{CONCEPT_HASH};
-	my @conceptList = $params->{CONCEPT_LIST};
+	my @conceptList = @{$params->{CONCEPT_LIST}};
 
 	my $observation_fact_output_file	= $params->{BASE_DIRECTORY} . "data/i2b2_load_tables/observation_fact";
 	my $inputDataDirectory 				= $params->{BASE_DIRECTORY} . "data/source/";
@@ -58,25 +59,66 @@ sub generateObservationFactFile
 
 					print observation_fact $observationFact->toTableFileLine(); 				
 				}
-			
-				#Next we need to loop through the variant array and pull out the concepts embedded in the special delimited fields.
-				foreach(@conceptList) 
-				{ 
-					#This should be a VariantFieldMapping object.
-					my $currentConcept = $_;
 				
-					#print(Dumper($currentConcept));
-				
-					#my $observationFact = new ObservationFact(PATIENT_NUM => $patientHash{$currentID}, CONCEPT_CD => $k, TVAL_CHAR => $currentValue);
+				for my $i (0 .. @conceptList-1)
+				{	
+					#Find out which column we need to extract the mapping from.
+					my $variableColumn = $conceptList[$i]->{VARIANT_FILE_VARIABLE_COLUMN};
+					
+					#Find out which column we need to extract the value from.
+					my $valueColumn = $conceptList[$i]->{VARIANT_FILE_VALUE_COLUMN};
 
-					#print observation_fact $observationFact->toTableFileLine(); 				
+					#When the mapping and value field are the same we parse just that one field.
+					if($variableColumn eq $valueColumn)
+					{
+						#Get the name of the variable and the delimiter we are using.
+						my $variableName 		= $conceptList[$i]->{VARIABLE_NAME};
+						my $variableDelimiter 	= $conceptList[$i]->{COLUMN_DELIMITER};
+													
+						#Create the regular expression to extract the value for the concept.
+						my $regularExpression = "$variableName([^$variableDelimiter]*)";
+
+						#Extract the value we are interested in out of the data column.
+						if($line[$variableColumn-1] =~ m/$regularExpression/)
+						{
+							#The first match is the value we are after. Some values are just a true/false, so if $1 is blank at this point it was found and it's true.
+							my $retrievedValue = $1 // "TRUE";
+							
+							my $observationFact 	= new ObservationFact(PATIENT_NUM => $patientHash->{$currentID}, CONCEPT_CD => $conceptList[$i]->{CONCEPT_CD}, TVAL_CHAR => $retrievedValue);
+							print observation_fact $observationFact->toTableFileLine(); 
+						}
+					}
+					else
+					{
+						my $variableName 			= $conceptList[$i]->{VARIABLE_NAME};
+						my $variableDelimiter 		= $conceptList[$i]->{COLUMN_DELIMITER};
+					
+						#If the mapping and value fields are different we need to parse two columns.
+						my @parsedVariableColumn 	= split(/$variableDelimiter/,$line[$variableColumn-1]);
+						
+						#We need to look for the index of the entry in the delimited field that matches our variable name.
+						my $variableIndex = first { $parsedVariableColumn[$_] eq $variableName } 0..$#parsedVariableColumn;
+						$variableIndex = $variableIndex  // -1;
+						
+						if($variableIndex >= 0)
+						{
+							#Okay, we've found the index of where the value should be in the value column, parse the value.
+							my @parsedValueColumn		= split(/$variableDelimiter/,$line[$valueColumn-1]);
+							my $retrievedValue			= $parsedValueColumn[$variableIndex];
+							
+							my $observationFact 	= new ObservationFact(PATIENT_NUM => $patientHash->{$currentID}, CONCEPT_CD => $conceptList[$i]->{CONCEPT_CD}, TVAL_CHAR => $retrievedValue);
+							
+							print observation_fact $observationFact->toTableFileLine(); 														
+						}
+					}
 				}
-			
+
 			}
 		
 			close currentPatientANNOVARFile	
 		 }
 	}
+	
 	closedir(D);
 	close(observation_fact);
 }
