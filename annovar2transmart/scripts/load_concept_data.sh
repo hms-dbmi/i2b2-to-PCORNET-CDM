@@ -1,0 +1,1 @@
+sqlldr tm_lz/tm_lz control=control_files/conceptDimension.ctl log=logFiles/concept_dimension.log

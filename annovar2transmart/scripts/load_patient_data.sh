@@ -1,0 +1,1 @@
+sqlldr tm_lz/tm_lz control=control_files/patientDimension.ctl log=logFiles/patient_dimension.log

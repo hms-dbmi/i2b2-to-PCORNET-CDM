@@ -26,6 +26,10 @@ sub printColumnHeaders {
 	return join("\t", @columnList) . "\n";
 }
 
+sub printColumnHeadersInList {
+	return "('" . join("','", @columnList) . "')\n";
+}
+
 sub toTableFileLine {
 	my $self = shift;
 	
@@ -43,6 +47,15 @@ sub toTableFileLine {
 	
 	#Add a new line and return.
     return $lineToReturn . "\n";
+}
+
+sub getNewPatientIdList {
+
+	my $numberOfIdsToGet = shift;
+
+	my @returnPatientIdArray = DatabaseConnection::getNewIdentifiers($numberOfIdsToGet, "I2B2DEMODATA.SEQ_PATIENT_NUM");
+
+	return @returnPatientIdArray;
 }
 
 1;

@@ -1,0 +1,1 @@
+sqlldr tm_lz/tm_lz control=control_files/observationFact.ctl log=logFiles/observation_fact.log

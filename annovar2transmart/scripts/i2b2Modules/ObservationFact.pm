@@ -26,6 +26,10 @@ sub printColumnHeaders {
 	return join("\t", @columnList) . "\n";
 }
 
+sub printColumnHeadersInList {
+	return "('" . join("','", @columnList) . "')\n";
+}
+
 sub toTableFileLine {
 	my $self = shift;
 	
@@ -43,6 +47,15 @@ sub toTableFileLine {
 	
 	#Add a new line and return.
     return $lineToReturn . "\n";
+}
+
+sub getNewObservationFactIdList {
+
+	my $numberOfIdsToGet = shift;
+
+	my @returnConceptIdArray = DatabaseConnection::getNewIdentifiers($numberOfIdsToGet, "I2B2DEMODATA.CONCEPT_ID");
+
+	return @returnConceptIdArray;
 }
 
 1;

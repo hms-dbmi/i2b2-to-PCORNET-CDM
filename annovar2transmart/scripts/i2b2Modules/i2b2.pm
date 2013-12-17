@@ -1,12 +1,12 @@
 #!/usr/bin/perl
 
-package ConceptDimension;
+package i2b2;
 
 use strict;
 use warnings;
 use Carp;
 
-our @columnList = ("UPLOAD_ID","SOURCESYSTEM_CD","CONCEPT_CD","CONCEPT_PATH","CONCEPT_BLOB","UPDATE_DATE","NAME_CHAR","DOWNLOAD_DATE","IMPORT_DATE");
+our @columnList = ("C_HLEVEL","C_FULLNAME","C_NAME","C_SYNONYM_CD","C_VISUALATTRIBUTES","C_TOTALNUM","C_BASECODE","C_METADATAXML","C_FACTTABLECOLUMN","C_TABLENAME","C_COLUMNNAME","C_COLUMNDATATYPE","C_OPERATOR","C_DIMCODE","C_COMMENT","C_TOOLTIP","UPDATE_DATE","DOWNLOAD_DATE","IMPORT_DATE","SOURCESYSTEM_CD","VALUETYPE_CD","I2B2_ID","M_APPLIED_PATH","M_EXCLUSION_CD","C_PATH","C_SYMBOL");
 
 sub new {
     my $class = shift;
@@ -49,11 +49,11 @@ sub toTableFileLine {
     return $lineToReturn . "\n";
 }
 
-sub getNewConceptIdList {
+sub getNewI2b2IdList {
 
 	my $numberOfIdsToGet = shift;
 
-	my @returnPatientIdArray = DatabaseConnection::getNewIdentifiers($numberOfIdsToGet, "I2B2DEMODATA.CONCEPT_ID");
+	my @returnPatientIdArray = DatabaseConnection::getNewIdentifiers($numberOfIdsToGet, "I2B2METADATA.I2B2_ID_SEQ");
 
 	return @returnPatientIdArray;
 }
