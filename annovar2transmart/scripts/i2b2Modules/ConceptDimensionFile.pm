@@ -30,7 +30,7 @@ sub generateConceptDimensionFile
 	my $textIndividualConceptHash;
 	
 	my $concept_dimension_output_file 	= $params->{BASE_DIRECTORY} . "data/i2b2_load_tables/concept_dimension.dat";
-	my $variant_data_file	 			= $params->{BASE_DIRECTORY} . "data/source/variant_data/i2b2_55sample_allVariantAnnotations.txt";
+	my $variant_data_file	 			= $params->{BASE_DIRECTORY} . "data/source/variant_data/i2b2_55sample_allVariantAnnotations.txt.short";
 	my $patient_data_directory			= $params->{BASE_DIRECTORY} . "data/source/patient_data/";
 	$currentStudyId						= $params->{STUDY_ID};
 	
@@ -345,16 +345,19 @@ sub _createConceptsFromConceptHash {
 	{ 
 		while(my($shortName, $fullConceptPath) = each %$distinctLeafValues) 
 		{
-			my $currentConceptId = shift(@$conceptIdArray);	
-	
-			#Create the concept object.
-			my $conceptDimension = new ConceptDimension(CONCEPT_CD => $currentConceptId, CONCEPT_PATH => $fullConceptPath, SOURCESYSTEM_CD => $currentStudyId);
+			if(length($fullConceptPath) < 255)
+			{
+				my $currentConceptId = shift(@$conceptIdArray);	
 			
-			#Write the entry for the concept_dimension table.
-			print $concept_dimension_out $conceptDimension->toTableFileLine();
+				#Create the concept object.
+				my $conceptDimension = new ConceptDimension(CONCEPT_CD => $currentConceptId, CONCEPT_PATH => $fullConceptPath, SOURCESYSTEM_CD => $currentStudyId);
 			
-			#Add the concept ID alongside the full concept path in the hash.
-			$distinctLeafValues->{$shortName} .= "!!!$currentConceptId";
+				#Write the entry for the concept_dimension table.
+				print $concept_dimension_out $conceptDimension->toTableFileLine();
+			
+				#Add the concept ID alongside the full concept path in the hash.
+				$distinctLeafValues->{$shortName} .= "!!!$currentConceptId";
+			}
 		}
 	}
 

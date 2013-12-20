@@ -8,6 +8,7 @@ use Carp;
 use UUID::Generator::PurePerl;
 use Data::Dumper;
 use List::Util qw(first);
+use Scalar::Util qw(looks_like_number);
 
 ###########################################
 #OBSERVATION_FACT FILE
@@ -118,28 +119,35 @@ sub generateObservationFactFile
 				#Add an observation fact record for each numeric concept.
 				while(my($columnName, $conceptCd) = each %$individualNumericConcepts) 
 				{ 	
-					#("UPLOAD_ID", "UNITS_CD", "CONCEPT_CD", "VALTYPE_CD", "TVAL_CHAR", "NVAL_NUM", "UPDATE_DATE", "END_DATE", "VALUEFLAG_CD", "ENCOUNTER_NUM", "PATIENT_NUM", "OBSERVATION_BLOB", "LOCATION_CD", "START_DATE", "QUANTITY_NUM", "SOURCESYSTEM_CD", "PROVIDER_ID", "INSTANCE_NUM", "MODIFIER_CD", "DOWNLOAD_DATE", "CONFIDENCE_NUM");
-					print observation_fact "\t\t$conceptCd\tN\t\t$line[$headerHash{$columnName}]\t\t\t\t$currentEncounterId\t$patientHash->{$currentID}\t\t\t\t\tWES_LOADING\t@\t1\t\t\t\n";
+					if(looks_like_number($line[$headerHash{$columnName}]))
+					{
+						#("UPLOAD_ID", "UNITS_CD", "CONCEPT_CD", "VALTYPE_CD", "TVAL_CHAR", "NVAL_NUM", "UPDATE_DATE", "END_DATE", "VALUEFLAG_CD", "ENCOUNTER_NUM", "PATIENT_NUM", "OBSERVATION_BLOB", "LOCATION_CD", "START_DATE", "QUANTITY_NUM", "SOURCESYSTEM_CD", "PROVIDER_ID", "INSTANCE_NUM", "MODIFIER_CD", "DOWNLOAD_DATE", "CONFIDENCE_NUM");
+						print observation_fact "\t\t$conceptCd\tN\t\t$line[$headerHash{$columnName}]\t\t\t\t$currentEncounterId\t$patientHash->{$currentID}\t\t\t\t\tWES_LOADING\t@\t1\t\t\t\n";
 
-					#So that we can build more observation fact records later we take note of all the variant + patient combinations.
-					$variantPatientHashArray{$line[0]}{$patientHash->{$currentID}} = $currentEncounterId;
+						#So that we can build more observation fact records later we take note of all the variant + patient combinations.
+						$variantPatientHashArray{$line[0]}{$patientHash->{$currentID}} = $currentEncounterId;						
+					}
 				}
 				
 				#For the text concepts we need to look up the concept code based on the actual value the patient has.
 				while(my($columnName, $subHash) = each %$individualTextConcepts) 
-				{ 	
-					my $conceptCd = $subHash->{$line[$headerHash{$columnName}]};
-					
-					if($conceptCd eq '')
+				{ 					
+					if(length($line[$headerHash{$columnName}]) < 255)
 					{
-						die("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]");
+						my $conceptCd = $subHash->{$line[$headerHash{$columnName}]};
+					
+						if($conceptCd eq '')
+						{
+							#die("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]");
+							print("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]\n");
+						}
+											
+						#("UPLOAD_ID", "UNITS_CD", "CONCEPT_CD", "VALTYPE_CD", "TVAL_CHAR", "NVAL_NUM", "UPDATE_DATE", "END_DATE", "VALUEFLAG_CD", "ENCOUNTER_NUM", "PATIENT_NUM", "OBSERVATION_BLOB", "LOCATION_CD", "START_DATE", "QUANTITY_NUM", "SOURCESYSTEM_CD", "PROVIDER_ID", "INSTANCE_NUM", "MODIFIER_CD", "DOWNLOAD_DATE", "CONFIDENCE_NUM");
+						print observation_fact "\t\t$conceptCd\tT\t$line[$headerHash{$columnName}]\t\t\t\t\t$currentEncounterId\t$patientHash->{$currentID}\t\t\t\t\tWES_LOADING\t@\t1\t\t\t\n";
+						
+						#So that we can build more observation fact records later we take note of all the variant + patient combinations.
+						$variantPatientHashArray{$line[0]}{$patientHash->{$currentID}} = $currentEncounterId;
 					}
-				
-					#("UPLOAD_ID", "UNITS_CD", "CONCEPT_CD", "VALTYPE_CD", "TVAL_CHAR", "NVAL_NUM", "UPDATE_DATE", "END_DATE", "VALUEFLAG_CD", "ENCOUNTER_NUM", "PATIENT_NUM", "OBSERVATION_BLOB", "LOCATION_CD", "START_DATE", "QUANTITY_NUM", "SOURCESYSTEM_CD", "PROVIDER_ID", "INSTANCE_NUM", "MODIFIER_CD", "DOWNLOAD_DATE", "CONFIDENCE_NUM");
-					print observation_fact "\t\t$conceptCd\tT\t$line[$headerHash{$columnName}]\t\t\t\t\t$currentEncounterId\t$patientHash->{$currentID}\t\t\t\t\tWES_LOADING\t@\t1\t\t\t\n";
-
-					#So that we can build more observation fact records later we take note of all the variant + patient combinations.
-					$variantPatientHashArray{$line[0]}{$patientHash->{$currentID}} = $currentEncounterId;
 					
 				}
 			}
@@ -152,7 +160,7 @@ sub generateObservationFactFile
 	
 	#The outmost iterator will be the variant file.
 	print("DEBUG - ObservationFactFile.pm : Attemping to open variant input file $variantDataDirectory\n");
-	open variant_data, "<$variantDataDirectory/i2b2_55sample_allVariantAnnotations.txt";
+	open variant_data, "<$variantDataDirectory/i2b2_55sample_allVariantAnnotations.txt.short";
 	
 	my $header = <variant_data>;
 	my @headerArray = split(/\t/,$header);
@@ -174,25 +182,35 @@ sub generateObservationFactFile
 		{ 
 			while(my($patientId, $encounterNum) = each %{ $variantPatientHashArray{$currentVariant}}) 
 			{ 	
-				$testCounter += 1;
-				print observation_fact "\t\t$conceptCd\tN\t\t$line[$headerHash{$columnName}]\t\t\t\t$encounterNum\t$patientId\t\t\t\t\tWES_LOADING\t@\t1\t\t\t\n";
+				if(looks_like_number($line[$headerHash{$columnName}]))
+				{
+					$testCounter += 1;
+					print observation_fact "\t\t$conceptCd\tN\t\t$line[$headerHash{$columnName}]\t\t\t\t$encounterNum\t$patientId\t\t\t\t\tWES_LOADING\t@\t1\t\t\t\n";
+				}
 			}
 		}
-	
+
 		while(my($columnName, $subHash) = each %$variantTextConcepts) 
 		{ 
-			my $conceptCd = $subHash->{$line[$headerHash{$columnName}]};
-			
-			if($conceptCd eq '')
+			if(length($line[$headerHash{$columnName}]) < 255)
 			{
-				die("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]");
+				my $conceptCd = $subHash->{$line[$headerHash{$columnName}]};
+		
+				if($conceptCd eq '')
+				{
+					#die("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]");
+					print("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]\n");
+				}
+				else
+				{
+					while(my($patientId, $encounterNum) = each %{ $variantPatientHashArray{$currentVariant}}) 
+					{ 	
+						$testCounter += 1;
+						print observation_fact "\t\t$conceptCd\tT\t$line[$headerHash{$columnName}]\t\t\t\t\t$encounterNum\t$patientId\t\t\t\t\tWES_LOADING\t@\t1\t\t\t\n";
+					}
+				}
 			}
-			
-			while(my($patientId, $encounterNum) = each %{ $variantPatientHashArray{$currentVariant}}) 
-			{ 	
-				$testCounter += 1;
-				print observation_fact "\t\t$conceptCd\tT\t$line[$headerHash{$columnName}]\t\t\t\t\t$encounterNum\t$patientId\t\t\t\t\tWES_LOADING\t@\t1\t\t\t\n";
-			}
+
 		}
 	
 	}
@@ -205,8 +223,6 @@ sub generateObservationFactFile
 	print("*************************************************************\n");
 	print("\n");
 }
-
-
 
 ###########################################
 

@@ -41,6 +41,8 @@ sub generateI2b2File
 	
 	my @i2b2IdArray = i2b2::getNewI2b2IdList($conceptCount);
 
+	print i2b2_output i2b2->printColumnHeaders();
+
 	while(my($mappingFile, $mappingFileType) = each %mappingFileHash) 
 	{ 
 		my $currentMappingFile = $params->{BASE_DIRECTORY} . "/mapping_files/" . $mappingFile;
@@ -65,32 +67,40 @@ sub generateI2b2File
 				my $currentConceptType 	= $3;
 				
 				#Pull the concept cd based on the name of the column in the data file. For text entries we need to loop through the hash to create all the possible data values.
-				if($mappingFileType eq "INDIVIDUAL" && $currentConceptType eq "N")
+				if($mappingFileType eq "INDIVIDUAL" and $currentConceptType eq "N")
 				{
-					_generateSingleI2b2Record($1,$2, $individualNumericConcepts->{$1}, shift @i2b2IdArray);
+					_generateSingleI2b2Record($1,$2, $individualNumericConcepts->{$1}, shift @i2b2IdArray,'N');
 				}
-				elsif($mappingFileType eq "VARIANT" && $currentConceptType eq "N")
+				elsif($mappingFileType eq "VARIANT" and $currentConceptType eq "N")
 				{
-					_generateSingleI2b2Record($1,$2, $variantNumericConcepts->{$1}, shift @i2b2IdArray);
+					_generateSingleI2b2Record($1,$2, $variantNumericConcepts->{$1}, shift @i2b2IdArray,'N');
 				}
-				elsif($mappingFileType eq "INDIVIDUAL" && $currentConceptType eq "T")
+				elsif($mappingFileType eq "INDIVIDUAL" and $currentConceptType eq "T")
 				{					
 					my $individualTextConceptsSubHash = $individualTextConcepts->{$1};
 					
 					while(my($nameText, $fullConceptInfo) = each %$individualTextConceptsSubHash) 
 					{
 						my @conceptPathIdSplit = split(/!!!/,$fullConceptInfo);
-						_generateSingleI2b2Record($1,$conceptPathIdSplit[0],$conceptPathIdSplit[1],shift @i2b2IdArray);
+						
+						if(length($conceptPathIdSplit[0]) < 255)
+						{
+							_generateSingleI2b2Record($1,$conceptPathIdSplit[0],$conceptPathIdSplit[1],shift @i2b2IdArray,'T');
+						}
 					}
 				}
-				elsif($mappingFileType eq "VARIANT" && $currentConceptType eq "T")
+				elsif($mappingFileType eq "VARIANT" and $currentConceptType eq "T")
 				{
 					my $variantTextConceptsSubHash = $variantTextConcepts->{$1};
 					
 					while(my($nameText, $fullConceptInfo) = each %$variantTextConceptsSubHash) 
 					{
 						my @conceptPathIdSplit = split(/!!!/,$fullConceptInfo);
-						_generateSingleI2b2Record($1,$conceptPathIdSplit[0],$conceptPathIdSplit[1],shift @i2b2IdArray);
+						
+						if(length($conceptPathIdSplit[0]) < 255)
+						{
+							_generateSingleI2b2Record($1,$conceptPathIdSplit[0],$conceptPathIdSplit[1],shift @i2b2IdArray,'T');
+						}
 					}
 				}
 				
@@ -100,8 +110,49 @@ sub generateI2b2File
 
 	}
 	
-
 	
+my $i2b2Record = new i2b2(	C_HLEVEL 			=> 0, 
+ 								C_FULLNAME 			=> '\\test\\', 
+ 								C_DIMCODE 			=> 'test',
+ 								C_TOOLTIP			=> '\\test\\',
+ 								C_FACTTABLECOLUMN	=> 'CONCEPT_CD',
+ 								C_NAME				=> 'test',
+ 								C_TABLENAME			=> 'CONCEPT_DIMENSION',
+ 								C_COLUMNNAME		=> 'CONCEPT_PATH',
+ 								C_COLUMNDATATYPE	=> 'T',
+ 								C_OPERATOR			=> 'LIKE',
+ 								C_COMMENT			=> 'WES_LOADER',
+ 								C_TOTALNUM			=> 0,
+ 								SOURCESYSTEM_CD		=> 'WES_LOADER',
+ 								M_APPLIED_PATH		=> '@',
+ 								I2B2_ID				=> shift @i2b2IdArray,
+ 								C_VISUALATTRIBUTES	=> 'CA',
+ 								C_SYNONYM_CD		=> 'N'
+ 								);	
+ 
+ 	print i2b2_output $i2b2Record->toTableFileLine();
+ 	
+ 	$i2b2Record = new i2b2(	C_HLEVEL 				=> 1, 
+ 								C_FULLNAME 			=> '\\test\\WES\\', 
+ 								C_DIMCODE 			=> 'WES',
+ 								C_TOOLTIP			=> '\\test\\WES\\',
+ 								C_FACTTABLECOLUMN	=> 'CONCEPT_CD',
+ 								C_NAME				=> 'WES',
+ 								C_TABLENAME			=> 'CONCEPT_DIMENSION',
+ 								C_COLUMNNAME		=> 'CONCEPT_PATH',
+ 								C_COLUMNDATATYPE	=> 'T',
+ 								C_OPERATOR			=> 'LIKE',
+ 								C_COMMENT			=> 'WES_LOADER',
+ 								C_TOTALNUM			=> 0,
+ 								SOURCESYSTEM_CD		=> 'WES_LOADER',
+ 								M_APPLIED_PATH		=> '@',
+ 								I2B2_ID				=> shift @i2b2IdArray,
+ 								C_VISUALATTRIBUTES	=> 'FA',
+ 								C_SYNONYM_CD		=> 'N'
+ 								);	
+ 
+ 	print i2b2_output $i2b2Record->toTableFileLine();	
+		
 	close(i2b2_output);
 
 	print("*************************************************************\n\n");
@@ -114,7 +165,12 @@ sub _generateSingleI2b2Record {
 	my $currentConceptPath 	= shift;
 	my $currentConceptCd	= shift;
 	my $i2b2Id				= shift;
+	my $columnDataType		= shift;
 	
+	my $metaDataXML			= '';
+	
+	if($columnDataType eq "N") {$metaDataXML = '<?xml version="1.0"?><ValueMetadata><Version>3.02</Version><CreationDateTime>08/14/2008 01:22:59</CreationDateTime><TestID></TestID><TestName></TestName><DataType>PosFloat</DataType><CodeType></CodeType><Loinc></Loinc><Flagstouse></Flagstouse><Oktousevalues>Y</Oktousevalues><MaxStringLength></MaxStringLength><LowofLowValue>0</LowofLowValue><HighofLowValue>0</HighofLowValue><LowofHighValue>100</LowofHighValue>100<HighofHighValue>100</HighofHighValue><LowofToxicValue></LowofToxicValue><HighofToxicValue></HighofToxicValue><EnumValues></EnumValues><CommentsDeterminingExclusion><Com></Com></CommentsDeterminingExclusion><UnitValues><NormalUnits>ratio</NormalUnits><EqualUnits></EqualUnits><ExcludingUnits></ExcludingUnits><ConvertingUnits><Units></Units><MultiplyingFactor></MultiplyingFactor></ConvertingUnits></UnitValues><Analysis><Enums /><Counts /><New /></Analysis></ValueMetadata>';}
+												
 	#The level is the number of hops minus the first and last slash.
 	my $levelCount = ($currentConceptPath =~ tr/\\//) - 2;
 	
@@ -139,14 +195,15 @@ sub _generateSingleI2b2Record {
 								C_NAME				=> $currentConceptName,
 								C_TABLENAME			=> 'CONCEPT_DIMENSION',
 								C_COLUMNNAME		=> 'CONCEPT_PATH',
-								C_COLUMNDATATYPE	=> 'T',
+								C_COLUMNDATATYPE	=> $columnDataType,
 								C_OPERATOR			=> 'LIKE',
 								C_COMMENT			=> 'WES_LOADER',
 								SOURCESYSTEM_CD		=> 'WES_LOADER',
 								M_APPLIED_PATH		=> '@',
 								I2B2_ID				=> $i2b2Id,
 								C_VISUALATTRIBUTES	=> 'LA',
-								C_SYNONYM_CD		=> 'N'
+								C_SYNONYM_CD		=> 'N',
+								C_METADATAXML		=> $metaDataXML
 								);
 								
 	print i2b2_output $i2b2Record->toTableFileLine();
@@ -164,46 +221,6 @@ sub _generateMultipleI2b2Records {
 
 
 
-	# my $i2b2Record = new i2b2(	C_HLEVEL 			=> 0, 
-# 								C_FULLNAME 			=> '\\test\\', 
-# 								C_DIMCODE 			=> 'test',
-# 								C_TOOLTIP			=> '\\test\\',
-# 								C_FACTTABLECOLUMN	=> 'CONCEPT_CD',
-# 								C_NAME				=> 'test',
-# 								C_TABLENAME			=> 'CONCEPT_DIMENSION',
-# 								C_COLUMNNAME		=> 'CONCEPT_PATH',
-# 								C_COLUMNDATATYPE	=> 'T',
-# 								C_OPERATOR			=> 'LIKE',
-# 								C_COMMENT			=> 'WES_LOADER',
-# 								C_TOTALNUM			=> 0,
-# 								SOURCESYSTEM_CD		=> 'WES_LOADER',
-# 								M_APPLIED_PATH		=> '@',
-# 								I2B2_ID				=> shift @i2b2IdArray,
-# 								C_VISUALATTRIBUTES	=> 'CA',
-# 								C_SYNONYM_CD		=> 'N'
-# 								);	
-# 
-# 	print i2b2_output $i2b2Record->toTableFileLine();
-# 	
-# 	$i2b2Record = new i2b2(	C_HLEVEL 				=> 1, 
-# 								C_FULLNAME 			=> '\\test\\WES\\', 
-# 								C_DIMCODE 			=> 'WES',
-# 								C_TOOLTIP			=> '\\test\\WES\\',
-# 								C_FACTTABLECOLUMN	=> 'CONCEPT_CD',
-# 								C_NAME				=> 'WES',
-# 								C_TABLENAME			=> 'CONCEPT_DIMENSION',
-# 								C_COLUMNNAME		=> 'CONCEPT_PATH',
-# 								C_COLUMNDATATYPE	=> 'T',
-# 								C_OPERATOR			=> 'LIKE',
-# 								C_COMMENT			=> 'WES_LOADER',
-# 								C_TOTALNUM			=> 0,
-# 								SOURCESYSTEM_CD		=> 'WES_LOADER',
-# 								M_APPLIED_PATH		=> '@',
-# 								I2B2_ID				=> shift @i2b2IdArray,
-# 								C_VISUALATTRIBUTES	=> 'FA',
-# 								C_SYNONYM_CD		=> 'N'
-# 								);	
-# 
-# 	print i2b2_output $i2b2Record->toTableFileLine();
+
 
 1;
