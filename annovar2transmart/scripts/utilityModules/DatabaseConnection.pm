@@ -31,7 +31,7 @@ sub getNewIdentifiers
 		die;
 	}
 	
-	my @returnPatientIdArray = ();
+	my @returnNewIdArray = ();
 	
 	my $dbh = DBI->connect(	DatabaseConnection::getDatabaseConnectionString(),
 							DatabaseConnection::getDatabaseUserName(),
@@ -42,13 +42,42 @@ sub getNewIdentifiers
 	my $sth = $dbh->prepare($sql);
 	$sth->execute();
 	
-	while ( my @row = $sth->fetchrow_array() ) { push(@returnPatientIdArray, $row[1]); }
+	while ( my @row = $sth->fetchrow_array() ) { push(@returnNewIdArray, $row[1]); }
 	
 	$sth->finish(); 
 	
 	$dbh->disconnect if defined($dbh);
 	
-	return @returnPatientIdArray;
+	return @returnNewIdArray;
+}
+
+sub getNewIdentifiersLarge
+{
+	my $numberOfIdsToGet 	= shift;
+	my $nameOfSequence		= shift;
+	
+	if(!$numberOfIdsToGet || !$nameOfSequence)
+	{
+		print("Parameter Missing - numberOfIdsToGet : $numberOfIdsToGet, nameOfSequence - $nameOfSequence");
+		die;
+	}
+	
+	my @returnPatientIdArray = ();
+	
+	my $dbh = DBI->connect(	DatabaseConnection::getDatabaseConnectionString(),
+							DatabaseConnection::getDatabaseUserName(),
+							DatabaseConnection::getDatabasePassword()) 
+							|| die "Database connection not made: $DBI::errstr";				
+
+	$dbh->do(qq{ alter sequence $nameOfSequence increment by $numberOfIdsToGet});
+	
+	my $lastId = $dbh->selectrow_array(qq{ select $nameOfSequence.nextval from dual});
+
+	$dbh->do(qq{ alter sequence $nameOfSequence increment by 1});
+	
+	$dbh->disconnect if defined($dbh);
+	
+	return $lastId;
 }
 
 1;

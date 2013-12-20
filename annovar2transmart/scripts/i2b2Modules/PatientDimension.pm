@@ -27,7 +27,7 @@ sub printColumnHeaders {
 }
 
 sub printColumnHeadersInList {
-	return "('" . join("','", @columnList) . "')\n";
+	return "(\"" . join("\",\"", @columnList) . "\")\n";
 }
 
 sub toTableFileLine {

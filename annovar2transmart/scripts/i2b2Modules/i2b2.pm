@@ -7,6 +7,7 @@ use warnings;
 use Carp;
 
 our @columnList = ("C_HLEVEL","C_FULLNAME","C_NAME","C_SYNONYM_CD","C_VISUALATTRIBUTES","C_TOTALNUM","C_BASECODE","C_METADATAXML","C_FACTTABLECOLUMN","C_TABLENAME","C_COLUMNNAME","C_COLUMNDATATYPE","C_OPERATOR","C_DIMCODE","C_COMMENT","C_TOOLTIP","UPDATE_DATE","DOWNLOAD_DATE","IMPORT_DATE","SOURCESYSTEM_CD","VALUETYPE_CD","I2B2_ID","M_APPLIED_PATH","M_EXCLUSION_CD","C_PATH","C_SYMBOL");
+our @columnListForCTL = ("C_HLEVEL","C_FULLNAME","C_NAME","C_SYNONYM_CD","C_VISUALATTRIBUTES","C_TOTALNUM","C_BASECODE","C_METADATAXML","C_FACTTABLECOLUMN","C_TABLENAME","C_COLUMNNAME","C_COLUMNDATATYPE","C_OPERATOR","C_DIMCODE","C_COMMENT","C_TOOLTIP","UPDATE_DATE SYSDATE","DOWNLOAD_DATE","IMPORT_DATE","SOURCESYSTEM_CD","VALUETYPE_CD","I2B2_ID","M_APPLIED_PATH","M_EXCLUSION_CD","C_PATH","C_SYMBOL");
 
 sub new {
     my $class = shift;
@@ -27,7 +28,11 @@ sub printColumnHeaders {
 }
 
 sub printColumnHeadersInList {
-	return "('" . join("','", @columnList) . "')\n";
+	return "(\"" . join("\",\"", @columnList) . "\")\n";
+}
+
+sub printColumnHeadersInListForCTL {
+	return "(" . join(",", @columnListForCTL) . ")\n";
 }
 
 sub toTableFileLine {

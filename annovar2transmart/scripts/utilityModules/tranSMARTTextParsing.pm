@@ -28,10 +28,25 @@ sub generateMasterMappingHash {
 		}
 	}
 	
+	print("\n");
+	
 	return %mappingFileHash;
 
 }
 
+sub countHashLeaves {
 
+	my $hashToCount = shift;
+	
+	my $leafCounter = 0;
+	
+	while(my($key, $subHash) = each %$hashToCount) 
+	{
+		$leafCounter += keys %$subHash;
+	}
+	
+	return $leafCounter;
+
+}
 
 1;

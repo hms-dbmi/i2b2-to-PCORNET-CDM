@@ -6,7 +6,7 @@ use strict;
 use warnings;
 use Carp;
 
-our @columnList = ("UPLOAD_ID", "TEXT_SEARCH_INDEX", "UNITS_CD", "CONCEPT_CD", "VALTYPE_CD", "TVAL_CHAR", "NVAL_NUM", "UPDATE_DATE", "END_DATE", "VALUEFLAG_CD", "ENCOUNTER_NUM", "PATIENT_NUM", "OBSERVATION_BLOB", "LOCATION_CD", "START_DATE", "QUANTITY_NUM", "SOURCESYSTEM_CD", "PROVIDER_ID", "INSTANCE_NUM", "MODIFIER_CD", "DOWNLOAD_DATE", "CONFIDENCE_NUM");
+our @columnList = ("UPLOAD_ID", "UNITS_CD", "CONCEPT_CD", "VALTYPE_CD", "TVAL_CHAR", "NVAL_NUM", "UPDATE_DATE", "END_DATE", "VALUEFLAG_CD", "ENCOUNTER_NUM", "PATIENT_NUM", "OBSERVATION_BLOB", "LOCATION_CD", "START_DATE", "QUANTITY_NUM", "SOURCESYSTEM_CD", "PROVIDER_ID", "INSTANCE_NUM", "MODIFIER_CD", "DOWNLOAD_DATE", "CONFIDENCE_NUM");
 
 sub new {
     my $class = shift;
@@ -27,7 +27,7 @@ sub printColumnHeaders {
 }
 
 sub printColumnHeadersInList {
-	return "('" . join("','", @columnList) . "')\n";
+	return "(\"" . join("\",\"", @columnList) . "\")\n";
 }
 
 sub toTableFileLine {
@@ -49,13 +49,23 @@ sub toTableFileLine {
     return $lineToReturn . "\n";
 }
 
-sub getNewObservationFactIdList {
+sub getNewEncounterIdList {
 
 	my $numberOfIdsToGet = shift;
 
-	my @returnConceptIdArray = DatabaseConnection::getNewIdentifiers($numberOfIdsToGet, "I2B2DEMODATA.CONCEPT_ID");
+	my $lastId = DatabaseConnection::getNewIdentifiersLarge($numberOfIdsToGet, "I2B2DEMODATA.SQ_UP_ENCDIM_ENCOUNTERNUM");
 
-	return @returnConceptIdArray;
+	my $firstId = $lastId - $numberOfIdsToGet;
+
+	print("DEBUG - ObservationFact.pm : Retrieved ($numberOfIdsToGet), First ID ($firstId), Last ID($lastId) \n");
+	
+	my @returnEncountertIdArray = ();
+	
+	for (my $i=$firstId; $i<=$lastId; $i++) {
+		push(@returnEncountertIdArray, $i);
+	}
+
+	return \@returnEncountertIdArray;
 }
 
 1;

@@ -1,0 +1,1 @@
+sqlldr tm_lz/tm_lz@ORCL control=../control_files/i2b2.ctl log=../log_files/i2b2.log

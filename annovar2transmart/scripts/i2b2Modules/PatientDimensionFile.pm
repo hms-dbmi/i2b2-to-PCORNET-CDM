@@ -13,6 +13,10 @@ use DBI;
 ###########################################
 sub generatePatientDimensionFile
 {
+	print("*************************************************************\n");
+	print("PatientDimensionFile.pm\n");
+	print("*************************************************************\n");
+	
 	my ($params) = @_;
 	
 	my %patientHash = ();
@@ -22,7 +26,7 @@ sub generatePatientDimensionFile
 
 	#This directory should house the individuals genomic variant files.
 	my $inputDataDirectory 				=  $params->{BASE_DIRECTORY} . "data/source/patient_data/";
-	my $patient_dimension_output_file	=  $params->{BASE_DIRECTORY} . "data/i2b2_load_tables/patient_dimension";
+	my $patient_dimension_output_file	=  $params->{BASE_DIRECTORY} . "data/i2b2_load_tables/patient_dimension.dat";
 
 	print("DEBUG - PatientDimensionFile.pm - Count number of input files.\n");
 	
@@ -64,7 +68,8 @@ sub generatePatientDimensionFile
 	closedir(D);
 	close(patient_dimension);
 	
-	print("\n\n");
+	print("*************************************************************\n");
+	print("\n");
 	
 	return \%patientHash;
 }
