@@ -18,20 +18,22 @@ sub generateI2b2File
 
 	my ($params) = @_;
 	
+	my $configurationObject 		= $params->{CONFIGURATION_OBJECT};
+	
 	#Pull the hash references into easier to read variables.
 	my $variantNumericConcepts 		= $params->{VARIANT_NUMERIC_CONCEPTS};
 	my $individualNumericConcepts 	= $params->{INDIVIDUAL_NUMERIC_CONCEPTS};
 	my $variantTextConcepts 		= $params->{VARIANT_TEXT_CONCEPTS};
 	my $individualTextConcepts 		= $params->{INDIVIDUAL_TEXT_CONCEPTS};
 					
-	my $i2b2_table_output_file 	= $params->{BASE_DIRECTORY} . "data/i2b2_load_tables/i2b2.dat";
+	my $i2b2_table_output_file 		= $configurationObject->{I2B2_OUT_FILE};
 	
 	print("DEBUG - i2b2File.pm : Attemping to open output file $i2b2_table_output_file\n");
 	
 	open (i2b2_output,">$i2b2_table_output_file") || die "Can't open output file ($i2b2_table_output_file) : $!\n";;
 
 	#Get the mapping of mapping files.
-	my %mappingFileHash = tranSMARTTextParsing::generateMasterMappingHash($params->{BASE_DIRECTORY});
+	my %mappingFileHash = tranSMARTTextParsing::generateMasterMappingHash($configurationObject->{BASE_PATH});
 
 	#We need to prefetch an ID per entry in the concept hashes.
 	my $conceptCount = keys %$variantNumericConcepts;
@@ -45,7 +47,7 @@ sub generateI2b2File
 
 	while(my($mappingFile, $mappingFileType) = each %mappingFileHash) 
 	{ 
-		my $currentMappingFile = $params->{BASE_DIRECTORY} . "/mapping_files/" . $mappingFile;
+		my $currentMappingFile = $configurationObject->{MAPPING_FILE_DIRECTORY} . $mappingFile;
 		
 		print("DEBUG - i2b2File.pm : Attemping to open mapping file $currentMappingFile\n");
 		
@@ -109,50 +111,7 @@ sub generateI2b2File
 		}
 
 	}
-	
-	
-my $i2b2Record = new i2b2(	C_HLEVEL 			=> 0, 
- 								C_FULLNAME 			=> '\\test\\', 
- 								C_DIMCODE 			=> 'test',
- 								C_TOOLTIP			=> '\\test\\',
- 								C_FACTTABLECOLUMN	=> 'CONCEPT_CD',
- 								C_NAME				=> 'test',
- 								C_TABLENAME			=> 'CONCEPT_DIMENSION',
- 								C_COLUMNNAME		=> 'CONCEPT_PATH',
- 								C_COLUMNDATATYPE	=> 'T',
- 								C_OPERATOR			=> 'LIKE',
- 								C_COMMENT			=> 'WES_LOADER',
- 								C_TOTALNUM			=> 0,
- 								SOURCESYSTEM_CD		=> 'WES_LOADER',
- 								M_APPLIED_PATH		=> '@',
- 								I2B2_ID				=> shift @i2b2IdArray,
- 								C_VISUALATTRIBUTES	=> 'CA',
- 								C_SYNONYM_CD		=> 'N'
- 								);	
- 
- 	print i2b2_output $i2b2Record->toTableFileLine();
- 	
- 	$i2b2Record = new i2b2(	C_HLEVEL 				=> 1, 
- 								C_FULLNAME 			=> '\\test\\WES\\', 
- 								C_DIMCODE 			=> 'WES',
- 								C_TOOLTIP			=> '\\test\\WES\\',
- 								C_FACTTABLECOLUMN	=> 'CONCEPT_CD',
- 								C_NAME				=> 'WES',
- 								C_TABLENAME			=> 'CONCEPT_DIMENSION',
- 								C_COLUMNNAME		=> 'CONCEPT_PATH',
- 								C_COLUMNDATATYPE	=> 'T',
- 								C_OPERATOR			=> 'LIKE',
- 								C_COMMENT			=> 'WES_LOADER',
- 								C_TOTALNUM			=> 0,
- 								SOURCESYSTEM_CD		=> 'WES_LOADER',
- 								M_APPLIED_PATH		=> '@',
- 								I2B2_ID				=> shift @i2b2IdArray,
- 								C_VISUALATTRIBUTES	=> 'FA',
- 								C_SYNONYM_CD		=> 'N'
- 								);	
- 
- 	print i2b2_output $i2b2Record->toTableFileLine();	
-		
+
 	close(i2b2_output);
 
 	print("*************************************************************\n\n");
@@ -210,13 +169,52 @@ sub _generateSingleI2b2Record {
 
 }
 
-sub _generateMultipleI2b2Records {
 
-
-
-
-
-}
+# 
+# 	
+# 	
+# my $i2b2Record = new i2b2(	C_HLEVEL 			=> 0, 
+#  								C_FULLNAME 			=> '\\test\\', 
+#  								C_DIMCODE 			=> 'test',
+#  								C_TOOLTIP			=> '\\test\\',
+#  								C_FACTTABLECOLUMN	=> 'CONCEPT_CD',
+#  								C_NAME				=> 'test',
+#  								C_TABLENAME			=> 'CONCEPT_DIMENSION',
+#  								C_COLUMNNAME		=> 'CONCEPT_PATH',
+#  								C_COLUMNDATATYPE	=> 'T',
+#  								C_OPERATOR			=> 'LIKE',
+#  								C_COMMENT			=> 'WES_LOADER',
+#  								C_TOTALNUM			=> 0,
+#  								SOURCESYSTEM_CD		=> 'WES_LOADER',
+#  								M_APPLIED_PATH		=> '@',
+#  								I2B2_ID				=> shift @i2b2IdArray,
+#  								C_VISUALATTRIBUTES	=> 'CA',
+#  								C_SYNONYM_CD		=> 'N'
+#  								);	
+#  
+#  	print i2b2_output $i2b2Record->toTableFileLine();
+#  	
+#  	$i2b2Record = new i2b2(	C_HLEVEL 				=> 1, 
+#  								C_FULLNAME 			=> '\\test\\WES\\', 
+#  								C_DIMCODE 			=> 'WES',
+#  								C_TOOLTIP			=> '\\test\\WES\\',
+#  								C_FACTTABLECOLUMN	=> 'CONCEPT_CD',
+#  								C_NAME				=> 'WES',
+#  								C_TABLENAME			=> 'CONCEPT_DIMENSION',
+#  								C_COLUMNNAME		=> 'CONCEPT_PATH',
+#  								C_COLUMNDATATYPE	=> 'T',
+#  								C_OPERATOR			=> 'LIKE',
+#  								C_COMMENT			=> 'WES_LOADER',
+#  								C_TOTALNUM			=> 0,
+#  								SOURCESYSTEM_CD		=> 'WES_LOADER',
+#  								M_APPLIED_PATH		=> '@',
+#  								I2B2_ID				=> shift @i2b2IdArray,
+#  								C_VISUALATTRIBUTES	=> 'FA',
+#  								C_SYNONYM_CD		=> 'N'
+#  								);	
+#  
+#  	print i2b2_output $i2b2Record->toTableFileLine();	
+		
 
 
 

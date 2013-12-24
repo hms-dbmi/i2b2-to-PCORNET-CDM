@@ -17,7 +17,7 @@ sub generatePatientDimensionFile
 	print("PatientDimensionFile.pm\n");
 	print("*************************************************************\n");
 	
-	my ($params) = @_;
+	my $configurationObject = shift;
 	
 	my %patientHash = ();
 
@@ -25,17 +25,20 @@ sub generatePatientDimensionFile
 	my $patientCounter = 0;
 
 	#This directory should house the individuals genomic variant files.
-	my $inputDataDirectory 				=  $params->{BASE_DIRECTORY} . "data/source/patient_data/";
-	my $patient_dimension_output_file	=  $params->{BASE_DIRECTORY} . "data/i2b2_load_tables/patient_dimension.dat";
+	my $inputDataDirectory 				=	$configurationObject->{PATIENT_DATA_DIRECTORY};
+	my $patient_dimension_output_file	=	$configurationObject->{PATIENT_DIMENSION_OUT_FILE};
 
 	print("DEBUG - PatientDimensionFile.pm - Count number of input files.\n");
-	
+
 	my @files = <$inputDataDirectory/*>;
 	my $count = @files;
 
 	print("DEBUG - PatientDimensionFile.pm - Found $count files.\n");
+	
+	my $patientSubjectHash	= DatabaseConnection::getPatientSubjectHash($configurationObject->{SUBJECT_PREFIX});
+	my @patientIdArray 		= PatientDimension::getNewPatientIdList($count);
 
-	my @patientIdArray = PatientDimension::getNewPatientIdList($count);
+	print(Dumper($patientSubjectHash));
 
 	print("DEBUG - PatientDimensionFile.pm : Attemping to open data directory $inputDataDirectory\n");
 
@@ -52,16 +55,25 @@ sub generatePatientDimensionFile
 	{
 		 if($f =~ m/(.*)\.annotated_vcf$/)
 		 {
-			my $currentID = $1;
-		
-			my $nextPatientId = shift @patientIdArray;
-		
-			$patientHash{$currentID} = $nextPatientId;
-		
-			my $patientDimension = new PatientDimension(PATIENT_NUM => $nextPatientId, SOURCESYSTEM_CD => $currentID);
-			print patient_dimension $patientDimension->toTableFileLine();     	
+			my $currentID = $configurationObject->{SUBJECT_PREFIX} . $1;
 			
-	 		$patientCounter = $patientCounter + 1;
+			if(!exists $patientSubjectHash->{$currentID})
+			{
+				my $nextPatientId = shift @patientIdArray;
+		
+				$patientHash{$currentID} = $nextPatientId;
+		
+				my $patientDimension = new PatientDimension(PATIENT_NUM => $nextPatientId, SOURCESYSTEM_CD => $currentID);
+				print patient_dimension $patientDimension->toTableFileLine();     	
+			
+				$patientCounter = $patientCounter + 1;
+
+	 		}
+	 		else
+	 		{
+	 			print("DEBUG - PatientDimensionFile.pm : Using existing Subject - $currentID\n");
+	 			$patientHash{$currentID} = $patientSubjectHash->{$currentID};
+	 		}
 		 }
 	}
 	

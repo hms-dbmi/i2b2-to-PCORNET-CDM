@@ -22,7 +22,9 @@ sub generateObservationFactFile
 
 	my ($params) = @_;
 
-	my $patientHash 	= $params->{PATIENT_HASH};
+	my $configurationObject			= $params->{CONFIGURATION_OBJECT};
+
+	my $patientHash 				= $params->{PATIENT_HASH};
 	
 	#Pull the hashes into an easier to use variable.
 	my $variantNumericConcepts 		= $params->{VARIANT_NUMERIC_CONCEPTS};
@@ -30,11 +32,9 @@ sub generateObservationFactFile
 	my $variantTextConcepts 		= $params->{VARIANT_TEXT_CONCEPTS};
 	my $individualTextConcepts 		= $params->{INDIVIDUAL_TEXT_CONCEPTS};
 	
-	my $observation_fact_output_file	= $params->{BASE_DIRECTORY} . "data/i2b2_load_tables/observation_fact.dat";
-	my $inputDataDirectory 				= $params->{BASE_DIRECTORY} . "data/source/patient_data/";
-	my $variantDataDirectory			= $params->{BASE_DIRECTORY} . "data/source/variant_data/";
-
-	
+	my $observation_fact_output_file	= $configurationObject->{OBSERVATION_FACT_OUT_FILE};
+	my $inputDataDirectory 				= $configurationObject->{PATIENT_DATA_DIRECTORY};
+	my $variantDataDirectory			= $configurationObject->{VARIANT_DATA_DIRECTORY};
 
 	#To speed things up later on down the line we will remove the need to split part of the concept info.
 	while(my($columnName, $subHash) = each %$individualTextConcepts) 
@@ -92,7 +92,7 @@ sub generateObservationFactFile
 	{
 		 if($f =~ m/(.*)\.annotated_vcf$/)
 		 {
-			my $currentID = $1;
+			my $currentID = $configurationObject->{SUBJECT_PREFIX} . $1;
 			
 			print("DEBUG - ObservationFactFile.pm : Working on patient file $currentID\n");
 			

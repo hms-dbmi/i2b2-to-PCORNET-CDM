@@ -21,7 +21,7 @@ sub generateConceptDimensionFile
 	print("ConceptDimensionFile.pm\n");
 	print("*************************************************************\n");
 		
-	my ($params) = @_;
+	my $configurationObject = shift;
 
 	my $numericVariantConceptHash;
 	my $numericIndividualConceptHash;
@@ -29,18 +29,18 @@ sub generateConceptDimensionFile
 	my $textVariantConceptHash;
 	my $textIndividualConceptHash;
 	
-	my $concept_dimension_output_file 	= $params->{BASE_DIRECTORY} . "data/i2b2_load_tables/concept_dimension.dat";
-	my $variant_data_file	 			= $params->{BASE_DIRECTORY} . "data/source/variant_data/i2b2_55sample_allVariantAnnotations.txt.short";
-	my $patient_data_directory			= $params->{BASE_DIRECTORY} . "data/source/patient_data/";
-	$currentStudyId						= $params->{STUDY_ID};
+	my $concept_dimension_output_file 	= 	$configurationObject->{CONCEPT_DIMENSION_OUT_FILE};
+	my $variant_data_file	 			= 	$configurationObject->{VARIANT_DATA_FILE};
+	my $patient_data_directory			= 	$configurationObject->{PATIENT_DATA_DIRECTORY};
+	$currentStudyId						=	$configurationObject->{STUDY_ID};
 	
 	#We could have many different types of mapping files. To that end we'll have a file to map our mapping files. This hash is {filename} = filetype
-	my %mappingFileHash = tranSMARTTextParsing::generateMasterMappingHash($params->{BASE_DIRECTORY});
+	my %mappingFileHash = tranSMARTTextParsing::generateMasterMappingHash($configurationObject->{BASE_PATH});
 	
 	while(my($k, $v) = each %mappingFileHash) 
 	{
-		if($v eq "VARIANT")		{$textVariantConceptHash 	= _parseMappingFileTextPassVariant($params->{BASE_DIRECTORY}, $k, $variant_data_file);}
-		if($v eq "INDIVIDUAL")	{$textIndividualConceptHash = _parseMappingFileTextPassPatient($params->{BASE_DIRECTORY}, $k, $patient_data_directory);}
+		if($v eq "VARIANT")		{$textVariantConceptHash 	= _parseMappingFileTextPassVariant($configurationObject->{BASE_PATH}, $k, $variant_data_file);}
+		if($v eq "INDIVIDUAL")	{$textIndividualConceptHash = _parseMappingFileTextPassPatient($configurationObject->{BASE_PATH}, $k, $patient_data_directory);}
 	}
 	
 	print("DEBUG - ConceptDimensionFile.pm : Attemping to open output file $concept_dimension_output_file\n");
@@ -48,7 +48,7 @@ sub generateConceptDimensionFile
 	my $totalConceptCount = 0;
 	
 	#Count each line in the mapping files. Maybe we should merge the counts into the functions below.
-	$totalConceptCount = _countLinesInMappingFiles(\%mappingFileHash, $params->{BASE_DIRECTORY});
+	$totalConceptCount = _countLinesInMappingFiles(\%mappingFileHash, $configurationObject->{BASE_PATH});
 
 	#We'll need a concept for each of the items in the concept hashes we extracted from the data file.
 	$totalConceptCount += _countItemsInConceptHash($textVariantConceptHash);
@@ -64,8 +64,8 @@ sub generateConceptDimensionFile
 	#After we've created the hash of mapping files we'll iterate over them and extract the numeric concepts and build hashes to be used when building the fact files.
 	while(my($k, $v) = each %mappingFileHash) 
 	{ 
-		if($v eq "INDIVIDUAL") 	{$numericIndividualConceptHash 	= _parseMappingFileSecondPass($params->{BASE_DIRECTORY}, $k, $concept_dimension_out, \@conceptIdArray);}
-		if($v eq "VARIANT") 	{$numericVariantConceptHash 	= _parseMappingFileSecondPass($params->{BASE_DIRECTORY}, $k, $concept_dimension_out, \@conceptIdArray);}
+		if($v eq "INDIVIDUAL") 	{$numericIndividualConceptHash 	= _parseMappingFileSecondPass($configurationObject->{BASE_PATH}, $k, $concept_dimension_out, \@conceptIdArray);}
+		if($v eq "VARIANT") 	{$numericVariantConceptHash 	= _parseMappingFileSecondPass($configurationObject->{BASE_PATH}, $k, $concept_dimension_out, \@conceptIdArray);}
 	}
 
 	#We need to create the text concepts from the hashes we created earlier.
@@ -197,11 +197,7 @@ sub _parseMappingFileTextPassPatient {
 	while (my $f = readdir(D)) 
 	{
 		if($f =~ m/(.*)\.annotated_vcf$/)
-		{
-			my $currentID = $1;
-			
-			print("DEBUG - ConceptDimensionFile.pm : Working on patient file $currentID\n");
-			
+		{	
 			open my $currentPatientANNOVARFile, "<$dataDirectoryToParse$f";
 
 			my $dataHeader = <$currentPatientANNOVARFile>;

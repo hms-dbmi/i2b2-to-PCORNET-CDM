@@ -63,4 +63,11 @@ sub getNewI2b2IdList {
 	return @returnPatientIdArray;
 }
 
+#Retrieve a hash of PatientNum and SubjectID. We can use this to determine if the patient already exists in the DB.
+sub getPatientSubjectHash {
+	
+	
+
+}
+
 1;
