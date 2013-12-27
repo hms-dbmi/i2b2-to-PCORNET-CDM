@@ -18,6 +18,7 @@ sub getDatabasePassword
 
 sub getDatabaseConnectionString
 {
+	#return "dbi:Oracle:host=localhost;sid=orcl";
 	return "dbi:Oracle:host=dwtst.tch.harvard.edu;sid=DWTST";
 }
 

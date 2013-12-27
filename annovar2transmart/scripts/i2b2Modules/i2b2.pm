@@ -54,20 +54,24 @@ sub toTableFileLine {
     return $lineToReturn . "\n";
 }
 
+
 sub getNewI2b2IdList {
 
 	my $numberOfIdsToGet = shift;
 
-	my @returnPatientIdArray = DatabaseConnection::getNewIdentifiers($numberOfIdsToGet, "I2B2METADATA.I2B2_ID_SEQ");
+	my $lastId = DatabaseConnection::getNewIdentifiersLarge($numberOfIdsToGet, "I2B2METADATA.I2B2_ID_SEQ");
 
-	return @returnPatientIdArray;
-}
+	my $firstId = $lastId - $numberOfIdsToGet;
 
-#Retrieve a hash of PatientNum and SubjectID. We can use this to determine if the patient already exists in the DB.
-sub getPatientSubjectHash {
+	print("DEBUG - i2b2.pm : Retrieved ($numberOfIdsToGet), First ID ($firstId), Last ID($lastId) \n");
 	
+	my @returni2b2IdArray = ();
 	
+	for (my $i=$firstId; $i<=$lastId; $i++) {
+		push(@returni2b2IdArray, $i);
+	}
 
+	return @returni2b2IdArray;
 }
 
 1;

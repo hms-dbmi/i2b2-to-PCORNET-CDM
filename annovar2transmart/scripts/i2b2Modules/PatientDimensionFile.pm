@@ -38,8 +38,6 @@ sub generatePatientDimensionFile
 	my $patientSubjectHash	= DatabaseConnection::getPatientSubjectHash($configurationObject->{SUBJECT_PREFIX});
 	my @patientIdArray 		= PatientDimension::getNewPatientIdList($count);
 
-	print(Dumper($patientSubjectHash));
-
 	print("DEBUG - PatientDimensionFile.pm : Attemping to open data directory $inputDataDirectory\n");
 
 	#Open the directory with annotated genomic files.

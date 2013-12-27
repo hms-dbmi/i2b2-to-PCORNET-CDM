@@ -5,6 +5,7 @@ package ConceptDimension;
 use strict;
 use warnings;
 use Carp;
+use Data::Dumper;
 
 our @columnList = ("UPLOAD_ID","SOURCESYSTEM_CD","CONCEPT_CD","CONCEPT_PATH","CONCEPT_BLOB","UPDATE_DATE","NAME_CHAR","DOWNLOAD_DATE","IMPORT_DATE");
 
@@ -53,9 +54,19 @@ sub getNewConceptIdList {
 
 	my $numberOfIdsToGet = shift;
 
-	my @returnPatientIdArray = DatabaseConnection::getNewIdentifiers($numberOfIdsToGet, "I2B2DEMODATA.CONCEPT_ID");
+	my $lastId = DatabaseConnection::getNewIdentifiersLarge($numberOfIdsToGet, "I2B2DEMODATA.CONCEPT_ID");
 
-	return @returnPatientIdArray;
+	my $firstId = $lastId - $numberOfIdsToGet;
+
+	print("DEBUG - i2b2.pm : Retrieved ($numberOfIdsToGet), First ID ($firstId), Last ID($lastId) \n");
+	
+	my @returnConceptIdArray = ();
+	
+	for (my $i=$firstId; $i<=$lastId; $i++) {
+		push(@returnConceptIdArray, $i);
+	}
+
+	return @returnConceptIdArray;
 }
 
 1;

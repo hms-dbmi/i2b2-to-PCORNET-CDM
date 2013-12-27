@@ -35,6 +35,7 @@ sub generateObservationFactFile
 	my $observation_fact_output_file	= $configurationObject->{OBSERVATION_FACT_OUT_FILE};
 	my $inputDataDirectory 				= $configurationObject->{PATIENT_DATA_DIRECTORY};
 	my $variantDataDirectory			= $configurationObject->{VARIANT_DATA_DIRECTORY};
+	my $variantDataFile					= $configurationObject->{VARIANT_DATA_FILE};
 
 	#To speed things up later on down the line we will remove the need to split part of the concept info.
 	while(my($columnName, $subHash) = each %$individualTextConcepts) 
@@ -139,7 +140,7 @@ sub generateObservationFactFile
 						if($conceptCd eq '')
 						{
 							#die("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]");
-							print("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]\n");
+							#print("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]\n");
 						}
 											
 						#("UPLOAD_ID", "UNITS_CD", "CONCEPT_CD", "VALTYPE_CD", "TVAL_CHAR", "NVAL_NUM", "UPDATE_DATE", "END_DATE", "VALUEFLAG_CD", "ENCOUNTER_NUM", "PATIENT_NUM", "OBSERVATION_BLOB", "LOCATION_CD", "START_DATE", "QUANTITY_NUM", "SOURCESYSTEM_CD", "PROVIDER_ID", "INSTANCE_NUM", "MODIFIER_CD", "DOWNLOAD_DATE", "CONFIDENCE_NUM");
@@ -159,8 +160,8 @@ sub generateObservationFactFile
 	closedir(D);
 	
 	#The outmost iterator will be the variant file.
-	print("DEBUG - ObservationFactFile.pm : Attemping to open variant input file $variantDataDirectory\n");
-	open variant_data, "<$variantDataDirectory/i2b2_55sample_allVariantAnnotations.txt.short";
+	print("DEBUG - ObservationFactFile.pm : Attemping to open variant input file $variantDataFile\n");
+	open variant_data, "<$variantDataFile";
 	
 	my $header = <variant_data>;
 	my @headerArray = split(/\t/,$header);
@@ -199,7 +200,7 @@ sub generateObservationFactFile
 				if($conceptCd eq '')
 				{
 					#die("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]");
-					print("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]\n");
+					#print("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]\n");
 				}
 				else
 				{

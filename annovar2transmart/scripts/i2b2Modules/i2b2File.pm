@@ -27,7 +27,7 @@ sub generateI2b2File
 	my $individualTextConcepts 		= $params->{INDIVIDUAL_TEXT_CONCEPTS};
 					
 	my $i2b2_table_output_file 		= $configurationObject->{I2B2_OUT_FILE};
-	
+	my $currentStudyId				= $configurationObject->{STUDY_ID};
 	print("DEBUG - i2b2File.pm : Attemping to open output file $i2b2_table_output_file\n");
 	
 	open (i2b2_output,">$i2b2_table_output_file") || die "Can't open output file ($i2b2_table_output_file) : $!\n";;
@@ -71,11 +71,11 @@ sub generateI2b2File
 				#Pull the concept cd based on the name of the column in the data file. For text entries we need to loop through the hash to create all the possible data values.
 				if($mappingFileType eq "INDIVIDUAL" and $currentConceptType eq "N")
 				{
-					_generateSingleI2b2Record($1,$2, $individualNumericConcepts->{$1}, shift @i2b2IdArray,'N');
+					_generateSingleI2b2Record($1,$2, $individualNumericConcepts->{$1}, shift @i2b2IdArray,'N', $currentStudyId);
 				}
 				elsif($mappingFileType eq "VARIANT" and $currentConceptType eq "N")
 				{
-					_generateSingleI2b2Record($1,$2, $variantNumericConcepts->{$1}, shift @i2b2IdArray,'N');
+					_generateSingleI2b2Record($1,$2, $variantNumericConcepts->{$1}, shift @i2b2IdArray,'N', $currentStudyId);
 				}
 				elsif($mappingFileType eq "INDIVIDUAL" and $currentConceptType eq "T")
 				{					
@@ -87,7 +87,7 @@ sub generateI2b2File
 						
 						if(length($conceptPathIdSplit[0]) < 255)
 						{
-							_generateSingleI2b2Record($1,$conceptPathIdSplit[0],$conceptPathIdSplit[1],shift @i2b2IdArray,'T');
+							_generateSingleI2b2Record($1,$conceptPathIdSplit[0],$conceptPathIdSplit[1],shift @i2b2IdArray,'T', $currentStudyId);
 						}
 					}
 				}
@@ -101,7 +101,7 @@ sub generateI2b2File
 						
 						if(length($conceptPathIdSplit[0]) < 255)
 						{
-							_generateSingleI2b2Record($1,$conceptPathIdSplit[0],$conceptPathIdSplit[1],shift @i2b2IdArray,'T');
+							_generateSingleI2b2Record($1,$conceptPathIdSplit[0],$conceptPathIdSplit[1],shift @i2b2IdArray,'T', $currentStudyId);
 						}
 					}
 				}
@@ -125,6 +125,7 @@ sub _generateSingleI2b2Record {
 	my $currentConceptCd	= shift;
 	my $i2b2Id				= shift;
 	my $columnDataType		= shift;
+	my $currentStudyId		= shift;
 	
 	my $metaDataXML			= '';
 	
@@ -156,8 +157,8 @@ sub _generateSingleI2b2Record {
 								C_COLUMNNAME		=> 'CONCEPT_PATH',
 								C_COLUMNDATATYPE	=> $columnDataType,
 								C_OPERATOR			=> 'LIKE',
-								C_COMMENT			=> 'WES_LOADER',
-								SOURCESYSTEM_CD		=> 'WES_LOADER',
+								C_COMMENT			=> $currentStudyId,
+								SOURCESYSTEM_CD		=> $currentStudyId,
 								M_APPLIED_PATH		=> '@',
 								I2B2_ID				=> $i2b2Id,
 								C_VISUALATTRIBUTES	=> 'LA',
