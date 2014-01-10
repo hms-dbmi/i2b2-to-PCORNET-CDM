@@ -12,14 +12,14 @@ sub getDatabaseUserName
 
 sub getDatabasePassword
 {
-	#return "biomart_user";
-	return "dwtst";
+	return "biomart_user";
+	#return "dwtst";
 }
 
 sub getDatabaseConnectionString
 {
-	#return "dbi:Oracle:host=localhost;sid=orcl";
-	return "dbi:Oracle:host=dwtst.tch.harvard.edu;sid=DWTST";
+	return "dbi:Oracle:host=localhost;sid=orcl";
+	#return "dbi:Oracle:host=dwtst.tch.harvard.edu;sid=DWTST";
 }
 
 sub getNewIdentifiers
@@ -94,9 +94,9 @@ sub getPatientSubjectHash {
 
 	my %subjectPatientHash = ();
 
-	my $dbh = DBI->connect(	DatabaseConnection::getDatabaseConnectionString(),
-								DatabaseConnection::getDatabaseUserName(),
-								DatabaseConnection::getDatabasePassword()) 
+	my $dbh = DBI->connect(	getDatabaseConnectionString(),
+								getDatabaseUserName(),
+								getDatabasePassword()) 
 								|| die "Database connection not made: $DBI::errstr";
 
 	my $sql = qq{ select patient_num,sourcesystem_cd from PATIENT_DIMENSION WHERE SOURCESYSTEM_CD LIKE '$subjectPrefix%'};

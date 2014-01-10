@@ -30,7 +30,7 @@ print("*************************************************************\n");
 my $configurationObject = new configurationObject(
 							BASE_PATH 					=> "/Users/mmcduffie/src/tranSMART/ETL/annovar2transmart/", 
 							STUDY_ID 					=> "WES_LOADING", 
-							VARIANT_DATA_FILE			=> "data/source/variant_data/i2b2_55sample_allVariantAnnotations.txt",
+							VARIANT_DATA_FILE			=> "data/source/variant_data/i2b2_55sample_allVariantAnnotations.txt.short",
 							PATIENT_DATA_DIRECTORY		=> "data/source/patient_data/",
 							VARIANT_DATA_DIRECTORY		=> "data/source/variant_data/",
 							MAPPING_FILE_DIRECTORY		=> "mapping_files/",
@@ -39,7 +39,7 @@ my $configurationObject = new configurationObject(
 							I2B2_OUT_FILE				=> "data/i2b2_load_tables/i2b2.dat",
 							OBSERVATION_FACT_OUT_FILE	=> "data/i2b2_load_tables/observation_fact.dat",
 							SUBJECT_PREFIX				=> "WES_LOADING:",
-							SQLLDR_LOGIN_STRING			=> 'tm_lz/dwtst@BCH_DWTST');
+							SQLLDR_LOGIN_STRING			=> 'tm_lz/tm_lz@ORCL');
 							
 							#SQLLDR_LOGIN_STRING			=> 'tm_lz/dwtst@BCH_DWTST' 'tm_lz/tm_lz@BCH_DEV'
 
