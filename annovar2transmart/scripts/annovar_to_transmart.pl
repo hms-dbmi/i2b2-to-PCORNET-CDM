@@ -1,22 +1,26 @@
 #!/usr/bin/perl
 
-use i2b2Modules::ConceptDimension;
-use i2b2Modules::PatientDimension;
-use i2b2Modules::ObservationFact;
-use i2b2Modules::i2b2;
+#This is to get the pathing down properly so we can run this script from another directory.
+use File::Basename;
+my $dirname = dirname(__FILE__);
 
-use i2b2Modules::PatientDimensionFile;
-use i2b2Modules::ConceptDimensionFile;
-use i2b2Modules::ObservationFactFile;
-use i2b2Modules::i2b2File;
+require "$dirname/i2b2Modules/ConceptDimension.pm";
+require "$dirname/i2b2Modules/PatientDimension.pm";
+require "$dirname/i2b2Modules/ObservationFact.pm";
+require "$dirname/i2b2Modules/i2b2.pm";
 
-use i2b2Modules::ControlFiles;
+require "$dirname/i2b2Modules/PatientDimensionFile.pm";
+require "$dirname/i2b2Modules/ConceptDimensionFile.pm";
+require "$dirname/i2b2Modules/ObservationFactFile.pm";
+require "$dirname/i2b2Modules/i2b2File.pm";
 
-use ANNOVARModules::VariantFieldMapping;
-use ANNOVARModules::configurationObject;
+require "$dirname/i2b2Modules/ControlFiles.pm";
 
-use utilityModules::DatabaseConnection;
-use utilityModules::tranSMARTTextParsing;
+require "$dirname/ANNOVARModules/VariantFieldMapping.pm";
+require "$dirname/ANNOVARModules/configurationObject.pm";
+
+require "$dirname/utilityModules/DatabaseConnection.pm";
+require "$dirname/utilityModules/tranSMARTTextParsing.pm";
 
 use Data::Dumper;
 
