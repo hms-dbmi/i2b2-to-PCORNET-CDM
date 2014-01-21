@@ -35,8 +35,8 @@ sub generatePatientDimensionFile
 
 	print("DEBUG - PatientDimensionFile.pm - Found $count files.\n");
 	
-	my $patientSubjectHash	= DatabaseConnection::getPatientSubjectHash($configurationObject->{SUBJECT_PREFIX});
-	my @patientIdArray 		= PatientDimension::getNewPatientIdList($count);
+	my $patientSubjectHash	= DatabaseConnection::getPatientSubjectHash($configurationObject);
+	my @patientIdArray 		= PatientDimension::getNewPatientIdList($count, $configurationObject);
 
 	print("DEBUG - PatientDimensionFile.pm : Attemping to open data directory $inputDataDirectory\n");
 

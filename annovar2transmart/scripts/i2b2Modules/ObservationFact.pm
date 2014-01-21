@@ -52,8 +52,9 @@ sub toTableFileLine {
 sub getNewEncounterIdList {
 
 	my $numberOfIdsToGet = shift;
+	my $configurationObject = shift;
 
-	my $lastId = DatabaseConnection::getNewIdentifiersLarge($numberOfIdsToGet, "I2B2DEMODATA.SQ_UP_ENCDIM_ENCOUNTERNUM");
+	my $lastId = DatabaseConnection::getNewIdentifiersLarge($numberOfIdsToGet, "I2B2DEMODATA.SQ_UP_ENCDIM_ENCOUNTERNUM", $configurationObject);
 
 	my $firstId = $lastId - $numberOfIdsToGet;
 

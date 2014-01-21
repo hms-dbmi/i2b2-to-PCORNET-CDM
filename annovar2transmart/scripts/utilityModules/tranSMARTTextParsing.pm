@@ -4,6 +4,7 @@ package tranSMARTTextParsing;
 
 use strict;
 use warnings;
+use Data::Dumper;
 
 sub generateMasterMappingHash {
 	
@@ -46,6 +47,52 @@ sub countHashLeaves {
 	}
 	
 	return $leafCounter;
+
+}
+
+sub generateConfigObjectFromFile {
+
+	my $configFile = shift;
+	
+	my %configHash;
+							
+	print("DEBUG - tranSMARTTextParsing.pm : Attemping to open configuration file $configFile\n");							
+	
+	open master_mapping, "<$configFile"; 
+	while (<master_mapping>)
+	{	
+		my $line = $_;
+		
+		chomp $line;
+		
+		if($line =~ m/^([^\t#]+)\t"([^\t]+)"/)
+		{
+			$configHash{$1} = $2;
+			
+			print($2);
+			print("\n");
+			
+		}
+	}
+	
+	my $configObject = new configurationObject(
+						BASE_PATH 					=> $configHash{'BASE_PATH'}, 
+						STUDY_ID 					=> $configHash{'STUDY_ID'},
+						VARIANT_DATA_FILE			=> $configHash{'VARIANT_DATA_FILE'},
+						PATIENT_DATA_DIRECTORY		=> $configHash{'PATIENT_DATA_DIRECTORY'},
+						VARIANT_DATA_DIRECTORY		=> $configHash{'VARIANT_DATA_DIRECTORY'},
+						MAPPING_FILE_DIRECTORY		=> $configHash{'MAPPING_FILE_DIRECTORY'},
+						CONCEPT_DIMENSION_OUT_FILE 	=> $configHash{'CONCEPT_DIMENSION_OUT_FILE'},
+						PATIENT_DIMENSION_OUT_FILE	=> $configHash{'PATIENT_DIMENSION_OUT_FILE'},
+						I2B2_OUT_FILE				=> $configHash{'I2B2_OUT_FILE'},
+						OBSERVATION_FACT_OUT_FILE	=> $configHash{'OBSERVATION_FACT_OUT_FILE'},
+						SUBJECT_PREFIX				=> $configHash{'SUBJECT_PREFIX'},
+						SQLLDR_LOGIN_STRING			=> $configHash{'SQLLDR_LOGIN_STRING'},
+						DATABASE_CONNECTION_STRING	=> $configHash{'DATABASE_CONNECTION_STRING'},
+						DATABASE_USERNAME			=> $configHash{'DATABASE_USERNAME'},
+						DATABASE_PASSWORD			=> $configHash{'DATABASE_PASSWORD'});
+	
+	return $configObject;
 
 }
 

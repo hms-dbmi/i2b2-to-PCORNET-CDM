@@ -52,8 +52,9 @@ sub toTableFileLine {
 sub getNewPatientIdList {
 
 	my $numberOfIdsToGet = shift;
+	my $configurationObject = shift;
 
-	my @returnPatientIdArray = DatabaseConnection::getNewIdentifiers($numberOfIdsToGet, "I2B2DEMODATA.SEQ_PATIENT_NUM");
+	my @returnPatientIdArray = DatabaseConnection::getNewIdentifiers($numberOfIdsToGet, "I2B2DEMODATA.SEQ_PATIENT_NUM", $configurationObject);
 
 	return @returnPatientIdArray;
 }

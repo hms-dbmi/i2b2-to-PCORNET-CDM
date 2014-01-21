@@ -23,7 +23,10 @@ sub new {
     $self->{'OBSERVATION_FACT_OUT_FILE'} 	= $self->{'BASE_PATH'} . $params{'OBSERVATION_FACT_OUT_FILE'};
     $self->{'SUBJECT_PREFIX'} 				= $params{'SUBJECT_PREFIX'};
     $self->{'SQLLDR_LOGIN_STRING'} 			= $params{'SQLLDR_LOGIN_STRING'};
-    
+    $self->{'DATABASE_CONNECTION_STRING'} 	= $params{'DATABASE_CONNECTION_STRING'};
+    $self->{'DATABASE_USERNAME'} 			= $params{'DATABASE_USERNAME'};
+    $self->{'DATABASE_PASSWORD'} 			= $params{'DATABASE_PASSWORD'};
+        
     bless $self, $class;
     return $self;
 }

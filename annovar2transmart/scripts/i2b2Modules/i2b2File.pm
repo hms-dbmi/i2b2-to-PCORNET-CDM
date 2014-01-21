@@ -41,7 +41,7 @@ sub generateI2b2File
 	$conceptCount 	+= tranSMARTTextParsing::countHashLeaves($variantTextConcepts);
 	$conceptCount 	+= tranSMARTTextParsing::countHashLeaves($individualTextConcepts);
 	
-	my @i2b2IdArray = i2b2::getNewI2b2IdList($conceptCount);
+	my @i2b2IdArray = i2b2::getNewI2b2IdList($conceptCount, $configurationObject);
 
 	print i2b2_output i2b2->printColumnHeaders();
 

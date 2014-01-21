@@ -1,1 +1,1 @@
-sqlldr tm_lz/dwtst@BCH_DWTST control=../control_files/patientDimension.ctl log=../log_files/patient_dimension.log
+sqlldr tm_lz/tm_lz@ORCL control=../control_files/patientDimension.ctl log=../log_files/patient_dimension.log

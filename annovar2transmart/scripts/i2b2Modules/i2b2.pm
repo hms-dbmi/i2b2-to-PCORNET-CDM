@@ -58,8 +58,9 @@ sub toTableFileLine {
 sub getNewI2b2IdList {
 
 	my $numberOfIdsToGet = shift;
+	my $configurationObject = shift;
 
-	my $lastId = DatabaseConnection::getNewIdentifiersLarge($numberOfIdsToGet, "I2B2METADATA.I2B2_ID_SEQ");
+	my $lastId = DatabaseConnection::getNewIdentifiersLarge($numberOfIdsToGet, "I2B2METADATA.I2B2_ID_SEQ", $configurationObject);
 
 	my $firstId = $lastId - $numberOfIdsToGet;
 

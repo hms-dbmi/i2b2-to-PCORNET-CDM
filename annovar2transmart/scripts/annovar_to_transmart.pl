@@ -26,25 +26,15 @@ print("*************************************************************\n");
 print("annovar_to_transmart.pl\n");
 print("*************************************************************\n");
 
-#Create the concept object.
-my $configurationObject = new configurationObject(
-							BASE_PATH 					=> "/Users/mmcduffie/src/tranSMART/ETL/annovar2transmart/", 
-							STUDY_ID 					=> "WES_LOADING", 
-							VARIANT_DATA_FILE			=> "data/source/variant_data/i2b2_55sample_allVariantAnnotations.txt.short",
-							PATIENT_DATA_DIRECTORY		=> "data/source/patient_data/",
-							VARIANT_DATA_DIRECTORY		=> "data/source/variant_data/",
-							MAPPING_FILE_DIRECTORY		=> "mapping_files/",
-							CONCEPT_DIMENSION_OUT_FILE 	=> "data/i2b2_load_tables/concept_dimension.dat",
-							PATIENT_DIMENSION_OUT_FILE	=> "data/i2b2_load_tables/patient_dimension.dat",
-							I2B2_OUT_FILE				=> "data/i2b2_load_tables/i2b2.dat",
-							OBSERVATION_FACT_OUT_FILE	=> "data/i2b2_load_tables/observation_fact.dat",
-							SUBJECT_PREFIX				=> "WES_LOADING:",
-							SQLLDR_LOGIN_STRING			=> 'tm_lz/tm_lz@ORCL');
-							
-							#SQLLDR_LOGIN_STRING			=> 'tm_lz/dwtst@BCH_DWTST' 'tm_lz/tm_lz@BCH_DEV'
+print($ARGV[0]);
 
+#Create the concept object.
+my $configurationObject = tranSMARTTextParsing::generateConfigObjectFromFile($ARGV[0]);
 
 print("DEBUG - annovar_to_transmart.pl : using configuration object.\n\n");
+
+print(Dumper($configurationObject));
+
 
 my $patientHash 			= PatientDimensionFile::generatePatientDimensionFile($configurationObject);
 my @conceptReturnObjects	= ConceptDimensionFile::generateConceptDimensionFile($configurationObject);

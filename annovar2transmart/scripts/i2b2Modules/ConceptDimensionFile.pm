@@ -55,7 +55,7 @@ sub generateConceptDimensionFile
 	$totalConceptCount += _countItemsInConceptHash($textIndividualConceptHash);
 
 	#Now that we know the total concept count, pre-fetch the concept_ids.
-	my @conceptIdArray = ConceptDimension::getNewConceptIdList($totalConceptCount);
+	my @conceptIdArray = ConceptDimension::getNewConceptIdList($totalConceptCount, $configurationObject);
 
 	open my $concept_dimension_out, ">$concept_dimension_output_file";
 

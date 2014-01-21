@@ -4,28 +4,13 @@ package DatabaseConnection;
 
 use strict;
 use warnings;
-
-sub getDatabaseUserName
-{
-	return "biomart_user";
-}
-
-sub getDatabasePassword
-{
-	return "biomart_user";
-	#return "dwtst";
-}
-
-sub getDatabaseConnectionString
-{
-	return "dbi:Oracle:host=localhost;sid=orcl";
-	#return "dbi:Oracle:host=dwtst.tch.harvard.edu;sid=DWTST";
-}
+use DBI;
 
 sub getNewIdentifiers
 {
 	my $numberOfIdsToGet 	= shift;
 	my $nameOfSequence		= shift;
+	my $configurationObject = shift;
 	
 	if(!$numberOfIdsToGet || !$nameOfSequence)
 	{
@@ -35,9 +20,9 @@ sub getNewIdentifiers
 	
 	my @returnNewIdArray = ();
 	
-	my $dbh = DBI->connect(	DatabaseConnection::getDatabaseConnectionString(),
-							DatabaseConnection::getDatabaseUserName(),
-							DatabaseConnection::getDatabasePassword()) 
+	my $dbh = DBI->connect(	$configurationObject->{DATABASE_CONNECTION_STRING},
+							$configurationObject->{DATABASE_USERNAME},
+							$configurationObject->{DATABASE_PASSWORD}) 
 							|| die "Database connection not made: $DBI::errstr";
 							
 	my $sql = qq{ select level,$nameOfSequence.nextval from dual connect by level<= $numberOfIdsToGet};
@@ -57,6 +42,7 @@ sub getNewIdentifiersLarge
 {
 	my $numberOfIdsToGet 	= shift;
 	my $nameOfSequence		= shift;
+	my $configurationObject = shift;
 	
 	if(!$numberOfIdsToGet || !$nameOfSequence)
 	{
@@ -72,9 +58,9 @@ sub getNewIdentifiersLarge
 	
 	my @returnPatientIdArray = ();
 	
-	my $dbh = DBI->connect(	DatabaseConnection::getDatabaseConnectionString(),
-							DatabaseConnection::getDatabaseUserName(),
-							DatabaseConnection::getDatabasePassword()) 
+	my $dbh = DBI->connect(	$configurationObject->{DATABASE_CONNECTION_STRING},
+							$configurationObject->{DATABASE_USERNAME},
+							$configurationObject->{DATABASE_PASSWORD}) 
 							|| die "Database connection not made: $DBI::errstr";				
 
 	$dbh->do(qq{ alter sequence $nameOfSequence increment by $numberOfIdsToGet});
@@ -90,16 +76,16 @@ sub getNewIdentifiersLarge
 
 sub getPatientSubjectHash {
 
-	my $subjectPrefix = shift;
+	my $configurationObject = shift;
 
 	my %subjectPatientHash = ();
 
-	my $dbh = DBI->connect(	getDatabaseConnectionString(),
-								getDatabaseUserName(),
-								getDatabasePassword()) 
-								|| die "Database connection not made: $DBI::errstr";
+	my $dbh = DBI->connect(	$configurationObject->{DATABASE_CONNECTION_STRING},
+							$configurationObject->{DATABASE_USERNAME},
+							$configurationObject->{DATABASE_PASSWORD}) 
+							|| die "Database connection not made: $DBI::errstr";
 
-	my $sql = qq{ select patient_num,sourcesystem_cd from PATIENT_DIMENSION WHERE SOURCESYSTEM_CD LIKE '$subjectPrefix%'};
+	my $sql = qq{ select patient_num,sourcesystem_cd from PATIENT_DIMENSION WHERE SOURCESYSTEM_CD LIKE '$configurationObject->{SUBJECT_PREFIX}%'};
 	my $sth = $dbh->prepare($sql);
 	$sth->execute();
 	

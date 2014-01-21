@@ -53,8 +53,9 @@ sub toTableFileLine {
 sub getNewConceptIdList {
 
 	my $numberOfIdsToGet = shift;
+	my $configurationObject = shift;
 
-	my $lastId = DatabaseConnection::getNewIdentifiersLarge($numberOfIdsToGet, "I2B2DEMODATA.CONCEPT_ID");
+	my $lastId = DatabaseConnection::getNewIdentifiersLarge($numberOfIdsToGet, "I2B2DEMODATA.CONCEPT_ID", $configurationObject);
 
 	my $firstId = $lastId - $numberOfIdsToGet;
 

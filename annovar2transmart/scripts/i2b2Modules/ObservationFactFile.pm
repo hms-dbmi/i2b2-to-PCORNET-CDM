@@ -62,7 +62,7 @@ sub generateObservationFactFile
 	my $encounterIdCounter = 0;
 	
 	#This system command will count the number of lines in the variant file.
-	my $lines = `/usr/bin/wc -l $variantDataDirectory/i2b2_55sample_allVariantAnnotations.txt`;
+	my $lines = `/usr/bin/wc -l $variantDataFile`;
 
 	die("Could not run wc!\n") if !defined($lines);	
 	chomp $lines;$lines =~ s/^\s+//;
@@ -75,7 +75,7 @@ sub generateObservationFactFile
 
 	print("DEBUG - ObservationFactFile.pm : Gathering $encounterIdCounter new Encounter Nums\n");
 
-	my $encounterIdArray = ObservationFact::getNewEncounterIdList($encounterIdCounter);		
+	my $encounterIdArray = ObservationFact::getNewEncounterIdList($encounterIdCounter, $configurationObject);		
 
 	my %variantPatientHashArray	= ();
 
