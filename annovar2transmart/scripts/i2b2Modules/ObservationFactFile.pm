@@ -5,7 +5,6 @@ package ObservationFactFile;
 #use strict;
 #use warnings;
 use Carp;
-use UUID::Generator::PurePerl;
 use Data::Dumper;
 use List::Util qw(first);
 use Scalar::Util qw(looks_like_number);
