@@ -92,6 +92,7 @@ sub generateConfigObjectFromFile {
 						DATABASE_CONNECTION_STRING	=> $configHash{'DATABASE_CONNECTION_STRING'},
 						DATABASE_USERNAME			=> $configHash{'DATABASE_USERNAME'},
 						DATABASE_PASSWORD			=> $configHash{'DATABASE_PASSWORD'},
+						PATIENT_FILE_SUFFIX			=> $configHash{'PATIENT_FILE_SUFFIX'},
 						DEBUG						=> $debugFlag);
 	
 	return $configObject;

@@ -35,10 +35,8 @@ my $configurationObject = tranSMARTTextParsing::generateConfigObjectFromFile($AR
 
 print("DEBUG - annovar_to_transmart.pl : using configuration object.\n\n");
 
-print(Dumper($configurationObject));
-
-
 my $patientHash 			= PatientDimensionFile::generatePatientDimensionFile($configurationObject);
+
 my @conceptReturnObjects	= ConceptDimensionFile::generateConceptDimensionFile($configurationObject);
 
 i2b2File::generateI2b2File({CONFIGURATION_OBJECT 		=> $configurationObject,

@@ -26,6 +26,7 @@ sub new {
     $self->{'DATABASE_CONNECTION_STRING'} 	= $params{'DATABASE_CONNECTION_STRING'};
     $self->{'DATABASE_USERNAME'} 			= $params{'DATABASE_USERNAME'};
     $self->{'DATABASE_PASSWORD'} 			= $params{'DATABASE_PASSWORD'};
+    $self->{'PATIENT_FILE_SUFFIX'} 			= $params{'PATIENT_FILE_SUFFIX'};
     $self->{'DEBUG'} 						= $params{'DEBUG'};
         
     bless $self, $class;
