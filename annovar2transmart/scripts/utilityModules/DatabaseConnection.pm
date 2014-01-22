@@ -35,6 +35,8 @@ sub getNewIdentifiers
 	
 	$dbh->disconnect if defined($dbh);
 	
+	print("DEBUG - DatabaseConnection.pm : Retrieved ($numberOfIdsToGet) \n");
+	
 	return @returnNewIdArray;
 }
 

@@ -51,7 +51,7 @@ sub generatePatientDimensionFile
 
 	while (my $f = readdir(D)) 
 	{
-		 if($f =~ m/(.*)\.$configurationObject->{PATIENT_FILE_SUFFIX}$/)
+		 if($f =~ m/(.*)$configurationObject->{PATIENT_FILE_SUFFIX}$/)
 		 {
 			my $currentID = $configurationObject->{SUBJECT_PREFIX} . $1;
 			
