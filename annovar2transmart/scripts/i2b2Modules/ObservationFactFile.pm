@@ -90,7 +90,7 @@ sub generateObservationFactFile
 
 	while (my $f = readdir(D)) 
 	{
-		 if($f =~ m/(.*)\.annotated_vcf$/)
+		 if($f =~ m/(.*)$configurationObject->{PATIENT_FILE_SUFFIX}$/)
 		 {
 			my $currentID = $configurationObject->{SUBJECT_PREFIX} . $1;
 			
