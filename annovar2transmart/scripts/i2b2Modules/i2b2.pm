@@ -59,8 +59,17 @@ sub getNewI2b2IdList {
 
 	my $numberOfIdsToGet = shift;
 	my $configurationObject = shift;
+	
+	my $lastId;
 
-	my $lastId = DatabaseConnection::getNewIdentifiersLarge($numberOfIdsToGet, "I2B2METADATA.I2B2_ID_SEQ", $configurationObject);
+	if($configurationObject->{DEBUG})
+	{
+		$lastId = $numberOfIdsToGet + 1;
+	}
+	else
+	{
+		$lastId = DatabaseConnection::getNewIdentifiersLarge($numberOfIdsToGet, "I2B2METADATA.I2B2_ID_SEQ", $configurationObject);
+	}
 
 	my $firstId = $lastId - $numberOfIdsToGet;
 
