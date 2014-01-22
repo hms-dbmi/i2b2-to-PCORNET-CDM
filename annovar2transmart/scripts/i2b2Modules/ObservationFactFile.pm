@@ -122,7 +122,7 @@ sub generateObservationFactFile
 					if(looks_like_number($line[$headerHash{$columnName}]))
 					{
 						#("UPLOAD_ID", "UNITS_CD", "CONCEPT_CD", "VALTYPE_CD", "TVAL_CHAR", "NVAL_NUM", "UPDATE_DATE", "END_DATE", "VALUEFLAG_CD", "ENCOUNTER_NUM", "PATIENT_NUM", "OBSERVATION_BLOB", "LOCATION_CD", "START_DATE", "QUANTITY_NUM", "SOURCESYSTEM_CD", "PROVIDER_ID", "INSTANCE_NUM", "MODIFIER_CD", "DOWNLOAD_DATE", "CONFIDENCE_NUM");
-						print observation_fact "\t\t$conceptCd\tN\t\t$line[$headerHash{$columnName}]\t\t\t\t$currentEncounterId\t$patientHash->{$currentID}\t\t\t\t\tWES_LOADING\t@\t1\t\t\t\n";
+						print observation_fact "\t\t$conceptCd\tN\tE\t$line[$headerHash{$columnName}]\t\t\t\t$currentEncounterId\t$patientHash->{$currentID}\t\t\t\t\tWES_LOADING\t@\t1\t\t\t\n";
 
 						#So that we can build more observation fact records later we take note of all the variant + patient combinations.
 						$variantPatientHashArray{$line[0]}{$patientHash->{$currentID}} = $currentEncounterId;						
@@ -185,7 +185,7 @@ sub generateObservationFactFile
 				if(looks_like_number($line[$headerHash{$columnName}]))
 				{
 					$testCounter += 1;
-					print observation_fact "\t\t$conceptCd\tN\t\t$line[$headerHash{$columnName}]\t\t\t\t$encounterNum\t$patientId\t\t\t\t\tWES_LOADING\t@\t1\t\t\t\n";
+					print observation_fact "\t\t$conceptCd\tN\tE\t$line[$headerHash{$columnName}]\t\t\t\t$encounterNum\t$patientId\t\t\t\t\tWES_LOADING\t@\t1\t\t\t\n";
 				}
 			}
 		}
