@@ -50,7 +50,7 @@ sub generatePatientDimensionControlFile
 {
 	my ($params) = @_;
 
-	open patient_dimension_control_file, ">$basePath/control_files/patientDimension.ctl";
+	open(patient_dimension_control_file, ">$basePath/control_files/patientDimension.ctl") or die("Unable to write $basePath/control_files/patientDimension.ctl'");
 	
 	print patient_dimension_control_file "OPTIONS (SKIP=1)\n";
 	print patient_dimension_control_file "load data\n";
@@ -66,7 +66,7 @@ sub generateConceptDimensionControlFile
 {
 	my ($params) = @_;
 
-	open concept_dimension_control_file, ">$basePath/control_files/conceptDimension.ctl";
+	open(concept_dimension_control_file, ">$basePath/control_files/conceptDimension.ctl") or die("Unable to write $basePath/control_files/conceptDimension.ctl'");
 	
 	print concept_dimension_control_file "OPTIONS (DIRECT=TRUE, SKIP=1) UNRECOVERABLE\n";
 	print concept_dimension_control_file "load data\n";
@@ -82,7 +82,7 @@ sub generateObservationFactControlFile
 {
 	my ($params) = @_;
 
-	open observation_fact_control_file, ">$basePath/control_files/observationFact.ctl";
+	open(observation_fact_control_file, ">$basePath/control_files/observationFact.ctl") or die("Unable to write $basePath/control_files/observationFact.ctl'");
 	
 	print observation_fact_control_file "OPTIONS(DIRECT=TRUE, SKIP=1) UNRECOVERABLE load data\n";
 	print observation_fact_control_file "infile '../data/i2b2_load_tables/observation_fact.dat'\n";
@@ -97,7 +97,7 @@ sub generateI2b2ControlFile
 {
 	my ($params) = @_;
 
-	open i2b2_control_file, ">$basePath/control_files/i2b2.ctl";
+	open(i2b2_control_file, ">$basePath/control_files/i2b2.ctl") or die("Unable to write $basePath/control_files/i2b2.ctl'");
 	
 	print i2b2_control_file "OPTIONS (DIRECT=TRUE, SKIP=1) UNRECOVERABLE \n";
 	print i2b2_control_file "load data\n";
