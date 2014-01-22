@@ -53,6 +53,7 @@ sub countHashLeaves {
 sub generateConfigObjectFromFile {
 
 	my $configFile = shift;
+	my $debugFlag = shift;
 	
 	my %configHash;
 							
@@ -90,7 +91,8 @@ sub generateConfigObjectFromFile {
 						SQLLDR_LOGIN_STRING			=> $configHash{'SQLLDR_LOGIN_STRING'},
 						DATABASE_CONNECTION_STRING	=> $configHash{'DATABASE_CONNECTION_STRING'},
 						DATABASE_USERNAME			=> $configHash{'DATABASE_USERNAME'},
-						DATABASE_PASSWORD			=> $configHash{'DATABASE_PASSWORD'});
+						DATABASE_PASSWORD			=> $configHash{'DATABASE_PASSWORD'},
+						DEBUG						=> $debugFlag);
 	
 	return $configObject;
 

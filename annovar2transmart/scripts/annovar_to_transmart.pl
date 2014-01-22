@@ -30,10 +30,8 @@ print("*************************************************************\n");
 print("annovar_to_transmart.pl\n");
 print("*************************************************************\n");
 
-print($ARGV[0]);
-
 #Create the concept object.
-my $configurationObject = tranSMARTTextParsing::generateConfigObjectFromFile($ARGV[0]);
+my $configurationObject = tranSMARTTextParsing::generateConfigObjectFromFile($ARGV[0], $ARGV[1]);
 
 print("DEBUG - annovar_to_transmart.pl : using configuration object.\n\n");
 

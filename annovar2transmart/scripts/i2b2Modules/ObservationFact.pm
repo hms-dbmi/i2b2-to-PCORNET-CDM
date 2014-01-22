@@ -53,8 +53,16 @@ sub getNewEncounterIdList {
 
 	my $numberOfIdsToGet = shift;
 	my $configurationObject = shift;
-
-	my $lastId = DatabaseConnection::getNewIdentifiersLarge($numberOfIdsToGet, "I2B2DEMODATA.SQ_UP_ENCDIM_ENCOUNTERNUM", $configurationObject);
+	my $lastId;
+	
+	if($configurationObject->{DEBUG})
+	{
+		$lastId = $numberOfIdsToGet + 1;
+	}
+	else
+	{
+		$lastId = DatabaseConnection::getNewIdentifiersLarge($numberOfIdsToGet, "I2B2DEMODATA.SQ_UP_ENCDIM_ENCOUNTERNUM", $configurationObject);
+	}
 
 	my $firstId = $lastId - $numberOfIdsToGet;
 

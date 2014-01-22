@@ -136,7 +136,7 @@ sub _generateSingleI2b2Record {
 	
 	my $currentConceptName = "";
 	
-	#Concept name is the last hope in the hierarchy.
+	#Concept name is the last hop in the hierarchy.
 	if($currentConceptPath =~ m/([^\\]*)\\$/) 
 	{
 		$currentConceptName = $1;

@@ -55,11 +55,20 @@ sub getNewConceptIdList {
 	my $numberOfIdsToGet = shift;
 	my $configurationObject = shift;
 
-	my $lastId = DatabaseConnection::getNewIdentifiersLarge($numberOfIdsToGet, "I2B2DEMODATA.CONCEPT_ID", $configurationObject);
+	my $lastId;
 
+	if($configurationObject->{DEBUG})
+	{
+		$lastId = $numberOfIdsToGet + 1;
+	}
+	else
+	{
+		$lastId = DatabaseConnection::getNewIdentifiersLarge($numberOfIdsToGet, "I2B2DEMODATA.CONCEPT_ID", $configurationObject);
+	}
+	
 	my $firstId = $lastId - $numberOfIdsToGet;
 
-	print("DEBUG - i2b2.pm : Retrieved ($numberOfIdsToGet), First ID ($firstId), Last ID($lastId) \n");
+	print("DEBUG - ConceptDimension.pm : Retrieved ($numberOfIdsToGet), First ID ($firstId), Last ID($lastId) \n");
 	
 	my @returnConceptIdArray = ();
 	

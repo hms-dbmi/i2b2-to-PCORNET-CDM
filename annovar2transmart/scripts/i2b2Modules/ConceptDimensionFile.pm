@@ -69,8 +69,8 @@ sub generateConceptDimensionFile
 	}
 
 	#We need to create the text concepts from the hashes we created earlier.
-	my $foo = _createConceptsFromConceptHash($textVariantConceptHash, \@conceptIdArray, $concept_dimension_out);
-	my $foo2= _createConceptsFromConceptHash($textIndividualConceptHash, \@conceptIdArray, $concept_dimension_out);
+	_createConceptsFromConceptHash($textVariantConceptHash, \@conceptIdArray, $concept_dimension_out);
+	_createConceptsFromConceptHash($textIndividualConceptHash, \@conceptIdArray, $concept_dimension_out);
 
 	close($concept_dimension_out);
 	
@@ -139,7 +139,7 @@ sub _parseMappingFileTextPassVariant {
 		#Loop through the text hash and add the value to the distinct hash.
 		while(my($columnId, $columnHash) = each %textAttributeHash) 
 		{
-			if(!(exists $headerHash{$columnId})) {die("Could not map a header to an entry in the mapping file!");}
+			if(!(exists $headerHash{$columnId})) {die("Could not map a header to an entry in the mapping file! $columnId");}
 	
 			$textAttributeHash{$columnId}{$line[$headerHash{$columnId}]} = "$idPathHash{$columnId}$line[$headerHash{$columnId}]\\";		
 			
@@ -219,7 +219,7 @@ sub _parseMappingFileTextPassPatient {
 				#Loop through the text hash and add the value to the distinct hash.
 				while(my($columnId, $columnHash) = each %textAttributeHash) 
 				{
-					if(!(exists $headerHash{$columnId})) {die("Could not map a header to an entry in the mapping file!");}
+					if(!(exists $headerHash{$columnId})) {die("Could not map a header to an entry in the mapping file! $columnId");}
 				
 					$textAttributeHash{$columnId}{$line[$headerHash{$columnId}]} = "$idPathHash{$columnId}$line[$headerHash{$columnId}]\\";
 				}	

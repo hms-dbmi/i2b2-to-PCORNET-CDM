@@ -218,7 +218,7 @@ sub generateObservationFactFile
 	
 	close(observation_fact);
 	
-	print "$testCounter\n";
+	print "DEBUG - ObservationFactFile.pm : Variant Facts Observed - $testCounter\n";
 	
 	print("*************************************************************\n");
 	print("\n");
