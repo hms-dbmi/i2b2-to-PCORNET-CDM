@@ -40,7 +40,7 @@ sub generateConceptDimensionFile
 	while(my($k, $v) = each %mappingFileHash) 
 	{
 		if($v eq "VARIANT")		{$textVariantConceptHash 	= _parseMappingFileTextPassVariant($configurationObject->{BASE_PATH}, $k, $variant_data_file);}
-		if($v eq "INDIVIDUAL")	{$textIndividualConceptHash = _parseMappingFileTextPassPatient($configurationObject->{BASE_PATH}, $k, $patient_data_directory);}
+		if($v eq "INDIVIDUAL")	{$textIndividualConceptHash = _parseMappingFileTextPassPatient($configurationObject, $k, $patient_data_directory);}
 	}
 	
 	print("DEBUG - ConceptDimensionFile.pm : Attemping to open output file $concept_dimension_output_file\n");
@@ -153,14 +153,14 @@ sub _parseMappingFileTextPassVariant {
 }
 
 sub _parseMappingFileTextPassPatient {
-	my $basePath 				= shift;
+	my $configurationObject 	= shift;
 	my $currentMappingFile 		= shift;
 	my $dataDirectoryToParse	= shift;
 	
 	my %textAttributeHash		= ();
 	my %idPathHash				= ();
 	
-	my $field_mapping_file = $basePath . "mapping_files/$currentMappingFile";
+	my $field_mapping_file = $configurationObject->{BASE_PATH} . "mapping_files/$currentMappingFile";
 
 	print("DEBUG - ConceptDimensionFile.pm : Attemping to open mapping file $field_mapping_file\n");
 
@@ -196,7 +196,7 @@ sub _parseMappingFileTextPassPatient {
 
 	while (my $f = readdir(D)) 
 	{
-		if($f =~ m/(.*)\.annotated_vcf$/)
+		if($f =~ m/(.*)$configurationObject->{PATIENT_FILE_SUFFIX}$/)
 		{	
 			open my $currentPatientANNOVARFile, "<$dataDirectoryToParse$f";
 
