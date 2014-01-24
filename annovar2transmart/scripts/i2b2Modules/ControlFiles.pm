@@ -30,19 +30,19 @@ sub generateMasterScripts
 	my $sqlLdrString = shift;
 
 	open (patientMasterScript,'>',"$basePath/scripts/load_patient_data.sh") or die("Unable to write $basePath/scripts/load_patient_data.sh'");
-	print patientMasterScript "sqlldr $sqlLdrString control=../control_files/patientDimension.ctl log=../log_files/patient_dimension.log";
+	print patientMasterScript "/usr/bin/time -v sqlldr $sqlLdrString control=../control_files/patientDimension.ctl log=../log_files/patient_dimension.log";
 	close patientMasterScript;
 
 	open (conceptMasterScript,'>',"$basePath/scripts/load_concept_data.sh") or die("Unable to write $basePath/scripts/load_concept_data.sh'");
-	print conceptMasterScript "sqlldr $sqlLdrString control=../control_files/conceptDimension.ctl log=../log_files/concept_dimension.log";
+	print conceptMasterScript "/usr/bin/time -v sqlldr $sqlLdrString control=../control_files/conceptDimension.ctl log=../log_files/concept_dimension.log";
 	close conceptMasterScript;
 	
 	open (factMasterScript,'>',"$basePath/scripts/load_fact_data.sh") or die("Unable to write $basePath/scripts/load_fact_data.sh'");
-	print factMasterScript "sqlldr $sqlLdrString control=../control_files/observationFact.ctl log=../log_files/observation_fact.log";
+	print factMasterScript "/usr/bin/time -v sqlldr $sqlLdrString control=../control_files/observationFact.ctl log=../log_files/observation_fact.log";
 	close factMasterScript;
 	
 	open (i2b2MasterScript,'>',"$basePath/scripts/load_i2b2_data.sh") or die("Unable to write $basePath/scripts/load_i2b2_data.sh'");
-	print i2b2MasterScript "sqlldr $sqlLdrString control=../control_files/i2b2.ctl log=../log_files/i2b2.log";
+	print i2b2MasterScript "/usr/bin/time -v sqlldr $sqlLdrString control=../control_files/i2b2.ctl log=../log_files/i2b2.log";
 	close i2b2MasterScript;	
 }
 
