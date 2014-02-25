@@ -140,8 +140,15 @@ sub _parseMappingFileTextPassVariant {
 		while(my($columnId, $columnHash) = each %textAttributeHash) 
 		{
 			if(!(exists $headerHash{$columnId})) {die("Could not map a header to an entry in the mapping file! $columnId");}
-	
-			$textAttributeHash{$columnId}{$line[$headerHash{$columnId}]} = "$idPathHash{$columnId}$line[$headerHash{$columnId}]\\";		
+			
+			my $leafConcept = $line[$headerHash{$columnId}];
+			
+			#Remove slashes from the string so they don't get confused for steps in the ontology!
+			if (index($line[$headerHash{$columnId}], '\\') != -1) {
+    			$leafConcept =~ s/\\/<>/g;
+			}
+			
+			$textAttributeHash{$columnId}{$line[$headerHash{$columnId}]} = "$idPathHash{$columnId}$leafConcept\\";		
 			
 		}
 		
@@ -272,7 +279,7 @@ sub _parseMappingFileSecondPass {
 				my $currentConcept = $2;
 
 				#Store the column index and the concept code in a hash.
-				$conceptHash{$currentIndexField} = $currentConceptId;
+				$conceptHash{$currentIndexField} = $currentConcept . "!!!" . $currentConceptId;
 
 				#Create the concept object.
 				my $conceptDimension = new ConceptDimension(CONCEPT_CD => $currentConceptId, CONCEPT_PATH => $currentConcept, SOURCESYSTEM_CD => $currentStudyId);

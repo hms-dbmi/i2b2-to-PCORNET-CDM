@@ -1,5 +1,6 @@
 #!/usr/bin/perl
 
+#x2c_susceptibility_to
 #This is to get the pathing down properly so we can run this script from another directory.
 use File::Basename;
 my $dirname = dirname(__FILE__);
@@ -8,6 +9,7 @@ require "$dirname/i2b2Modules/ConceptDimension.pm";
 require "$dirname/i2b2Modules/PatientDimension.pm";
 require "$dirname/i2b2Modules/ObservationFact.pm";
 require "$dirname/i2b2Modules/i2b2.pm";
+require "$dirname/i2b2Modules/ConceptCount.pm";
 
 require "$dirname/i2b2Modules/PatientDimensionFile.pm";
 require "$dirname/i2b2Modules/ConceptDimensionFile.pm";
@@ -56,7 +58,8 @@ ControlFiles::generateControlFiles({	CONFIGURATION_OBJECT 		=> $configurationObj
 										PATIENT_DIMENSION_COLUMNS 	=> PatientDimension::printColumnHeadersInList(),
 										CONCEPT_DIMENSION_COLUMNS 	=> ConceptDimension::printColumnHeadersInList(),
 										OBSERVATION_FACT_COLUMNS  	=> ObservationFact::printColumnHeadersInList(),
-										I2B2_COLUMNS			  	=> i2b2::printColumnHeadersInListForCTL()});
+										I2B2_COLUMNS			  	=> i2b2::printColumnHeadersInListForCTL(),
+										CONCEPT_COUNT_COLUMNS		=> ConceptCount::printColumnHeadersInList()});
 										
 										
 my $end_run = time();

@@ -1,1 +1,1 @@
-sqlldr tm_lz/tm_lz@ORCL control=../control_files/observationFact.ctl log=../log_files/observation_fact.log
+/usr/bin/time -v sqlldr tm_lz/tm_lz@ORCL control=../control_files/observationFact.ctl log=../log_files/observation_fact.log

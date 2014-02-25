@@ -36,6 +36,9 @@ sub generateObservationFactFile
 	my $variantDataDirectory			= $configurationObject->{VARIANT_DATA_DIRECTORY};
 	my $variantDataFile					= $configurationObject->{VARIANT_DATA_FILE};
 
+	my %conceptPatientHash;
+	my %conceptHash;
+
 	#To speed things up later on down the line we will remove the need to split part of the concept info.
 	while(my($columnName, $subHash) = each %$individualTextConcepts) 
 	{ 	
@@ -44,6 +47,7 @@ sub generateObservationFactFile
 			my @conceptPathIdSplit = split(/!!!/,$conceptInfo);
 			
 			$subHash->{$columnValue} = $conceptPathIdSplit[1];
+			$conceptHash->{$conceptPathIdSplit[1]} = $conceptPathIdSplit[0];
 		}
 	}
 
@@ -54,7 +58,22 @@ sub generateObservationFactFile
 			my @conceptPathIdSplit = split(/!!!/,$conceptInfo);
 			
 			$subHash->{$columnValue} = $conceptPathIdSplit[1];
+			$conceptHash->{$conceptPathIdSplit[1]} = $conceptPathIdSplit[0];
 		}
+	}
+
+	while(my($columnName, $conceptInfo) = each %$individualNumericConcepts) 
+	{ 	
+		my @conceptPathIdSplit = split(/!!!/,$conceptInfo);
+		$conceptHash->{$conceptPathIdSplit[1]} = $conceptPathIdSplit[0];
+		$individualNumericConcepts->{$columnName} = $conceptPathIdSplit[1];
+	}
+
+	while(my($columnName, $conceptInfo) = each %$variantNumericConcepts) 
+	{ 	
+		my @conceptPathIdSplit = split(/!!!/,$conceptInfo);
+		$conceptHash->{$conceptPathIdSplit[1]} = $conceptPathIdSplit[0];
+		$variantNumericConcepts->{$columnName} = $conceptPathIdSplit[1];
 	}
 
 	#This is ugly, but, we need to retrieve all the encounter numbers we might need. We may not use all of them (As not all patients have all variants) but we'll assume patient concepts + (variant concepts * patient count).
@@ -123,6 +142,16 @@ sub generateObservationFactFile
 					{
 						#("UPLOAD_ID", "UNITS_CD", "CONCEPT_CD", "VALTYPE_CD", "TVAL_CHAR", "NVAL_NUM", "UPDATE_DATE", "END_DATE", "VALUEFLAG_CD", "ENCOUNTER_NUM", "PATIENT_NUM", "OBSERVATION_BLOB", "LOCATION_CD", "START_DATE", "QUANTITY_NUM", "SOURCESYSTEM_CD", "PROVIDER_ID", "INSTANCE_NUM", "MODIFIER_CD", "DOWNLOAD_DATE", "CONFIDENCE_NUM");
 						print observation_fact "\t\t$conceptCd\tN\tE\t$line[$headerHash{$columnName}]\t\t\t\t$currentEncounterId\t$patientHash->{$currentID}\t\t\t\t\tWES_LOADING\t@\t1\t\t\t\n";
+						
+						if(exists $conceptPatientHash{$conceptCd})
+						{
+							$conceptPatientHash{$conceptCd}{$patientHash->{$currentID}} = undef;
+						}
+						else
+						{
+							$conceptPatientHash{$conceptCd} = { $patientHash->{$currentID} => undef}
+						}
+						
 
 						#So that we can build more observation fact records later we take note of all the variant + patient combinations.
 						$variantPatientHashArray{$line[0]}{$patientHash->{$currentID}} = $currentEncounterId;						
@@ -147,6 +176,15 @@ sub generateObservationFactFile
 						
 						#So that we can build more observation fact records later we take note of all the variant + patient combinations.
 						$variantPatientHashArray{$line[0]}{$patientHash->{$currentID}} = $currentEncounterId;
+						
+						if(exists $conceptPatientHash{$conceptCd})
+						{
+							$conceptPatientHash{$conceptCd}{$patientHash->{$currentID}} = undef;
+						}
+						else
+						{
+							$conceptPatientHash{$conceptCd} = { $patientHash->{$currentID} => undef}
+						}						
 					}
 					
 				}
@@ -186,6 +224,16 @@ sub generateObservationFactFile
 				{
 					$testCounter += 1;
 					print observation_fact "\t\t$conceptCd\tN\tE\t$line[$headerHash{$columnName}]\t\t\t\t$encounterNum\t$patientId\t\t\t\t\tWES_LOADING\t@\t1\t\t\t\n";
+					
+					if(exists $conceptPatientHash{$conceptCd})
+					{
+						$conceptPatientHash{$conceptCd}{$patientHash->{$currentID}} = undef;
+					}
+					else
+					{
+						$conceptPatientHash{$conceptCd} = { $patientHash->{$currentID} => undef}
+					}
+					
 				}
 			}
 		}
@@ -207,6 +255,16 @@ sub generateObservationFactFile
 					{ 	
 						$testCounter += 1;
 						print observation_fact "\t\t$conceptCd\tT\t$line[$headerHash{$columnName}]\t\t\t\t\t$encounterNum\t$patientId\t\t\t\t\tWES_LOADING\t@\t1\t\t\t\n";
+						
+						if(exists $conceptPatientHash{$conceptCd})
+						{
+							$conceptPatientHash{$conceptCd}{$patientHash->{$currentID}} = undef;
+						}
+						else
+						{
+							$conceptPatientHash{$conceptCd} = { $patientHash->{$currentID} => undef}
+						}						
+						
 					}
 				}
 			}
@@ -219,6 +277,103 @@ sub generateObservationFactFile
 	close(observation_fact);
 	
 	print "DEBUG - ObservationFactFile.pm : Variant Facts Observed - $testCounter\n";
+	
+	print "DEBUG - ObservationFactFile.pm : Creating count file.\n";
+	
+	open my $concept_count_out, ">$configurationObject->{CONCEPT_COUNT_OUT_FILE}";
+	
+	my $longestConceptPath = 0;
+	
+	my %conceptPathPatientHash;
+	
+	#Get the count of patients for each concept.
+	while(my($conceptCd, $subPatientHash) = each %conceptPatientHash)
+	{
+		my $conceptCount = keys %$subPatientHash;
+		my $currentConcept = $conceptHash->{$conceptCd};
+		my $parentConcept = $currentConcept;
+		
+		#Remove last step from path.
+		$parentConcept =~ s/[^\\]*\\$//g;
+		
+		#Keep track of the longest concept path we put into the table.
+		my $numberOfSteps = ($currentConcept =~ s/\\/\\/g);
+		
+		if($longestConceptPath < $numberOfSteps)
+		{
+			$longestConceptPath = $numberOfSteps;
+		}
+
+		my $conceptCountObject = new ConceptCount(CONCEPT_PATH => $currentConcept, PARENT_CONCEPT_PATH => $parentConcept, PATIENT_COUNT => $conceptCount);
+		
+		#Write the entry for the concept_dimension table.
+		print $concept_count_out $conceptCountObject->toTableFileLine();
+
+		#This is used later to build intermediate paths.
+		if(exists $conceptPathPatientHash{$parentConcept})
+		{
+			@{$conceptPathPatientHash{$parentConcept}}{ keys %$subPatientHash } = values %$subPatientHash;
+		}
+		else
+		{
+			$conceptPathPatientHash{$parentConcept} = {};
+			@{$conceptPathPatientHash{$parentConcept}}{ keys %$subPatientHash } = values %$subPatientHash;
+		}
+		
+		
+	}
+
+	my $currentDepthFromBottom = 0;
+
+	#We make a pass for each depth.
+	while($currentDepthFromBottom < $longestConceptPath)
+	{
+		#Loop through all concepts.
+		while(my($conceptPath, $subPatientHash) = each %conceptPathPatientHash)
+		{
+			my $currentConceptDepth = ($conceptPath =~ s/\\/\\/g);
+			
+			#If this path is the depth we are working on.
+			if( ($currentConceptDepth == ($longestConceptPath - $currentDepthFromBottom)) && ($currentConceptDepth > 2) ) 
+			{
+				my $parentPath = $conceptPath;
+				
+				$parentPath =~ s/[^\\]*\\$//g;
+				
+				#For this level node we add path and the patient hash. We already have the patient hash in another hash so we gotta hash it out. hash. hash hash.
+				if(exists $conceptPathPatientHash{$parentPath})
+				{
+					@{$conceptPathPatientHash{$parentPath}}{ keys %$subPatientHash } = values %$subPatientHash;
+				}
+				else
+				{
+					$conceptPathPatientHash{$parentPath} = {};
+					@{$conceptPathPatientHash{$parentPath}}{ keys %$subPatientHash } = values %$subPatientHash;
+				}
+			
+			}
+		}
+		
+		$currentDepthFromBottom += 1;
+	}
+	
+	#Loop through the hash and dump the contents to our concept count file.
+	while(my($conceptPath, $patientHash) = each %conceptPathPatientHash)
+	{	
+		my $conceptCount = keys %$patientHash;
+		my $parentConcept = $conceptPath;
+		
+		#Remove last step from path.
+		$parentConcept =~ s/[^\\]*\\$//g;
+		
+		my $conceptCountObject = new ConceptCount(CONCEPT_PATH => $conceptPath, PARENT_CONCEPT_PATH => $parentConcept, PATIENT_COUNT => $conceptCount);
+		
+		#Write the entry for the concept_dimension table.
+		print $concept_count_out $conceptCountObject->toTableFileLine();
+
+	}
+		
+	
 	
 	print("*************************************************************\n");
 	print("\n");

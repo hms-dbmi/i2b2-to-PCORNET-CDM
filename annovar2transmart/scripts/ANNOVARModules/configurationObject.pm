@@ -21,6 +21,7 @@ sub new {
     $self->{'PATIENT_DIMENSION_OUT_FILE'} 	= $self->{'BASE_PATH'} . $params{'PATIENT_DIMENSION_OUT_FILE'};
     $self->{'I2B2_OUT_FILE'} 				= $self->{'BASE_PATH'} . $params{'I2B2_OUT_FILE'};
     $self->{'OBSERVATION_FACT_OUT_FILE'} 	= $self->{'BASE_PATH'} . $params{'OBSERVATION_FACT_OUT_FILE'};
+    $self->{'CONCEPT_COUNT_OUT_FILE'} 		= $self->{'BASE_PATH'} . $params{'CONCEPT_COUNT_OUT_FILE'};
     $self->{'SUBJECT_PREFIX'} 				= $params{'SUBJECT_PREFIX'};
     $self->{'SQLLDR_LOGIN_STRING'} 			= $params{'SQLLDR_LOGIN_STRING'};
     $self->{'DATABASE_CONNECTION_STRING'} 	= $params{'DATABASE_CONNECTION_STRING'};

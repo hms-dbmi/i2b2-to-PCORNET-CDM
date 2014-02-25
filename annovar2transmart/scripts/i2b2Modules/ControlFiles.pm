@@ -20,6 +20,7 @@ sub generateControlFiles
 	generateConceptDimensionControlFile({CONCEPT_DIMENSION_COLUMNS => $params->{CONCEPT_DIMENSION_COLUMNS}});
 	generateObservationFactControlFile({OBSERVATION_FACT_COLUMNS => $params->{OBSERVATION_FACT_COLUMNS}});
 	generateI2b2ControlFile({I2B2_COLUMNS => $params->{I2B2_COLUMNS}});
+	generateConceptCountControlFile({CONCEPT_COUNT_COLUMNS => $params->{CONCEPT_COUNT_COLUMNS}});
 	
 	generateMasterScripts($configurationObject->{SQLLDR_LOGIN_STRING});
 }
@@ -44,6 +45,11 @@ sub generateMasterScripts
 	open (i2b2MasterScript,'>',"$basePath/scripts/load_i2b2_data.sh") or die("Unable to write $basePath/scripts/load_i2b2_data.sh'");
 	print i2b2MasterScript "/usr/bin/time -v sqlldr $sqlLdrString control=../control_files/i2b2.ctl log=../log_files/i2b2.log";
 	close i2b2MasterScript;	
+	
+	open (conceptCountMasterScript,'>',"$basePath/scripts/load_concept_count_data.sh") or die("Unable to write $basePath/scripts/load_concept_count_data.sh'");
+	print conceptCountMasterScript "/usr/bin/time -v sqlldr $sqlLdrString control=../control_files/concept_count.ctl log=../log_files/concept_count.log";
+	close conceptCountMasterScript;	
+	
 }
 
 sub generatePatientDimensionControlFile
@@ -107,6 +113,24 @@ sub generateI2b2ControlFile
 	print i2b2_control_file $params->{I2B2_COLUMNS};
 	
 	close i2b2_control_file;
+
+
+}
+
+sub generateConceptCountControlFile
+{
+	my ($params) = @_;
+
+	open(concept_count_control_file, ">$basePath/control_files/concept_count.ctl") or die("Unable to write $basePath/control_files/concept_count.ctl'");
+	
+	print concept_count_control_file "OPTIONS (DIRECT=TRUE, SKIP=1) UNRECOVERABLE \n";
+	print concept_count_control_file "load data\n";
+	print concept_count_control_file "infile '../data/i2b2_load_tables/concept_count.dat'\n";
+	print concept_count_control_file "APPEND into table i2b2DemoData.concept_counts\n";
+	print concept_count_control_file 'fields terminated by "\t" TRAILING NULLCOLS' . "\n";
+	print concept_count_control_file $params->{CONCEPT_COUNT_COLUMNS};
+	
+	close concept_count_control_file;
 
 
 }
