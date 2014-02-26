@@ -71,11 +71,15 @@ sub generateI2b2File
 				#Pull the concept cd based on the name of the column in the data file. For text entries we need to loop through the hash to create all the possible data values.
 				if($mappingFileType eq "INDIVIDUAL" and $currentConceptType eq "N")
 				{
-					_generateSingleI2b2Record($1,$2, $individualNumericConcepts->{$1}, shift @i2b2IdArray,'N', $currentStudyId);
+					my @conceptPathIdSplit = split(/!!!/,$individualNumericConcepts->{$1});
+					
+					_generateSingleI2b2Record($1,$2, $conceptPathIdSplit[1], shift @i2b2IdArray,'N', $currentStudyId);
 				}
 				elsif($mappingFileType eq "VARIANT" and $currentConceptType eq "N")
 				{
-					_generateSingleI2b2Record($1,$2, $variantNumericConcepts->{$1}, shift @i2b2IdArray,'N', $currentStudyId);
+					my @conceptPathIdSplit = split(/!!!/,$variantNumericConcepts->{$1});
+					
+					_generateSingleI2b2Record($1,$2, $conceptPathIdSplit[1], shift @i2b2IdArray,'N', $currentStudyId);
 				}
 				elsif($mappingFileType eq "INDIVIDUAL" and $currentConceptType eq "T")
 				{					
