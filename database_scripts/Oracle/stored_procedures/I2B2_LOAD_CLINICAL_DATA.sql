@@ -9,46 +9,6 @@ PROCEDURE         "I2B2_LOAD_CLINICAL_DATA"
  ,fact_set		IN	VARCHAR2 := null
 )
 AS
-
-	--	JEA@20110708	Cloned from i2b2_apply_curation_rules and i2b2_load_tpm_post_curation
-	--	JEA@20111028	Changed source table to lt_src_clinical_data, this table will be loaded either through
-	--					i2b2_clinical_data_extrnl_lt sp or through sqlldr where external tables are not feasible
-	--	JEA@20111114	Added ctrl_vocab_code
-	--	JEA@20111115	Reuse concept_cds, i2b2 and concept_dimension
-	--	JEA@20111201	Added join to concept_dimension when setting datatype of N and xml for i2b2
-	--	JEA@20111220	Don't delete patients that exist in de_subject_sample_mapping
-	--	JEA@20111226	Change all & to ' and ' in category_cd, data_label or data_value
-	--	JEA@20120103	Only check for dups for numeric data values, text won't cause problems on insert
-	--	JEA@20120103	Remove setting c_basecode to null for folders
-	--	JEA@20120104	Don't insert into observation_fact if lower-level leaf node exists
-	--	JEA@20120105	Fix node_name in wt_trial_nodes for numeric data types wchere data_label is concatenation
-	--	JEA@20120109	Added populate i2b2_id on insert to i2b2
-	--	JEA@20120111	Added populate wt_clinical_data_dups table to easily identify duplicate records
-	--	JEA@20120113	Change del_nodes to look for H in pos 2 of c_visualattributes
-	--	JEA220120119	Don't run i2b2_create_patient_trial, delete/insert done as part of proc
-	--	JEA@20120120	Comment out delete/insert to patient_trial, incorporated as part of i2b2_create_security_for_trial
-	--	JEA@20120204	Remove data_label from last part of category_path and category_cd when they are the same
-	--	JEA@20120215	Add : to where clause in delete patient_dimension
-	--	JEA@20120229	Added replace of + with ' and ' to data_label and data_value
-	--	JEA@20120318	Correct node_name where visit_name is not null
-	--	JEA@20120318	Update node if node_name changed or changed from text to numeric
-	--	JEA@20120319	Added third c_visualattributes = J for topNode
-	--	JEA@20120402	Fixed update to patient_dimension to add coalesce for null values
-	--	JEA@20120409	Add new parameter, highlight_study that will determine if J is set as third position of c_visualattributes for topNode
-	--	JEA@20120411	Fix c_visualattribute issue when node changed from numeric leaf to folder
-	--	JEA@20120411	Add DATALABEL, VISITNAME override to category_cd, add update of node_name in wt_trial_nodes
-	--	JEA@20120421	Default sex_cd in patient_dimenstion to Unknown when null
-	--	JEA220120425	Add single DATALABEL in category_cd to force drop of visit_name/VISITNAME
-	--	JEA@20120507	Fix missing data_value when DATALABEL, VISITNAME in category_cd
-	--	JEA@20120508	Add trial name to start audit text, change patient update to coalesce for sex_cd, race_cd, 
-	--					remove case statement that set sex_cd to M/F/U
-	--	JEA@20120510	Add root node using i2b2_add_root_node if missing
-	--	JEA@20120511	Only insert unique leaf_nodes to concept_dimension
-	--	JEA@20120517	Set visit_name to null if only DATALABEL in category_cd
-	--	JEA@20120526	Set sourcesystem_cd, c_comment to null if any upper-level nodes added
-	--	JEA@20120601	Change underscore (_) to space in data_label
-	--	JEA@20120603	Raise exception if only one node in top_node
-	--	JEA@20120604	Raise exception if category_cd, data_label, data_value has both null and non-null visit_name
   
   topNode		VARCHAR2(2000);
   topLevel		number(10,0);
@@ -65,7 +25,7 @@ AS
   rtnCode		int;
   tText			varchar2(2000);
   
-    --Audit variables
+  --Audit variables
   newJobFlag INTEGER(1);
   databaseName VARCHAR(100);
   procedureName VARCHAR(100);
@@ -92,21 +52,36 @@ AS
       and substr(c_visualattributes,2,1) = 'H';
 
 BEGIN
+   -----------
+   --DROP Index on WZ Table.
    execute immediate('drop index TM_WZ.LEAF_NODE_IDX');
+   -----------
   
+  ----------- 
+  --SET Variables
 	TrialID := upper(trial_id);
   FactSet := upper(fact_set);
 	secureStudy := upper(secure_study);
-	
-	--Set Audit Parameters
+	-----------
+  
+  -----------
+	--SET Audit Parameters.
 	newJobFlag := 0; -- False (Default)
 	jobID := currentJobID;
-
+  -----------
+  
+  -----------
+  --SET Database name.
 	SELECT sys_context('USERENV', 'CURRENT_SCHEMA') INTO databaseName FROM dual;
 	procedureName := $$PLSQL_UNIT;
-	
+	-----------
+  
+  -----------
+  --SET Date.
 	select sysdate into etlDate from dual;
-	
+	-----------
+  
+  -----------
 	--Audit JOB Initialization
 	--If Job ID does not exist, then this is a single procedure run and we need to create it
 	IF(jobID IS NULL or jobID < 1)
@@ -114,37 +89,50 @@ BEGIN
 		newJobFlag := 1; -- True
 		cz_start_audit (procedureName, databaseName, jobID);
 	END IF;
-    	
+  -----------
+  
+  -----------
+  --INITIAL AUDIT STEPS.
 	stepCt := 0;
 
 	stepCt := stepCt + 1;
 	tText := 'Start i2b2_load_clinical_data for ' || TrialId;
 	cz_write_audit(jobId,databaseName,procedureName,tText,0,stepCt,'Done');
-	
+  -----------
+
+  -----------
+  --SET SECURED STUDY FLAG.
 	if (secureStudy not in ('Y','N') ) then
 		secureStudy := 'Y';
 	end if;
-	
+	-----------
+  
+  -----------
+  --SET TOPNODE FORMAT.
 	topNode := REGEXP_REPLACE('\' || top_node || '\','(\\){2,}', '\');
-	
+	-----------
+  
+  -----------
 	--	figure out how many nodes (folders) are at study name and above
 	--	\Public Studies\Clinical Studies\Pancreatic_Cancer_Smith_GSE22780\: topLevel = 4, so there are 3 nodes
 	--	\Public Studies\GSE12345\: topLevel = 3, so there are 2 nodes
 	
+  --SET TOP LEVEL.
 	select length(topNode)-length(replace(topNode,'\','')) into topLevel from dual;
-	
-	--if topLevel < 3 then
-	--	raise invalid_topNode;
-	--end if;	
+  -----------
+  
+  -----------
 	--	delete any existing data from lz_src_clinical_data and load new data
-	
 	delete from lz_src_clinical_data
 	where study_id = TrialId;
 	
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Delete existing data from lz_src_clinical_data',SQL%ROWCOUNT,stepCt,'Done');
 	commit;
-	
+	-----------
+  
+  -----------
+  --INSERT INTO LZ_SRC
 	insert into lz_src_clinical_data
 	(study_id
 	,site_id
@@ -170,13 +158,15 @@ BEGIN
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Insert data into lz_src_clinical_data',SQL%ROWCOUNT,stepCt,'Done');
 	commit;
-		
+  -----------
+  
+  -----------
 	--	truncate wrk_clinical_data and load data from external file
-	
 	execute immediate('truncate table tm_wz.wrk_clinical_data');
-	
+	-----------
+  
+  -----------
 	--	insert data from lt_src_clinical_data to wrk_clinical_data
-	
 	insert into wrk_clinical_data
 	(study_id
 	,site_id
@@ -200,57 +190,73 @@ BEGIN
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Load lt_src_clinical_data to work table',SQL%ROWCOUNT,stepCt,'Done');
 	
-	commit;  	
+	commit;
+  -----------
 
+  -----------
 	-- Get root_node from topNode
-  
 	select parse_nth_value(topNode, 2, '\') into root_node from dual;
-	
+	-----------
+  
+  -----------
+  --SET TABLE_ACCESS COUNT
 	select count(*) into pExists
 	from table_access
 	where c_name = root_node;
-	
+	-----------
+  
+  -----------
+  --ADD ROOT NODE IF IT DOESN'T EXIST.
 	if pExists = 0 then
 		i2b2_add_root_node(root_node, jobId);
 	end if;
-	
+	-----------
+  
+  -----------
+  --SET LEVEL OF ROOT NODE.
 	select c_hlevel into root_level
 	from table_access
 	where c_name = root_node;
-	
-	-- Get study name from topNode
+	-----------
   
+  -----------
+	-- Get study name from topNode
+  --SET STUDY NAME.
 	select parse_nth_value(topNode, topLevel, '\') into study_name from dual;
-	
+	-----------
+  
+  -----------
 	--	Add any upper level nodes as needed
-	
+	--SET LENGTH OF TOP NODE
 	tPath := REGEXP_REPLACE(replace(top_node,study_name,null),'(\\){2,}', '\');
 	select length(tPath) - length(replace(tPath,'\',null)) into pCount from dual;
-
+  -----------
+  
+  -----------
+  --FILL IN TREE IF REQUIRED (UPPER NODES).
 	if pCount > 2 then
 		stepCt := stepCt + 1;
 		cz_write_audit(jobId,databaseName,procedureName,'Adding upper-level nodes',0,stepCt,'Done');
-		i2b2_fill_in_tree(null, tPath, jobId);
+		i2b2_fill_in_tree(null, tPath, jobId, FactSet);
 	end if;
-	
-/*	Don't delete existing data, concept_cds will be reused
-	--	delete any existing data
-	
-	i2b2_delete_all_nodes(topNode, jobId);
-*/
-
+  -----------
+  
+  -----------
+  --FIND OUT IF TOP NODE EXISTS.
 	select count(*) into pExists
 	from i2b2
 	where c_fullname = topNode;
-	
+	-----------
+  
+  -----------
 	--	add top node for study
-	
 	if pExists = 0 then
-		i2b2_add_node(TrialId, topNode, study_name, jobId);
+		i2b2_add_node(TrialId, topNode, study_name, jobId, FactSet);
 	end if;
+  -----------
   
-	--	Set data_type, category_path, and usubjid 
-  
+  -----------
+	--	WRK - Set data_type, category_path, and usubjid 
 	update wrk_clinical_data
 	set data_type = 'T'
 	   ,category_path = replace(replace(category_cd,'_',' '),'+','\')
@@ -262,9 +268,10 @@ BEGIN
 	cz_write_audit(jobId,databaseName,procedureName,'Set columns in wrk_clinical_data',SQL%ROWCOUNT,stepCt,'Done');
 	
 	commit;
+  -----------
   
-	--	Delete rows where data_value is null
-  
+  -----------
+	--	WRK - Delete rows where data_value is null
 	delete from wrk_clinical_data
 	where data_value is null;
 	stepCt := stepCt + 1;
@@ -281,7 +288,9 @@ BEGIN
 	cz_write_audit(jobId,databaseName,procedureName,'Remove pipes in data_value',SQL%ROWCOUNT,stepCt,'Done');
 	
 	commit;  
+  -----------
   
+  -----------
 	--Remove invalid Parens in the data
 	--They have appeared as empty pairs or only single ones.
   
@@ -302,7 +311,9 @@ BEGIN
 	cz_write_audit(jobId,databaseName,procedureName,'Remove empty parentheses 2',SQL%ROWCOUNT,stepCt,'Done');
 	
 	commit;
-
+  -----------
+  
+  -----------
 	--Replace the Pipes with Commas in the data_label column
 	update wrk_clinical_data
     set data_label = replace (data_label, '|', ',')
@@ -311,9 +322,10 @@ BEGIN
 	cz_write_audit(jobId,databaseName,procedureName,'Replace pipes with comma in data_label',SQL%ROWCOUNT,stepCt,'Done');
 	
 	commit;
-
+  -----------
+  
+  -----------
 	--	set visit_name to null when there's only a single visit_name for the catgory
-	
 	update wrk_clinical_data tpm
 	set visit_name=null
 	where (tpm.category_cd) in
@@ -326,11 +338,13 @@ BEGIN
 	cz_write_audit(jobId,databaseName,procedureName,'Set single visit_name to null',SQL%ROWCOUNT,stepCt,'Done');
 		
 	commit;
+  -----------
 	
   ---------------------------------------------------------------
   --BEGIN Using Node Curation table to convert values or set Suppression flag.
   ---------------------------------------------------------------
   
+  -----------
   --DATA_VALUE
   update wrk_clinical_data a
     set a.data_value = 
@@ -365,7 +379,9 @@ BEGIN
   cz_write_audit(jobId,databaseName,procedureName,'Node curation for DATA_VALUE',SQL%ROWCOUNT,stepCt,'Done');
 	
   COMMIT;
-
+  -----------
+  
+  -----------
   --DATA_LABEL
   update wrk_clinical_data a
     set a.data_label = 
@@ -400,25 +416,9 @@ BEGIN
   cz_write_audit(jobId,databaseName,procedureName,'Node curation for DATA_LABEL',SQL%ROWCOUNT,stepCt,'Done');
 	
   commit;
-
-	
-/*	--	set sample_type to null when there's only a single sample_type for the category except Samples and Timepoints
-	
-	update wrk_clinical_data tpm
-	set sample_type=null
-	where tpm.category_cd in
-		 (select x.category_cd
-		  from wrk_clinical_data x
-		  group by x.category_cd
-		  having count(distinct upper(x.sample_type)) = 1)
-	  and upper(tpm.category_cd) not like 'SAMPLES_AND_TIMEPOINTS%';
-
-	stepCt := stepCt + 1;
-	cz_write_audit(jobId,databaseName,procedureName,'Set single sample_type to null',SQL%ROWCOUNT,stepCt,'Done');
-		
-	commit;
-*/
-	
+	-----------
+  
+  -----------
 	--	set data_label to null when it duplicates the last part of the category_path
 	--	Remove data_label from last part of category_path when they are the same
 	
@@ -439,9 +439,10 @@ BEGIN
 	cz_write_audit(jobId,databaseName,procedureName,'Set data_label to null when found in category_path',SQL%ROWCOUNT,stepCt,'Done');
 		
 	commit;
-
+  -----------
+  
+  -----------
 	--	set visit_name to null if same as data_label
-	
 	update wrk_clinical_data t
 	set visit_name=null
 	where (t.category_cd, t.visit_name, t.data_label) in
@@ -455,9 +456,10 @@ BEGIN
 	cz_write_audit(jobId,databaseName,procedureName,'Set visit_name to null when found in data_label',SQL%ROWCOUNT,stepCt,'Done');
 		
 	commit;
-	
+	-----------
+  
+  -----------
 	--	set visit_name to null if same as data_value
-	
 	update wrk_clinical_data t
 	set visit_name=null
 	where (t.category_cd, t.visit_name, t.data_value) in
@@ -471,9 +473,10 @@ BEGIN
 	cz_write_audit(jobId,databaseName,procedureName,'Set visit_name to null when found in data_value',SQL%ROWCOUNT,stepCt,'Done');
 		
 	commit;
-	
+	-----------
+  
+  -----------
 	--	set visit_name to null if only DATALABEL in category_cd
-	
 	update wrk_clinical_data t
 	set visit_name=null
 	where t.category_cd like '%DATALABEL%'
@@ -483,20 +486,9 @@ BEGIN
 	cz_write_audit(jobId,databaseName,procedureName,'Set visit_name to null when only DATALABE in category_cd',SQL%ROWCOUNT,stepCt,'Done');
 		
 	commit;
-
-/*	--	Remove sample_type if found in category_path
-	
-	update wrk_clinical_data t
-	set sample_type = null
-	where exists
-	     (select 1 from wrk_clinical_data c
-		  where instr(c.category_path,t.sample_type) > 0);
-	stepCt := stepCt + 1;
-	cz_write_audit(jobId,databaseName,procedureName,'Remove sample_type if already in category_path',SQL%ROWCOUNT,stepCt,'Done');
-	commit;
-*/
-	--	comment out may need later
-	
+	-----------
+  
+  -----------
 	--	change any % to Pct and & and + to ' and ' and _ to space in data_label only
 	
 	update wrk_clinical_data
@@ -504,7 +496,7 @@ BEGIN
 	   ,data_value=replace(replace(replace(data_value,'%',' Pct'),'&',' and '),'+',' and ')
 	   ,category_cd=replace(replace(category_cd,'%',' Pct'),'&',' and ')
 	   ,category_path=replace(replace(category_path,'%',' Pct'),'&',' and ');
-
+  
   --Trim trailing and leadling spaces as well as remove any double spaces, remove space from before comma, remove trailing comma
 
 	update wrk_clinical_data
@@ -516,8 +508,10 @@ BEGIN
 	cz_write_audit(jobId,databaseName,procedureName,'Remove leading, trailing, double spaces',SQL%ROWCOUNT,stepCt,'Done');
 	
 	commit;
-
-    --1. DETERMINE THE DATA_TYPES OF THE FIELDS
+  -----------
+  
+  -----------
+  --1. DETERMINE THE DATA_TYPES OF THE FIELDS
 	--	replaced cursor with update, used temp table to store category_cd/data_label because correlated subquery ran too long
 	
 	execute immediate('truncate table tm_wz.wt_num_data_types');
@@ -540,12 +534,15 @@ BEGIN
 	cz_write_audit(jobId,databaseName,procedureName,'Insert numeric data into WZ wt_num_data_types',SQL%ROWCOUNT,stepCt,'Done');
 	
 	commit;
-
+  -----------
+  
+  -----------
 	--	Check if any duplicate records of key columns (site_id, subject_id, visit_name, data_label, category_cd) for numeric data
 	--	exist.  Raise error if yes
-	
 	execute immediate('truncate table tm_wz.wt_clinical_data_dups');
-	
+	-----------
+  
+  -----------
 	insert into wt_clinical_data_dups
 	(site_id
 	,subject_id
@@ -571,7 +568,9 @@ BEGIN
 	if pCount > 0 then
 		raise duplicate_values;
 	end if;
-	
+	-----------
+  
+  -----------
 	--	check for multiple visit_names for category_cd, data_label, data_value
 	
      select max(case when x.null_ct > 0 and x.non_null_ct > 0
@@ -588,7 +587,9 @@ BEGIN
 	if pCount > 0 then
 		raise multiple_visit_names;
 	end if;
-		
+  -----------
+  
+  -----------
 	update wrk_clinical_data t
 	set data_type='N'
 	where exists
@@ -601,11 +602,14 @@ BEGIN
 	cz_write_audit(jobId,databaseName,procedureName,'Updated data_type flag for numeric data_types',SQL%ROWCOUNT,stepCt,'Done');
 	
 	commit;
+  -----------
 
+  -----------
 	-- Build all needed leaf nodes in one pass for both numeric and text nodes
- 
 	execute immediate('truncate table tm_wz.wt_trial_nodes');
-	
+	-----------
+  
+  -----------
 	insert into wt_trial_nodes
 	(leaf_node
 	,category_cd
@@ -647,7 +651,9 @@ BEGIN
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Create leaf nodes for trial',SQL%ROWCOUNT,stepCt,'Done');
 	commit;
-	
+	-----------
+  
+  -----------
 	--	set node_name
 	
 	update wt_trial_nodes
@@ -655,20 +661,25 @@ BEGIN
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Updated node name for leaf nodes',SQL%ROWCOUNT,stepCt,'Done');
 	commit;	
-	
+	-----------
+  
+  -----------
 	DBMS_STATS.UNLOCK_TABLE_STATS('TM_WZ','WT_TRIAL_NODES');
 	execute immediate('analyze table tm_wz.wt_trial_nodes compute statistics');
-	
+	-----------
   
-   -- NEW INDEX
+  -----------
+  -- NEW INDEX
 	execute immediate('CREATE INDEX  TM_WZ.LEAF_NODE_IDX ON TM_WZ.WT_TRIAL_NODES (LEAF_NODE)');
+  -----------
   
-      
+  -----------
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Create new LEAF_NODE_IDX',SQL%ROWCOUNT,stepCt,'Done');
-commit;	
+  commit;	
+  -----------
   
-  
+  -----------
 	--	insert subjects into patient_dimension if needed
 	
 	execute immediate('truncate table tmp_subject_info');
@@ -703,33 +714,11 @@ commit;
 	cz_write_audit(jobId,databaseName,procedureName,'Insert subject information into temp table',SQL%ROWCOUNT,stepCt,'Done');
 	
 	commit;
-	
-	--	update patients with changed information
-	
-	update patient_dimension pd
-	set (sex_cd, age_in_years_num, race_cd, update_date) = 
-		(select nvl(t.sex_cd,pd.sex_cd), t.age_in_years_num, nvl(t.race_cd,pd.race_cd), sysdate
-		 from tmp_subject_info t
-		 where t.usubjid = pd.sourcesystem_cd
-		   and (coalesce(pd.sex_cd,'@') != t.sex_cd or
-				pd.age_in_years_num != t.age_in_years_num or
-				coalesce(pd.race_cd,'@') != t.race_cd)
-		)
-	where exists
-		 (select 1 from tmp_subject_info x
-		  where pd.sourcesystem_cd = x.usubjid
-		    and (coalesce(pd.sex_cd,'@') != x.sex_cd or
-				 pd.age_in_years_num != x.age_in_years_num or
-				 coalesce(pd.race_cd,'@') != x.race_cd)
-		 );
-		  
-	stepCt := stepCt + 1;
-	cz_write_audit(jobId,databaseName,procedureName,'Update subjects with changed demographics in patient_dimension',SQL%ROWCOUNT,stepCt,'Done');
-	
-	commit;	
+  -----------
 
+  -----------
 	--	insert new subjects into patient_dimension
-	
+
 	insert into patient_dimension
     (patient_num,
      sex_cd,
@@ -759,7 +748,9 @@ commit;
 	cz_write_audit(jobId,databaseName,procedureName,'Insert new subjects into patient_dimension',SQL%ROWCOUNT,stepCt,'Done');
 	
 	commit;
-	
+	-----------
+  
+  -----------
 	--	bulk insert leaf nodes
 	
 	update concept_dimension cd
@@ -774,8 +765,9 @@ commit;
 	cz_write_audit(jobId,databaseName,procedureName,'Update name_char in concept_dimension for changed names',SQL%ROWCOUNT,stepCt,'Done');
 	
 	commit;
-							
+	-----------						
 	
+  -----------
 	insert into concept_dimension
     (concept_cd
 	,concept_path
@@ -805,7 +797,9 @@ commit;
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Inserted new leaf nodes into I2B2DEMODATA concept_dimension',SQL%ROWCOUNT,stepCt,'Done');
     commit;
-	
+	-----------
+  
+  -----------
 	--	update i2b2 if name or data type changed
 	
 	update i2b2 b
@@ -821,7 +815,9 @@ commit;
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Updated name and data type in i2b2 if changed',SQL%ROWCOUNT,stepCt,'Done');
     commit;
-			   
+  -----------
+  
+  -----------
 	insert into i2b2
     (c_hlevel
 	,c_fullname
@@ -872,9 +868,9 @@ commit;
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Inserted leaf nodes into I2B2METADATA i2b2',SQL%ROWCOUNT,stepCt,'Done');
     COMMIT;
-
-	--	delete from observation_fact all concept_cds for trial that are clinical data, exclude concept_cds from biomarker data
-	
+  -----------
+  
+  -----------	
     --Insert into observation_fact
 	
 	insert into observation_fact
@@ -892,7 +888,7 @@ commit;
 	)
 	select distinct c.patient_num,
 		   i.c_basecode,
-		   a.study_id,
+		   '@',
 		   a.data_type,
 		   case when a.data_type = 'T' then a.data_value
 				else 'E'  --Stands for Equals for numeric types
@@ -924,7 +920,9 @@ commit;
 	cz_write_audit(jobId,databaseName,procedureName,'Insert trial into I2B2DEMODATA observation_fact',SQL%ROWCOUNT,stepCt,'Done');
 	
 	commit;
-
+  -----------
+  
+  -----------
 	--Update I2b2 for correct data type
 	
 	update i2b2 b
@@ -941,7 +939,9 @@ commit;
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Initialize data_type and xml in i2b2',SQL%ROWCOUNT,stepCt,'Done');
 	commit;
-	
+	-----------
+  
+  -----------
 	update i2b2
 	SET c_columndatatype = 'N',
       --Static XML String
@@ -959,7 +959,9 @@ commit;
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Update c_columndatatype and c_metadataxml for numeric data types in I2B2METADATA i2b2',SQL%ROWCOUNT,stepCt,'Done');
 	commit;
+  -----------
   
+  -----------
 	--UPDATE VISUAL ATTRIBUTES for Leaf Active (Default is folder)
 	update i2b2 a
     set c_visualattributes = 'LA'
@@ -973,7 +975,9 @@ commit;
 	cz_write_audit(jobId,databaseName,procedureName,'Update visual attributes for leaf nodes in I2B2METADATA i2b2',SQL%ROWCOUNT,stepCt,'Done');
   
 	COMMIT;
-	
+	-----------
+  
+  -----------
 	--	update c_visualattribute to J for topNode if highlight_study=Y
 
 	update i2b2 b
@@ -984,11 +988,13 @@ commit;
 	cz_write_audit(jobId,databaseName,procedureName,'Update visual attributes for top node in I2B2METADATA i2b2',SQL%ROWCOUNT,stepCt,'Done');
   
 	COMMIT;
-	
-	-- final procs
+	-----------
   
-	i2b2_fill_in_tree(TrialId, topNode, jobID);
-	
+  ----------- 
+	i2b2_fill_in_tree(TrialId, topNode, jobID, FactSet);
+	-----------
+  
+  -----------
 	--	set sourcesystem_cd, c_comment to null if any added upper-level nodes
 		
 	update i2b2 b
@@ -999,25 +1005,16 @@ commit;
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Set sourcesystem_cd to null for added upper-level nodes',SQL%ROWCOUNT,stepCt,'Done');
 	commit;
-	
-	i2b2_create_concept_counts(topNode, jobID);
-	
-	--	delete each node that is hidden after create concept counts
-	
-	 FOR r_delNodes in delNodes Loop
+	-----------
+  
+  -----------
+	--i2b2_create_concept_counts(topNode, FactSet, jobID);
+	-----------
+  
+	--	delete each node that is hidden after create concept counts  	
 
-    --	deletes hidden nodes for a trial one at a time
-
-		i2b2_delete_1_node(r_delNodes.c_fullname);
-		stepCt := stepCt + 1;
-		tText := 'Deleted node: ' || r_delNodes.c_fullname;
-		
-		cz_write_audit(jobId,databaseName,procedureName,tText,SQL%ROWCOUNT,stepCt,'Done');
-
-	END LOOP;  	
-
-	i2b2_create_security_for_trial(TrialId, secureStudy, jobID);
-	i2b2_load_security_data(jobID);
+	--i2b2_create_security_for_trial(TrialId, secureStudy, jobID);
+	--i2b2_load_security_data(jobID);
 	
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'End i2b2_load_clinical_data',0,stepCt,'Done');
