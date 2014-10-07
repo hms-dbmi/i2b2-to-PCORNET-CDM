@@ -16,6 +16,7 @@ require "$dirname/i2b2Modules/PatientDimension.pm";
 require "$dirname/i2b2Modules/ObservationFact.pm";
 require "$dirname/i2b2Modules/i2b2.pm";
 require "$dirname/i2b2Modules/ConceptCount.pm";
+require "$dirname/i2b2Modules/ConceptsFoldersPatients.pm";
 
 require "$dirname/i2b2Modules/PatientDimensionFile.pm";
 require "$dirname/i2b2Modules/ConceptDimensionFile.pm";
@@ -59,7 +60,8 @@ ControlFiles::generateControlFiles({	CONFIGURATION_OBJECT 		=> $configurationObj
 										CONCEPT_DIMENSION_COLUMNS 	=> ConceptDimension::printColumnHeadersInList(),
 										OBSERVATION_FACT_COLUMNS  	=> ObservationFact::printColumnHeadersInList(),
 										I2B2_COLUMNS			  	=> i2b2::printColumnHeadersInListForCTL(),
-										CONCEPT_COUNT_COLUMNS		=> ConceptCount::printColumnHeadersInList()});
+										CONCEPT_COUNT_COLUMNS		=> ConceptCount::printColumnHeadersInList(),
+										CONCEPTS_FOLDERS_PATIENTS_COLUMNS => ConceptsFoldersPatients::printColumnHeadersInList()});
 										
 										
 my $end_run = time();

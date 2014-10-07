@@ -86,9 +86,6 @@ sub generateObservationFactFile
 
 	print observation_fact ObservationFact->printColumnHeaders();
 
-
-#print(Dumper($patientHash));
-
 	while (my $f = readdir(D)) 
 	{
 		 if($f =~ m/(.*)\.txt$/)
@@ -186,7 +183,8 @@ sub generateObservationFactFile
 	
 	print "DEBUG - ObservationFactFile.pm : Creating count file.\n";
 	
-	open my $concept_count_out, ">$configurationObject->{CONCEPT_COUNT_OUT_FILE}";
+	open my $concept_count_out, 			">", $configurationObject->{CONCEPT_COUNT_OUT_FILE};
+	open my $concepts_folders_patients_out, ">", $configurationObject->{CONCEPTS_FOLDERS_PATIENTS_OUT_FILE};
 	
 	my $longestConceptPath = 0;
 	
@@ -225,8 +223,6 @@ sub generateObservationFactFile
 			$conceptPathPatientHash{$parentConcept} = {};
 			@{$conceptPathPatientHash{$parentConcept}}{ keys %$subPatientHash } = values %$subPatientHash;
 		}
-		
-		
 	}
 
 	my $currentDepthFromBottom = 0;
@@ -263,6 +259,7 @@ sub generateObservationFactFile
 		$currentDepthFromBottom += 1;
 	}
 	
+
 	#Loop through the hash and dump the contents to our concept count file.
 	while(my($conceptPath, $patientHash) = each %conceptPathPatientHash)
 	{	
@@ -277,7 +274,22 @@ sub generateObservationFactFile
 		#Write the entry for the concept_dimension table.
 		print $concept_count_out $conceptCountObject->toTableFileLine();
 
+		if($conceptPath ne "")
+		{
+			while(my($patientNum, $dummyValue) = each %$patientHash)
+			{
+
+				my $conceptsFoldersPatientsObject = new ConceptsFoldersPatients(CONCEPT_PATH => $conceptPath, PATIENT_NUM => $patientNum);
+		
+				#Write the entry for the concept_dimension table.
+				print $concepts_folders_patients_out $conceptsFoldersPatientsObject->toTableFileLine();
+			
+			}
+		}
 	}
+
+	close($concept_count_out);	
+	close($concepts_folders_patients_out);
 	
 	print("*************************************************************\n");
 	print("\n");

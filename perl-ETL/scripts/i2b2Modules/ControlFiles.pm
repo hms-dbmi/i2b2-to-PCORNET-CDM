@@ -21,6 +21,7 @@ sub generateControlFiles
 	generateObservationFactControlFile({OBSERVATION_FACT_COLUMNS => $params->{OBSERVATION_FACT_COLUMNS}});
 	generateI2b2ControlFile({I2B2_COLUMNS => $params->{I2B2_COLUMNS}});
 	generateConceptCountControlFile({CONCEPT_COUNT_COLUMNS => $params->{CONCEPT_COUNT_COLUMNS}});
+	generateConceptsFoldersPatientsControlFile({CONCEPTS_FOLDERS_PATIENTS_COLUMNS => $params->{CONCEPTS_FOLDERS_PATIENTS_COLUMNS}});
 	
 	generateMasterScripts($configurationObject->{SQLLDR_LOGIN_STRING});
 }
@@ -131,6 +132,24 @@ sub generateConceptCountControlFile
 	print concept_count_control_file $params->{CONCEPT_COUNT_COLUMNS};
 	
 	close concept_count_control_file;
+
+
+}
+
+sub generateConceptsFoldersPatientsControlFile
+{
+	my ($params) = @_;
+
+	open(concepts_folders_patients_control_file, ">$basePath/control_files/concepts_folders_patients.ctl") or die("Unable to write $basePath/control_files/concepts_folders_patients.ctl'");
+	
+	print concepts_folders_patients_control_file "OPTIONS (DIRECT=TRUE, SKIP=1) UNRECOVERABLE \n";
+	print concepts_folders_patients_control_file "load data\n";
+	print concepts_folders_patients_control_file "infile '../data/i2b2_load_tables/concepts_folders_patients.dat'\n";
+	print concepts_folders_patients_control_file "APPEND into table i2b2DemoData.concepts_folders_patients\n";
+	print concepts_folders_patients_control_file 'fields terminated by "\t" TRAILING NULLCOLS' . "\n";
+	print concepts_folders_patients_control_file $params->{CONCEPTS_FOLDERS_PATIENTS_COLUMNS};
+	
+	close concepts_folders_patients_control_file;
 
 
 }
