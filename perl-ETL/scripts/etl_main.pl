@@ -6,7 +6,9 @@
 #$ARGV[1]
 #Debug Flag
 
-#x2c_susceptibility_to
+#TODO
+#Add debugging log file.
+
 #This is to get the pathing down properly so we can run this script from another directory.
 use File::Basename;
 my $dirname = dirname(__FILE__);

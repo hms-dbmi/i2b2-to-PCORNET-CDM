@@ -150,24 +150,27 @@ sub generateObservationFactFile
 					
 						if($conceptCd eq '')
 						{
+							#print Dumper(\%headerHash);
 							#die("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]");
 							#print("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]\n");
 						}
-											
-						#("UPLOAD_ID", "UNITS_CD", "CONCEPT_CD", "VALTYPE_CD", "TVAL_CHAR", "NVAL_NUM", "UPDATE_DATE", "END_DATE", "VALUEFLAG_CD", "ENCOUNTER_NUM", "PATIENT_NUM", "OBSERVATION_BLOB", "LOCATION_CD", "START_DATE", "QUANTITY_NUM", "SOURCESYSTEM_CD", "PROVIDER_ID", "INSTANCE_NUM", "MODIFIER_CD", "DOWNLOAD_DATE", "CONFIDENCE_NUM");
-						print observation_fact "\t\t$conceptCd\tT\t$line[$headerHash{$columnName}]\t\t\t\t\t$currentEncounterId\t$patientHash->{$currentSubjectId}\t\t\t\t\t$factSet\t@\t1\t\t\t\n";
-						
-						#So that we can build more observation fact records later we take note of all the variant + patient combinations.
-						$variantPatientHashArray{$line[0]}{$patientHash->{$currentSubjectId}} = $currentEncounterId;
-	
-						if(exists $conceptPatientHash{$conceptCd})
-						{
-							$conceptPatientHash{$conceptCd}{$patientHash->{$currentSubjectId}} = undef;
-						}
 						else
-						{
-							$conceptPatientHash{$conceptCd} = { $patientHash->{$currentSubjectId} => undef}
-						}						
+						{					
+							#("UPLOAD_ID", "UNITS_CD", "CONCEPT_CD", "VALTYPE_CD", "TVAL_CHAR", "NVAL_NUM", "UPDATE_DATE", "END_DATE", "VALUEFLAG_CD", "ENCOUNTER_NUM", "PATIENT_NUM", "OBSERVATION_BLOB", "LOCATION_CD", "START_DATE", "QUANTITY_NUM", "SOURCESYSTEM_CD", "PROVIDER_ID", "INSTANCE_NUM", "MODIFIER_CD", "DOWNLOAD_DATE", "CONFIDENCE_NUM");
+							print observation_fact "\t\t$conceptCd\tT\t$line[$headerHash{$columnName}]\t\t\t\t\t$currentEncounterId\t$patientHash->{$currentSubjectId}\t\t\t\t\t$factSet\t@\t1\t\t\t\n";
+						
+							#So that we can build more observation fact records later we take note of all the variant + patient combinations.
+							$variantPatientHashArray{$line[0]}{$patientHash->{$currentSubjectId}} = $currentEncounterId;
+	
+							if(exists $conceptPatientHash{$conceptCd})
+							{
+								$conceptPatientHash{$conceptCd}{$patientHash->{$currentSubjectId}} = undef;
+							}
+							else
+							{
+								$conceptPatientHash{$conceptCd} = { $patientHash->{$currentSubjectId} => undef}
+							}	
+						}					
 					}
 					
 				}
@@ -198,30 +201,33 @@ sub generateObservationFactFile
 		my $parentConcept = $currentConcept;
 		
 		#Remove last step from path.
-		$parentConcept =~ s/[^\\]*\\$//g;
+		$parentConcept =~ s/[^\\]*\\$//g;	
 		
-		#Keep track of the longest concept path we put into the table.
-		my $numberOfSteps = ($currentConcept =~ s/\\/\\/g);
-		
-		if($longestConceptPath < $numberOfSteps)
+		if($currentConcept ne '')
 		{
-			$longestConceptPath = $numberOfSteps;
-		}
+			#Keep track of the longest concept path we put into the table.
+			my $numberOfSteps = ($currentConcept =~ s/\\/\\/g);
+		
+			if($longestConceptPath < $numberOfSteps)
+			{
+				$longestConceptPath = $numberOfSteps;
+			}
 
-		my $conceptCountObject = new ConceptCount(CONCEPT_PATH => $currentConcept, PARENT_CONCEPT_PATH => $parentConcept, PATIENT_COUNT => $conceptCount);
+			my $conceptCountObject = new ConceptCount(CONCEPT_PATH => $currentConcept, PARENT_CONCEPT_PATH => $parentConcept, PATIENT_COUNT => $conceptCount);
 		
-		#Write the entry for the concept_dimension table.
-		print $concept_count_out $conceptCountObject->toTableFileLine();
+			#Write the entry for the concept_dimension table.
+			print $concept_count_out $conceptCountObject->toTableFileLine();
 
-		#This is used later to build intermediate paths.
-		if(exists $conceptPathPatientHash{$parentConcept})
-		{
-			@{$conceptPathPatientHash{$parentConcept}}{ keys %$subPatientHash } = values %$subPatientHash;
-		}
-		else
-		{
-			$conceptPathPatientHash{$parentConcept} = {};
-			@{$conceptPathPatientHash{$parentConcept}}{ keys %$subPatientHash } = values %$subPatientHash;
+			#This is used later to build intermediate paths.
+			if(exists $conceptPathPatientHash{$parentConcept})
+			{
+				@{$conceptPathPatientHash{$parentConcept}}{ keys %$subPatientHash } = values %$subPatientHash;
+			}
+			else
+			{
+				$conceptPathPatientHash{$parentConcept} = {};
+				@{$conceptPathPatientHash{$parentConcept}}{ keys %$subPatientHash } = values %$subPatientHash;
+			}
 		}
 	}
 
