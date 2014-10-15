@@ -26,6 +26,8 @@ sub generatePatientDimensionFile
 
 	my $inputDataDirectory 				=	$configurationObject->{PATIENT_DATA_DIRECTORY};
 	my $patient_dimension_output_file	=	$configurationObject->{PATIENT_DIMENSION_OUT_FILE};
+	my $patient_mapping_output_file		=	$configurationObject->{PATIENT_MAPPING_OUT_FILE};	
+	my $factSet							=	$configurationObject->{FACT_SET};
 
 	print("DEBUG - PatientDimensionFile.pm - Count number of patients.\n");
 
@@ -52,8 +54,10 @@ sub generatePatientDimensionFile
 	opendir(D, $inputDataDirectory) || die "Can't opedir: $!\n";
 	
 	print("DEBUG - PatientDimensionFile.pm : Attemping to open output file $patient_dimension_output_file\n");
+	print("DEBUG - PatientDimensionFile.pm : Attemping to open output file $patient_mapping_output_file\n");
 	
 	open patient_dimension, ">$patient_dimension_output_file" || die "Can't open patient_dimension_output_file ($patient_dimension_output_file) : $!\n";
+	open patient_mapping_output_file, ">$patient_mapping_output_file" || die "Can't open patient_mapping_output_file ($patient_mapping_output_file) : $!\n";	
 
 	print patient_dimension PatientDimension->printColumnHeaders();
 	
@@ -66,21 +70,28 @@ sub generatePatientDimensionFile
 			$patientHash{$subjectID} = $nextPatientId;
 
 			my $patientDimension = new PatientDimension(PATIENT_NUM => $nextPatientId, SOURCESYSTEM_CD => $subjectID);
-			print patient_dimension $patientDimension->toTableFileLine();     	
+			print patient_dimension $patientDimension->toTableFileLine();    
+			
+			my $patientMapping = new PatientMapping(PATIENT_NUM => $nextPatientId, PATIENT_IDE => $subjectID, PATIENT_IDE_SOURCE => $factSet, SOURCESYSTEM_CD => 'AUTISM');
+			print patient_mapping_output_file $patientMapping->toTableFileLine();   	
 	
 			$patientCounter = $patientCounter + 1;
+			
+			print("DEBUG - PatientDimensionFile.pm : Creating New Subject - $subjectID\n");
 
 		}
 		else
 		{
-			print("DEBUG - PatientDimensionFile.pm : Using existing Subject - $subjectID\n");
 			$patientHash{$subjectID} = $patientSubjectHash->{$subjectID};
+			
+			print("DEBUG - PatientDimensionFile.pm : Using existing Subject - $subjectID\n");
 		}
 	}
 
 	
 	closedir(D);
 	close(patient_dimension);
+	close(patient_mapping_output_file);
 	
 	print("*************************************************************\n");
 	print("\n");

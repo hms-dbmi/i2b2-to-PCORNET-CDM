@@ -19,6 +19,7 @@ require "$dirname/i2b2Modules/ObservationFact.pm";
 require "$dirname/i2b2Modules/i2b2.pm";
 require "$dirname/i2b2Modules/ConceptCount.pm";
 require "$dirname/i2b2Modules/ConceptsFoldersPatients.pm";
+require "$dirname/i2b2Modules/PatientMapping.pm";
 
 require "$dirname/i2b2Modules/PatientDimensionFile.pm";
 require "$dirname/i2b2Modules/ConceptDimensionFile.pm";

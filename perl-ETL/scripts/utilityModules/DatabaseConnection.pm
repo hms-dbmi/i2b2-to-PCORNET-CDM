@@ -87,7 +87,7 @@ sub getPatientSubjectHash {
 							$configurationObject->{DATABASE_PASSWORD}) 
 							|| die "Database connection not made: $DBI::errstr";
 
-	my $sql = qq{ select patient_num,sourcesystem_cd from PATIENT_DIMENSION WHERE SOURCESYSTEM_CD LIKE '$configurationObject->{SUBJECT_PREFIX}%'};
+	my $sql = qq{ select PATIENT_NUM,PATIENT_IDE from PATIENT_MAPPING};
 	my $sth = $dbh->prepare($sql);
 	$sth->execute();
 	

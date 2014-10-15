@@ -31,7 +31,6 @@ sub generateObservationFactFile
 	
 	my $observation_fact_output_file	= $configurationObject->{OBSERVATION_FACT_OUT_FILE};
 	my $inputDataDirectory 				= $configurationObject->{PATIENT_DATA_DIRECTORY};
-	
 	my $factSet							= $configurationObject->{FACT_SET};
 
 	my %conceptPatientHash;
