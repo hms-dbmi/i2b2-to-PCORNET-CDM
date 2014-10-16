@@ -18,7 +18,7 @@ opendir(D, $srcDirectory) || die "Can't opendir: $!\n";
 
 while (my $f = readdir(D)) 
 {
-	if($f =~ m/abc.visit.txt$/)
+	if($f =~ m/.txt$/)
 	{	
 		open my $currentInputFile, '<', "$srcDirectory$f" || die "Can't openfile: $!\n";
 		my $dataHeader = <$currentInputFile>;
