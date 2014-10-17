@@ -142,7 +142,7 @@ print $masterMappingFile "mappingfile	mappingtype\n";
 
 foreach(@masterMappingArray)
 {
-	print $masterMappingFile "$_	INDIVIDUAL\n";
+	print $masterMappingFile "$_.map	INDIVIDUAL\n";
 }
 
 close $masterMappingFile;
