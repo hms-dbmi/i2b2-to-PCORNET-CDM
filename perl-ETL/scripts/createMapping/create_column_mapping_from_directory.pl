@@ -12,6 +12,9 @@ my $columnMappingHeader = "HEADER\tPATH\tDATATYPE\n";
 #Store the filename and number of columns in it.
 my %filesAndHeaderCount = ();
 
+#This will be a hash of columns that we won't use.
+my %omitColumnsHash = ();
+
 print("DEBUG - create_column_mapping_from_directory.pl : Attemping to open data input directory $srcDirectory\n");
 
 opendir(D, $srcDirectory) || die "Can't opendir: $!\n";
@@ -32,6 +35,19 @@ while (my $f = readdir(D))
 	}
 }
 
+open my $omitColumns, '<' , "columns.omit" || die "Can't openfile: $!\n";
+
+while (<$omitColumns>)
+{	
+	my $line = $_;
+	
+	chomp $line;
+	
+	$omitColumnsHash{$line} = 1;
+}
+	
+close $omitColumns;
+
 while(my($k, $v) = each %filesAndHeaderCount) 
 { 
 	my @headerArray = @$v;
@@ -45,11 +61,12 @@ while(my($k, $v) = each %filesAndHeaderCount)
 		my $currentHeader = $headerArray[$arrayIndex];
 		my $categoryCode = '';
 		my $dataLabel = '';	
-				 
-		$currentHeader =~ s/\./+/g;
 		
-		if (!($currentHeader eq "interview_date"))
+		if (!exists $omitColumnsHash{$currentHeader})
 		{
+		
+			$currentHeader =~ s/\./+/g;
+		
 			#Split on the hierarchy, last item is the data label.
 			my @hierarchySplit = split(/\+/,$currentHeader);
 			my $splitCount = @hierarchySplit;
@@ -59,8 +76,6 @@ while(my($k, $v) = each %filesAndHeaderCount)
 				$dataLabel = $hierarchySplit[0];
 			
 				$currentHeader =~ s/\s/_/g;
-				
-				print($currentHeader . "\n");
 				
 				if($dataLabel eq "src_subject_id")
 				{
@@ -100,6 +115,10 @@ while(my($k, $v) = each %filesAndHeaderCount)
     		{
     			print $outputColumnMappingFile "$headerArray[$arrayIndex]\t$topLevelNode\\\\$categoryCode\\\\$dataLabel\\\\\tT\n";
     		}
+    	}
+    	else
+    	{
+    		print "Skipping Header - $currentHeader\n";
     	}
 	}
 	

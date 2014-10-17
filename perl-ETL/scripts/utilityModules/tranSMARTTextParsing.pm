@@ -72,6 +72,7 @@ sub generateConfigObjectFromFile {
 			
 		}
 	}
+	close master_mapping;
 	
 	my $configObject = new configurationObject(
 						BASE_PATH 					=> $configHash{'BASE_PATH'}, 
