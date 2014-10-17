@@ -15,6 +15,25 @@ my %filesAndHeaderCount = ();
 #This will be a hash of columns that we won't use.
 my %omitColumnsHash = ();
 
+my @masterMappingArray = ();
+
+###################
+#Read file that omits columns into an array.
+open my $omitColumns, '<' , "columns.omit" || die "Can't openfile: $!\n";
+
+while (<$omitColumns>)
+{	
+	my $line = $_;
+	
+	chomp $line;
+	
+	$omitColumnsHash{$line} = 1;
+}
+	
+close $omitColumns;
+###################
+
+
 print("DEBUG - create_column_mapping_from_directory.pl : Attemping to open data input directory $srcDirectory\n");
 
 opendir(D, $srcDirectory) || die "Can't opendir: $!\n";
@@ -35,22 +54,11 @@ while (my $f = readdir(D))
 	}
 }
 
-open my $omitColumns, '<' , "columns.omit" || die "Can't openfile: $!\n";
-
-while (<$omitColumns>)
-{	
-	my $line = $_;
-	
-	chomp $line;
-	
-	$omitColumnsHash{$line} = 1;
-}
-	
-close $omitColumns;
-
 while(my($k, $v) = each %filesAndHeaderCount) 
 { 
 	my @headerArray = @$v;
+
+	push(@masterMappingArray,$k);
 
 	open my $outputColumnMappingFile, '>' , "$k.map" || die "Can't openfile: $!\n";;
 
@@ -126,4 +134,17 @@ while(my($k, $v) = each %filesAndHeaderCount)
 		
 }
 
+###################
+#Write master mapping file.
+open my $masterMappingFile, '>' , "master_mapping" || die "Can't openfile: $!\n";
+
+print $masterMappingFile "mappingfile	mappingtype\n";
+
+foreach(@masterMappingArray)
+{
+	print $masterMappingFile "$_	INDIVIDUAL\n";
+}
+
+close $masterMappingFile;
+###################
 
