@@ -145,32 +145,42 @@ sub _extractPatientList {
 	
 	print("DEBUG - PatientDimensionFile.pm : Attemping to open data file $dataDirectoryToParse$currentStrippedFileName\n");
 	
-	open my $currentPatientFile, "<$dataDirectoryToParse$currentStrippedFileName";
-
-	my $dataHeader = <$currentPatientFile>;
+	my $currentPatientFile;
 	
-	chomp($dataHeader);
 	
-	my @headerArray = split(/\t/,$dataHeader);
+	
+	if(open $currentPatientFile, "<$dataDirectoryToParse$currentStrippedFileName")
+	{
+		my $dataHeader = <$currentPatientFile>;
+	
+		chomp($dataHeader);
+	
+		my @headerArray = split(/\t/,$dataHeader);
 
-	#Make a hash so we know the column index for each of our column names.
-	my %headerHash;
-	%headerHash = map { $headerArray[$_] => $_ } 0..$#headerArray;
+		#Make a hash so we know the column index for each of our column names.
+		my %headerHash;
+		%headerHash = map { $headerArray[$_] => $_ } 0..$#headerArray;
 
-	#For every line we grab the unique values for our subject ID hash.
-	while (<$currentPatientFile>)
-	{	
-		chomp($_);
+		#For every line we grab the unique values for our subject ID hash.
+		while (<$currentPatientFile>)
+		{	
+			chomp($_);
 		
-		my @line = split(/\t/, $_);
+			my @line = split(/\t/, $_);
 
-		if(!(exists $headerHash{$subjectIdColumn})) {die("Could not map a header to an entry in the mapping file! $subjectIdColumn");}
+			if(!(exists $headerHash{$subjectIdColumn})) {die("Could not map a header to an entry in the mapping file! $subjectIdColumn");}
 
-		$idHash{$line[$headerHash{$subjectIdColumn}]} = 1;
+			$idHash{$line[$headerHash{$subjectIdColumn}]} = 1;
 
+		}
 	}
-
+	else
+	{
+		#print("DEBUG - PatientDimensionFile.pm : Couldn't find file! $dataDirectoryToParse$currentStrippedFileName\n");
+	}
+	
 	close $currentPatientFile;
+	
 
 	return \%idHash;	
 

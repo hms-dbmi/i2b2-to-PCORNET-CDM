@@ -6,6 +6,8 @@ use strict;
 use warnings;
 use Carp;
 
+use Text::CSV;
+
 use Data::Dumper;
 
 
@@ -114,37 +116,42 @@ sub _parseMappingFileTextPassPatient {
 	
 	print("DEBUG - ConceptDimensionFile.pm : Attemping to open data file $dataDirectoryToParse$currentStrippedFileName\n");
 	
-	open my $currentPatientFile, "<$dataDirectoryToParse$currentStrippedFileName";
-
-	my $dataHeader = <$currentPatientFile>;
+	my @rows;
+	my $csv = Text::CSV->new ( { binary => 1, sep_char => "\t" } ) or die "Cannot use CSV: ".Text::CSV->error_diag ();
+ 	my $currentPatientFile;
+ 	
+	if(open $currentPatientFile, "<$dataDirectoryToParse$currentStrippedFileName")
+	{
 	
-	chomp($dataHeader);
-	
-	my @headerArray = split(/\t/,$dataHeader);
+		my $dataHeader = $csv->getline( $currentPatientFile );
 
-	#Make a hash so we know the column index for each of our column names.
-	my %headerHash;
-	%headerHash = map { $headerArray[$_] => $_ } 0..$#headerArray;
-
-	#For every line we grab the unique values for our text field hash.
-	while (<$currentPatientFile>)
-	{	
-		chomp($_);
-		my @line = split(/\t/, $_);
-
-		#Loop through the text hash and add the value to the distinct hash.
-		while(my($columnId, $columnHash) = each %textAttributeHash) 
+		#Make a hash so we know the column index for each of our column names.
+		my %headerHash;
+		
+		while(my ($index, $value) = each @$dataHeader) 
 		{
-			if(!(exists $headerHash{$columnId})) {die("Could not map a header to an entry in the mapping file! $columnId");}
-			
-			if($line[$headerHash{$columnId}] ne "")
+    		$headerHash{$value} = $index;
+		}
+
+		#For every line we grab the unique values for our text field hash.
+		while (my $row = $csv->getline( $currentPatientFile ))
+		{	
+			#Loop through the text hash and add the value to the distinct hash.
+			while(my($columnId, $columnHash) = each %textAttributeHash) 
 			{
-				$textAttributeHash{$columnId}{$line[$headerHash{$columnId}]} = "$idPathHash{$columnId}$line[$headerHash{$columnId}]\\";
-			}
+				if(!(exists $headerHash{$columnId})) {die("Could not map a header to an entry in the mapping file! $columnId");}
+				
+				if($row->[$headerHash{$columnId}] ne "" && !($row->[$headerHash{$columnId}] =~ s/\n//))
+				{
+					$textAttributeHash{$columnId}{$row->[$headerHash{$columnId}]} = "$idPathHash{$columnId}$row->[$headerHash{$columnId}]\\";
+				}
+			}	
+
 		}	
-
+	
+		$csv->eof or $csv->error_diag();	
 	}
-
+	
 	close $currentPatientFile;
 	
 	return \%textAttributeHash;	
