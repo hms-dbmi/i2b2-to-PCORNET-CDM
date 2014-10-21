@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 
 use Data::Dumper;
+use Scalar::Util qw(looks_like_number);
 
 #This is the directory we will parse to get the column names.
 my $srcDirectory = $ARGV[0];
@@ -14,8 +15,12 @@ my %filesAndHeaderCount = ();
 
 #This will be a hash of columns that we won't use.
 my %omitColumnsHash = ();
+my %specialColumnsHash = ();
 
-my @masterMappingArray = ();
+my @masterMappingArray 		= ();
+my %tempFieldTypeHash		= ();
+my %finalFieldTypeHash		= ();
+
 
 ###################
 #Read file that omits columns into an array.
@@ -33,6 +38,24 @@ while (<$omitColumns>)
 close $omitColumns;
 ###################
 
+###################
+#Read file that omits columns into an array.
+open my $specialColumns, '<' , "columns.special" || die "Can't openfile: $!\n";
+
+while (<$specialColumns>)
+{	
+	my $line = $_;
+	
+	chomp $line;
+	
+	my @conceptPathIdSplit = split(/\t/,$line);
+	
+	$specialColumnsHash{$conceptPathIdSplit[0]} = $conceptPathIdSplit[1];
+}
+	
+close $specialColumns;
+###################
+
 
 print("DEBUG - create_column_mapping_from_directory.pl : Attemping to open data input directory $srcDirectory\n");
 
@@ -44,13 +67,69 @@ while (my $f = readdir(D))
 	{	
 		open my $currentInputFile, '<', "$srcDirectory$f" || die "Can't openfile: $!\n";
 		my $dataHeader = <$currentInputFile>;
-		close $currentInputFile;
 		
 		chomp($dataHeader);
 	
 		my @headerArray = split(/\t/,$dataHeader);
 
 		$filesAndHeaderCount{$f} = \@headerArray;
+		
+		#This section does automatic detection of column types.
+		my $rowCount = 0;
+		
+		while (<$currentInputFile>)
+		{
+			my $line = $_;
+	
+			chomp $line;
+	
+			my @fieldSplit = split(/\t/,$line);
+			
+			for my $i (0 .. $#fieldSplit)
+			{
+				my $fieldType = "T";
+				
+				if (looks_like_number($fieldSplit[$i]))
+				{
+					$fieldType = "N";
+				}
+				  
+				if(exists $fieldTypeHash{$headerArray[$i]}) 
+				{
+					$fieldTypeHash{$headerArray[$i]} = $fieldTypeHash{$headerArray[$i]} . $fieldType;
+				}
+				else 
+				{
+
+					$fieldTypeHash{$headerArray[$i]} = $fieldType;
+				}				  
+			}
+				
+			$rowCount = $rowCount + 1;
+			
+			if($rowCount > 20) 
+			{
+				#Consolidate the column types.
+				while(my($k, $v) = each %fieldTypeHash) 		
+				{
+					my $numericCount = ($v =~ tr/N//);
+
+					if($numericCount > 10)
+					{
+						$finalFieldTypeHash{$k} = "N";
+					}
+					else
+					{
+						$finalFieldTypeHash{$k} = "T";					
+					}
+				}
+				
+				$rowCount = 0;
+				break;
+			}
+		}
+
+		close $currentInputFile;
 	}
 }
 
@@ -72,56 +151,47 @@ while(my($k, $v) = each %filesAndHeaderCount)
 		
 		if (!exists $omitColumnsHash{$currentHeader})
 		{
-		
-			$currentHeader =~ s/\./+/g;
-		
-			#Split on the hierarchy, last item is the data label.
-			my @hierarchySplit = split(/\+/,$currentHeader);
-			my $splitCount = @hierarchySplit;
-
-			if($splitCount == 1)
+			if(!exists $specialColumnsHash{$currentHeader})
 			{
-				$dataLabel = $hierarchySplit[0];
+				$currentHeader =~ s/\./+/g;
+		
+				#Split on the hierarchy, last item is the data label.
+				my @hierarchySplit = split(/\+/,$currentHeader);
+				my $splitCount = @hierarchySplit;
+
+				if($splitCount == 1)
+				{
+					$dataLabel = $hierarchySplit[0];
 			
-				$currentHeader =~ s/\s/_/g;
+					$currentHeader =~ s/\s/_/g;
 				
-				if($dataLabel eq "src_subject_id")
-				{
-					$dataLabel = "SUBJ_ID";
-				}
-				elsif($dataLabel eq "Gender")
-				{
-					$dataLabel = "SEX";
+					($categoryCode = $k) =~ s/\.[^.]+$//;
+
 				}
 				else
 				{
-					$dataLabel = $hierarchySplit[0];
+					$dataLabel = pop(@hierarchySplit);
+		
+					$categoryCode = join('+',@hierarchySplit);
 				}
 				
-				($categoryCode = $k) =~ s/\.[^.]+$//;
+				my $fileName = $k;
+				my $columnNumber = $arrayIndex+1;
+				my $columnType = "T";
 
-			}
-			elsif($currentHeader eq "measure+individual")
-			{
-				$dataLabel = "SUBJ_ID";
-			}				
-			else
-			{
-				$dataLabel = pop(@hierarchySplit);
-		
-				$categoryCode = join('+',@hierarchySplit);
-			}
-				
-			my $fileName = $k;
-			my $columnNumber = $arrayIndex+1;
+				#Pull column type from auto detection above.
+				if(exists $fieldTypeHash{$headerArray[$arrayIndex]})
+				{
+					$columnType = $finalFieldTypeHash{$headerArray[$arrayIndex]};
+				}
 
-			if($dataLabel eq "SUBJ_ID")
-			{
-				print $outputColumnMappingFile "$headerArray[$arrayIndex]\tSUBJECT_ID\tSUBJECT_ID\n";
+				print $outputColumnMappingFile "$headerArray[$arrayIndex]\t$topLevelNode\\\\$categoryCode\\\\$dataLabel\\\\\t$columnType\n";
+
     		}
     		else
     		{
-    			print $outputColumnMappingFile "$headerArray[$arrayIndex]\t$topLevelNode\\\\$categoryCode\\\\$dataLabel\\\\\tT\n";
+    			print "Special Header\n";
+    			print $outputColumnMappingFile "$headerArray[$arrayIndex]\t$specialColumnsHash{$currentHeader}\t$specialColumnsHash{$currentHeader}\n";
     		}
     	}
     	else
