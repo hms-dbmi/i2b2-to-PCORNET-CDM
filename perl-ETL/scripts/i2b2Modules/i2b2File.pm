@@ -66,9 +66,9 @@ sub generateI2b2File
 				
 				#Pull the concept cd based on the name of the column in the data file. For text entries we need to loop through the hash to create all the possible data values.
 				if($mappingFileType eq "INDIVIDUAL" and $currentConceptType eq "N")
-				{
+				{										
 					my @conceptPathIdSplit = split(/!!!/,$individualNumericConcepts->{$1});
-					
+
 					_generateSingleI2b2Record($1,$2, $conceptPathIdSplit[1], shift @i2b2IdArray,'N', $currentStudyId);
 				}
 				elsif($mappingFileType eq "INDIVIDUAL" and $currentConceptType eq "T")
@@ -147,57 +147,5 @@ sub _generateSingleI2b2Record {
 	print i2b2_output $i2b2Record->toTableFileLine();
 
 }
-
-
-# 
-# 	
-# 	
-# my $i2b2Record = new i2b2(	C_HLEVEL 			=> 0, 
-#  								C_FULLNAME 			=> '\\test\\', 
-#  								C_DIMCODE 			=> 'test',
-#  								C_TOOLTIP			=> '\\test\\',
-#  								C_FACTTABLECOLUMN	=> 'CONCEPT_CD',
-#  								C_NAME				=> 'test',
-#  								C_TABLENAME			=> 'CONCEPT_DIMENSION',
-#  								C_COLUMNNAME		=> 'CONCEPT_PATH',
-#  								C_COLUMNDATATYPE	=> 'T',
-#  								C_OPERATOR			=> 'LIKE',
-#  								C_COMMENT			=> 'WES_LOADER',
-#  								C_TOTALNUM			=> 0,
-#  								SOURCESYSTEM_CD		=> 'WES_LOADER',
-#  								M_APPLIED_PATH		=> '@',
-#  								I2B2_ID				=> shift @i2b2IdArray,
-#  								C_VISUALATTRIBUTES	=> 'CA',
-#  								C_SYNONYM_CD		=> 'N'
-#  								);	
-#  
-#  	print i2b2_output $i2b2Record->toTableFileLine();
-#  	
-#  	$i2b2Record = new i2b2(	C_HLEVEL 				=> 1, 
-#  								C_FULLNAME 			=> '\\test\\WES\\', 
-#  								C_DIMCODE 			=> 'WES',
-#  								C_TOOLTIP			=> '\\test\\WES\\',
-#  								C_FACTTABLECOLUMN	=> 'CONCEPT_CD',
-#  								C_NAME				=> 'WES',
-#  								C_TABLENAME			=> 'CONCEPT_DIMENSION',
-#  								C_COLUMNNAME		=> 'CONCEPT_PATH',
-#  								C_COLUMNDATATYPE	=> 'T',
-#  								C_OPERATOR			=> 'LIKE',
-#  								C_COMMENT			=> 'WES_LOADER',
-#  								C_TOTALNUM			=> 0,
-#  								SOURCESYSTEM_CD		=> 'WES_LOADER',
-#  								M_APPLIED_PATH		=> '@',
-#  								I2B2_ID				=> shift @i2b2IdArray,
-#  								C_VISUALATTRIBUTES	=> 'FA',
-#  								C_SYNONYM_CD		=> 'N'
-#  								);	
-#  
-#  	print i2b2_output $i2b2Record->toTableFileLine();	
-		
-
-
-
-
-
 
 1;

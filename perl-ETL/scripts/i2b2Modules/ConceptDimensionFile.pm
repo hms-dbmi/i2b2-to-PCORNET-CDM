@@ -25,8 +25,8 @@ sub generateConceptDimensionFile
 		
 	my $configurationObject = shift;
 
-	my $numericIndividualConceptHash;	
-	my $textIndividualConceptHash;
+	my %numericIndividualConceptHash 	= ();	
+	my %textIndividualConceptHash 		= ();
 	
 	my $concept_dimension_output_file 	= 	$configurationObject->{CONCEPT_DIMENSION_OUT_FILE};
 	my $patient_data_directory			= 	$configurationObject->{PATIENT_DATA_DIRECTORY};
@@ -37,7 +37,10 @@ sub generateConceptDimensionFile
 	
 	while(my($k, $v) = each %mappingFileHash) 
 	{
-		if($v eq "INDIVIDUAL")	{$textIndividualConceptHash = _parseMappingFileTextPassPatient($configurationObject, $k, $patient_data_directory);}
+		if($v eq "INDIVIDUAL")	
+		{
+			_parseMappingFileTextPassPatient($configurationObject, $k, $patient_data_directory, \%textIndividualConceptHash);
+		}
 	}
 	
 	print("DEBUG - ConceptDimensionFile.pm : Attemping to open output file $concept_dimension_output_file\n");
@@ -48,7 +51,7 @@ sub generateConceptDimensionFile
 	$totalConceptCount = _countLinesInMappingFiles(\%mappingFileHash, $configurationObject->{BASE_PATH});
 
 	#We'll need a concept for each of the items in the concept hashes we extracted from the data file.
-	$totalConceptCount += _countItemsInConceptHash($textIndividualConceptHash);
+	$totalConceptCount += _countItemsInConceptHash(\%textIndividualConceptHash);
 
 	#Now that we know the total concept count, pre-fetch the concept_ids.
 	my @conceptIdArray = ConceptDimension::getNewConceptIdList($totalConceptCount, $configurationObject);
@@ -60,26 +63,29 @@ sub generateConceptDimensionFile
 	#After we've created the hash of mapping files we'll iterate over them and extract the numeric concepts and build hashes to be used when building the fact files.
 	while(my($k, $v) = each %mappingFileHash) 
 	{ 
-		if($v eq "INDIVIDUAL") 	{$numericIndividualConceptHash 	= _parseMappingFileSecondPass($configurationObject->{BASE_PATH}, $k, $concept_dimension_out, \@conceptIdArray);}
+		if($v eq "INDIVIDUAL") 	
+		{
+			_parseMappingFileSecondPass($configurationObject->{BASE_PATH}, $k, $concept_dimension_out, \@conceptIdArray, \%numericIndividualConceptHash);
+		}
 	}
 
 	#We need to create the text concepts from the hashes we created earlier.
-	_createConceptsFromConceptHash($textIndividualConceptHash, \@conceptIdArray, $concept_dimension_out);
+	_createConceptsFromConceptHash(\%textIndividualConceptHash, \@conceptIdArray, $concept_dimension_out);
 
 	close($concept_dimension_out);
 	
 	print("*************************************************************\n");
 	print("\n");
 
-	return ($numericIndividualConceptHash, $textIndividualConceptHash);
+	return (\%numericIndividualConceptHash, \%textIndividualConceptHash);
 }
 
 sub _parseMappingFileTextPassPatient {
 	my $configurationObject 	= shift;
 	my $currentMappingFile 		= shift;
 	my $dataDirectoryToParse	= shift;
-	
-	my %textAttributeHash		= ();
+	my $textAttributeHash		= shift;
+
 	my %idPathHash				= ();
 	
 	my $field_mapping_file = $configurationObject->{BASE_PATH} . "mapping_files/$currentMappingFile";
@@ -102,7 +108,7 @@ sub _parseMappingFileTextPassPatient {
 			#Gather all the text elements from the mapping file.
 			if($3 eq "T")
 			{
-				$textAttributeHash{$1} = ();
+				$textAttributeHash->{$1} = ();
 				$idPathHash{$1} = $2;
 			}
 
@@ -128,7 +134,6 @@ sub _parseMappingFileTextPassPatient {
 		#Make a hash so we know the column index for each of our column names.
 		my %headerHash;
 		
-		#Make a hash so we know the column index for each of our column names.
 		my $headerCount = @$dataHeader;
 		
 		for (my $i=0; $i < $headerCount; $i++) 
@@ -140,13 +145,14 @@ sub _parseMappingFileTextPassPatient {
 		while (my $row = $csv->getline( $currentPatientFile ))
 		{	
 			#Loop through the text hash and add the value to the distinct hash.
-			while(my($columnId, $columnHash) = each %textAttributeHash) 
+			while(my($columnId, $columnHash) = each %$textAttributeHash) 
 			{
-				if(!(exists $headerHash{$columnId})) {die("Could not map a header to an entry in the mapping file! $columnId");}
-				
-				if($row->[$headerHash{$columnId}] ne "" && !($row->[$headerHash{$columnId}] =~ s/\n//))
+				if(exists $headerHash{$columnId})
 				{
-					$textAttributeHash{$columnId}{$row->[$headerHash{$columnId}]} = "$idPathHash{$columnId}$row->[$headerHash{$columnId}]\\";
+					if($row->[$headerHash{$columnId}] ne "" && !($row->[$headerHash{$columnId}] =~ s/\n//))
+					{
+						$textAttributeHash->{$columnId}{$row->[$headerHash{$columnId}]} = "$idPathHash{$columnId}$row->[$headerHash{$columnId}]\\";
+					}
 				}
 			}	
 
@@ -155,9 +161,7 @@ sub _parseMappingFileTextPassPatient {
 		$csv->eof or $csv->error_diag();	
 	}
 	
-	close $currentPatientFile;
-	
-	return \%textAttributeHash;	
+	close $currentPatientFile;	
 
 }
 
@@ -167,8 +171,7 @@ sub _parseMappingFileSecondPass {
 	my $currentMappingFile 		= shift;
 	my $concept_dimension_out	= shift;
 	my $conceptIdArray			= shift;
-	
-	my %conceptHash				= ();
+	my $conceptHash				= shift;
 		
 	my $field_mapping_file = $basePath . "mapping_files/$currentMappingFile";
 
@@ -199,7 +202,7 @@ sub _parseMappingFileSecondPass {
 				my $currentConcept = $2;
 
 				#Store the column index and the concept code in a hash.
-				$conceptHash{$currentIndexField} = $currentConcept . "!!!" . $currentConceptId;
+				$conceptHash->{$currentIndexField} = $currentConcept . "!!!" . $currentConceptId;
 
 				#Create the concept object.
 				my $conceptDimension = new ConceptDimension(CONCEPT_CD => $currentConceptId, CONCEPT_PATH => $currentConcept, SOURCESYSTEM_CD => $currentStudyId);
@@ -212,7 +215,6 @@ sub _parseMappingFileSecondPass {
 	}
 
 	close(field_mapping);
-	return \%conceptHash;
 
 }
 

@@ -119,7 +119,6 @@ sub generateObservationFactFile
 
 					if($patientHash->{$currentSubjectId} eq '') 
 					{
-#						print($patientHash->{$currentSubjectId});
 						print("\nBAD RECORD - Subject ID : $currentSubjectId\n");
 					}
 
