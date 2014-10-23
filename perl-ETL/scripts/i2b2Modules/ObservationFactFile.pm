@@ -85,97 +85,102 @@ sub generateObservationFactFile
 
 	print observation_fact ObservationFact->printColumnHeaders();
 
+	my $csv = Text::CSV->new ( { binary => 1, sep_char => "\t" } ) or die "Cannot use CSV: ".Text::CSV->error_diag ();
+
 	while (my $f = readdir(D)) 
 	{
 		 if($f =~ m/(.*)\.txt$/)
 		 {
 			
-			print("DEBUG - ObservationFactFile.pm : Working on data file $f\n");
+			print("DEBUG - ObservationFactFile.pm : Working on data file $inputDataDirectory$f\n");
 			
-			open currentPatientFile, "<$inputDataDirectory$f";
-
-			my $header = <currentPatientFile>;
-			
-			chomp($header);
-			
-			my @headerArray = split(/\t/,$header);
-			
-			my %headerHash;
-			@headerHash{@headerArray} = 0..$#headerArray;
-						
-			while (<currentPatientFile>)
+			if(open $currentPatientFile, "<", "$inputDataDirectory$f")
 			{
-				chomp($_);
-				
-				#Split the line from the ANNOVAR file.
-				my @line = split(/\t/,$_);
-				
-				my $currentEncounterId 	= shift @$encounterIdArray;
-				my $currentSubjectId	= $line[$headerHash{$fileSubjectColumnHash->{$f . '.map'}}];
-
-				if($patientHash->{$currentSubjectId} eq '') 
+				my $header = $csv->getline( $currentPatientFile );
+			
+				my %headerHash;
+			
+				#Make a hash so we know the column index for each of our column names.
+				my $headerCount = @$header;
+		
+				for (my $i=0; $i < $headerCount; $i++) 
 				{
-					print("BAD RECORD - Subject ID : $currentSubjectId\n");
+					$headerHash{@$header[$i]} = $i;
 				}
-
-				#Add an observation fact record for each numeric concept.
-				while(my($columnName, $conceptCd) = each %$individualNumericConcepts) 
-				{ 	
-					if(looks_like_number($line[$headerHash{$columnName}]))
-					{
-						#("UPLOAD_ID", "UNITS_CD", "CONCEPT_CD", "VALTYPE_CD", "TVAL_CHAR", "NVAL_NUM", "UPDATE_DATE", "END_DATE", "VALUEFLAG_CD", "ENCOUNTER_NUM", "PATIENT_NUM", "OBSERVATION_BLOB", "LOCATION_CD", "START_DATE", "QUANTITY_NUM", "SOURCESYSTEM_CD", "PROVIDER_ID", "INSTANCE_NUM", "MODIFIER_CD", "DOWNLOAD_DATE", "CONFIDENCE_NUM");
-						print observation_fact "\t\t$conceptCd\tN\tE\t$line[$headerHash{$columnName}]\t\t\t\t$currentEncounterId\t$patientHash->{$currentSubjectId}\t\t\t\t\t$factSet\t@\t1\t\t\t\n";
-												
-						if(exists $conceptPatientHash{$conceptCd} )
-						{
-							$conceptPatientHash{$conceptCd}{$patientHash->{$currentSubjectId}} = undef;
-						}
-						else
-						{
-							$conceptPatientHash{$conceptCd} = { $patientHash->{$currentSubjectId} => undef}
-						}
-
-						#So that we can build more observation fact records later we take note of all the variant + patient combinations.
-						$variantPatientHashArray{$line[0]}{$patientHash->{$currentSubjectId}} = $currentEncounterId;						
-					}
-				}
-				
-				#For the text concepts we need to look up the concept code based on the actual value the patient has.
-				while(my($columnName, $subHash) = each %$individualTextConcepts) 
-				{ 					
-					if(length($line[$headerHash{$columnName}]) < 255)
-					{
-						my $conceptCd = $subHash->{$line[$headerHash{$columnName}]};
-					
-						if($conceptCd eq '')
-						{
-							#print Dumper(\%headerHash);
-							#die("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]");
-							#print("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]\n");
-						}
-						else
-						{					
-							#("UPLOAD_ID", "UNITS_CD", "CONCEPT_CD", "VALTYPE_CD", "TVAL_CHAR", "NVAL_NUM", "UPDATE_DATE", "END_DATE", "VALUEFLAG_CD", "ENCOUNTER_NUM", "PATIENT_NUM", "OBSERVATION_BLOB", "LOCATION_CD", "START_DATE", "QUANTITY_NUM", "SOURCESYSTEM_CD", "PROVIDER_ID", "INSTANCE_NUM", "MODIFIER_CD", "DOWNLOAD_DATE", "CONFIDENCE_NUM");
-							print observation_fact "\t\t$conceptCd\tT\t$line[$headerHash{$columnName}]\t\t\t\t\t$currentEncounterId\t$patientHash->{$currentSubjectId}\t\t\t\t\t$factSet\t@\t1\t\t\t\n";
 						
-							#So that we can build more observation fact records later we take note of all the variant + patient combinations.
-							$variantPatientHashArray{$line[0]}{$patientHash->{$currentSubjectId}} = $currentEncounterId;
-	
-							if(exists $conceptPatientHash{$conceptCd})
+				while (my $row = $csv->getline( $currentPatientFile ))
+				{
+				
+					my @line = @$row;
+				
+					#This will be vital later when we need to make some data into the same encounter.
+					my $currentEncounterId 	= shift @$encounterIdArray;
+					my $currentSubjectId	= $line[$headerHash{$fileSubjectColumnHash->{$f . '.map'}}];
+
+					if($patientHash->{$currentSubjectId} eq '') 
+					{
+#						print($patientHash->{$currentSubjectId});
+						print("\nBAD RECORD - Subject ID : $currentSubjectId\n");
+					}
+
+					#Add an observation fact record for each numeric concept.
+					while(my($columnName, $conceptCd) = each %$individualNumericConcepts) 
+					{ 	
+						if(looks_like_number($line[$headerHash{$columnName}]))
+						{
+							#("UPLOAD_ID", "UNITS_CD", "CONCEPT_CD", "VALTYPE_CD", "TVAL_CHAR", "NVAL_NUM", "UPDATE_DATE", "END_DATE", "VALUEFLAG_CD", "ENCOUNTER_NUM", "PATIENT_NUM", "OBSERVATION_BLOB", "LOCATION_CD", "START_DATE", "QUANTITY_NUM", "SOURCESYSTEM_CD", "PROVIDER_ID", "INSTANCE_NUM", "MODIFIER_CD", "DOWNLOAD_DATE", "CONFIDENCE_NUM");
+							print observation_fact "\t\t$conceptCd\tN\tE\t$line[$headerHash{$columnName}]\t\t\t\t$currentEncounterId\t$patientHash->{$currentSubjectId}\t\t\t\t\t$factSet\t@\t1\t\t\t\n";
+												
+							if(exists $conceptPatientHash{$conceptCd} )
 							{
 								$conceptPatientHash{$conceptCd}{$patientHash->{$currentSubjectId}} = undef;
 							}
 							else
 							{
 								$conceptPatientHash{$conceptCd} = { $patientHash->{$currentSubjectId} => undef}
-							}	
-						}					
+							}
+
+							#So that we can build more observation fact records later we take note of all the variant + patient combinations.
+							$variantPatientHashArray{$line[0]}{$patientHash->{$currentSubjectId}} = $currentEncounterId;						
+						}
 					}
+				
+					#For the text concepts we need to look up the concept code based on the actual value the patient has.
+					while(my($columnName, $subHash) = each %$individualTextConcepts) 
+					{ 					
+						if(length($line[$headerHash{$columnName}]) < 255)
+						{
+							my $conceptCd = $subHash->{$line[$headerHash{$columnName}]};
 					
+							if($conceptCd eq '')
+							{
+								#print Dumper(\%headerHash);
+								#die("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]");
+								#print("Couldn't find a Concept Code for this concept - $columnName - $headerHash{$columnName} - $line[$headerHash{$columnName}]\n");
+							}
+							else
+							{					
+								#("UPLOAD_ID", "UNITS_CD", "CONCEPT_CD", "VALTYPE_CD", "TVAL_CHAR", "NVAL_NUM", "UPDATE_DATE", "END_DATE", "VALUEFLAG_CD", "ENCOUNTER_NUM", "PATIENT_NUM", "OBSERVATION_BLOB", "LOCATION_CD", "START_DATE", "QUANTITY_NUM", "SOURCESYSTEM_CD", "PROVIDER_ID", "INSTANCE_NUM", "MODIFIER_CD", "DOWNLOAD_DATE", "CONFIDENCE_NUM");
+								print observation_fact "\t\t$conceptCd\tT\t$line[$headerHash{$columnName}]\t\t\t\t\t$currentEncounterId\t$patientHash->{$currentSubjectId}\t\t\t\t\t$factSet\t@\t1\t\t\t\n";
+						
+								#So that we can build more observation fact records later we take note of all the variant + patient combinations.
+								$variantPatientHashArray{$line[0]}{$patientHash->{$currentSubjectId}} = $currentEncounterId;
+	
+								if(exists $conceptPatientHash{$conceptCd})
+								{
+									$conceptPatientHash{$conceptCd}{$patientHash->{$currentSubjectId}} = undef;
+								}
+								else
+								{
+									$conceptPatientHash{$conceptCd} = { $patientHash->{$currentSubjectId} => undef}
+								}	
+							}					
+						}
+					
+					}
 				}
 			}
-		
-			close currentPatientFile;
+			close $currentPatientFile;
 		 }
 	}
 	

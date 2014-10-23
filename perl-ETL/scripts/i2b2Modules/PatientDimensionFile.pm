@@ -36,14 +36,14 @@ sub generatePatientDimensionFile
 	
 	#Open the mapping files.
 	my %mappingFileHash = tranSMARTTextParsing::generateMasterMappingHash($configurationObject->{BASE_PATH});
-	my $subjectIDHash;
+	my %subjectIDHash = ();
 	
 	while(my($k, $v) = each %mappingFileHash) 
 	{
-		$subjectIDHash = _extractPatientList($configurationObject, $k, $inputDataDirectory);
+		_extractPatientList($configurationObject, $k, $inputDataDirectory, \%subjectIDHash);
 	}
 
-	my $count = keys %$subjectIDHash;
+	my $count = keys %subjectIDHash;
 
 	print("DEBUG - PatientDimensionFile.pm - Found $count patients.\n");
 	
@@ -61,8 +61,8 @@ sub generatePatientDimensionFile
 	open patient_mapping_output_file, ">$patient_mapping_output_file" || die "Can't open patient_mapping_output_file ($patient_mapping_output_file) : $!\n";	
 
 	print patient_dimension PatientDimension->printColumnHeaders();
-	
-	while(my($subjectID, $subjectPlaceholder) = each %$subjectIDHash) 
+
+	while(my($subjectID, $subjectPlaceholder) = each %subjectIDHash) 
 	{
 		if(!exists $patientSubjectHash->{$subjectID})
 		{
@@ -78,14 +78,14 @@ sub generatePatientDimensionFile
 	
 			$patientCounter = $patientCounter + 1;
 			
-			#print("DEBUG - PatientDimensionFile.pm : Creating New Subject - $subjectID\n");
+			print("DEBUG - PatientDimensionFile.pm : Creating New Subject - $subjectID\n");
 
 		}
 		else
 		{
 			$patientHash{$subjectID} = $patientSubjectHash->{$subjectID};
 			
-			#print("DEBUG - PatientDimensionFile.pm : Using existing Subject - $subjectID\n");
+			print("DEBUG - PatientDimensionFile.pm : Using existing Subject - $subjectID\n");
 		}
 	}
 
@@ -105,10 +105,8 @@ sub _extractPatientList {
 	my $configurationObject 	= shift;
 	my $currentMappingFile 		= shift;
 	my $dataDirectoryToParse	= shift;
+	my $subjectIDHash			= shift;
 	my $subjectIdColumn			= "";
-	
-	my %idHash					= ();
-	
 	
 	my $field_mapping_file = $configurationObject->{BASE_PATH} . "mapping_files/$currentMappingFile";
 
@@ -169,19 +167,16 @@ sub _extractPatientList {
 		{	
 			if(!(exists $headerHash{$subjectIdColumn})) {die("Could not map a header to an entry in the mapping file! $subjectIdColumn");}
 
-			$idHash{$row->[$headerHash{$subjectIdColumn}]} = 1;
+			$subjectIDHash->{$row->[$headerHash{$subjectIdColumn}]} = 1;
 
 		}
 	}
 	else
 	{
-		#print("DEBUG - PatientDimensionFile.pm : Couldn't find file! $dataDirectoryToParse$currentStrippedFileName\n");
+		print("DEBUG - PatientDimensionFile.pm : Couldn't find file! $dataDirectoryToParse$currentStrippedFileName\n");
 	}
 	
 	close $currentPatientFile;
-	
-
-	return \%idHash;	
 
 }
 
