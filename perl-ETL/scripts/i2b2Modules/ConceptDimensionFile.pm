@@ -128,9 +128,12 @@ sub _parseMappingFileTextPassPatient {
 		#Make a hash so we know the column index for each of our column names.
 		my %headerHash;
 		
-		while(my ($index, $value) = each @$dataHeader) 
+		#Make a hash so we know the column index for each of our column names.
+		my $headerCount = @$dataHeader;
+		
+		for (my $i=0; $i < $headerCount; $i++) 
 		{
-    		$headerHash{$value} = $index;
+	   		$headerHash{@$dataHeader[$i]} = $i;
 		}
 
 		#For every line we grab the unique values for our text field hash.

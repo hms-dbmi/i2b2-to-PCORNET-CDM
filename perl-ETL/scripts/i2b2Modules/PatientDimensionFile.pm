@@ -7,6 +7,7 @@ use warnings;
 use Carp;
 use Data::Dumper;
 use DBI;
+use Text::CSV;
 
 ###########################################
 #PATIENT_DIMENSION FILE
@@ -77,14 +78,14 @@ sub generatePatientDimensionFile
 	
 			$patientCounter = $patientCounter + 1;
 			
-			print("DEBUG - PatientDimensionFile.pm : Creating New Subject - $subjectID\n");
+			#print("DEBUG - PatientDimensionFile.pm : Creating New Subject - $subjectID\n");
 
 		}
 		else
 		{
 			$patientHash{$subjectID} = $patientSubjectHash->{$subjectID};
 			
-			print("DEBUG - PatientDimensionFile.pm : Using existing Subject - $subjectID\n");
+			#print("DEBUG - PatientDimensionFile.pm : Using existing Subject - $subjectID\n");
 		}
 	}
 
@@ -147,30 +148,28 @@ sub _extractPatientList {
 	
 	my $currentPatientFile;
 	
-	
+	my $csv = Text::CSV->new ( { binary => 1, sep_char => "\t" } ) or die "Cannot use CSV: ".Text::CSV->error_diag ();
 	
 	if(open $currentPatientFile, "<$dataDirectoryToParse$currentStrippedFileName")
 	{
-		my $dataHeader = <$currentPatientFile>;
-	
-		chomp($dataHeader);
-	
-		my @headerArray = split(/\t/,$dataHeader);
+		my %headerHash;
+		
+		my $dataHeader = $csv->getline( $currentPatientFile );
 
 		#Make a hash so we know the column index for each of our column names.
-		my %headerHash;
-		%headerHash = map { $headerArray[$_] => $_ } 0..$#headerArray;
+		my $headerCount = @$dataHeader;
+		
+		for (my $i=0; $i < $headerCount; $i++) 
+		{
+	   		$headerHash{@$dataHeader[$i]} = $i;
+		}
 
 		#For every line we grab the unique values for our subject ID hash.
-		while (<$currentPatientFile>)
+		while (my $row = $csv->getline( $currentPatientFile ))
 		{	
-			chomp($_);
-		
-			my @line = split(/\t/, $_);
-
 			if(!(exists $headerHash{$subjectIdColumn})) {die("Could not map a header to an entry in the mapping file! $subjectIdColumn");}
 
-			$idHash{$line[$headerHash{$subjectIdColumn}]} = 1;
+			$idHash{$row->[$headerHash{$subjectIdColumn}]} = 1;
 
 		}
 	}
