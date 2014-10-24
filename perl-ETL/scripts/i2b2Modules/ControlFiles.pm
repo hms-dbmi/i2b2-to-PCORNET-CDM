@@ -16,12 +16,14 @@ sub generateControlFiles
 	
 	$basePath = $configurationObject->{BASE_PATH};
 	
+	#This is so ugly but I didn't take the time to figure out inheritance in perl.
 	generatePatientDimensionControlFile({PATIENT_DIMENSION_COLUMNS => $params->{PATIENT_DIMENSION_COLUMNS}});
 	generateConceptDimensionControlFile({CONCEPT_DIMENSION_COLUMNS => $params->{CONCEPT_DIMENSION_COLUMNS}});
 	generateObservationFactControlFile({OBSERVATION_FACT_COLUMNS => $params->{OBSERVATION_FACT_COLUMNS}});
 	generateI2b2ControlFile({I2B2_COLUMNS => $params->{I2B2_COLUMNS}});
 	generateConceptCountControlFile({CONCEPT_COUNT_COLUMNS => $params->{CONCEPT_COUNT_COLUMNS}});
 	generateConceptsFoldersPatientsControlFile({CONCEPTS_FOLDERS_PATIENTS_COLUMNS => $params->{CONCEPTS_FOLDERS_PATIENTS_COLUMNS}});
+	generatePatientMappingControlFile({PATIENT_MAPPING_COLUMNS => $params->{PATIENT_MAPPING_COLUMNS}});
 	
 	generateMasterScripts($configurationObject->{SQLLDR_LOGIN_STRING});
 }
@@ -150,6 +152,24 @@ sub generateConceptsFoldersPatientsControlFile
 	print concepts_folders_patients_control_file $params->{CONCEPTS_FOLDERS_PATIENTS_COLUMNS};
 	
 	close concepts_folders_patients_control_file;
+
+
+}
+
+sub generatePatientMappingControlFile
+{
+	my ($params) = @_;
+
+	open(patient_mapping_control_file, ">$basePath/control_files/patient_mapping.ctl") or die("Unable to write $basePath/control_files/patient_mapping.ctl'");
+	
+	print patient_mapping_control_file "OPTIONS (DIRECT=TRUE, SKIP=1) UNRECOVERABLE \n";
+	print patient_mapping_control_file "load data\n";
+	print patient_mapping_control_file "infile '../data/i2b2_load_tables/patient_mapping.dat'\n";
+	print patient_mapping_control_file "APPEND into table i2b2DemoData.PATIENT_MAPPING\n";
+	print patient_mapping_control_file 'fields terminated by "\t" TRAILING NULLCOLS' . "\n";
+	print patient_mapping_control_file $params->{PATIENT_MAPPING_COLUMNS};
+	
+	close patient_mapping_control_file;
 
 
 }

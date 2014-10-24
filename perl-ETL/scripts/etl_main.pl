@@ -64,7 +64,8 @@ ControlFiles::generateControlFiles({	CONFIGURATION_OBJECT 		=> $configurationObj
 										OBSERVATION_FACT_COLUMNS  	=> ObservationFact::printColumnHeadersInList(),
 										I2B2_COLUMNS			  	=> i2b2::printColumnHeadersInListForCTL(),
 										CONCEPT_COUNT_COLUMNS		=> ConceptCount::printColumnHeadersInList(),
-										CONCEPTS_FOLDERS_PATIENTS_COLUMNS => ConceptsFoldersPatients::printColumnHeadersInList()});
+										CONCEPTS_FOLDERS_PATIENTS_COLUMNS => ConceptsFoldersPatients::printColumnHeadersInList(),
+										PATIENT_MAPPING_COLUMNS 	=> PatientMapping::printColumnHeadersInList()});
 										
 										
 my $end_run = time();
