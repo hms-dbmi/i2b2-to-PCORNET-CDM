@@ -1,0 +1,12 @@
+create or replace PROCEDURE      GENERATE_MODIFIERS_I2B2 AS 
+BEGIN
+FOR rec IN (SELECT * FROM I2B2METADATA.I2B2 where c_fullname like '\PMS_DN\02 PMS Clinical Notes (cTAKES NLP)\01 SNOMED\%')
+  LOOP
+     DBMS_OUTPUT.ENABLE(1000000);
+    if (SUBSTR(rec.c_fullname,1,INSTR(rec.c_fullname,'\',-2,1)) = '\PMS_DN\02 PMS Clinical Notes (cTAKES NLP)\01 SNOMED\' and rec.c_synonym_cd='N') then
+insert into i2b2 values(1,'\cTAKES Modifiers\','cTAKES Modifiers','N','OAE',null,'CTAKES_MODIFIERS',null,'MODIFIER_CD','MODIFIER_DIMENSION','MODIFIER_PATH','T','LIKE','\CTAKES Modifiers\',null,'cTAKES Modifiers','24-NOV-14',null,null,'CTAKES_MODIFIERS',null,null,rec.c_fullname||'%',null,'\cTAKES Modifiers\','CTAKES Modifiers');
+commit;
+END if;
+END LOOP;
+  NULL;
+END GENERATE_MODIFIERS_I2B2;
