@@ -1,0 +1,11 @@
+Package: MyPheWAS
+Type: Package
+Title: MyPheWAS
+Version: 0.1
+Date: 2014-12-09
+Author: Antoine Neuraz <aneuraz@live.fr>
+Maintainer: Antoine Neuraz <aneuraz@live.fr>
+Description: Functions to perform a PheWAS in an ORACLE JDBC environment using
+    complex phenotypic data from a transMART datacenter
+License: MIT
+Dependencies: RJDBC
