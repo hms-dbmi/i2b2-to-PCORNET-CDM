@@ -49,10 +49,11 @@ my $patientHash 			= PatientDimensionFile::generatePatientDimensionFile($configu
 
 my @conceptReturnObjects	= ConceptDimensionFile::generateConceptDimensionFile($configurationObject);
 
+print Dumper @conceptReturnObjects;
+
 i2b2File::generateI2b2File({CONFIGURATION_OBJECT 		=> $configurationObject,
 							INDIVIDUAL_NUMERIC_CONCEPTS => $conceptReturnObjects[0], 
-						   	INDIVIDUAL_TEXT_CONCEPTS 	=> $conceptReturnObjects[1]});
-
+						   	INDIVIDUAL_TEXT_CONCEPTS 	=> $conceptReturnObjects[1]}
 ObservationFactFile::generateObservationFactFile({	CONFIGURATION_OBJECT 		=> $configurationObject, 
 													PATIENT_HASH 				=> $patientHash , 
 													INDIVIDUAL_NUMERIC_CONCEPTS => $conceptReturnObjects[0], 

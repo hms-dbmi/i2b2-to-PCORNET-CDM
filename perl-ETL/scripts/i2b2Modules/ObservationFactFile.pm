@@ -120,6 +120,7 @@ sub generateObservationFactFile
 					if($patientHash->{$currentSubjectId} eq '') 
 					{
 						print("\nBAD RECORD - Subject ID : $currentSubjectId\n");
+						print("\nBAD RECORD - File : $f\n");
 					}
 
 					#Add an observation fact record for each numeric concept.
