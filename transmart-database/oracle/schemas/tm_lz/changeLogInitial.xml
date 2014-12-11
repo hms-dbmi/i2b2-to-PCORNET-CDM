@@ -1,0 +1,1016 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="mmcduffie (generated)" id="1418322495087-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="SQ_UNIQ_ID" startValue="39741"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="ALL_SAMPLE_DATA">
+            <column name="INDIVIDUAL_NAME" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_NAME" type="VARCHAR2(2000)"/>
+            <column name="COLLECTION_DESCRIPTION" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_TYPE" type="VARCHAR2(2000)"/>
+            <column name="ALIQUOT_NUMBER" type="VARCHAR2(2000)"/>
+            <column name="ALIQUOT_VOLUME" type="VARCHAR2(2000)"/>
+            <column name="COLLECTION_NUMBER" type="VARCHAR2(2000)"/>
+            <column name="MINUTES_SINCE_CALORIES" type="VARCHAR2(2000)"/>
+            <column name="COLLECTION_DATE" type="VARCHAR2(2000)"/>
+            <column name="COLLECTION_TIME" type="VARCHAR2(2000)"/>
+            <column name="FREEZE_DATE" type="VARCHAR2(2000)"/>
+            <column name="FREEZE_TIME" type="VARCHAR2(2000)"/>
+            <column name="EXTRACTION_DATE" type="VARCHAR2(2000)"/>
+            <column name="THAW_START_TIME" type="VARCHAR2(2000)"/>
+            <column name="START_TIME" type="VARCHAR2(2000)"/>
+            <column name="END_TIME" type="VARCHAR2(2000)"/>
+            <column name="INSTRUMENT" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_PROTOCOL" type="VARCHAR2(2000)"/>
+            <column name="COLLECTION_NOTES" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_NOTES" type="VARCHAR2(2000)"/>
+            <column name="INVENTORY_STATUS" type="VARCHAR2(2000)"/>
+            <column name="CONTAINER_NAME" type="VARCHAR2(2000)"/>
+            <column name="POSITION" type="VARCHAR2(2000)"/>
+            <column name="PARENT_SAMPLE_NAME" type="VARCHAR2(2000)"/>
+            <column name="INDIVIDUAL_NAME_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="COLLECTION_DATE_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="COLLECTION_TIME_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="EXTRACTION_DATE_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_NAME_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_TYPE_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="ALIQUOT_NUMBER_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="ALIQUOT_VOLUME_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="ALIQUOT_WEIGHT_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="A260_A280_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="A260_A230_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="A260_NG_UL_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="28S_18S_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="RIN_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="BIOA_NG_UL_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="DSDNA_NG_UL_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="INVENTORY_STATUS_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_NOTES_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="CONTAINER_NAME_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="POSITION_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="PARENT_SAMPLE_NAME_ALIQ" type="VARCHAR2(2000)"/>
+            <column name="INDIVIDUAL_NAME_ANA" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_NAME_ANA" type="VARCHAR2(2000)"/>
+            <column name="ANALYSIS_ANA" type="VARCHAR2(2000)"/>
+            <column name="PLATFORM_ANA" type="VARCHAR2(2000)"/>
+            <column name="ASSAY_ANA" type="VARCHAR2(2000)"/>
+            <column name="DATE_ANA" type="VARCHAR2(2000)"/>
+            <column name="COMMENTS_ANA" type="VARCHAR2(2000)"/>
+            <column name="FACILITY_ANA" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="AN_AGRE_PEDIGRE">
+            <column name="INDIVIDUAL_CODE" type="VARCHAR2(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NDAR_GUID" type="VARCHAR2(20)"/>
+            <column name="AGP_FAMILY_ID" type="NUMBER(*, 0)"/>
+            <column name="BLOOD_ID" type="VARCHAR2(10)"/>
+            <column name="PERSON" type="NUMBER(*, 0)"/>
+            <column name="FATHER" type="NUMBER(*, 0)"/>
+            <column name="MOTHER" type="NUMBER(*, 0)"/>
+            <column name="SEX" type="VARCHAR2(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="AN_GENOPHENO_TO_MRN">
+            <column name="MRN" type="VARCHAR2(15)"/>
+            <column name="ID" type="VARCHAR2(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="AN_MAPPING">
+            <column name="SSC_SOURCESYSTEM_CD" type="VARCHAR2(200)"/>
+            <column name="ID_4DIGIT" type="VARCHAR2(200)"/>
+            <column name="ID_5DIGIT" type="VARCHAR2(200)"/>
+            <column name="MRN" type="VARCHAR2(200)"/>
+            <column name="PRIMARY_ID" type="VARCHAR2(200)"/>
+            <column name="I2B2_PATIENT_NUM" type="VARCHAR2(200)"/>
+            <column name="SECONDARY_ID" type="VARCHAR2(200)"/>
+            <column name="BCH_FAMILY_ID" type="VARCHAR2(200)"/>
+            <column name="UNIQ_ID" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="AN_MASTER_MAPPING">
+            <column name="UNIQ_ID" type="NUMBER"/>
+            <column name="SOURCE_ID" type="VARCHAR2(200)"/>
+            <column name="SOURCE" type="CHAR(16)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="AN_SSC_ID_MAPPING">
+            <column name="COLLECTIONID" type="VARCHAR2(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INTERNALFAMILYID" type="NUMBER(*, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RELATIONSHIPID" type="NUMBER(*, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRIMARYID" type="VARCHAR2(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SECONDARYID" type="VARCHAR2(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RELATIONSHIPTYPE" type="VARCHAR2(10)"/>
+            <column name="FAMILY" type="NUMBER(*, 0)"/>
+            <column name="COLLECTION" type="VARCHAR2(10)"/>
+            <column name="FAMILY_TYPE" type="VARCHAR2(10)"/>
+            <column name="ID" type="VARCHAR2(10)"/>
+            <column name="DOB" type="VARCHAR2(10)"/>
+            <column name="SEX" type="VARCHAR2(10)"/>
+            <column name="GUID" type="VARCHAR2(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="AN_SSC_INDIVIDUAL_14">
+            <column name="FAMILY" type="NUMBER(*, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID" type="VARCHAR2(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEX" type="VARCHAR2(10)"/>
+            <column name="BIRTH" type="VARCHAR2(10)"/>
+            <column name="GUID" type="VARCHAR2(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="AN_TEMP">
+            <column name="ENCOUNTER_NUM" type="NUMBER(38, 0)"/>
+            <column name="PATIENT_NUM" type="NUMBER(38, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONCEPT_CD" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PROVIDER_ID" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="START_DATE" type="TIMESTAMP"/>
+            <column name="MODIFIER_CD" type="VARCHAR2(100)"/>
+            <column name="VALTYPE_CD" type="VARCHAR2(50)"/>
+            <column name="TVAL_CHAR" type="VARCHAR2(255)"/>
+            <column name="NVAL_NUM" type="NUMBER(18, 5)"/>
+            <column name="VALUEFLAG_CD" type="VARCHAR2(50)"/>
+            <column name="QUANTITY_NUM" type="NUMBER(18, 5)"/>
+            <column name="UNITS_CD" type="VARCHAR2(50)"/>
+            <column name="END_DATE" type="TIMESTAMP"/>
+            <column name="LOCATION_CD" type="VARCHAR2(50)"/>
+            <column name="CONFIDENCE_NUM" type="NUMBER(18, 0)"/>
+            <column name="UPDATE_DATE" type="TIMESTAMP"/>
+            <column name="DOWNLOAD_DATE" type="TIMESTAMP"/>
+            <column name="IMPORT_DATE" type="TIMESTAMP"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(50)"/>
+            <column name="UPLOAD_ID" type="NUMBER(38, 0)"/>
+            <column name="OBSERVATION_BLOB" type="CLOB"/>
+            <column name="INSTANCE_NUM" type="NUMBER(18, 0)"/>
+            <column name="CONCEPT_PATH" type="VARCHAR2(700)"/>
+            <column name="CONCEPT_TYPE" type="VARCHAR2(4000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="AN_VIP_TO_MRN">
+            <column name="MRN" type="VARCHAR2(10)"/>
+            <column name="ID" type="VARCHAR2(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="AN_VIP_TO_MRN_NEW">
+            <column name="PARTICIPATION_ID" type="VARCHAR2(10)"/>
+            <column name="ID" type="VARCHAR2(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MRN" type="VARCHAR2(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="AUTISM_ALIQUOT">
+            <column name="INDIVIDUAL_NAME" type="VARCHAR2(2000)"/>
+            <column name="COLLECTION_DATE" type="VARCHAR2(2000)"/>
+            <column name="COLLECTION_TIME" type="VARCHAR2(2000)"/>
+            <column name="EXTRACTION_DATE" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_NAME" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_TYPE" type="VARCHAR2(2000)"/>
+            <column name="ALIQUOT_NUMBER" type="VARCHAR2(2000)"/>
+            <column name="ALIQUOT_VOLUME" type="VARCHAR2(2000)"/>
+            <column name="ALIQUOT_WEIGHT" type="VARCHAR2(2000)"/>
+            <column name="A260_A280" type="VARCHAR2(2000)"/>
+            <column name="A260_A230" type="VARCHAR2(2000)"/>
+            <column name="A260_NG_UL" type="VARCHAR2(2000)"/>
+            <column name="28S_18S" type="VARCHAR2(2000)"/>
+            <column name="RIN" type="VARCHAR2(2000)"/>
+            <column name="BIOA_NG_UL" type="VARCHAR2(2000)"/>
+            <column name="DSDNA_NG_UL" type="VARCHAR2(2000)"/>
+            <column name="INVENTORY_STATUS" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_NOTES" type="VARCHAR2(2000)"/>
+            <column name="CONTAINER_NAME" type="VARCHAR2(2000)"/>
+            <column name="POSITION" type="VARCHAR2(2000)"/>
+            <column name="PARENT_SAMPLE_NAME" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="AUTISM_ANALYSIS">
+            <column name="INDIVIDUAL_NAME" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_NAME" type="VARCHAR2(2000)"/>
+            <column name="ANALYSIS" type="VARCHAR2(2000)"/>
+            <column name="PLATFORM" type="VARCHAR2(2000)"/>
+            <column name="ASSAY" type="VARCHAR2(2000)"/>
+            <column name="DATE" type="VARCHAR2(2000)"/>
+            <column name="COMMENTS" type="VARCHAR2(2000)"/>
+            <column name="FACILITY" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="AUTISM_COLLECTION">
+            <column name="INDIVIDUAL_NAME" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_NAME" type="VARCHAR2(2000)"/>
+            <column name="COLLECTION_DESCRIPTION" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_TYPE" type="VARCHAR2(2000)"/>
+            <column name="ALIQUOT_NUMBER" type="VARCHAR2(2000)"/>
+            <column name="ALIQUOT_VOLUME" type="VARCHAR2(2000)"/>
+            <column name="COLLECTION_NUMBER" type="VARCHAR2(2000)"/>
+            <column name="MINUTES_SINCE_CALORIES" type="VARCHAR2(2000)"/>
+            <column name="COLLECTION_DATE" type="VARCHAR2(2000)"/>
+            <column name="COLLECTION_TIME" type="VARCHAR2(2000)"/>
+            <column name="FREEZE_DATE" type="VARCHAR2(2000)"/>
+            <column name="FREEZE_TIME" type="VARCHAR2(2000)"/>
+            <column name="EXTRACTION_DATE" type="VARCHAR2(2000)"/>
+            <column name="THAW_START_TIME" type="VARCHAR2(2000)"/>
+            <column name="START_TIME" type="VARCHAR2(2000)"/>
+            <column name="END_TIME" type="VARCHAR2(2000)"/>
+            <column name="INSTRUMENT" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_PROTOCOL" type="VARCHAR2(2000)"/>
+            <column name="COLLECTION_NOTES" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_NOTES" type="VARCHAR2(2000)"/>
+            <column name="INVENTORY_STATUS" type="VARCHAR2(2000)"/>
+            <column name="CONTAINER_NAME" type="VARCHAR2(2000)"/>
+            <column name="POSITION" type="VARCHAR2(2000)"/>
+            <column name="PARENT_SAMPLE_NAME" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="AUTISM_SUBJECT">
+            <column name="PROTOCOL_ID" type="VARCHAR2(2000)"/>
+            <column name="PROTOCOL_TITLE" type="VARCHAR2(2000)"/>
+            <column name="INDIVIDUAL_NAME" type="VARCHAR2(2000)"/>
+            <column name="INDIVIDUAL_ALIAS" type="VARCHAR2(2000)"/>
+            <column name="GENDER" type="VARCHAR2(2000)"/>
+            <column name="PEDIGREE_NAME" type="VARCHAR2(2000)"/>
+            <column name="PROBAND_STATUS" type="VARCHAR2(2000)"/>
+            <column name="INDIVIDUAL_NOTES" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="BCH_MRN_TO_FAMILY_ID">
+            <column name="MRN" type="VARCHAR2(2000)"/>
+            <column name="PRIMARY_ID" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="BCH_MRN_TO_FAMILY_ID_FULL">
+            <column name="MRN" type="VARCHAR2(2000)"/>
+            <column name="PRIMARY_ID" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="BCH_TO_MRN_08292014">
+            <column name="ID" type="VARCHAR2(20)"/>
+            <column name="MRN" type="VARCHAR2(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="CONCEPT_DIMENSION_CTAKES">
+            <column name="CONCEPT_CD" type="VARCHAR2(20)"/>
+            <column name="CONCEPT_PATH" type="VARCHAR2(250)"/>
+            <column name="NAME_CHAR" type="VARCHAR2(100)"/>
+            <column name="CONCEPT_BLOB" type="VARCHAR2(100)"/>
+            <column name="UPDATE_DATE" type="VARCHAR2(100)"/>
+            <column name="DOWNLOAD_DATE" type="VARCHAR2(100)"/>
+            <column name="IMPORT_DATE" type="VARCHAR2(100)"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(100)"/>
+            <column name="UPLOAD_ID" type="VARCHAR2(100)"/>
+            <column name="TABLE_NAME" type="VARCHAR2(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="CONCEPT_DIMENSION_I2B2_MTM">
+            <column name="UPLOAD_ID" type="VARCHAR2(2000)"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(2000)"/>
+            <column name="CONCEPT_CD" type="VARCHAR2(2000)"/>
+            <column name="CONCEPT_PATH" type="VARCHAR2(2000)"/>
+            <column name="CONCEPT_BLOB" type="VARCHAR2(2000)"/>
+            <column name="UPDATE_DATE" type="VARCHAR2(2000)"/>
+            <column name="NAME_CHAR" type="VARCHAR2(2000 CHAR)"/>
+            <column name="DOWNLOAD_DATE" type="VARCHAR2(2000)"/>
+            <column name="IMPORT_DATE" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-21" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="GENOPHENO_PATIENTS_0820">
+            <column name="ID" type="VARCHAR2(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-22" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="GENOPHENO_PATIENTS_0822">
+            <column name="ID" type="VARCHAR2(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-23" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="I2B2_CTAKES">
+            <column name="C_HLEVEL" type="VARCHAR2(255)"/>
+            <column name="C_FULLNAME" type="VARCHAR2(2000)"/>
+            <column name="C_NAME" type="VARCHAR2(255)"/>
+            <column name="C_SYNONYM_CD" type="VARCHAR2(255)"/>
+            <column name="C_VISUALATTRIBUTES" type="VARCHAR2(255)"/>
+            <column name="C_TOTALNUM" type="VARCHAR2(255)"/>
+            <column name="C_BASECODE" type="VARCHAR2(255)"/>
+            <column name="C_METADATAXML" type="VARCHAR2(2000)"/>
+            <column name="C_FACTTABLECOLUMN" type="VARCHAR2(255)"/>
+            <column name="C_TABLENAME" type="VARCHAR2(255)"/>
+            <column name="C_COLUMNNAME" type="VARCHAR2(255)"/>
+            <column name="C_COLUMNDATATYPE" type="VARCHAR2(255)"/>
+            <column name="C_OPERATOR" type="VARCHAR2(255)"/>
+            <column name="C_DIMCODE" type="VARCHAR2(255)"/>
+            <column name="C_COMMENT" type="VARCHAR2(255)"/>
+            <column name="C_TOOLTIP" type="VARCHAR2(2000)"/>
+            <column name="UPDATE_DATE" type="VARCHAR2(200)"/>
+            <column name="DOWNLOAD_DATE" type="VARCHAR2(200)"/>
+            <column name="IMPORT_DATE" type="VARCHAR2(200)"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(255)"/>
+            <column name="VALUETYPE_CD" type="VARCHAR2(255)"/>
+            <column name="I2B2_ID" type="VARCHAR2(255)"/>
+            <column name="M_APPLIED_PATH" type="VARCHAR2(2000)"/>
+            <column name="M_EXCLUSION_CD" type="VARCHAR2(2000)"/>
+            <column name="C_PATH" type="VARCHAR2(2000)"/>
+            <column name="C_SYMBOL" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-24" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="I2B2_I2B2_MTM">
+            <column name="C_HLEVEL" type="VARCHAR2(2000)"/>
+            <column name="C_FULLNAME" type="VARCHAR2(2000)"/>
+            <column name="C_NAME" type="VARCHAR2(2000)"/>
+            <column name="C_SYNONYM_CD" type="VARCHAR2(2000)"/>
+            <column name="C_VISUALATTRIBUTES" type="VARCHAR2(2000)"/>
+            <column name="C_TOTALNUM" type="VARCHAR2(2000)"/>
+            <column name="C_BASECODE" type="VARCHAR2(2000)"/>
+            <column name="C_METADATAXML" type="CLOB"/>
+            <column name="C_FACTTABLECOLUMN" type="VARCHAR2(2000)"/>
+            <column name="C_TABLENAME" type="VARCHAR2(2000)"/>
+            <column name="C_COLUMNNAME" type="VARCHAR2(2000)"/>
+            <column name="C_COLUMNDATATYPE" type="VARCHAR2(2000)"/>
+            <column name="C_OPERATOR" type="VARCHAR2(2000)"/>
+            <column name="C_DIMCODE" type="VARCHAR2(2000)"/>
+            <column name="C_COMMENT" type="CLOB"/>
+            <column name="C_TOOLTIP" type="VARCHAR2(2000)"/>
+            <column name="UPDATE_DATE" type="VARCHAR2(2000)"/>
+            <column name="DOWNLOAD_DATE" type="VARCHAR2(2000)"/>
+            <column name="IMPORT_DATE" type="VARCHAR2(2000)"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(2000)"/>
+            <column name="VALUETYPE_CD" type="VARCHAR2(2000)"/>
+            <column name="I2B2_ID" type="VARCHAR2(2000)"/>
+            <column name="M_APPLIED_PATH" type="VARCHAR2(2000)"/>
+            <column name="M_EXCLUSION_CD" type="VARCHAR2(2000)"/>
+            <column name="C_PATH" type="VARCHAR2(2000)"/>
+            <column name="C_SYMBOL" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-25" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="I2B2_TO_BCH_MRN">
+            <column name="PATIENT_NUM" type="VARCHAR2(2000)"/>
+            <column name="MRN" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-26" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="LT_SRC_CLINICAL_DATA">
+            <column name="STUDY_ID" type="VARCHAR2(25)"/>
+            <column name="SITE_ID" type="VARCHAR2(50)"/>
+            <column name="SUBJECT_ID" type="VARCHAR2(20)"/>
+            <column name="VISIT_NAME" type="VARCHAR2(100)"/>
+            <column name="DATA_LABEL" type="VARCHAR2(500)"/>
+            <column name="DATA_VALUE" type="VARCHAR2(500)"/>
+            <column name="CATEGORY_CD" type="VARCHAR2(250)"/>
+            <column name="CTRL_VOCAB_CODE" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-27" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="LT_SRC_DEAPP_ANNOT">
+            <column name="GPL_ID" type="VARCHAR2(100)"/>
+            <column name="PROBE_ID" type="VARCHAR2(100)"/>
+            <column name="GENE_SYMBOL" type="VARCHAR2(100)"/>
+            <column name="GENE_ID" type="VARCHAR2(250)"/>
+            <column name="ORGANISM" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-28" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="LT_SRC_MRNA_DATA">
+            <column name="TRIAL_NAME" type="VARCHAR2(25)"/>
+            <column name="PROBESET" type="VARCHAR2(100)"/>
+            <column name="EXPR_ID" type="VARCHAR2(100)"/>
+            <column name="INTENSITY_VALUE" type="VARCHAR2(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-29" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="LT_SRC_MRNA_SUBJ_SAMP_MAP">
+            <column name="TRIAL_NAME" type="VARCHAR2(100)"/>
+            <column name="SITE_ID" type="VARCHAR2(100)"/>
+            <column name="SUBJECT_ID" type="VARCHAR2(100)"/>
+            <column name="SAMPLE_CD" type="VARCHAR2(100)"/>
+            <column name="PLATFORM" type="VARCHAR2(100)"/>
+            <column name="TISSUE_TYPE" type="VARCHAR2(100)"/>
+            <column name="ATTRIBUTE_1" type="VARCHAR2(256)"/>
+            <column name="ATTRIBUTE_2" type="VARCHAR2(200)"/>
+            <column name="CATEGORY_CD" type="VARCHAR2(200)"/>
+            <column name="SOURCE_CD" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-30" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="LT_SRC_NGS">
+            <column name="STUDY_ID" type="VARCHAR2(50 CHAR)"/>
+            <column name="SITE_ID" type="VARCHAR2(50 CHAR)"/>
+            <column name="SUBJECT_ID" type="VARCHAR2(50 CHAR)"/>
+            <column name="VISIT_NAME" type="VARCHAR2(50 CHAR)"/>
+            <column name="DATA_LABEL" type="VARCHAR2(500 CHAR)"/>
+            <column name="DATA_VALUE" type="VARCHAR2(500 CHAR)"/>
+            <column name="CATEGORY_CD" type="VARCHAR2(500 CHAR)"/>
+            <column name="CTRL_VOCAB_CODE" type="VARCHAR2(500 CHAR)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-31" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="LT_SRC_SAMPLE_CATEGORIES">
+            <column name="TRIAL_CD" type="VARCHAR2(200)"/>
+            <column name="SITE_CD" type="VARCHAR2(200)"/>
+            <column name="SUBJECT_CD" type="VARCHAR2(200)"/>
+            <column name="SAMPLE_CD" type="VARCHAR2(200)"/>
+            <column name="CATEGORY_CD" type="VARCHAR2(200)"/>
+            <column name="CATEGORY_VALUE" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-32" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="LT_SRC_STUDY_METADATA">
+            <column name="STUDY_ID" type="VARCHAR2(100)"/>
+            <column name="TITLE" type="VARCHAR2(1000)"/>
+            <column name="DESCRIPTION" type="VARCHAR2(2000)"/>
+            <column name="DESIGN" type="VARCHAR2(2000)"/>
+            <column name="START_DATE" type="VARCHAR2(50)"/>
+            <column name="COMPLETION_DATE" type="VARCHAR2(50)"/>
+            <column name="PRIMARY_INVESTIGATOR" type="VARCHAR2(400)"/>
+            <column name="CONTACT_FIELD" type="VARCHAR2(400)"/>
+            <column name="STATUS" type="VARCHAR2(100)"/>
+            <column name="OVERALL_DESIGN" type="VARCHAR2(2000)"/>
+            <column name="INSTITUTION" type="VARCHAR2(100)"/>
+            <column name="COUNTRY" type="VARCHAR2(50)"/>
+            <column name="BIOMARKER_TYPE" type="VARCHAR2(255)"/>
+            <column name="TARGET" type="VARCHAR2(255)"/>
+            <column name="ACCESS_TYPE" type="VARCHAR2(100)"/>
+            <column name="STUDY_OWNER" type="VARCHAR2(510)"/>
+            <column name="STUDY_PHASE" type="VARCHAR2(100)"/>
+            <column name="BLINDING_PROCEDURE" type="VARCHAR2(1000)"/>
+            <column name="STUDYTYPE" type="VARCHAR2(510)"/>
+            <column name="DURATION_OF_STUDY_WEEKS" type="VARCHAR2(200)"/>
+            <column name="NUMBER_OF_PATIENTS" type="VARCHAR2(200)"/>
+            <column name="NUMBER_OF_SITES" type="VARCHAR2(200)"/>
+            <column name="ROUTE_OF_ADMINISTRATION" type="VARCHAR2(510)"/>
+            <column name="DOSING_REGIMEN" type="VARCHAR2(3500)"/>
+            <column name="GROUP_ASSIGNMENT" type="VARCHAR2(510)"/>
+            <column name="TYPE_OF_CONTROL" type="VARCHAR2(510)"/>
+            <column name="PRIMARY_END_POINTS" type="VARCHAR2(2000)"/>
+            <column name="SECONDARY_END_POINTS" type="VARCHAR2(3500)"/>
+            <column name="INCLUSION_CRITERIA" type="VARCHAR2(4000)"/>
+            <column name="EXCLUSION_CRITERIA" type="VARCHAR2(4000)"/>
+            <column name="SUBJECTS" type="VARCHAR2(2000)"/>
+            <column name="GENDER_RESTRICTION_MFB" type="VARCHAR2(510)"/>
+            <column name="MIN_AGE" type="VARCHAR2(100)"/>
+            <column name="MAX_AGE" type="VARCHAR2(100)"/>
+            <column name="SECONDARY_IDS" type="VARCHAR2(510)"/>
+            <column name="DEVELOPMENT_PARTNER" type="VARCHAR2(100)"/>
+            <column name="GEO_PLATFORM" type="VARCHAR2(100)"/>
+            <column name="MAIN_FINDINGS" type="VARCHAR2(2000)"/>
+            <column name="SEARCH_AREA" type="VARCHAR2(100)"/>
+            <column name="COMPOUND" type="VARCHAR2(1000)"/>
+            <column name="DISEASE" type="VARCHAR2(1000)"/>
+            <column name="PUBMED_IDS" type="VARCHAR2(1000)"/>
+            <column name="ORGANISM" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-33" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="LZ_SRC_CLINICAL_DATA">
+            <column name="STUDY_ID" type="VARCHAR2(25)"/>
+            <column name="SITE_ID" type="VARCHAR2(50)"/>
+            <column name="SUBJECT_ID" type="VARCHAR2(20)"/>
+            <column name="VISIT_NAME" type="VARCHAR2(100)"/>
+            <column name="DATA_LABEL" type="VARCHAR2(500)"/>
+            <column name="DATA_VALUE" type="VARCHAR2(500)"/>
+            <column name="CATEGORY_CD" type="VARCHAR2(250)"/>
+            <column name="ETL_JOB_ID" type="NUMBER(22, 0)"/>
+            <column name="ETL_DATE" type="date"/>
+            <column name="CTRL_VOCAB_CODE" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-34" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="LZ_SRC_MRNA_DATA">
+            <column name="TRIAL_NAME" type="VARCHAR2(25)"/>
+            <column name="PROBESET" type="VARCHAR2(100)"/>
+            <column name="EXPR_ID" type="VARCHAR2(100)"/>
+            <column name="INTENSITY_VALUE" type="VARCHAR2(50)"/>
+            <column name="SOURCE_CD" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-35" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="LZ_SRC_MRNA_SUBJ_SAMP_MAP">
+            <column name="TRIAL_NAME" type="VARCHAR2(100)"/>
+            <column name="SITE_ID" type="VARCHAR2(100)"/>
+            <column name="SUBJECT_ID" type="VARCHAR2(100)"/>
+            <column name="SAMPLE_CD" type="VARCHAR2(100)"/>
+            <column name="PLATFORM" type="VARCHAR2(100)"/>
+            <column name="TISSUE_TYPE" type="VARCHAR2(100)"/>
+            <column name="ATTRIBUTE_1" type="VARCHAR2(256)"/>
+            <column name="ATTRIBUTE_2" type="VARCHAR2(200)"/>
+            <column name="CATEGORY_CD" type="VARCHAR2(200)"/>
+            <column name="SOURCE_CD" type="VARCHAR2(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-36" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="LZ_SRC_SAMPLE_CATEGORIES">
+            <column name="TRIAL_CD" type="VARCHAR2(200)"/>
+            <column name="SITE_CD" type="VARCHAR2(200)"/>
+            <column name="SUBJECT_CD" type="VARCHAR2(200)"/>
+            <column name="SAMPLE_CD" type="VARCHAR2(200)"/>
+            <column name="CATEGORY_CD" type="VARCHAR2(200)"/>
+            <column name="CATEGORY_VALUE" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-37" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="LZ_SRC_SAMPLE_CATEGORIES_BKUP">
+            <column name="TRIAL_CD" type="VARCHAR2(200)"/>
+            <column name="SITE_CD" type="VARCHAR2(200)"/>
+            <column name="SUBJECT_CD" type="VARCHAR2(200)"/>
+            <column name="SAMPLE_CD" type="VARCHAR2(200)"/>
+            <column name="CATEGORY_CD" type="VARCHAR2(200)"/>
+            <column name="CATEGORY_VALUE" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-38" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="MAP_4ID_TO_5ID">
+            <column name="ID1" type="VARCHAR2(2000)"/>
+            <column name="ID2" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-39" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="MASTER_BCH_MAPPING">
+            <column name="SSC_SOURCESYSTEM_CD" type="VARCHAR2(200)"/>
+            <column name="ID_4DIGIT" type="VARCHAR2(200)"/>
+            <column name="ID_5DIGIT" type="VARCHAR2(200)"/>
+            <column name="MRN" type="VARCHAR2(200)"/>
+            <column name="PRIMARY_ID" type="VARCHAR2(200)"/>
+            <column name="I2B2_PATIENT_NUM" type="VARCHAR2(200)"/>
+            <column name="SECONDARY_ID" type="VARCHAR2(200)"/>
+            <column name="BCH_FAMILY_ID" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-40" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="MODIFIER_DIMENSION_I2B2_MTM">
+            <column name="UPLOAD_ID" type="VARCHAR2(2000)"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(2000)"/>
+            <column name="MODIFIER_CD" type="VARCHAR2(2000)"/>
+            <column name="UPDATE_DATE" type="VARCHAR2(2000)"/>
+            <column name="NAME_CHAR" type="VARCHAR2(2000)"/>
+            <column name="DOWNLOAD_DATE" type="VARCHAR2(2000)"/>
+            <column name="MODIFIER_BLOB" type="LONG"/>
+            <column name="IMPORT_DATE" type="VARCHAR2(2000)"/>
+            <column name="MODIFIER_PATH" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-41" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="NEW_ENCOUNTER_NUM">
+            <column name="ENCOUNTER_NUM" type="VARCHAR2(2000)"/>
+            <column name="NEW_ENCOUNTER_NUM" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-42" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="NEW_PATIENT_NUM">
+            <column name="PATIENT_NUM" type="VARCHAR2(2000)"/>
+            <column name="NEW_PATIENT_NUM" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-43" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="NODE_METADATA_CTAKES">
+            <column name="CONCEPT_PATH" type="VARCHAR2(2000)"/>
+            <column name="PARENT_CONCEPT_PATH" type="VARCHAR2(2000)"/>
+            <column name="VALUE" type="VARCHAR2(2000)"/>
+            <column name="TYPE" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-44" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="OBSERVATION_FACT_CTAKES">
+            <column name="ENCOUNTER_NUM" type="VARCHAR2(255)"/>
+            <column name="PATIENT_NUM" type="VARCHAR2(255)"/>
+            <column name="CONCEPT_CD" type="VARCHAR2(255)"/>
+            <column name="PROVIDER_ID" type="VARCHAR2(255)"/>
+            <column name="START_DATE" type="VARCHAR2(255)"/>
+            <column name="MODIFIER_CD" type="VARCHAR2(255)"/>
+            <column name="VALTYPE_CD" type="VARCHAR2(255)"/>
+            <column name="TVAL_CHAR" type="VARCHAR2(1000)"/>
+            <column name="NVAL_NUM" type="VARCHAR2(255)"/>
+            <column name="VALUEFLAG_CD" type="VARCHAR2(255)"/>
+            <column name="QUANTITY_NUM" type="VARCHAR2(255)"/>
+            <column name="UNITS_CD" type="VARCHAR2(255)"/>
+            <column name="END_DATE" type="VARCHAR2(255)"/>
+            <column name="LOCATION_CD" type="VARCHAR2(255)"/>
+            <column name="CONFIDENCE_NUM" type="VARCHAR2(255)"/>
+            <column name="UPDATE_DATE" type="VARCHAR2(255)"/>
+            <column name="DOWNLOAD_DATE" type="VARCHAR2(255)"/>
+            <column name="IMPORT_DATE" type="VARCHAR2(255)"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(255)"/>
+            <column name="UPLOAD_ID" type="VARCHAR2(255)"/>
+            <column name="OBSERVATION_BLOB" type="VARCHAR2(255)"/>
+            <column name="INSTANCE_NUM" type="VARCHAR2(255)"/>
+            <column name="DATASOURCE" type="VARCHAR2(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-45" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="OBSERVATION_FACT_I2B2_MTM">
+            <column name="UPLOAD_ID" type="VARCHAR2(20)"/>
+            <column name="TEXT_SEARCH_INDEX" type="VARCHAR2(2000)"/>
+            <column name="UNITS_CD" type="VARCHAR2(2000)"/>
+            <column name="CONCEPT_CD" type="VARCHAR2(2000)"/>
+            <column name="VALTYPE_CD" type="VARCHAR2(2000)"/>
+            <column name="TVAL_CHAR" type="VARCHAR2(2000)"/>
+            <column name="NVAL_NUM" type="VARCHAR2(2000)"/>
+            <column name="UPDATE_DATE" type="VARCHAR2(2000)"/>
+            <column name="END_DATE" type="VARCHAR2(2000)"/>
+            <column name="VALUEFLAG_CD" type="VARCHAR2(2000)"/>
+            <column name="ENCOUNTER_NUM" type="VARCHAR2(2000)"/>
+            <column name="PATIENT_NUM" type="VARCHAR2(2000)"/>
+            <column name="IMPORT_DATE" type="VARCHAR2(2000)"/>
+            <column name="OBSERVATION_BLOB" type="LONG"/>
+            <column name="LOCATION_CD" type="VARCHAR2(2000)"/>
+            <column name="START_DATE" type="VARCHAR2(2000)"/>
+            <column name="QUANTITY_NUM" type="VARCHAR2(2000)"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(2000)"/>
+            <column name="PROVIDER_ID" type="VARCHAR2(2000)"/>
+            <column name="INSTANCE_NUM" type="VARCHAR2(2000)"/>
+            <column name="MODIFIER_CD" type="VARCHAR2(2000)"/>
+            <column name="DOWNLOAD_DATE" type="VARCHAR2(2000)"/>
+            <column name="CONFIDENCE_NUM" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-46" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="OBSERVATION_FACT_MTM_S">
+            <column name="ENCOUNTER_NUM" type="VARCHAR2(2000)"/>
+            <column name="PATIENT_NUM" type="VARCHAR2(2000)"/>
+            <column name="CONCEPT_CD" type="VARCHAR2(2000)"/>
+            <column name="PROVIDER_ID" type="VARCHAR2(2000)"/>
+            <column name="START_DATE" type="VARCHAR2(2000)"/>
+            <column name="MODIFIER_CD" type="VARCHAR2(2000)"/>
+            <column name="VALTYPE_CD" type="VARCHAR2(2000)"/>
+            <column name="TVAL_CHAR" type="VARCHAR2(2000)"/>
+            <column name="NVAL_NUM" type="VARCHAR2(2000)"/>
+            <column name="VALUEFLAG_CD" type="VARCHAR2(2000)"/>
+            <column name="QUANTITY_NUM" type="VARCHAR2(2000)"/>
+            <column name="UNITS_CD" type="VARCHAR2(2000)"/>
+            <column name="END_DATE" type="VARCHAR2(2000)"/>
+            <column name="LOCATION_CD" type="VARCHAR2(2000)"/>
+            <column name="CONFIDENCE_NUM" type="VARCHAR2(2000)"/>
+            <column name="UPDATE_DATE" type="VARCHAR2(2000)"/>
+            <column name="DOWNLOAD_DATE" type="VARCHAR2(2000)"/>
+            <column name="IMPORT_DATE" type="VARCHAR2(2000)"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(2000)"/>
+            <column name="UPLOAD_ID" type="VARCHAR2(2000)"/>
+            <column name="OBSERVATION_BLOB" type="CLOB"/>
+            <column name="INSTANCE_NUM" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-47" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="PATIENT_DIMENSION_I2B2_MTM">
+            <column name="ZIP_CD" type="VARCHAR2(2000)"/>
+            <column name="UPLOAD_ID" type="VARCHAR2(2000)"/>
+            <column name="DEATH_DATE" type="VARCHAR2(2000)"/>
+            <column name="UPDATE_DATE" type="VARCHAR2(2000)"/>
+            <column name="AGE_IN_YEARS_NUM" type="VARCHAR2(2000)"/>
+            <column name="SEX_CD" type="VARCHAR2(2000)"/>
+            <column name="PATIENT_BLOB" type="VARCHAR2(2000)"/>
+            <column name="RACE_CD" type="VARCHAR2(2000)"/>
+            <column name="RELIGION_CD" type="VARCHAR2(2000)"/>
+            <column name="PATIENT_NUM" type="VARCHAR2(2000)"/>
+            <column name="IMPORT_DATE" type="VARCHAR2(2000)"/>
+            <column name="INCOME_CD" type="VARCHAR2(2000)"/>
+            <column name="VITAL_STATUS_CD" type="VARCHAR2(2000)"/>
+            <column name="LANGUAGE_CD" type="VARCHAR2(2000)"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(2000)"/>
+            <column name="MARITAL_STATUS_CD" type="VARCHAR2(2000)"/>
+            <column name="BIRTH_DATE" type="VARCHAR2(2000)"/>
+            <column name="DOWNLOAD_DATE" type="VARCHAR2(2000)"/>
+            <column name="STATECITYZIP_PATH" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-48" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SSC_LINKAGE">
+            <column name="INTERNAL_FAMILY_ID" type="VARCHAR2(2000)"/>
+            <column name="PRIMARY_ID" type="VARCHAR2(2000)"/>
+            <column name="SECONDARY_ID" type="VARCHAR2(2000)"/>
+            <column name="BCH_FAMILY_ID" type="VARCHAR2(2000)"/>
+            <column name="ID" type="VARCHAR2(2000)"/>
+            <column name="SEX" type="VARCHAR2(2000)"/>
+            <column name="DOB" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-49" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SSC_TO_MRN">
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(200)"/>
+            <column name="ID1" type="VARCHAR2(200)"/>
+            <column name="ID2" type="VARCHAR2(200)"/>
+            <column name="MRN" type="VARCHAR2(200)"/>
+            <column name="PRIMARY_ID" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-50" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TABLE1">
+            <column name="ID1" type="VARCHAR2(2000)"/>
+            <column name="ID2" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-51" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="UMLS">
+            <column name="ID" type="VARCHAR2(100)"/>
+            <column name="PATIENT_ID" type="VARCHAR2(100)"/>
+            <column name="STR" type="VARCHAR2(1000)"/>
+            <column name="NBCUI" type="VARCHAR2(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-52" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="UMLS2">
+            <column name="ID" type="VARCHAR2(100)"/>
+            <column name="PATIENT_ID" type="VARCHAR2(100)"/>
+            <column name="STR" type="VARCHAR2(1000)"/>
+            <column name="NBCUI" type="VARCHAR2(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-53" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="VARIANT_EXPLORER">
+            <column name="VARIANT_EXPLORER_ID" type="VARCHAR2(2000)"/>
+            <column name="INDIVIDUAL" type="VARCHAR2(4000)"/>
+            <column name="CHR" type="VARCHAR2(4000)"/>
+            <column name="START" type="VARCHAR2(4000)"/>
+            <column name="END" type="VARCHAR2(4000)"/>
+            <column name="REF" type="CLOB"/>
+            <column name="ALT" type="VARCHAR2(4000)"/>
+            <column name="FUNC_REFGENE" type="VARCHAR2(4000)"/>
+            <column name="GENE_REFGENE" type="CLOB"/>
+            <column name="EXONICFUNC_REFGENE" type="VARCHAR2(4000)"/>
+            <column name="REFGENE_AFFECTEDTRANSCRIPT" type="CLOB"/>
+            <column name="REFGENE_AFFECTEDEXON" type="VARCHAR2(4000)"/>
+            <column name="REFGENE_CDNACHANGE" type="VARCHAR2(4000)"/>
+            <column name="REFGENE_PROTEINCHANGE" type="VARCHAR2(4000)"/>
+            <column name="FUNC_KNOWNGENE" type="VARCHAR2(4000)"/>
+            <column name="GENE_KNOWNGENE" type="VARCHAR2(4000)"/>
+            <column name="EXONICFUNC_KNOWNGENE" type="VARCHAR2(4000)"/>
+            <column name="KNOWNGENE_AFFECTEDTRANSCRIPT" type="CLOB"/>
+            <column name="KNOWNGENE_AFFECTEDEXON" type="VARCHAR2(4000)"/>
+            <column name="KNOWNGENE_CDNACHANGE" type="CLOB"/>
+            <column name="KNOWNGENE_PROTEINCHANGE" type="VARCHAR2(4000)"/>
+            <column name="FUNC_ENSGENE" type="VARCHAR2(4000)"/>
+            <column name="GENE_ENSGENE" type="CLOB"/>
+            <column name="EXONICFUNC_ENSGENE" type="VARCHAR2(4000)"/>
+            <column name="ENSGENE_AFFECTEDTRANSCRIPT" type="CLOB"/>
+            <column name="ENSGENE_AFFECTEDEXON" type="VARCHAR2(4000)"/>
+            <column name="ENSGENE_CDNACHANGE" type="VARCHAR2(4000)"/>
+            <column name="ENSGENE_PROTEINCHANGE" type="VARCHAR2(4000)"/>
+            <column name="LJB2_SIFT" type="VARCHAR2(4000)"/>
+            <column name="LJB2_POLYPHEN2_HDIV" type="VARCHAR2(4000)"/>
+            <column name="LJB2_PP2_HDIV_PRED" type="VARCHAR2(4000)"/>
+            <column name="LJB2_POLYPHEN2_HVAR" type="VARCHAR2(4000)"/>
+            <column name="LJB2_POLYPHEN2_HVAR_PRED" type="VARCHAR2(4000)"/>
+            <column name="LJB2_LRT" type="VARCHAR2(4000)"/>
+            <column name="LJB2_LRT_PRED" type="VARCHAR2(4000)"/>
+            <column name="LJB2_MUTATIONTASTER" type="VARCHAR2(4000)"/>
+            <column name="LJB2_MUTATIONTASTER_PRED" type="VARCHAR2(4000)"/>
+            <column name="LJB_MUTATIONASSESSOR" type="VARCHAR2(4000)"/>
+            <column name="LJB_MUTATIONASSESSOR_PRED" type="VARCHAR2(4000)"/>
+            <column name="LJB2_FATHMM" type="VARCHAR2(4000)"/>
+            <column name="LJB2_GERP" type="VARCHAR2(4000)"/>
+            <column name="LJB2_PHYLOP" type="VARCHAR2(4000)"/>
+            <column name="LJB2_SIPHY" type="VARCHAR2(4000)"/>
+            <column name="SNP137NONFLAGGED" type="VARCHAR2(4000)"/>
+            <column name="CLINVAR_SIG" type="VARCHAR2(4000)"/>
+            <column name="CLINVAR_CLNDBN" type="CLOB"/>
+            <column name="CLINVAR_CLNACC" type="VARCHAR2(4000)"/>
+            <column name="VCF_CHROM" type="VARCHAR2(4000)"/>
+            <column name="VCF_POS" type="VARCHAR2(4000)"/>
+            <column name="VCF_ID" type="VARCHAR2(4000)"/>
+            <column name="VCF_REF" type="CLOB"/>
+            <column name="VCF_ALT" type="VARCHAR2(4000)"/>
+            <column name="VCF_QUAL" type="VARCHAR2(4000)"/>
+            <column name="VCF_FILTER" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_AA" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_AC" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_AF" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_AFR_AF" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_AMR_AF" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_AN" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_ASN_AF" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_AVGPOST" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_ERATE" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_EUR_AF" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_LDAF" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_RSQ" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_SNPSOURCE" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_THETA" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_VT" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_CIEND" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_CIPOS" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_END" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_SVTYPE" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_HOMLEN" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_HOMSEQ" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO_SVLEN" type="VARCHAR2(4000)"/>
+            <column name="TOTALNONREFERENCEALLELES" type="VARCHAR2(4000)"/>
+            <column name="VCF_DS" type="VARCHAR2(4000)"/>
+            <column name="VCF_GT" type="VARCHAR2(4000)"/>
+            <column name="VCF_PL" type="VARCHAR2(4000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-54" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="VARIANT_EXPLORER_BCH">
+            <column name="VARIANT_EXPLORER_ID" type="VARCHAR2(2000)"/>
+            <column name="VARID" type="VARCHAR2(4000)"/>
+            <column name="SAMPLE_ID" type="VARCHAR2(4000)"/>
+            <column name="ALT_SAMPLE_ID" type="VARCHAR2(4000)"/>
+            <column name="CHROMOSOME" type="VARCHAR2(4000)"/>
+            <column name="START_POSITION" type="VARCHAR2(4000)"/>
+            <column name="END_POSITION" type="VARCHAR2(4000)"/>
+            <column name="REFERENCE_ALLELE" type="VARCHAR2(4000)"/>
+            <column name="OBSERVED_ALLELE" type="VARCHAR2(4000)"/>
+            <column name="ZYGOSITY" type="VARCHAR2(4000)"/>
+            <column name="CYTOBAND" type="VARCHAR2(4000)"/>
+            <column name="REFGENE_GENE" type="VARCHAR2(4000)"/>
+            <column name="REFGENE_FUNCTION" type="VARCHAR2(4000)"/>
+            <column name="REFGENE_EXONIC_FUNCTION" type="VARCHAR2(4000)"/>
+            <column name="REFGENE_AA_CHANGE" type="VARCHAR2(4000)"/>
+            <column name="REFGENE_SPLICE_INFO" type="VARCHAR2(4000)"/>
+            <column name="VCF_GENOTYPE" type="VARCHAR2(4000)"/>
+            <column name="PHRED_QUALITY" type="VARCHAR2(4000)"/>
+            <column name="FILTER" type="VARCHAR2(4000)"/>
+            <column name="ALLELE_INHERITANCE_PATTERN" type="VARCHAR2(4000)"/>
+            <column name="LOCUS_INHERITANCE_PATTERN" type="VARCHAR2(4000)"/>
+            <column name="IN_MOTHER" type="VARCHAR2(4000)"/>
+            <column name="MATERNAL_GENOTYPE" type="VARCHAR2(4000)"/>
+            <column name="IN_FATHER" type="VARCHAR2(4000)"/>
+            <column name="PATERNAL_GENOTYPE" type="VARCHAR2(4000)"/>
+            <column name="IN_AFF_SIBLINGS" type="VARCHAR2(4000)"/>
+            <column name="IN_UNAFF_SIBLINGS" type="VARCHAR2(4000)"/>
+            <column name="OMIM_DISEASE" type="VARCHAR2(4000)"/>
+            <column name="OMIM_GENE_ID" type="VARCHAR2(4000)"/>
+            <column name="OMIM_MIM_NUMBER" type="VARCHAR2(4000)"/>
+            <column name="OMIM_DISORDERS" type="VARCHAR2(4000)"/>
+            <column name="OMIM_TITLE" type="VARCHAR2(4000)"/>
+            <column name="OMIM_ALT_TITLES" type="VARCHAR2(4000)"/>
+            <column name="OMIM_DESCRIPTION" type="VARCHAR2(4000)"/>
+            <column name="SIFT" type="VARCHAR2(4000)"/>
+            <column name="POLYPHEN_2_HDIV" type="VARCHAR2(4000)"/>
+            <column name="POLYPHEN_2_HDIV_PRED" type="VARCHAR2(4000)"/>
+            <column name="POLYPHEN_2_HVAR" type="VARCHAR2(4000)"/>
+            <column name="POLYPHEN_2_HVAR_PRED" type="VARCHAR2(4000)"/>
+            <column name="LJB_LRT" type="VARCHAR2(4000)"/>
+            <column name="LJB_LRT_PRED" type="VARCHAR2(4000)"/>
+            <column name="LJB_MUTATION_TASTER" type="VARCHAR2(4000)"/>
+            <column name="LJB_MUTATION_TASTER_PRED" type="VARCHAR2(4000)"/>
+            <column name="LJB_MUTATION_ASSESSOR" type="VARCHAR2(4000)"/>
+            <column name="LJB_MUTATION_ASSESSOR_PRED" type="VARCHAR2(4000)"/>
+            <column name="LJB_FATHMM" type="VARCHAR2(4000)"/>
+            <column name="LJB_GERPPP" type="VARCHAR2(4000)"/>
+            <column name="LJB_PHYLO_P" type="VARCHAR2(4000)"/>
+            <column name="LJB_SI_PHY" type="VARCHAR2(4000)"/>
+            <column name="CONSERVED" type="VARCHAR2(4000)"/>
+            <column name="SEGMENT_DUPLICATION_NAME" type="VARCHAR2(4000)"/>
+            <column name="SEGMENT_DUPLICATION_VALUE" type="VARCHAR2(4000)"/>
+            <column name="DB_SNP" type="VARCHAR2(4000)"/>
+            <column name="THOUSAND_GENOME_ALL_AF" type="VARCHAR2(4000)"/>
+            <column name="COMPLETE_GENOMICS_AF" type="VARCHAR2(4000)"/>
+            <column name="NHLBI_ESP_AF" type="VARCHAR2(4000)"/>
+            <column name="WALSH_LAB_226_AF" type="VARCHAR2(4000)"/>
+            <column name="WALSH_LAB_ALL_AF" type="VARCHAR2(4000)"/>
+            <column name="VCF_INFO" type="VARCHAR2(4000)"/>
+            <column name="VCF_FORMAT_KEY" type="VARCHAR2(4000)"/>
+            <column name="VCF_FORMAT_VALUE" type="VARCHAR2(4000)"/>
+            <column name="DP" type="VARCHAR2(4000)"/>
+            <column name="GQ" type="VARCHAR2(4000)"/>
+            <column name="KNOWNGENE_GENE" type="VARCHAR2(4000)"/>
+            <column name="KNOWNGENE_FUNCTION" type="VARCHAR2(4000)"/>
+            <column name="KNOWNGENE_EXONIC_FUNCTION" type="VARCHAR2(4000)"/>
+            <column name="KNOWNGENE_AA_CHANGE" type="VARCHAR2(4000)"/>
+            <column name="KNOWNGENE_SPLICE_INFO" type="VARCHAR2(4000)"/>
+            <column name="ENSGENE_GENE" type="VARCHAR2(4000)"/>
+            <column name="ENSGENE_FUNCTION" type="VARCHAR2(4000)"/>
+            <column name="ENSGENE_EXONIC_FUNCTION" type="VARCHAR2(4000)"/>
+            <column name="ENSGENE_AA_CHANGE" type="VARCHAR2(4000)"/>
+            <column name="ENSGENE_SPLICE_INFO" type="VARCHAR2(4000)"/>
+            <column name="RUN_NAME" type="VARCHAR2(4000)"/>
+            <column name="MOLECULAR_BARCODE" type="VARCHAR2(4000)"/>
+            <column name="RUN_TIMESTAMP" type="VARCHAR2(4000)"/>
+            <column name="REFGENE_HITS" type="VARCHAR2(4000)"/>
+            <column name="REFGENE_TRUNC_HITS" type="VARCHAR2(4000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-55" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="VIP_GENO">
+            <column name="ENCOUNTER_NUM" type="NUMBER(38, 0)"/>
+            <column name="PATIENT_NUM" type="NUMBER(38, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONCEPT_CD" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PROVIDER_ID" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="START_DATE" type="TIMESTAMP"/>
+            <column name="MODIFIER_CD" type="VARCHAR2(100)"/>
+            <column name="VALTYPE_CD" type="VARCHAR2(50)"/>
+            <column name="TVAL_CHAR" type="VARCHAR2(255)"/>
+            <column name="NVAL_NUM" type="NUMBER(18, 5)"/>
+            <column name="VALUEFLAG_CD" type="VARCHAR2(50)"/>
+            <column name="QUANTITY_NUM" type="NUMBER(18, 5)"/>
+            <column name="UNITS_CD" type="VARCHAR2(50)"/>
+            <column name="END_DATE" type="TIMESTAMP"/>
+            <column name="LOCATION_CD" type="VARCHAR2(50)"/>
+            <column name="CONFIDENCE_NUM" type="NUMBER(18, 0)"/>
+            <column name="UPDATE_DATE" type="TIMESTAMP"/>
+            <column name="DOWNLOAD_DATE" type="TIMESTAMP"/>
+            <column name="IMPORT_DATE" type="TIMESTAMP"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(50)"/>
+            <column name="UPLOAD_ID" type="NUMBER(38, 0)"/>
+            <column name="OBSERVATION_BLOB" type="CLOB"/>
+            <column name="INSTANCE_NUM" type="NUMBER(18, 0)"/>
+            <column name="CONCEPT_PATH" type="VARCHAR2(700)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-56" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="VISIT_DIMENSION_I2B2_MTM">
+            <column name="UPLOAD_ID" type="VARCHAR2(2000)"/>
+            <column name="ACTIVE_STATUS_CD" type="VARCHAR2(2000)"/>
+            <column name="END_DATE" type="VARCHAR2(2000)"/>
+            <column name="UPDATE_DATE" type="VARCHAR2(2000)"/>
+            <column name="VISIT_BLOB" type="LONG"/>
+            <column name="ENCOUNTER_NUM" type="VARCHAR2(2000)"/>
+            <column name="PATIENT_NUM" type="VARCHAR2(2000)"/>
+            <column name="IMPORT_DATE" type="VARCHAR2(2000)"/>
+            <column name="START_DATE" type="VARCHAR2(2000)"/>
+            <column name="LOCATION_CD" type="VARCHAR2(2000)"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(2000)"/>
+            <column name="LENGTH_OF_STAY" type="VARCHAR2(2000)"/>
+            <column name="INOUT_CD" type="VARCHAR2(2000)"/>
+            <column name="DOWNLOAD_DATE" type="VARCHAR2(2000)"/>
+            <column name="LOCATION_PATH" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-57" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="WT_SNP_NODES">
+            <column name="LEAF_NODE" type="VARCHAR2(2000)"/>
+            <column name="CATEGORY_CD" type="VARCHAR2(500)"/>
+            <column name="PLATFORM" type="VARCHAR2(500)"/>
+            <column name="SAMPLE_TYPE" type="VARCHAR2(200)"/>
+            <column name="TIMEPOINT" type="VARCHAR2(200)"/>
+            <column name="NODE_TYPE" type="VARCHAR2(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-58" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="WT_SNP_NODE_VALUES">
+            <column name="CATEGORY_CD" type="VARCHAR2(500)"/>
+            <column name="SAMPLE_TYPE" type="VARCHAR2(200)"/>
+            <column name="TIMEPOINT" type="VARCHAR2(200)"/>
+            <column name="TITLE" type="VARCHAR2(500)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-59" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="CONCEPT_DIMENSION_I2B2_INDEX1" tableName="CONCEPT_DIMENSION_I2B2_MTM" unique="false">
+            <column name="CONCEPT_CD"/>
+            <column name="CONCEPT_PATH"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-60" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="IDX_LT_SRC_CLINICAL_DATA" tableName="LT_SRC_CLINICAL_DATA" unique="false">
+            <column name="STUDY_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-61" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="LZ_SRC_MRNA_SUBJ_SAMP_IDX1" tableName="LZ_SRC_MRNA_SUBJ_SAMP_MAP" unique="false">
+            <column name="TRIAL_NAME"/>
+            <column name="SOURCE_CD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322495087-62" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="OBSERVATION_FACT_I2B2_INDEX1" tableName="OBSERVATION_FACT_I2B2_MTM" unique="false">
+            <column name="ENCOUNTER_NUM"/>
+            <column name="PATIENT_NUM"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="mmcduffie (generated)" id="1418321503315-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="CRC_ANALYSIS_JOB">
+            <column name="JOB_ID" type="VARCHAR2(10)"/>
+            <column name="QUEUE_NAME" type="VARCHAR2(50)"/>
+            <column name="STATUS_TYPE_ID" type="NUMBER(*, 0)"/>
+            <column name="DOMAIN_ID" type="VARCHAR2(255)"/>
+            <column name="PROJECT_ID" type="VARCHAR2(500)"/>
+            <column name="USER_ID" type="VARCHAR2(255)"/>
+            <column name="REQUEST_XML" type="CLOB"/>
+            <column name="CREATE_DATE" type="date"/>
+            <column name="UPDATE_DATE" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="CRC_DB_LOOKUP">
+            <column name="C_DOMAIN_ID" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_PROJECT_PATH" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_OWNER_ID" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_DB_FULLSCHEMA" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_DB_DATASOURCE" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_DB_SERVERTYPE" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_DB_NICENAME" type="VARCHAR2(255)"/>
+            <column name="C_DB_TOOLTIP" type="VARCHAR2(255)"/>
+            <column name="C_COMMENT" type="CLOB"/>
+            <column name="C_ENTRY_DATE" type="date"/>
+            <column name="C_CHANGE_DATE" type="date"/>
+            <column name="C_STATUS_CD" type="CHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="HILOSEQUENCES">
+            <column name="SEQUENCENAME" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HIGHVALUES" type="NUMBER(*, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="JMS_MESSAGES">
+            <column name="MESSAGEID" type="NUMBER(38, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESTINATION" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TXID" type="NUMBER(38, 0)"/>
+            <column name="TXOP" type="CHAR(1)"/>
+            <column name="MESSAGEBLOB" type="BLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="JMS_ROLES">
+            <column name="ROLEID" type="VARCHAR2(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USERID" type="VARCHAR2(32)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="JMS_SUBSCRIPTIONS">
+            <column name="CLIENTID" type="VARCHAR2(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SUBNAME" type="VARCHAR2(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TOPIC" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SELECTOR" type="VARCHAR2(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="JMS_TRANSACTIONS">
+            <column name="TXID" type="NUMBER(38, 0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="JMS_USERS">
+            <column name="USERID" type="VARCHAR2(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PASSWD" type="VARCHAR2(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CLIENTID" type="VARCHAR2(128)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="ONT_DB_LOOKUP">
+            <column name="C_DOMAIN_ID" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_PROJECT_PATH" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_OWNER_ID" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_DB_FULLSCHEMA" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_DB_DATASOURCE" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_DB_SERVERTYPE" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_DB_NICENAME" type="VARCHAR2(255)"/>
+            <column name="C_DB_TOOLTIP" type="VARCHAR2(255)"/>
+            <column name="C_COMMENT" type="CLOB"/>
+            <column name="C_ENTRY_DATE" type="date"/>
+            <column name="C_CHANGE_DATE" type="date"/>
+            <column name="C_STATUS_CD" type="CHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TIMERS">
+            <column name="TIMERID" type="VARCHAR2(80)"/>
+            <column name="TARGETID" type="VARCHAR2(250)"/>
+            <column name="INITIALDATE" type="TIMESTAMP"/>
+            <column name="TIMERINTERVAL" type="NUMBER(19, 0)"/>
+            <column name="INSTANCEPK" type="BLOB"/>
+            <column name="INFO" type="BLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="WORK_DB_LOOKUP">
+            <column name="C_DOMAIN_ID" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_PROJECT_PATH" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_OWNER_ID" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_DB_FULLSCHEMA" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_DB_DATASOURCE" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_DB_SERVERTYPE" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_DB_NICENAME" type="VARCHAR2(255)"/>
+            <column name="C_DB_TOOLTIP" type="VARCHAR2(255)"/>
+            <column name="C_COMMENT" type="CLOB"/>
+            <column name="C_ENTRY_DATE" type="date"/>
+            <column name="C_CHANGE_DATE" type="date"/>
+            <column name="C_STATUS_CD" type="CHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="C_DOMAIN_ID, C_PROJECT_PATH, C_OWNER_ID" constraintName="CRC_DB_LOOKUP_PK" tableName="CRC_DB_LOOKUP"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SEQUENCENAME" constraintName="HILO_PK" tableName="HILOSEQUENCES"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="C_DOMAIN_ID, C_PROJECT_PATH, C_OWNER_ID" constraintName="ONT_DB_LOOKUP_PK" tableName="ONT_DB_LOOKUP"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="USERID, ROLEID" constraintName="SYS_C00236992" tableName="JMS_ROLES"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="CLIENTID, SUBNAME" constraintName="SYS_C00236993" tableName="JMS_SUBSCRIPTIONS"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="TXID" constraintName="SYS_C00236994" tableName="JMS_TRANSACTIONS"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="USERID" constraintName="SYS_C00236995" tableName="JMS_USERS"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="MESSAGEID, DESTINATION" constraintName="SYS_C00237027" tableName="JMS_MESSAGES"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="C_DOMAIN_ID, C_PROJECT_PATH, C_OWNER_ID" constraintName="WORK_DB_LOOKUP_PK" tableName="WORK_DB_LOOKUP"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-21" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="ANALSIS_JOB_PK" tableName="CRC_ANALYSIS_JOB" unique="true">
+            <column name="JOB_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-22" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="JMS_MESSAGES_DESTINATION" tableName="JMS_MESSAGES" unique="false">
+            <column name="DESTINATION"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321503315-23" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="JMS_MESSAGES_TXOP_TXID" tableName="JMS_MESSAGES" unique="false">
+            <column name="TXOP"/>
+            <column name="TXID"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

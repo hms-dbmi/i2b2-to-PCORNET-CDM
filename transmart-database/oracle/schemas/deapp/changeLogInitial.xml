@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="mmcduffie (generated)" id="1418321147021-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="DE_PARENT_CD_SEQ" startValue="1"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_ASSAY_ID" startValue="26461"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_DATA_ID" startValue="1"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DEAPP_ANNOTATION">
+            <column name="ANNOTATION_TYPE" type="VARCHAR2(50)"/>
+            <column name="ANNOTATION_VALUE" type="VARCHAR2(100)"/>
+            <column name="GENE_ID" type="NUMBER"/>
+            <column name="GENE_SYMBOL" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_GPL_INFO">
+            <column name="PLATFORM" type="VARCHAR2(50)"/>
+            <column name="TITLE" type="VARCHAR2(500)"/>
+            <column name="ORGANISM" type="VARCHAR2(100)"/>
+            <column name="ANNOTATION_DATE" type="TIMESTAMP"/>
+            <column name="MARKER_TYPE" type="VARCHAR2(100)"/>
+            <column name="RELEASE_NBR" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_MRNA_ANNOTATION">
+            <column name="GPL_ID" type="VARCHAR2(100)"/>
+            <column name="PROBE_ID" type="VARCHAR2(100)"/>
+            <column name="GENE_SYMBOL" type="VARCHAR2(100)"/>
+            <column name="PROBESET_ID" type="NUMBER(38, 0)"/>
+            <column name="GENE_ID" type="NUMBER(18, 0)"/>
+            <column name="ORGANISM" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_PATHWAY">
+            <column name="NAME" type="NVARCHAR2(300)"/>
+            <column name="DESCRIPTION" type="NVARCHAR2(510)"/>
+            <column name="ID" type="NUMBER(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TYPE" type="NVARCHAR2(100)"/>
+            <column name="SOURCE" type="NVARCHAR2(100)"/>
+            <column name="EXTERNALID" type="NVARCHAR2(100)"/>
+            <column name="PATHWAY_UID" type="VARCHAR2(200)"/>
+            <column name="USER_ID" type="NUMBER(18, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_PATHWAY_GENE">
+            <column name="ID" type="NUMBER(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PATHWAY_ID" type="NUMBER(18, 0)"/>
+            <column name="GENE_SYMBOL" type="NVARCHAR2(200)"/>
+            <column name="GENE_ID" type="NVARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SAMPLE_SNP_DATA">
+            <column name="SAMPLE_ID" type="VARCHAR2(50)"/>
+            <column name="SNP_NAME" type="VARCHAR2(100)"/>
+            <column name="SNP_CALLS" type="VARCHAR2(4)"/>
+            <column name="COPY_NUMBER" type="NUMBER(10, 6)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SAVED_COMPARISON">
+            <column name="COMPARISON_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="QUERY_ID1" type="NUMBER"/>
+            <column name="QUERY_ID2" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SNP_CALLS_BY_GSM">
+            <column name="GSM_NUM" type="VARCHAR2(10)"/>
+            <column name="PATIENT_NUM" type="NUMBER(20, 0)"/>
+            <column name="SNP_NAME" type="VARCHAR2(100)"/>
+            <column name="SNP_CALLS" type="VARCHAR2(4)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SNP_COPY_NUMBER">
+            <column name="PATIENT_NUM" type="NUMBER(20, 0)"/>
+            <column name="SNP_NAME" type="VARCHAR2(50)"/>
+            <column name="CHROM" type="VARCHAR2(2)"/>
+            <column name="CHROM_POS" type="NUMBER(20, 0)"/>
+            <column name="COPY_NUMBER" type="NUMBER(2, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SNP_DATA_BY_PATIENT">
+            <column name="SNP_DATA_BY_PATIENT_ID" type="NUMBER(22, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SNP_DATASET_ID" type="NUMBER(22, 0)"/>
+            <column name="TRIAL_NAME" type="VARCHAR2(255)"/>
+            <column name="PATIENT_NUM" type="NUMBER"/>
+            <column name="CHROM" type="VARCHAR2(16)"/>
+            <column name="DATA_BY_PATIENT_CHR" type="CLOB"/>
+            <column name="PED_BY_PATIENT_CHR" type="CLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SNP_DATA_BY_PROBE">
+            <column name="SNP_DATA_BY_PROBE_ID" type="NUMBER(22, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PROBE_ID" type="NUMBER(22, 0)"/>
+            <column name="PROBE_NAME" type="VARCHAR2(255)"/>
+            <column name="SNP_ID" type="NUMBER(22, 0)"/>
+            <column name="SNP_NAME" type="VARCHAR2(255)"/>
+            <column name="TRIAL_NAME" type="VARCHAR2(255)"/>
+            <column name="DATA_BY_PROBE" type="CLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SNP_DATA_DATASET_LOC">
+            <column name="SNP_DATA_DATASET_LOC_ID" type="NUMBER(22, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TRIAL_NAME" type="VARCHAR2(255)"/>
+            <column name="SNP_DATASET_ID" type="NUMBER(22, 0)"/>
+            <column name="LOCATION" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SNP_GENE_MAP">
+            <column name="SNP_ID" type="NUMBER(22, 0)"/>
+            <column name="SNP_NAME" type="VARCHAR2(255)"/>
+            <column name="ENTREZ_GENE_ID" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SNP_INFO">
+            <column name="SNP_INFO_ID" type="NUMBER(22, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(255)"/>
+            <column name="CHROM" type="VARCHAR2(16)"/>
+            <column name="CHROM_POS" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SNP_PROBE">
+            <column name="SNP_PROBE_ID" type="NUMBER(22, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PROBE_NAME" type="VARCHAR2(255)"/>
+            <column name="SNP_ID" type="NUMBER(22, 0)"/>
+            <column name="SNP_NAME" type="VARCHAR2(255)"/>
+            <column name="VENDOR_NAME" type="VARCHAR2(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SNP_PROBE_SORTED_DEF">
+            <column name="SNP_PROBE_SORTED_DEF_ID" type="NUMBER(22, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PLATFORM_NAME" type="VARCHAR2(255)"/>
+            <column name="NUM_PROBE" type="NUMBER"/>
+            <column name="CHROM" type="VARCHAR2(16)"/>
+            <column name="PROBE_DEF" type="CLOB"/>
+            <column name="SNP_ID_DEF" type="CLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SNP_SUBJECT_SORTED_DEF">
+            <column name="SNP_SUBJECT_SORTED_DEF_ID" type="NUMBER(22, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TRIAL_NAME" type="VARCHAR2(255)"/>
+            <column name="PATIENT_POSITION" type="NUMBER(5, 0)"/>
+            <column name="PATIENT_NUM" type="NUMBER"/>
+            <column name="SUBJECT_ID" type="VARCHAR2(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-21" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SUBJECT_MICROARRAY_DATA">
+            <column name="TRIAL_SOURCE" type="VARCHAR2(200)"/>
+            <column name="TRIAL_NAME" type="VARCHAR2(50)"/>
+            <column name="PROBESET_ID" type="NUMBER(22, 0)"/>
+            <column name="ASSAY_ID" type="NUMBER(18, 0)"/>
+            <column name="PATIENT_ID" type="NUMBER(18, 0)"/>
+            <column name="RAW_INTENSITY" type="NUMBER(18, 4)"/>
+            <column name="LOG_INTENSITY" type="NUMBER(18, 4)"/>
+            <column name="ZSCORE" type="NUMBER(18, 4)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-22" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SUBJECT_MICROARRAY_LOGS">
+            <column name="PROBESET" type="VARCHAR2(50)"/>
+            <column name="RAW_INTENSITY" type="NUMBER"/>
+            <column name="PVALUE" type="FLOAT(22)"/>
+            <column name="REFSEQ" type="VARCHAR2(50)"/>
+            <column name="GENE_SYMBOL" type="VARCHAR2(50)"/>
+            <column name="ASSAY_ID" type="NUMBER(18, 0)"/>
+            <column name="PATIENT_ID" type="NUMBER(18, 0)"/>
+            <column name="SUBJECT_ID" type="VARCHAR2(20)"/>
+            <column name="TRIAL_NAME" type="VARCHAR2(15)"/>
+            <column name="TIMEPOINT" type="VARCHAR2(30)"/>
+            <column name="LOG_INTENSITY" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-23" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SUBJECT_MICROARRAY_MED">
+            <column name="PROBESET" type="VARCHAR2(50)"/>
+            <column name="RAW_INTENSITY" type="NUMBER"/>
+            <column name="LOG_INTENSITY" type="NUMBER"/>
+            <column name="GENE_SYMBOL" type="VARCHAR2(50)"/>
+            <column name="ASSAY_ID" type="NUMBER(18, 0)"/>
+            <column name="PATIENT_ID" type="NUMBER(18, 0)"/>
+            <column name="SUBJECT_ID" type="VARCHAR2(20)"/>
+            <column name="TRIAL_NAME" type="VARCHAR2(15)"/>
+            <column name="TIMEPOINT" type="VARCHAR2(30)"/>
+            <column name="PVALUE" type="FLOAT(22)"/>
+            <column name="REFSEQ" type="VARCHAR2(50)"/>
+            <column name="MEAN_INTENSITY" type="NUMBER"/>
+            <column name="STDDEV_INTENSITY" type="NUMBER"/>
+            <column name="MEDIAN_INTENSITY" type="NUMBER"/>
+            <column name="ZSCORE" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-24" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SUBJECT_PROTEIN_DATA">
+            <column name="TRIAL_NAME" type="VARCHAR2(15)"/>
+            <column name="COMPONENT" type="VARCHAR2(15)"/>
+            <column name="INTENSITY" type="NUMBER"/>
+            <column name="PATIENT_ID" type="NUMBER(38, 0)"/>
+            <column name="SUBJECT_ID" type="VARCHAR2(10)"/>
+            <column name="GENE_SYMBOL" type="VARCHAR2(100)"/>
+            <column name="GENE_ID" type="NUMBER(10, 0)"/>
+            <column name="ASSAY_ID" type="NUMBER"/>
+            <column name="TIMEPOINT" type="VARCHAR2(20)"/>
+            <column name="N_VALUE" type="NUMBER"/>
+            <column name="MEAN_INTENSITY" type="NUMBER"/>
+            <column name="STDDEV_INTENSITY" type="NUMBER"/>
+            <column name="MEDIAN_INTENSITY" type="NUMBER"/>
+            <column name="ZSCORE" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-25" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SUBJECT_RBM_DATA">
+            <column name="TRIAL_NAME" type="VARCHAR2(15)"/>
+            <column name="ANTIGEN_NAME" type="VARCHAR2(100)"/>
+            <column name="N_VALUE" type="NUMBER"/>
+            <column name="PATIENT_ID" type="NUMBER(38, 0)"/>
+            <column name="GENE_SYMBOL" type="VARCHAR2(100)"/>
+            <column name="GENE_ID" type="NUMBER(10, 0)"/>
+            <column name="ASSAY_ID" type="NUMBER"/>
+            <column name="NORMALIZED_VALUE" type="NUMBER(18, 5)"/>
+            <column name="CONCEPT_CD" type="NVARCHAR2(100)"/>
+            <column name="TIMEPOINT" type="VARCHAR2(100)"/>
+            <column name="DATA_UID" type="VARCHAR2(100)"/>
+            <column name="VALUE" type="NUMBER"/>
+            <column name="LOG_INTENSITY" type="NUMBER"/>
+            <column name="MEAN_INTENSITY" type="NUMBER"/>
+            <column name="STDDEV_INTENSITY" type="NUMBER"/>
+            <column name="MEDIAN_INTENSITY" type="NUMBER"/>
+            <column name="ZSCORE" type="NUMBER"/>
+            <column name="RBM_PANEL" type="VARCHAR2(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-26" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SUBJECT_SAMPLE_MAPPING">
+            <column name="PATIENT_ID" type="NUMBER(18, 0)"/>
+            <column name="SITE_ID" type="NVARCHAR2(100)"/>
+            <column name="SUBJECT_ID" type="NVARCHAR2(100)"/>
+            <column name="SUBJECT_TYPE" type="NVARCHAR2(100)"/>
+            <column name="CONCEPT_CODE" type="VARCHAR2(1000 CHAR)"/>
+            <column name="ASSAY_ID" type="NUMBER(18, 0)"/>
+            <column name="PATIENT_UID" type="VARCHAR2(50)"/>
+            <column name="SAMPLE_TYPE" type="VARCHAR2(100)"/>
+            <column name="ASSAY_UID" type="NVARCHAR2(100)"/>
+            <column name="TRIAL_NAME" type="VARCHAR2(30)"/>
+            <column name="TIMEPOINT" type="VARCHAR2(100)"/>
+            <column name="TIMEPOINT_CD" type="VARCHAR2(50)"/>
+            <column name="SAMPLE_TYPE_CD" type="VARCHAR2(50)"/>
+            <column name="TISSUE_TYPE_CD" type="VARCHAR2(50)"/>
+            <column name="PLATFORM" type="VARCHAR2(50)"/>
+            <column name="PLATFORM_CD" type="VARCHAR2(50)"/>
+            <column name="TISSUE_TYPE" type="VARCHAR2(100)"/>
+            <column name="DATA_UID" type="VARCHAR2(100)"/>
+            <column name="GPL_ID" type="VARCHAR2(20)"/>
+            <column name="RBM_PANEL" type="VARCHAR2(50)"/>
+            <column name="SAMPLE_ID" type="NUMBER(22, 0)"/>
+            <column name="SAMPLE_CD" type="VARCHAR2(200)"/>
+            <column name="CATEGORY_CD" type="VARCHAR2(1000)"/>
+            <column name="SOURCE_CD" type="VARCHAR2(50)"/>
+            <column name="OMIC_SOURCE_STUDY" type="VARCHAR2(200)"/>
+            <column name="OMIC_PATIENT_ID" type="NUMBER(18, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-27" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_SUBJECT_SNP_DATASET">
+            <column name="SUBJECT_SNP_DATASET_ID" type="NUMBER(22, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DATASET_NAME" type="VARCHAR2(255)"/>
+            <column name="CONCEPT_CD" type="VARCHAR2(255)"/>
+            <column name="PLATFORM_NAME" type="VARCHAR2(255)"/>
+            <column name="TRIAL_NAME" type="VARCHAR2(255)"/>
+            <column name="PATIENT_NUM" type="NUMBER"/>
+            <column name="TIMEPOINT" type="VARCHAR2(255)"/>
+            <column name="SUBJECT_ID" type="VARCHAR2(255)"/>
+            <column name="SAMPLE_TYPE" type="VARCHAR2(255)"/>
+            <column name="PAIRED_DATASET_ID" type="NUMBER(22, 0)"/>
+            <column name="PATIENT_GENDER" type="VARCHAR2(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-28" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_XTRIAL_CHILD_MAP">
+            <column name="CONCEPT_CD" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARENT_CD" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MANUALLY_MAPPED" type="NUMBER"/>
+            <column name="STUDY_ID" type="VARCHAR2(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-29" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DE_XTRIAL_PARENT_NAMES">
+            <column name="PARENT_CD" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACROSS_PATH" type="VARCHAR2(500)"/>
+            <column name="MANUALLY_CREATED" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-30" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="HAPLOVIEW_DATA">
+            <column name="I2B2_ID" type="NUMBER(20, 0)"/>
+            <column name="JNJ_ID" type="VARCHAR2(30)"/>
+            <column name="FATHER_ID" type="NUMBER(5, 0)"/>
+            <column name="MOTHER_ID" type="NUMBER(5, 0)"/>
+            <column name="SEX" type="NUMBER(1, 0)"/>
+            <column name="AFFECTION_STATUS" type="NUMBER(1, 0)"/>
+            <column name="CHROMOSOME" type="VARCHAR2(10)"/>
+            <column name="GENE" type="VARCHAR2(50)"/>
+            <column name="RELEASE" type="NUMBER(4, 0)"/>
+            <column name="RELEASE_DATE" type="date"/>
+            <column name="TRIAL_NAME" type="VARCHAR2(50)"/>
+            <column name="SNP_DATA" type="CLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-31" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SOLR_SAVE_QUERY">
+            <column name="SOLR_QUERY_ID" type="VARCHAR2(2000)"/>
+            <column name="QUERY_NAME" type="VARCHAR2(400)"/>
+            <column name="QUERY_CONTENTS" type="CLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-32" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="ID" constraintName="DE_PATHWAY_GENE_PK" tableName="DE_PATHWAY_GENE"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-33" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="ID" constraintName="DE_PATHWAY_PK" tableName="DE_PATHWAY"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-34" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SUBJECT_SNP_DATASET_ID" constraintName="SYS_C00236925" tableName="DE_SUBJECT_SNP_DATASET"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-35" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="CONCEPT_CD" constraintName="SYS_C00236926" tableName="DE_XTRIAL_CHILD_MAP"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-36" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="PARENT_CD" constraintName="SYS_C00236927" tableName="DE_XTRIAL_PARENT_NAMES"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-37" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SNP_DATA_DATASET_LOC_ID" constraintName="SYS_C00236942" tableName="DE_SNP_DATA_DATASET_LOC"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-38" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SNP_INFO_ID" constraintName="SYS_C00236944" tableName="DE_SNP_INFO"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-39" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SNP_PROBE_ID" constraintName="SYS_C00236946" tableName="DE_SNP_PROBE"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-40" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SNP_SUBJECT_SORTED_DEF_ID" constraintName="SYS_C00236947" tableName="DE_SNP_SUBJECT_SORTED_DEF"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-41" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SNP_DATA_BY_PATIENT_ID" constraintName="SYS_C00237017" tableName="DE_SNP_DATA_BY_PATIENT"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-42" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SNP_DATA_BY_PROBE_ID" constraintName="SYS_C00237018" tableName="DE_SNP_DATA_BY_PROBE"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-43" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SNP_PROBE_SORTED_DEF_ID" constraintName="SYS_C00237019" tableName="DE_SNP_PROBE_SORTED_DEF"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-44" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addUniqueConstraint columnNames="ACROSS_PATH" constraintName="DEXTPN_PARENT_NODE_U" deferrable="false" disabled="false" initiallyDeferred="false" tableName="DE_XTRIAL_PARENT_NAMES"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-45" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addUniqueConstraint columnNames="NAME" constraintName="U_SNP_INFO_NAME" deferrable="false" disabled="false" initiallyDeferred="false" tableName="DE_SNP_INFO"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-46" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addUniqueConstraint columnNames="PROBE_NAME" constraintName="U_SNP_PROBE_NAME" deferrable="false" disabled="false" initiallyDeferred="false" tableName="DE_SNP_PROBE"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-47" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="PARENT_CD" baseTableName="DE_XTRIAL_CHILD_MAP" constraintName="DEXCM_PARENT_CD_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="PARENT_CD" referencedTableName="DE_XTRIAL_PARENT_NAMES"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-48" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="PROBE_ID" baseTableName="DE_SNP_DATA_BY_PROBE" constraintName="FK_SNP_BY_PROBE_PROBE_ID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SNP_PROBE_ID" referencedTableName="DE_SNP_PROBE"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-49" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="SNP_ID" baseTableName="DE_SNP_DATA_BY_PROBE" constraintName="FK_SNP_BY_PROBE_SNP_ID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SNP_INFO_ID" referencedTableName="DE_SNP_INFO"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-50" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="SNP_DATASET_ID" baseTableName="DE_SNP_DATA_BY_PATIENT" constraintName="FK_SNP_DATASET_ID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SUBJECT_SNP_DATASET_ID" referencedTableName="DE_SUBJECT_SNP_DATASET"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-51" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="SNP_ID" baseTableName="DE_SNP_GENE_MAP" constraintName="FK_SNP_GENE_MAP_SNP_ID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SNP_INFO_ID" referencedTableName="DE_SNP_INFO"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-52" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="SNP_DATASET_ID" baseTableName="DE_SNP_DATA_DATASET_LOC" constraintName="FK_SNP_LOC_DATASET_ID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SUBJECT_SNP_DATASET_ID" referencedTableName="DE_SUBJECT_SNP_DATASET"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-53" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="SNP_ID" baseTableName="DE_SNP_PROBE" constraintName="FK_SNP_PROBE_SNP_ID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SNP_INFO_ID" referencedTableName="DE_SNP_INFO"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-54" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="DE_MRNA_ANNOTATION_INDEX1" tableName="DE_MRNA_ANNOTATION" unique="false">
+            <column name="PROBESET_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-55" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="DE_PATHWAY_GENE_IDX4" tableName="DE_PATHWAY_GENE" unique="false">
+            <column name="GENE_SYMBOL"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-56" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="DE_PATHWAY_GENE_INDEX1" tableName="DE_PATHWAY_GENE" unique="false">
+            <column name="PATHWAY_ID"/>
+            <column name="GENE_SYMBOL"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-57" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="DE_PATHWAY_IDX3" tableName="DE_PATHWAY" unique="false">
+            <column name="PATHWAY_UID"/>
+            <column name="ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-58" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="DE_PATHWAY_NAME_IDX" tableName="DE_PATHWAY" unique="false">
+            <column name="NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-59" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="DE_SUBJECT_SMPL_MPNG_IDX1" tableName="DE_SUBJECT_SAMPLE_MAPPING" unique="false">
+            <column name="TIMEPOINT"/>
+            <column name="PATIENT_ID"/>
+            <column name="TRIAL_NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-60" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="DE_SUBJECT_SMPL_MPNG_IDX2" tableName="DE_SUBJECT_SAMPLE_MAPPING" unique="false">
+            <column name="PATIENT_ID"/>
+            <column name="TIMEPOINT_CD"/>
+            <column name="PLATFORM_CD"/>
+            <column name="ASSAY_ID"/>
+            <column name="TRIAL_NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-61" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="IDX_DE_MICROARRAY_DATA_1" tableName="DE_SUBJECT_MICROARRAY_DATA" unique="false">
+            <column name="TRIAL_NAME"/>
+            <column name="ASSAY_ID"/>
+            <column name="PROBESET_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-62" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="IDX_DE_MICROARRAY_DATA_2" tableName="DE_SUBJECT_MICROARRAY_DATA" unique="false">
+            <column name="ASSAY_ID"/>
+            <column name="PROBESET_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-63" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="IDX_DE_SAMPLE_SNP_DATA_SAMPLE" tableName="DE_SAMPLE_SNP_DATA" unique="false">
+            <column name="SAMPLE_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-64" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="IDX_DE_SAMPLE_SNP_DATA_SNP" tableName="DE_SAMPLE_SNP_DATA" unique="false">
+            <column name="SNP_NAME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321147021-65" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="IDX_PATHWAY_GENE_PATHWAY" tableName="DE_PATHWAY_GENE" unique="false">
+            <column name="PATHWAY_ID"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

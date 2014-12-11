@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="mmcduffie (generated)" id="1418322143334-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="HIBERNATE_SEQUENCE" startValue="104064"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="PLUGIN_MODULE_SEQ" startValue="41"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="PLUGIN_SEQ" startValue="1"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_SEARCH_DATA_ID" startValue="1999000"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="PASSWORD_DICTIONARY">
+            <column name="TERM" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="PLUGIN">
+            <column name="PLUGIN_SEQ" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PLUGIN_NAME" type="VARCHAR2(90)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="N" name="HAS_MODULES" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="N" name="HAS_FORM" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DEFAULT_LINK" type="VARCHAR2(70)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FORM_LINK" type="VARCHAR2(70)"/>
+            <column name="FORM_PAGE" type="VARCHAR2(100)"/>
+            <column name="ACTIVE" type="CHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="PLUGIN1">
+            <column name="PLUGIN_SEQ" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PLUGIN_NAME" type="VARCHAR2(90)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="N" name="HAS_MODULES" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="N" name="HAS_FORM" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DEFAULT_LINK" type="VARCHAR2(70)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FORM_LINK" type="VARCHAR2(70)"/>
+            <column name="FORM_PAGE" type="VARCHAR2(100)"/>
+            <column name="ACTIVE" type="CHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="PLUGIN_MODULE">
+            <column name="MODULE_SEQ" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PLUGIN_SEQ" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(70)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARAMS" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0.1" name="VERSION" type="VARCHAR2(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="Y" name="ACTIVE" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="N" name="HAS_FORM" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FORM_LINK" type="VARCHAR2(90)"/>
+            <column name="FORM_PAGE" type="VARCHAR2(90)"/>
+            <column name="MODULE_NAME" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CATEGORY" type="VARCHAR2(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="PLUGIN_MODULE1">
+            <column name="MODULE_SEQ" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PLUGIN_SEQ" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(70)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARAMS" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0.1" name="VERSION" type="VARCHAR2(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="Y" name="ACTIVE" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="N" name="HAS_FORM" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FORM_LINK" type="VARCHAR2(90)"/>
+            <column name="FORM_PAGE" type="VARCHAR2(90)"/>
+            <column name="MODULE_NAME" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CATEGORY" type="VARCHAR2(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_APP_ACCESS_LOG">
+            <column name="ID" type="NUMBER(19, 0)"/>
+            <column name="ACCESS_TIME" type="TIMESTAMP"/>
+            <column name="EVENT" type="VARCHAR2(255 CHAR)"/>
+            <column name="REQUEST_URL" type="VARCHAR2(255 CHAR)"/>
+            <column name="USER_NAME" type="VARCHAR2(255 CHAR)"/>
+            <column name="EVENT_MESSAGE" type="CLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_AUTH_GROUP">
+            <column name="ID" type="NUMBER(19, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GROUP_CATEGORY" type="VARCHAR2(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_AUTH_GROUP_MEMBER">
+            <column name="AUTH_USER_ID" type="NUMBER(19, 0)"/>
+            <column name="AUTH_GROUP_ID" type="NUMBER(19, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_AUTH_PRINCIPAL">
+            <column name="ID" type="NUMBER(19, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRINCIPAL_TYPE" type="VARCHAR2(255)"/>
+            <column name="DATE_CREATED" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="VARCHAR2(255)"/>
+            <column name="LAST_UPDATED" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(255)"/>
+            <column name="UNIQUE_ID" type="VARCHAR2(255)"/>
+            <column name="ENABLED" type="NUMBER(1, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_AUTH_SEC_OBJECT_ACCESS">
+            <column name="AUTH_SEC_OBJ_ACCESS_ID" type="NUMBER(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AUTH_PRINCIPAL_ID" type="NUMBER(18, 0)"/>
+            <column name="SECURE_OBJECT_ID" type="NUMBER(18, 0)"/>
+            <column name="SECURE_ACCESS_LEVEL_ID" type="NUMBER(18, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_AUTH_USER">
+            <column name="ID" type="NUMBER(19, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EMAIL" type="VARCHAR2(255 CHAR)"/>
+            <column name="EMAIL_SHOW" type="NUMBER(1, 0)"/>
+            <column name="PASSWD" type="VARCHAR2(255 CHAR)"/>
+            <column name="USER_REAL_NAME" type="VARCHAR2(255 CHAR)"/>
+            <column name="USERNAME" type="VARCHAR2(255 CHAR)"/>
+            <column defaultValueNumeric="0" name="LOGIN_ATTEMPT_COUNT" type="NUMBER(1, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="Y" name="PASSWORD_EXPIRED" type="CHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_AUTH_USER_SEC_ACCESS">
+            <column name="SEARCH_AUTH_USER_SEC_ACCESS_ID" type="NUMBER(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEARCH_AUTH_USER_ID" type="NUMBER(18, 0)"/>
+            <column name="SEARCH_SECURE_OBJECT_ID" type="NUMBER(18, 0)"/>
+            <column name="SEARCH_SEC_ACCESS_LEVEL_ID" type="NUMBER(18, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_CUSTOM_FILTER">
+            <column name="SEARCH_CUSTOM_FILTER_ID" type="NUMBER(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEARCH_USER_ID" type="NUMBER(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="NVARCHAR2(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="NVARCHAR2(2000)"/>
+            <column defaultValue="N" name="PRIVATE" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_CUSTOM_FILTER_ITEM">
+            <column name="SEARCH_CUSTOM_FILTER_ITEM_ID" type="NUMBER(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEARCH_CUSTOM_FILTER_ID" type="NUMBER(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UNIQUE_ID" type="VARCHAR2(200 CHAR)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BIO_DATA_TYPE" type="VARCHAR2(100 CHAR)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_GENE_SIGNATURE">
+            <column name="SEARCH_GENE_SIGNATURE_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" remarks="name of the gene signature for identification purposes" type="VARCHAR2(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" remarks="expanded description" type="VARCHAR2(1000)"/>
+            <column name="UNIQUE_ID" remarks="a unique code assigned to the object by a naming convention" type="VARCHAR2(50)"/>
+            <column name="CREATE_DATE" remarks="date object was created" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY_AUTH_USER_ID" remarks="auth user that created the object" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_MODIFIED_DATE" remarks="date of the last modification" type="TIMESTAMP"/>
+            <column name="MODIFIED_BY_AUTH_USER_ID" remarks="auth user that last modified the object" type="NUMBER"/>
+            <column name="VERSION_NUMBER" remarks="for version tracking for modifications" type="VARCHAR2(50)"/>
+            <column defaultValueNumeric="0" name="PUBLIC_FLAG" remarks="binary flag indicates if object is accessible to other users besides the creator" type="NUMBER(1, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="DELETED_FLAG" remarks="binary flag indicates if object is deleted so that it will not appear on the UI" type="NUMBER(1, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARENT_GENE_SIGNATURE_ID" remarks="tracks the parent gene signature this object was derived from" type="NUMBER"/>
+            <column name="SOURCE_CONCEPT_ID" remarks="source meta data defined in bio_concept_code" type="NUMBER"/>
+            <column name="SOURCE_OTHER" remarks="source of the object when selection is not defined in bio_concept_code (other selection)" type="VARCHAR2(255)"/>
+            <column name="OWNER_CONCEPT_ID" remarks="owner of the data defined in bio_concept_code" type="NUMBER"/>
+            <column name="STIMULUS_DESCRIPTION" remarks="a description for the stimulus" type="VARCHAR2(1000)"/>
+            <column name="STIMULUS_DOSING" remarks="the dosing used for the stimulus" type="VARCHAR2(255)"/>
+            <column name="TREATMENT_DESCRIPTION" remarks="description of the treamtent involved" type="VARCHAR2(1000)"/>
+            <column name="TREATMENT_DOSING" remarks="descipriont of any treatment dosing used" type="VARCHAR2(255)"/>
+            <column name="TREATMENT_BIO_COMPOUND_ID" remarks="reference to the bio_compound_id if relevant" type="NUMBER"/>
+            <column name="TREATMENT_PROTOCOL_NUMBER" remarks="the protocol number associated with the treatment" type="VARCHAR2(50)"/>
+            <column name="PMID_LIST" remarks="list of associated pmids (comma separated)" type="VARCHAR2(255)"/>
+            <column name="SPECIES_CONCEPT_ID" remarks="species meta data defined in bio_concept_code" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SPECIES_MOUSE_SRC_CONCEPT_ID" remarks="for species of mouse type, specifies the source of the mouse in bio_concept_code" type="NUMBER"/>
+            <column name="SPECIES_MOUSE_DETAIL" remarks="extra detail for knockout/transgenic, or other mouse strain" type="VARCHAR2(255)"/>
+            <column name="TISSUE_TYPE_CONCEPT_ID" remarks="tissue type meta data defined in bio_concept_code" type="NUMBER"/>
+            <column name="EXPERIMENT_TYPE_CONCEPT_ID" remarks="experiment type meta data defined in bio_concept_code" type="NUMBER"/>
+            <column name="EXPERIMENT_TYPE_IN_VIVO_DESCR" remarks="describes the model for in vivo experiment types" type="VARCHAR2(255)"/>
+            <column name="EXPERIMENT_TYPE_ATCC_REF" remarks="experiment type atcc designation" type="VARCHAR2(255)"/>
+            <column name="ANALYTIC_CAT_CONCEPT_ID" remarks="analytic category meta deta from bio_concept_code" type="NUMBER"/>
+            <column name="ANALYTIC_CAT_OTHER" remarks="analytic category atcc designation" type="VARCHAR2(255)"/>
+            <column name="BIO_ASSAY_PLATFORM_ID" remarks="technology platform meta deta from bio_concept_code" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ANALYST_NAME" remarks="name of the analyst performing analysis (analysis meta data)" type="VARCHAR2(100)"/>
+            <column name="NORM_METHOD_CONCEPT_ID" remarks="normalization method from bio_concept_code (analysis meta data)" type="NUMBER"/>
+            <column name="NORM_METHOD_OTHER" remarks="normalization method for other selection (analysis meta data)" type="VARCHAR2(255)"/>
+            <column name="ANALYSIS_METHOD_CONCEPT_ID" remarks="analysis method from bio_concept_code (analysis meta data)" type="NUMBER"/>
+            <column name="ANALYSIS_METHOD_OTHER" remarks="analysis method for other selection (analysis meta data)" type="VARCHAR2(255)"/>
+            <column name="MULTIPLE_TESTING_CORRECTION" remarks="binary flag indicates if multiple testing correction was employed (analysis meta data)" type="NUMBER(1, 0)"/>
+            <column name="P_VALUE_CUTOFF_CONCEPT_ID" remarks="p-value cutoff from bio_concept_code (analysis meta data)" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPLOAD_FILE" remarks="upload file name from user containing gene items" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="SEARCH_GENE_SIG_FILE_SCHEMA_ID" remarks="file schema for the upload gene signature file" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="NULL" name="FOLD_CHG_METRIC_CONCEPT_ID" remarks="fold change metric type in bio_concept_code" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EXPERIMENT_TYPE_CELL_LINE_ID" remarks="for established cell line experiment, specifies the specific cell line from bio_cell_line" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_GENE_SIGNATURE_ITEM">
+            <column name="SEARCH_GENE_SIGNATURE_ID" remarks="associated gene signature" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BIO_MARKER_ID" remarks="link to bio_marker table" type="NUMBER"/>
+            <column name="FOLD_CHG_METRIC" remarks="the corresponding fold change value metric (actual number or -1,0,1 for composite gene signatures). If null, it's assumed to be a gene list in which case all genes are assumed to be up regulated" type="NUMBER"/>
+            <column name="BIO_DATA_UNIQUE_ID" remarks="link to unique_id from bio_data_uid table (context sensitive)" type="NVARCHAR2(200)"/>
+            <column name="ID" remarks="hibernate primary key" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BIO_ASSAY_FEATURE_GROUP_ID" type="NUMBER(18, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-21" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable remarks="Represents file schemas used to represent a gene signature upload. Normally this table would be populated only by seed data" tableName="SEARCH_GENE_SIG_FILE_SCHEMA">
+            <column name="SEARCH_GENE_SIG_FILE_SCHEMA_ID" remarks="primary key" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" remarks="name of the file schema" type="VARCHAR2(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="VARCHAR2(255)"/>
+            <column defaultValueNumeric="2" name="NUMBER_COLUMNS" remarks="number of columns in tab delimited file" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="SUPPORTED" remarks="a binary flag indicates if schema is supported by the application" type="NUMBER(1, 0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-22" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_KEYWORD">
+            <column name="KEYWORD" type="NVARCHAR2(200)"/>
+            <column name="BIO_DATA_ID" type="NUMBER(18, 0)"/>
+            <column name="UNIQUE_ID" type="NVARCHAR2(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEARCH_KEYWORD_ID" type="NUMBER(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DATA_CATEGORY" type="NVARCHAR2(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SOURCE_CODE" type="NVARCHAR2(100)"/>
+            <column name="DISPLAY_DATA_CATEGORY" type="NVARCHAR2(200)"/>
+            <column name="OWNER_AUTH_USER_ID" remarks="the owner of the object, this can be used to control access permissions in search" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-23" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_KEYWORD_TERM">
+            <column name="KEYWORD_TERM" type="VARCHAR2(200)"/>
+            <column name="SEARCH_KEYWORD_ID" type="NUMBER(18, 0)"/>
+            <column name="RANK" type="NUMBER(18, 0)"/>
+            <column name="SEARCH_KEYWORD_TERM_ID" type="NUMBER(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TERM_LENGTH" type="NUMBER(18, 0)"/>
+            <column name="OWNER_AUTH_USER_ID" remarks="owner of the object, this can be used to control access in search" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-24" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_REQUEST_MAP">
+            <column name="ID" type="NUMBER(19, 0)"/>
+            <column name="VERSION" type="NUMBER(19, 0)"/>
+            <column name="CONFIG_ATTRIBUTE" type="VARCHAR2(255 CHAR)"/>
+            <column name="URL" type="VARCHAR2(255 CHAR)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-25" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_ROLE">
+            <column name="ID" type="NUMBER(19, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VERSION" type="NUMBER(19, 0)"/>
+            <column name="AUTHORITY" type="VARCHAR2(255 CHAR)"/>
+            <column name="DESCRIPTION" type="VARCHAR2(255 CHAR)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-26" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_ROLE_AUTH_USER">
+            <column name="PEOPLE_ID" type="NUMBER(19, 0)"/>
+            <column name="AUTHORITIES_ID" type="NUMBER(19, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-27" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_SECURE_OBJECT">
+            <column name="SEARCH_SECURE_OBJECT_ID" type="NUMBER(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BIO_DATA_ID" type="NUMBER(18, 0)"/>
+            <column name="DISPLAY_NAME" type="NVARCHAR2(100)"/>
+            <column name="DATA_TYPE" type="NVARCHAR2(200)"/>
+            <column name="BIO_DATA_UNIQUE_ID" type="NVARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-28" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_SECURE_OBJECT_PATH">
+            <column name="SEARCH_SECURE_OBJECT_ID" type="NUMBER(18, 0)"/>
+            <column name="I2B2_CONCEPT_PATH" type="NVARCHAR2(2000)"/>
+            <column name="SEARCH_SECURE_OBJ_PATH_ID" type="NUMBER(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-29" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_SEC_ACCESS_LEVEL">
+            <column name="SEARCH_SEC_ACCESS_LEVEL_ID" type="NUMBER(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACCESS_LEVEL_NAME" type="NVARCHAR2(200)"/>
+            <column name="ACCESS_LEVEL_VALUE" type="NUMBER(18, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-30" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SEARCH_USER_FEEDBACK">
+            <column name="SEARCH_USER_FEEDBACK_ID" type="NUMBER(18, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEARCH_USER_ID" type="NUMBER(18, 0)"/>
+            <column name="CREATE_DATE" type="date"/>
+            <column name="FEEDBACK_TEXT" type="NVARCHAR2(2000)"/>
+            <column name="APP_VERSION" type="NVARCHAR2(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-31" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="ID" constraintName="PK_AUTH_USR_GROUP" tableName="SEARCH_AUTH_GROUP"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-32" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="ID" constraintName="PK_SEARCH_PRINCIPAL" tableName="SEARCH_AUTH_PRINCIPAL"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-33" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="MODULE_SEQ" constraintName="PLUGIN_MODULE_PK" tableName="PLUGIN_MODULE1"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-34" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="PLUGIN_SEQ" constraintName="PLUGIN_PK" tableName="PLUGIN1"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-35" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SEARCH_USER_FEEDBACK_ID" constraintName="RDT_SEARCH_USER_FDBK_PK" tableName="SEARCH_USER_FEEDBACK"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-36" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="AUTH_SEC_OBJ_ACCESS_ID" constraintName="SCH_SEC_A_A_S_A_PK" tableName="SEARCH_AUTH_SEC_OBJECT_ACCESS"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-37" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SEARCH_CUSTOM_FILTER_ID" constraintName="SEARCH_CUSTOM_FILTER_PK" tableName="SEARCH_CUSTOM_FILTER"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-38" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SEARCH_CUSTOM_FILTER_ITEM_ID" constraintName="SEARCH_CUST_FIL_ITEM_PK" tableName="SEARCH_CUSTOM_FILTER_ITEM"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-39" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="ID" constraintName="SEARCH_GENE_SIGNATURE_ITE_PK" tableName="SEARCH_GENE_SIGNATURE_ITEM"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-40" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SEARCH_GENE_SIGNATURE_ID" constraintName="SEARCH_GENE_SIG_DESCR_PK" tableName="SEARCH_GENE_SIGNATURE"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-41" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SEARCH_GENE_SIG_FILE_SCHEMA_ID" constraintName="SEARCH_GENE_SIG_FILE_SCHE_PK" tableName="SEARCH_GENE_SIG_FILE_SCHEMA"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-42" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SEARCH_KEYWORD_ID" constraintName="SEARCH_KW_PK" tableName="SEARCH_KEYWORD"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-43" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SEARCH_KEYWORD_TERM_ID" constraintName="SEARCH_KW_TERM_PK" tableName="SEARCH_KEYWORD_TERM"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-44" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SEARCH_SEC_ACCESS_LEVEL_ID" constraintName="SEARCH_SEC_AC_LEVEL_PK" tableName="SEARCH_SEC_ACCESS_LEVEL"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-45" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SEARCH_AUTH_USER_SEC_ACCESS_ID" constraintName="SEARCH_SEC_A_U_S_A_PK" tableName="SEARCH_AUTH_USER_SEC_ACCESS"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-46" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SEARCH_SECURE_OBJECT_ID" constraintName="SEARCH_SEC_OBJ_PK" tableName="SEARCH_SECURE_OBJECT"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-47" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SEARCH_SECURE_OBJ_PATH_ID" constraintName="SEARCH_SEC_OBJ__PATH_PK" tableName="SEARCH_SECURE_OBJECT_PATH"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-48" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C00236974" tableName="SEARCH_AUTH_USER"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-49" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C00236982" tableName="SEARCH_ROLE"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-50" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addUniqueConstraint columnNames="UNIQUE_ID, DATA_CATEGORY" constraintName="SEARCH_KEYWORD_UK" deferrable="false" disabled="false" initiallyDeferred="false" tableName="SEARCH_KEYWORD"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-51" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="AUTHORITIES_ID" baseTableName="SEARCH_ROLE_AUTH_USER" constraintName="FKFB14EF79287E0CAC" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_USER"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-52" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="PEOPLE_ID" baseTableName="SEARCH_ROLE_AUTH_USER" constraintName="FKFB14EF798F01F561" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_ROLE"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-53" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="CREATED_BY_AUTH_USER_ID" baseTableName="SEARCH_GENE_SIGNATURE" constraintName="GENE_SIG_CREATE_AUTH_USER_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_USER"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-54" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="SEARCH_GENE_SIG_FILE_SCHEMA_ID" baseTableName="SEARCH_GENE_SIGNATURE" constraintName="GENE_SIG_FILE_SCHEMA_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_GENE_SIG_FILE_SCHEMA_ID" referencedTableName="SEARCH_GENE_SIG_FILE_SCHEMA"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-55" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="MODIFIED_BY_AUTH_USER_ID" baseTableName="SEARCH_GENE_SIGNATURE" constraintName="GENE_SIG_MOD_AUTH_USER_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_USER"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-56" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="PARENT_GENE_SIGNATURE_ID" baseTableName="SEARCH_GENE_SIGNATURE" constraintName="GENE_SIG_PARENT_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_GENE_SIGNATURE_ID" referencedTableName="SEARCH_GENE_SIGNATURE"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-57" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="PLUGIN_SEQ" baseTableName="PLUGIN_MODULE1" constraintName="PLUGIN_MODULE_PLUGIN_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="PLUGIN_SEQ" referencedTableName="PLUGIN1"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-58" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="AUTH_PRINCIPAL_ID" baseTableName="SEARCH_AUTH_SEC_OBJECT_ACCESS" constraintName="SCH_SEC_A_U_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_PRINCIPAL"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-59" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="SECURE_ACCESS_LEVEL_ID" baseTableName="SEARCH_AUTH_SEC_OBJECT_ACCESS" constraintName="SCH_SEC_S_A_L_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_SEC_ACCESS_LEVEL_ID" referencedTableName="SEARCH_SEC_ACCESS_LEVEL"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-60" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="SECURE_OBJECT_ID" baseTableName="SEARCH_AUTH_SEC_OBJECT_ACCESS" constraintName="SCH_SEC_S_O_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_SECURE_OBJECT_ID" referencedTableName="SEARCH_SECURE_OBJECT"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-61" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="AUTH_GROUP_ID" baseTableName="SEARCH_AUTH_GROUP_MEMBER" constraintName="SCH_USER_GP_M_GRP_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_GROUP"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-62" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="AUTH_USER_ID" baseTableName="SEARCH_AUTH_GROUP_MEMBER" constraintName="SCH_USER_GP_M_USR_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_PRINCIPAL"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-63" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="SEARCH_KEYWORD_ID" baseTableName="SEARCH_KEYWORD_TERM" constraintName="SEARCH_KW_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_KEYWORD_ID" referencedTableName="SEARCH_KEYWORD"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-64" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="SEARCH_AUTH_USER_ID" baseTableName="SEARCH_AUTH_USER_SEC_ACCESS" constraintName="SEARCH_SEC_A_U_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_USER"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-65" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="SEARCH_SEC_ACCESS_LEVEL_ID" baseTableName="SEARCH_AUTH_USER_SEC_ACCESS" constraintName="SEARCH_SEC_S_A_L_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_SEC_ACCESS_LEVEL_ID" referencedTableName="SEARCH_SEC_ACCESS_LEVEL"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-66" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="SEARCH_SECURE_OBJECT_ID" baseTableName="SEARCH_AUTH_USER_SEC_ACCESS" constraintName="SEARCH_SEC_S_O_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_SECURE_OBJECT_ID" referencedTableName="SEARCH_SECURE_OBJECT"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-67" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="ID" baseTableName="SEARCH_AUTH_GROUP" constraintName="SH_AUTH_GP_ID_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_PRINCIPAL"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-68" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="ID" baseTableName="SEARCH_AUTH_USER" constraintName="SH_AUTH_USER_ID_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_PRINCIPAL"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-69" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="SEARCH_KEYWORD_INDEX1" tableName="SEARCH_KEYWORD" unique="false">
+            <column name="KEYWORD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-70" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="SEARCH_KEYWORD_INDEX2" tableName="SEARCH_KEYWORD" unique="false">
+            <column name="BIO_DATA_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-71" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="SEARCH_KEYWORD_INDEX3" tableName="SEARCH_KEYWORD" unique="false">
+            <column name="OWNER_AUTH_USER_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-72" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="SEARCH_KW_TERM_SKID_IDX" tableName="SEARCH_KEYWORD_TERM" unique="false">
+            <column name="SEARCH_KEYWORD_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-73" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createView fullDefinition="true" viewName="SEARCH_AUTH_USER_SEC_ACCESS_V">CREATE OR REPLACE FORCE VIEW SEARCH_AUTH_USER_SEC_ACCESS_V (SEARCH_AUTH_USER_SEC_ACCESS_ID, SEARCH_AUTH_USER_ID, SEARCH_SECURE_OBJECT_ID, SEARCH_SEC_ACCESS_LEVEL_ID) AS SELECT 
+ sasoa.AUTH_SEC_OBJ_ACCESS_ID AS SEARCH_AUTH_USER_SEC_ACCESS_ID,
+ sasoa.AUTH_PRINCIPAL_ID AS SEARCH_AUTH_USER_ID,
+ sasoa.SECURE_OBJECT_ID AS SEARCH_SECURE_OBJECT_ID,
+ sasoa.SECURE_ACCESS_LEVEL_ID AS SEARCH_SEC_ACCESS_LEVEL_ID
+FROM SEARCH_AUTH_USER sau, 
+SEARCH_AUTH_SEC_OBJECT_ACCESS sasoa
+WHERE 
+sau.ID = sasoa.AUTH_PRINCIPAL_ID
+UNION
+ SELECT 
+ sasoa.AUTH_SEC_OBJ_ACCESS_ID AS SEARCH_AUTH_USER_SEC_ACCESS_ID,
+ sagm.AUTH_USER_ID AS SEARCH_AUTH_USER_ID,
+ sasoa.SECURE_OBJECT_ID AS SEARCH_SECURE_OBJECT_ID,
+ sasoa.SECURE_ACCESS_LEVEL_ID AS SEARCH_SEC_ACCESS_LEVEL_ID
+FROM SEARCH_AUTH_GROUP sag, 
+SEARCH_AUTH_GROUP_MEMBER sagm,
+SEARCH_AUTH_SEC_OBJECT_ACCESS sasoa
+WHERE 
+sag.ID = sagm.AUTH_GROUP_ID
+AND
+sag.ID = sasoa.AUTH_PRINCIPAL_ID
+UNION
+SELECT 
+ sasoa.AUTH_SEC_OBJ_ACCESS_ID AS SEARCH_AUTH_USER_SEC_ACCESS_ID,
+ NULL AS SEARCH_AUTH_USER_ID,
+ sasoa.SECURE_OBJECT_ID AS SEARCH_SECURE_OBJECT_ID,
+ sasoa.SECURE_ACCESS_LEVEL_ID AS SEARCH_SEC_ACCESS_LEVEL_ID
+FROM SEARCH_AUTH_GROUP sag, 
+SEARCH_AUTH_SEC_OBJECT_ACCESS sasoa
+WHERE 
+sag.group_category = 'EVERYONE_GROUP'
+AND
+sag.ID = sasoa.AUTH_PRINCIPAL_ID
+ 
+ 
+ 
+ 
+ </createView>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322143334-74" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createView fullDefinition="true" viewName="SEARCH_BIO_MKR_CORREL_VIEW">CREATE OR REPLACE FORCE VIEW SEARCH_BIO_MKR_CORREL_VIEW (DOMAIN_OBJECT_ID, ASSO_BIO_MARKER_ID, CORREL_TYPE, VALUE_METRIC, MV_ID) AS SELECT domain_object_id,
+    asso_bio_marker_id,
+    correl_type,
+    value_metric,
+    mv_id
+  FROM
+    (SELECT i.SEARCH_GENE_SIGNATURE_ID AS domain_object_id,
+      i.BIO_MARKER_ID                  AS asso_bio_marker_id,
+      'GENE_SIGNATURE_ITEM'            AS correl_type,
+      CASE
+        WHEN i.FOLD_CHG_METRIC IS NULL
+        THEN 1
+        ELSE i.FOLD_CHG_METRIC
+      END AS value_metric,
+      1   AS mv_id
+    FROM SEARCH_GENE_SIGNATURE_ITEM i,
+      SEARCH_GENE_SIGNATURE gs
+    WHERE i.SEARCH_GENE_SIGNATURE_ID = gs.SEARCH_GENE_SIGNATURE_ID
+    AND gs.DELETED_FLAG              = 0
+    AND i.bio_marker_id             IS NOT NULL
+    UNION ALL
+    SELECT i.SEARCH_GENE_SIGNATURE_ID AS domain_object_id,
+      bada.BIO_MARKER_ID              AS asso_bio_marker_id,
+      'GENE_SIGNATURE_ITEM'           AS correl_type,
+      CASE
+        WHEN i.FOLD_CHG_METRIC IS NULL
+        THEN 1
+        ELSE i.FOLD_CHG_METRIC
+      END AS value_metric,
+      2   AS mv_id
+    FROM SEARCH_GENE_SIGNATURE_ITEM i,
+      SEARCH_GENE_SIGNATURE gs,
+      biomart.bio_assay_data_annotation bada
+    WHERE i.SEARCH_GENE_SIGNATURE_ID    = gs.SEARCH_GENE_SIGNATURE_ID
+    AND gs.DELETED_FLAG                 = 0
+    AND bada.bio_assay_feature_group_id = i.bio_assay_feature_group_id
+    AND i.bio_assay_feature_group_id   IS NOT NULL
+    )</createView>
+    </changeSet>
+</databaseChangeLog>

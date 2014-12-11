@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="mmcduffie (generated)" id="1418322071315-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="WORKPLACE">
+            <column name="C_NAME" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_USER_ID" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_GROUP_ID" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_SHARE_ID" type="VARCHAR2(255)"/>
+            <column name="C_INDEX" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_PARENT_INDEX" type="VARCHAR2(255)"/>
+            <column name="C_VISUALATTRIBUTES" type="CHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_PROTECTED_ACCESS" type="CHAR(1)"/>
+            <column name="C_TOOLTIP" type="VARCHAR2(255)"/>
+            <column name="C_WORK_XML" type="CLOB"/>
+            <column name="C_WORK_XML_SCHEMA" type="CLOB"/>
+            <column name="C_WORK_XML_I2B2_TYPE" type="VARCHAR2(255)"/>
+            <column name="C_ENTRY_DATE" type="date"/>
+            <column name="C_CHANGE_DATE" type="date"/>
+            <column name="C_STATUS_CD" type="CHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322071315-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="WORKPLACE_ACCESS">
+            <column name="C_TABLE_CD" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_TABLE_NAME" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_PROTECTED_ACCESS" type="CHAR(1)"/>
+            <column name="C_HLEVEL" type="NUMBER(38, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_NAME" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_USER_ID" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_GROUP_ID" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_SHARE_ID" type="VARCHAR2(255)"/>
+            <column name="C_INDEX" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_PARENT_INDEX" type="VARCHAR2(255)"/>
+            <column name="C_VISUALATTRIBUTES" type="CHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="C_TOOLTIP" type="VARCHAR2(255)"/>
+            <column name="C_ENTRY_DATE" type="date"/>
+            <column name="C_CHANGE_DATE" type="date"/>
+            <column name="C_STATUS_CD" type="CHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322071315-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="C_INDEX" constraintName="WORKPLACE_ACCESS_PK" tableName="WORKPLACE_ACCESS"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418322071315-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="C_INDEX" constraintName="WORKPLACE_PK" tableName="WORKPLACE"/>
+    </changeSet>
+</databaseChangeLog>
