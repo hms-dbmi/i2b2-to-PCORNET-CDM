@@ -53,6 +53,14 @@ sub generateMasterScripts
 	print conceptCountMasterScript "/usr/bin/time -v sqlldr $sqlLdrString control=../control_files/concept_count.ctl log=../log_files/concept_count.log";
 	close conceptCountMasterScript;	
 	
+	open (conceptFolderMasterScript,'>',"$basePath/scripts/load_concept_folders_patients_data.sh") or die("Unable to write $basePath/scripts/load_concept_folders_patients_data.sh'");
+        print conceptFolderMasterScript "/usr/bin/time -v sqlldr $sqlLdrString control=../control_files/concepts_folders_patients.ctl log=../log_files/concepts_folders_patients.ctl";
+        close conceptFolderMasterScript;
+
+        open (patientMappingScript,'>',"$basePath/scripts/load_patient_mapping_data.sh") or die("Unable to write $basePath/scripts/load_patient_mapping_data.sh'");
+        print patientMappingMasterScript "/usr/bin/time -v sqlldr $sqlLdrString control=../control_files/patient_mapping.ctl log=../log_files/patient_mapping.ctl";
+        close patientMappingMasterScript;
+
 }
 
 sub generatePatientDimensionControlFile

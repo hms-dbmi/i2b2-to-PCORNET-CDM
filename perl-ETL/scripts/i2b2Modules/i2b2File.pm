@@ -23,6 +23,8 @@ sub generateI2b2File
 	#Pull the hash references into easier to read variables.
 	my $individualNumericConcepts 	= $params->{INDIVIDUAL_NUMERIC_CONCEPTS};
 	my $individualTextConcepts 		= $params->{INDIVIDUAL_TEXT_CONCEPTS};
+	
+	my $lowLevelConcepts = $params->{LOW_LEVEL_CONCEPTS};
 					
 	my $i2b2_table_output_file 		= $configurationObject->{I2B2_OUT_FILE};
 	my $currentStudyId				= $configurationObject->{STUDY_ID};
@@ -36,7 +38,8 @@ sub generateI2b2File
 	#We need to prefetch an ID per entry in the concept hashes.
 	my $conceptCount = keys %$individualNumericConcepts;
 	$conceptCount 	+= tranSMARTTextParsing::countHashLeaves($individualTextConcepts);
-	
+	## add the number of concepts from low level concepts
+	$conceptCount += keys %$lowLevelConcepts;	
 	my @i2b2IdArray = i2b2::getNewI2b2IdList($conceptCount, $configurationObject);
 
 	print i2b2_output i2b2->printColumnHeaders();
@@ -69,7 +72,7 @@ sub generateI2b2File
 				{										
 					my @conceptPathIdSplit = split(/!!!/,$individualNumericConcepts->{$1});
 
-					_generateSingleI2b2Record($1,$2, $conceptPathIdSplit[1], shift @i2b2IdArray,'N', $currentStudyId);
+					_generateSingleI2b2Record($1,$2, $conceptPathIdSplit[1], shift @i2b2IdArray,'N', $currentStudyId, 'LA');
 				}
 				elsif($mappingFileType eq "INDIVIDUAL" and $currentConceptType eq "T")
 				{					
@@ -81,13 +84,19 @@ sub generateI2b2File
 						
 						if(length($conceptPathIdSplit[0]) < 255)
 						{
-							_generateSingleI2b2Record($1,$conceptPathIdSplit[0],$conceptPathIdSplit[1],shift @i2b2IdArray,'T', $currentStudyId);
+							_generateSingleI2b2Record($1,$conceptPathIdSplit[0],$conceptPathIdSplit[1],shift @i2b2IdArray,'T', $currentStudyId,'LA');
 						}
 					}
 				}
 			}
 		}
 
+	}
+	# Generate I2b2 records for low level concepts (levels 1 and 2)
+	while(my ($conceptName,$conceptPath) = each %$lowLevelConcepts)
+	{
+		my @conceptPathIdSplit = split(/!!!/, $conceptPath);
+		_generateSingleI2b2Record($conceptName, @conceptPathIdSplit[0], @conceptPathIdSplit[1], shift @i2b2IdArray,'T', $currentStudyId, 'FA');
 	}
 
 	close(i2b2_output);
@@ -104,7 +113,7 @@ sub _generateSingleI2b2Record {
 	my $i2b2Id				= shift;
 	my $columnDataType		= shift;
 	my $currentStudyId		= shift;
-	
+	my $visualAttributes		= shift;
 	my $metaDataXML			= '';
 	
 	if($columnDataType eq "N") {$metaDataXML = '<?xml version="1.0"?><ValueMetadata><Version>3.02</Version><CreationDateTime>08/14/2008 01:22:59</CreationDateTime><TestID></TestID><TestName></TestName><DataType>PosFloat</DataType><CodeType></CodeType><Loinc></Loinc><Flagstouse></Flagstouse><Oktousevalues>Y</Oktousevalues><MaxStringLength></MaxStringLength><LowofLowValue>0</LowofLowValue><HighofLowValue>0</HighofLowValue><LowofHighValue>100</LowofHighValue>100<HighofHighValue>100</HighofHighValue><LowofToxicValue></LowofToxicValue><HighofToxicValue></HighofToxicValue><EnumValues></EnumValues><CommentsDeterminingExclusion><Com></Com></CommentsDeterminingExclusion><UnitValues><NormalUnits>ratio</NormalUnits><EqualUnits></EqualUnits><ExcludingUnits></ExcludingUnits><ConvertingUnits><Units></Units><MultiplyingFactor></MultiplyingFactor></ConvertingUnits></UnitValues><Analysis><Enums /><Counts /><New /></Analysis></ValueMetadata>';}
@@ -139,7 +148,7 @@ sub _generateSingleI2b2Record {
 								SOURCESYSTEM_CD		=> $currentStudyId,
 								M_APPLIED_PATH		=> '@',
 								I2B2_ID				=> $i2b2Id,
-								C_VISUALATTRIBUTES	=> 'LA',
+								C_VISUALATTRIBUTES	=> $visualAttributes,
 								C_SYNONYM_CD		=> 'N',
 								C_METADATAXML		=> $metaDataXML
 								);

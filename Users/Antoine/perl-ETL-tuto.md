@@ -38,4 +38,5 @@ oracle database connection via DBI package requires 2 environment variables: (on
 	ORACLE_HOME=/app/oracle/product/11.2.0/client_1
 	LD_LIBRARY_PATH=/app/oracle/product/11.2.0/client_1/lib
 	
-### run main
+### run main ETL process
+

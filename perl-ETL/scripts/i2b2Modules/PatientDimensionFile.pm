@@ -29,6 +29,14 @@ sub generatePatientDimensionFile
 	my $patient_dimension_output_file	=	$configurationObject->{PATIENT_DIMENSION_OUT_FILE};
 	my $patient_mapping_output_file		=	$configurationObject->{PATIENT_MAPPING_OUT_FILE};	
 	my $factSet							=	$configurationObject->{FACT_SET};
+	
+	my $log_file = "log_file.txt";
+
+	# open log file	
+	
+	open LOG, ">>$log_file" || die "Can't open log_file.txt     ($log_file) : $!\n";
+	
+	logIt("This is a log test");
 
 	print("DEBUG - PatientDimensionFile.pm - Count number of patients.\n");
 
@@ -42,15 +50,19 @@ sub generatePatientDimensionFile
 	{
 		_extractPatientList($configurationObject, $k, $inputDataDirectory, \%subjectIDHash);
 	}
-
 	my $count = keys %subjectIDHash;
 
 	print("DEBUG - PatientDimensionFile.pm - Found $count patients.\n");
 	
 	my $patientSubjectHash	= DatabaseConnection::getPatientSubjectHash($configurationObject);
-	my @patientIdArray 		= PatientDimension::getNewPatientIdList($count, $configurationObject);
+	
+	# get the first available ID from database.
+	my @patientIdArray 		= PatientDimension::getNewPatientIdList(0, $configurationObject);
 
+	my $initialPatientId = $patientIdArray[0];
+	my $currentPatientId = $initialPatientId;	
 	print("DEBUG - PatientDimensionFile.pm : Attemping to open data directory $inputDataDirectory\n");
+
 
 	opendir(D, $inputDataDirectory) || die "Can't opedir: $!\n";
 	
@@ -66,19 +78,21 @@ sub generatePatientDimensionFile
 	{
 		if(!exists $patientSubjectHash->{$subjectID})
 		{
-			my $nextPatientId = shift @patientIdArray;
+			my $nextPatientId = $currentPatientId;
+			$currentPatientId ++;
 
 			$patientHash{$subjectID} = $nextPatientId;
 
 			my $patientDimension = new PatientDimension(PATIENT_NUM => $nextPatientId, SOURCESYSTEM_CD => $subjectID);
 			print patient_dimension $patientDimension->toTableFileLine();    
 			
+			print("DEBUG - PatientDimensionFile.pm : Creating New Subject - $subjectID\n");
+
 			my $patientMapping = new PatientMapping(PATIENT_NUM => $nextPatientId, PATIENT_IDE => $subjectID, PATIENT_IDE_SOURCE => $factSet, SOURCESYSTEM_CD => 'AUTISM');
 			print patient_mapping_output_file $patientMapping->toTableFileLine();   	
 	
 			$patientCounter = $patientCounter + 1;
 			
-			print("DEBUG - PatientDimensionFile.pm : Creating New Subject - $subjectID\n");
 
 		}
 		else
@@ -88,12 +102,26 @@ sub generatePatientDimensionFile
 			print("DEBUG - PatientDimensionFile.pm : Using existing Subject - $subjectID\n");
 		}
 	}
+	
+	# count new patients
+	my $newPatientsCount = $currentPatientId - $initialPatientId ;
+	
+	# if the number of new patients > 1 (because we already retrieved 1 new Id)
+	# then get the required number of new Ids from Database
+	# (these Ids have already been assigned to the new patients above: this is just to keep the sequence updated on the database)
 
+	if ($newPatientsCount > 1){
+
+		@patientIdArray              = PatientDimension::getNewPatientIdList(($newPatientsCount-1), $configurationObject);
+	}
+
+	print ("DEBUG - PatientDimensionFile.pm :Number of new patients created: $newPatientsCount\n");
+	print ("DEBUG - PatientDimensionFile.pm :Total number of patients created: $count\n");
 	
 	closedir(D);
 	close(patient_dimension);
 	close(patient_mapping_output_file);
-	
+	close(LOG);	
 	print("*************************************************************\n");
 	print("\n");
 	
@@ -180,6 +208,22 @@ sub _extractPatientList {
 
 }
 
+sub logIt 
+{
+	# ARGV = text to log
+	
+	my $logText = shift;
+
+#	my $log_file = "log_file.txt";
+            
+#      open my $log, ">>$log_file" || die "Can't open log_file.txt     ($log_file) : $!\n";
+            
+        my ($logsec,$logmin,$loghour,$logmday,$logmon,$logyear,$logwday,$logyday,$logisdst)=localtime(time);
+        my $logtimestamp = sprintf("%4d-%02d-%02d %02d:%02d:%02d",$logyear+1900,$logmon+1,$logmday,$loghour,$logmin,$logsec);
+
+        print LOG  "$logtimestamp: $logText\n";
+ #       close $log;
+}
 
 ###########################################
 
