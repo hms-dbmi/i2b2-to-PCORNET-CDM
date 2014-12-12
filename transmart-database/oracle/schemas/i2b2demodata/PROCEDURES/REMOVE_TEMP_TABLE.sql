@@ -1,0 +1,16 @@
+--------------------------------------------------------
+--  DDL for Procedure REMOVE_TEMP_TABLE
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."REMOVE_TEMP_TABLE" (tempTableName VARCHAR) 
+IS
+BEGIN 
+	execute immediate 'drop table ' || tempTableName || ' cascade constraints';
+	
+EXCEPTION
+	WHEN OTHERS THEN
+		dbms_output.put_line(SQLCODE|| ' - ' ||SQLERRM);
+END;
+
+/
