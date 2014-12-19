@@ -1,0 +1,10 @@
+/usr/bin/time -v sqlplus -s biomart_user/dwtst@BCH_DWTST<<EOF
+
+ALTER INDEX i2b2DemoData.OB_FACT_PK REBUILD NOLOGGING PARALLEL 3;
+ALTER INDEX i2b2DemoData.IDX_OB_FACT_1 REBUILD  NOLOGGING PARALLEL 3;
+ALTER INDEX i2b2DemoData.IDX_OB_FACT_2 REBUILD  NOLOGGING PARALLEL 3;
+ALTER INDEX i2b2DemoData.FACT_CNPT_PAT_ENCT_IDX REBUILD  NOLOGGING PARALLEL 3;
+exec dbms_stats.gather_schema_stats('I2B2DEMODATA');
+exec dbms_stats.gather_schema_stats('I2B2METADATA');
+exit;
+EOF

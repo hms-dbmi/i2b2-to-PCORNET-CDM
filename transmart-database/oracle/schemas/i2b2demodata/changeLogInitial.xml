@@ -1,0 +1,990 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="mmcduffie (generated)" id="1418321432519-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="CONCEPT_ID" startValue="27848544"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="NODE_METADATA_SEQUENCE" startValue="70161"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="PROTOCOL_ID_SEQ" startValue="215"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="QT_SQ_PQM_QMID" startValue="1"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="QT_SQ_QI_QIID" startValue="21590"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="QT_SQ_QM_QMID" startValue="21592"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="QT_SQ_QPER_PECID" startValue="1"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="QT_SQ_QPR_PCID" startValue="3388385"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="QT_SQ_QRI_QRIID" startValue="21570"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="QT_SQ_QR_QRID" startValue="1"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="QT_SQ_QS_QSID" startValue="1"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="QT_SQ_QXR_XRID" startValue="675"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_PATIENT_NUM" startValue="198202"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_SUBJECT_REFERENCE" startValue="743"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="0" cycle="false" incrementBy="1" maxValue="9999999999999" minValue="1" ordered="true" sequenceName="SQ_UPLOADSTATUS_UPLOADID" startValue="1"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="0" cycle="false" incrementBy="1" maxValue="9999999999999" minValue="1" ordered="true" sequenceName="SQ_UP_ENCDIM_ENCOUNTERNUM" startValue="209266407"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createSequence cacheSize="0" cycle="false" incrementBy="1" maxValue="9999999999999" minValue="1" ordered="true" sequenceName="SQ_UP_PATDIM_PATIENTNUM" startValue="2"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="ASYNC_JOB">
+            <column name="ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="JOB_NAME" type="VARCHAR2(200)"/>
+            <column name="JOB_STATUS" type="VARCHAR2(200)"/>
+            <column name="RUN_TIME" type="VARCHAR2(200)"/>
+            <column name="LAST_RUN_ON" type="TIMESTAMP"/>
+            <column name="VIEWER_URL" type="VARCHAR2(4000)"/>
+            <column name="ALT_VIEWER_URL" type="VARCHAR2(4000)"/>
+            <column name="JOB_RESULTS" type="CLOB"/>
+            <column name="JOB_TYPE" type="VARCHAR2(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="CODE_LOOKUP">
+            <column name="TABLE_CD" type="VARCHAR2(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COLUMN_CD" type="VARCHAR2(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CODE_CD" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME_CHAR" type="VARCHAR2(650)"/>
+            <column name="LOOKUP_BLOB" type="CLOB"/>
+            <column name="UPLOAD_DATE" type="date"/>
+            <column name="UPDATE_DATE" type="date"/>
+            <column name="DOWNLOAD_DATE" type="date"/>
+            <column name="IMPORT_DATE" type="date"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(50)"/>
+            <column name="UPLOAD_ID" type="NUMBER(38, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="CONCEPTS_FOLDERS_PATIENTS">
+            <column name="CONCEPT_PATH" type="VARCHAR2(700)"/>
+            <column name="PATIENT_NUM" type="NUMBER(38, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-21" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="CONCEPT_COUNTS">
+            <column name="CONCEPT_PATH" type="VARCHAR2(700)"/>
+            <column name="PARENT_CONCEPT_PATH" type="VARCHAR2(700)"/>
+            <column name="PATIENT_COUNT" type="NUMBER(38, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-22" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="CONCEPT_DIMENSION">
+            <column name="CONCEPT_CD" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONCEPT_PATH" type="VARCHAR2(700)"/>
+            <column name="NAME_CHAR" type="VARCHAR2(2000)"/>
+            <column name="CONCEPT_BLOB" type="CLOB"/>
+            <column name="UPDATE_DATE" type="date"/>
+            <column name="DOWNLOAD_DATE" type="date"/>
+            <column name="IMPORT_DATE" type="date"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(50)"/>
+            <column name="UPLOAD_ID" type="NUMBER"/>
+            <column name="TABLE_NAME" type="VARCHAR2(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-23" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="COUNTER">
+            <column name="CONCEPT_CD" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COUNTS" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-24" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="CRC_DB_LOOKUP">
+            <column name="C_DOMAIN_ID" type="VARCHAR2(255)"/>
+            <column name="C_PROJECT_PATH" type="VARCHAR2(255)"/>
+            <column name="C_OWNER_ID" type="VARCHAR2(255)"/>
+            <column name="C_DB_FULLSCHEMA" type="VARCHAR2(255)"/>
+            <column name="C_DB_DATASOURCE" type="VARCHAR2(255)"/>
+            <column name="C_DB_SERVERTYPE" type="VARCHAR2(255)"/>
+            <column name="C_DB_NICENAME" type="VARCHAR2(255)"/>
+            <column name="C_DB_TOOLTIP" type="VARCHAR2(255)"/>
+            <column name="C_COMMENT" type="CLOB"/>
+            <column name="C_ENTRY_DATE" type="date"/>
+            <column name="C_CHANGE_DATE" type="date"/>
+            <column name="C_STATUS_CD" type="CHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-25" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DATAMART_REPORT">
+            <column name="TOTAL_PATIENT" type="NUMBER(38, 0)"/>
+            <column name="TOTAL_OBSERVATIONFACT" type="NUMBER(38, 0)"/>
+            <column name="TOTAL_EVENT" type="NUMBER(38, 0)"/>
+            <column name="REPORT_DATE" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-26" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DIMLOADER">
+            <column name="C_HLEVEL" type="NUMBER(22, 0)"/>
+            <column name="C_FULLNAME" type="VARCHAR2(900)"/>
+            <column name="C_NAME" type="VARCHAR2(2000)"/>
+            <column name="C_SYNONYM_CD" type="CHAR(1)"/>
+            <column name="C_VISUALATTRIBUTES" type="CHAR(3)"/>
+            <column name="C_TOTALNUM" type="NUMBER(22, 0)"/>
+            <column name="C_BASECODE" type="VARCHAR2(50)"/>
+            <column name="C_METADATAXML" type="CLOB"/>
+            <column name="C_FACTTABLECOLUMN" type="VARCHAR2(50)"/>
+            <column name="C_TABLENAME" type="VARCHAR2(50)"/>
+            <column name="C_COLUMNNAME" type="VARCHAR2(50)"/>
+            <column name="C_COLUMNDATATYPE" type="VARCHAR2(50)"/>
+            <column name="C_OPERATOR" type="VARCHAR2(10)"/>
+            <column name="C_DIMCODE" type="VARCHAR2(900)"/>
+            <column name="C_COMMENT" type="CLOB"/>
+            <column name="C_TOOLTIP" type="VARCHAR2(900)"/>
+            <column name="UPDATE_DATE" type="date"/>
+            <column name="DOWNLOAD_DATE" type="date"/>
+            <column name="IMPORT_DATE" type="date"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(50)"/>
+            <column name="VALUETYPE_CD" type="VARCHAR2(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-27" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="DX">
+            <column name="ENCOUNTER_NUM" type="NUMBER(22, 0)"/>
+            <column name="PATIENT_NUM" type="NUMBER(22, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-28" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="ENCOUNTER_MAPPING">
+            <column name="ENCOUNTER_IDE" type="VARCHAR2(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENCOUNTER_IDE_SOURCE" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENCOUNTER_NUM" type="NUMBER(38, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PATIENT_IDE" type="VARCHAR2(200)"/>
+            <column name="PATIENT_IDE_SOURCE" type="VARCHAR2(50)"/>
+            <column name="ENCOUNTER_IDE_STATUS" type="VARCHAR2(50)"/>
+            <column name="UPDATE_DATE" type="date"/>
+            <column name="UPLOAD_DATE" type="date"/>
+            <column name="DOWNLOAD_DATE" type="date"/>
+            <column name="IMPORT_DATE" type="date"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(50)"/>
+            <column name="UPLOAD_ID" type="NUMBER(38, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-29" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="GLOBAL_TEMP_FACT_PARAM_TABLE">
+            <column name="SET_INDEX" type="NUMBER(*, 0)"/>
+            <column name="CHAR_PARAM1" type="VARCHAR2(500)"/>
+            <column name="CHAR_PARAM2" type="VARCHAR2(500)"/>
+            <column name="NUM_PARAM1" type="NUMBER(*, 0)"/>
+            <column name="NUM_PARAM2" type="NUMBER(*, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-30" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="GLOBAL_TEMP_PARAM_TABLE">
+            <column name="SET_INDEX" type="NUMBER(*, 0)"/>
+            <column name="CHAR_PARAM1" type="VARCHAR2(500)"/>
+            <column name="CHAR_PARAM2" type="VARCHAR2(500)"/>
+            <column name="NUM_PARAM1" type="NUMBER(*, 0)"/>
+            <column name="NUM_PARAM2" type="NUMBER(*, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-31" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="HILOSEQUENCES">
+            <column name="SEQUENCENAME" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HIGHVALUES" type="NUMBER(*, 0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-32" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="JMS_MESSAGES">
+            <column name="MESSAGEID" type="NUMBER(*, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESTINATION" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TXID" type="NUMBER(*, 0)"/>
+            <column name="TXOP" type="CHAR(1)"/>
+            <column name="MESSAGEBLOB" type="BLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-33" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="JMS_ROLES">
+            <column name="ROLEID" type="VARCHAR2(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USERID" type="VARCHAR2(32)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-34" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="JMS_SUBSCRIPTIONS">
+            <column name="CLIENTID" type="VARCHAR2(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SUBNAME" type="VARCHAR2(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TOPIC" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SELECTOR" type="VARCHAR2(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-35" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="JMS_TRANSACTIONS">
+            <column name="TXID" type="NUMBER(*, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-36" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="JMS_USERS">
+            <column name="USERID" type="VARCHAR2(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PASSWD" type="VARCHAR2(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CLIENTID" type="VARCHAR2(128)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-37" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="MASTER_QUERY_GLOBAL_TEMP">
+            <column name="ENCOUNTER_NUM" type="NUMBER(22, 0)"/>
+            <column name="PATIENT_NUM" type="NUMBER(22, 0)"/>
+            <column name="INSTANCE_NUM" type="NUMBER(18, 0)"/>
+            <column name="CONCEPT_CD" type="VARCHAR2(50)"/>
+            <column name="START_DATE" type="date"/>
+            <column name="PROVIDER_ID" type="VARCHAR2(50)"/>
+            <column name="MASTER_ID" type="VARCHAR2(50)"/>
+            <column name="LEVEL_NO" type="NUMBER(5, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-38" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="MODIFIER_DIMENSION">
+            <column name="MODIFIER_PATH" type="VARCHAR2(700)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MODIFIER_CD" type="VARCHAR2(50)"/>
+            <column name="NAME_CHAR" type="VARCHAR2(2000)"/>
+            <column name="MODIFIER_BLOB" type="CLOB"/>
+            <column name="UPDATE_DATE" type="date"/>
+            <column name="DOWNLOAD_DATE" type="date"/>
+            <column name="IMPORT_DATE" type="date"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(50)"/>
+            <column name="UPLOAD_ID" type="NUMBER(38, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-39" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="NEWS_UPDATES">
+            <column name="NEWSID" type="NUMBER"/>
+            <column name="RANBYUSER" type="VARCHAR2(200)"/>
+            <column name="ROWSAFFECTED" type="NUMBER"/>
+            <column name="OPERATION" type="VARCHAR2(200)"/>
+            <column name="DATASETNAME" type="VARCHAR2(200)"/>
+            <column name="UPDATEDATE" type="TIMESTAMP"/>
+            <column name="COMMENTFIELD" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-40" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="NODE_METADATA">
+            <column name="CONCEPT_PATH" type="VARCHAR2(700)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARENT_CONCEPT_PATH" type="VARCHAR2(2800)"/>
+            <column name="VALUE" type="NUMBER"/>
+            <column name="TYPE" type="VARCHAR2(50)"/>
+            <column name="NODE_METADATA_ID" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-41" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="OBSERVATION_FACT">
+            <column name="ENCOUNTER_NUM" type="NUMBER(38, 0)"/>
+            <column name="PATIENT_NUM" type="NUMBER(38, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONCEPT_CD" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PROVIDER_ID" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="START_DATE" type="TIMESTAMP"/>
+            <column name="MODIFIER_CD" type="VARCHAR2(100)"/>
+            <column name="VALTYPE_CD" type="VARCHAR2(50)"/>
+            <column name="TVAL_CHAR" type="VARCHAR2(255)"/>
+            <column name="NVAL_NUM" type="NUMBER(18, 5)"/>
+            <column name="VALUEFLAG_CD" type="VARCHAR2(50)"/>
+            <column name="QUANTITY_NUM" type="NUMBER(18, 5)"/>
+            <column name="UNITS_CD" type="VARCHAR2(50)"/>
+            <column name="END_DATE" type="TIMESTAMP"/>
+            <column name="LOCATION_CD" type="VARCHAR2(50)"/>
+            <column name="CONFIDENCE_NUM" type="NUMBER(18, 0)"/>
+            <column name="UPDATE_DATE" type="TIMESTAMP"/>
+            <column name="DOWNLOAD_DATE" type="TIMESTAMP"/>
+            <column name="IMPORT_DATE" type="TIMESTAMP"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(50)"/>
+            <column name="UPLOAD_ID" type="NUMBER(38, 0)"/>
+            <column name="OBSERVATION_BLOB" type="CLOB"/>
+            <column name="INSTANCE_NUM" type="NUMBER(18, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-42" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="PATIENT_DIMENSION">
+            <column name="PATIENT_NUM" type="NUMBER(38, 0)"/>
+            <column name="VITAL_STATUS_CD" type="VARCHAR2(50)"/>
+            <column name="BIRTH_DATE" type="TIMESTAMP"/>
+            <column name="DEATH_DATE" type="TIMESTAMP"/>
+            <column name="SEX_CD" type="VARCHAR2(50)"/>
+            <column name="AGE_IN_YEARS_NUM" type="NUMBER(38, 0)"/>
+            <column name="LANGUAGE_CD" type="VARCHAR2(50)"/>
+            <column name="RACE_CD" type="VARCHAR2(50)"/>
+            <column name="MARITAL_STATUS_CD" type="VARCHAR2(50)"/>
+            <column name="RELIGION_CD" type="VARCHAR2(50)"/>
+            <column name="ZIP_CD" type="VARCHAR2(50)"/>
+            <column name="STATECITYZIP_PATH" type="VARCHAR2(700)"/>
+            <column name="UPDATE_DATE" type="TIMESTAMP"/>
+            <column name="DOWNLOAD_DATE" type="TIMESTAMP"/>
+            <column name="IMPORT_DATE" type="TIMESTAMP"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(50)"/>
+            <column name="UPLOAD_ID" type="NUMBER(38, 0)"/>
+            <column name="PATIENT_BLOB" type="CLOB"/>
+            <column name="INCOME_CD" type="VARCHAR2(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-43" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="PATIENT_MAPPING">
+            <column name="PATIENT_IDE" type="VARCHAR2(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PATIENT_IDE_SOURCE" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PATIENT_NUM" type="NUMBER(38, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PATIENT_IDE_STATUS" type="VARCHAR2(50)"/>
+            <column name="UPLOAD_DATE" type="date"/>
+            <column name="UPDATE_DATE" type="date"/>
+            <column name="DOWNLOAD_DATE" type="date"/>
+            <column name="IMPORT_DATE" type="date"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(50)"/>
+            <column name="UPLOAD_ID" type="NUMBER(38, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-44" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="PATIENT_TRIAL">
+            <column name="PATIENT_NUM" type="NUMBER"/>
+            <column name="TRIAL" type="VARCHAR2(30)"/>
+            <column name="SECURE_OBJ_TOKEN" type="VARCHAR2(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-45" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="PROVIDER_DIMENSION">
+            <column name="PROVIDER_ID" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PROVIDER_PATH" type="VARCHAR2(700)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME_CHAR" type="VARCHAR2(850)"/>
+            <column name="PROVIDER_BLOB" type="CLOB"/>
+            <column name="UPDATE_DATE" type="date"/>
+            <column name="DOWNLOAD_DATE" type="date"/>
+            <column name="IMPORT_DATE" type="date"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(50)"/>
+            <column name="UPLOAD_ID" type="NUMBER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-46" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="QT_ANALYSIS_PLUGIN">
+            <column name="PLUGIN_ID" type="NUMBER(10, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PLUGIN_NAME" type="VARCHAR2(2000)"/>
+            <column name="DESCRIPTION" type="VARCHAR2(2000)"/>
+            <column name="VERSION_CD" type="VARCHAR2(50)"/>
+            <column name="PARAMETER_INFO" type="CLOB"/>
+            <column name="STATUS_CD" type="VARCHAR2(50)"/>
+            <column name="USER_ID" type="VARCHAR2(50)"/>
+            <column name="GROUP_ID" type="VARCHAR2(50)"/>
+            <column name="CREATE_DATE" type="date"/>
+            <column name="UPDATE_DATE" type="date"/>
+            <column name="PARAMETER_INFO_XSD" type="CLOB"/>
+            <column name="COMMAND_LINE" type="CLOB"/>
+            <column name="WORKING_FOLDER" type="CLOB"/>
+            <column name="COMMANDOPTION_CD" type="CLOB"/>
+            <column name="PLUGIN_ICON" type="CLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-47" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="QT_ANALYSIS_PLUGIN_RESULT_TYPE">
+            <column name="PLUGIN_ID" type="NUMBER(10, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RESULT_TYPE_ID" type="NUMBER(10, 0)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-48" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="QT_BREAKDOWN_PATH">
+            <column name="NAME" type="VARCHAR2(100)"/>
+            <column name="VALUE" type="VARCHAR2(2000)"/>
+            <column name="CREATE_DATE" type="date"/>
+            <column name="UPDATE_DATE" type="date"/>
+            <column name="USER_ID" type="VARCHAR2(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-49" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="QT_PATIENT_ENC_COLLECTION">
+            <column name="PATIENT_ENC_COLL_ID" type="NUMBER(10, 0)"/>
+            <column name="RESULT_INSTANCE_ID" type="NUMBER(5, 0)"/>
+            <column name="SET_INDEX" type="NUMBER(10, 0)"/>
+            <column name="PATIENT_NUM" type="NUMBER(10, 0)"/>
+            <column name="ENCOUNTER_NUM" type="NUMBER(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-50" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="QT_PATIENT_SAMPLE_COLLECTION">
+            <column name="RESULT_INSTANCE_ID" type="NUMBER(5, 0)"/>
+            <column name="SAMPLE_ID" type="NUMBER(10, 0)"/>
+            <column name="PATIENT_ID" type="NUMBER(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-51" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="QT_PATIENT_SET_COLLECTION">
+            <column name="PATIENT_SET_COLL_ID" type="NUMBER(38, 0)"/>
+            <column name="RESULT_INSTANCE_ID" type="NUMBER(5, 0)"/>
+            <column name="SET_INDEX" type="NUMBER(10, 0)"/>
+            <column name="PATIENT_NUM" type="NUMBER(38, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-52" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="QT_PDO_QUERY_MASTER">
+            <column name="QUERY_MASTER_ID" type="NUMBER(5, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GROUP_ID" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATE_DATE" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REQUEST_XML" type="CLOB"/>
+            <column name="I2B2_REQUEST_XML" type="CLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-53" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="QT_PRIVILEGE">
+            <column name="PROTECTION_LABEL_CD" type="VARCHAR2(1500)"/>
+            <column name="DATAPROT_CD" type="VARCHAR2(1000)"/>
+            <column name="HIVEMGMT_CD" type="VARCHAR2(1000)"/>
+            <column name="PLUGIN_ID" type="NUMBER(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-54" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="QT_QUERY_INSTANCE">
+            <column name="QUERY_INSTANCE_ID" type="NUMBER(5, 0)"/>
+            <column name="QUERY_MASTER_ID" type="NUMBER(5, 0)"/>
+            <column name="USER_ID" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GROUP_ID" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BATCH_MODE" type="VARCHAR2(50)"/>
+            <column name="START_DATE" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="END_DATE" type="date"/>
+            <column name="STATUS_TYPE_ID" type="NUMBER(5, 0)"/>
+            <column name="DELETE_FLAG" type="VARCHAR2(3)"/>
+            <column name="MESSAGE" type="CLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-55" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="QT_QUERY_MASTER">
+            <column name="QUERY_MASTER_ID" type="NUMBER(5, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GROUP_ID" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATE_DATE" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DELETE_DATE" type="date"/>
+            <column name="REQUEST_XML" type="CLOB"/>
+            <column name="DELETE_FLAG" type="VARCHAR2(3)"/>
+            <column name="GENERATED_SQL" type="CLOB"/>
+            <column name="I2B2_REQUEST_XML" type="CLOB"/>
+            <column name="MASTER_TYPE_CD" type="VARCHAR2(2000)"/>
+            <column name="PLUGIN_ID" type="NUMBER(10, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-56" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="QT_QUERY_RESULT_INSTANCE">
+            <column name="RESULT_INSTANCE_ID" type="NUMBER(5, 0)"/>
+            <column name="QUERY_INSTANCE_ID" type="NUMBER(5, 0)"/>
+            <column name="RESULT_TYPE_ID" type="NUMBER(3, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SET_SIZE" type="NUMBER(10, 0)"/>
+            <column name="START_DATE" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="END_DATE" type="date"/>
+            <column name="STATUS_TYPE_ID" type="NUMBER(3, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DELETE_FLAG" type="VARCHAR2(3)"/>
+            <column name="MESSAGE" type="CLOB"/>
+            <column name="DESCRIPTION" type="VARCHAR2(200)"/>
+            <column name="REAL_SET_SIZE" type="NUMBER(10, 0)"/>
+            <column name="OBFUSC_METHOD" type="VARCHAR2(500)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-57" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="QT_QUERY_RESULT_TYPE">
+            <column name="RESULT_TYPE_ID" type="NUMBER(3, 0)"/>
+            <column name="NAME" type="VARCHAR2(100)"/>
+            <column name="DESCRIPTION" type="VARCHAR2(200)"/>
+            <column name="DISPLAY_TYPE_ID" type="VARCHAR2(500)"/>
+            <column name="VISUAL_ATTRIBUTE_TYPE_ID" type="VARCHAR2(3)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-58" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="QT_QUERY_STATUS_TYPE">
+            <column name="STATUS_TYPE_ID" type="NUMBER(3, 0)"/>
+            <column name="NAME" type="VARCHAR2(100)"/>
+            <column name="DESCRIPTION" type="VARCHAR2(200)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-59" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="QT_XML_RESULT">
+            <column name="XML_RESULT_ID" type="NUMBER(5, 0)"/>
+            <column name="RESULT_INSTANCE_ID" type="NUMBER(5, 0)"/>
+            <column name="XML_VALUE" type="CLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-60" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="QUERY_GLOBAL_TEMP">
+            <column name="ENCOUNTER_NUM" type="NUMBER(22, 0)"/>
+            <column name="PATIENT_NUM" type="NUMBER(22, 0)"/>
+            <column name="INSTANCE_NUM" type="NUMBER(18, 0)"/>
+            <column name="CONCEPT_CD" type="VARCHAR2(50)"/>
+            <column name="START_DATE" type="date"/>
+            <column name="PROVIDER_ID" type="VARCHAR2(50)"/>
+            <column name="PANEL_COUNT" type="NUMBER(5, 0)"/>
+            <column name="FACT_COUNT" type="NUMBER(22, 0)"/>
+            <column name="FACT_PANELS" type="NUMBER(5, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-61" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SAMPLE_CATEGORIES">
+            <column name="PATIENT_NUM" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_ID" type="VARCHAR2(2000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SAMPLE_NAME" type="VARCHAR2(2000)"/>
+            <column name="COLLECTION_DESC" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_TYPE" type="VARCHAR2(2000)"/>
+            <column name="ALIQUOT_NO" type="VARCHAR2(2000)"/>
+            <column name="ALIQUOT_VOLUME" type="VARCHAR2(2000)"/>
+            <column name="INSTRUMENT" type="VARCHAR2(2000)"/>
+            <column name="SAMPLE_PROTOCOL" type="VARCHAR2(2000)"/>
+            <column name="INVENTORY_STATUS" type="VARCHAR2(2000)"/>
+            <column name="POSITION" type="VARCHAR2(2000)"/>
+            <column name="TOTAL_MICROGRAMS" type="VARCHAR2(2000)"/>
+            <column name="A260_A280" type="VARCHAR2(2000)"/>
+            <column name="A260_A230" type="VARCHAR2(2000)"/>
+            <column name="A260_NG_UL" type="VARCHAR2(2000)"/>
+            <column name="28S_18S" type="VARCHAR2(2000)"/>
+            <column name="RIN" type="VARCHAR2(2000)"/>
+            <column name="BIOA_NG_UL" type="VARCHAR2(2000)"/>
+            <column name="DSDNA_NG_UL" type="VARCHAR2(2000)"/>
+            <column name="PROTOCOL_TITLE" type="VARCHAR2(2000)"/>
+            <column name="GENDER" type="VARCHAR2(2000)"/>
+            <column name="MINUTES_SINCE_CALORIES" type="VARCHAR2(2000)"/>
+            <column name="PEDIGREE_NAME" type="VARCHAR2(2000)"/>
+            <column name="PROBAND_STATUS" type="VARCHAR2(2000)"/>
+            <column name="ANALYSIS" type="VARCHAR2(2000)"/>
+            <column name="PLATFORM" type="VARCHAR2(2000)"/>
+            <column name="ASSAY" type="VARCHAR2(2000)"/>
+            <column name="FACILITY" type="VARCHAR2(2000)"/>
+            <column name="STUDY_ID" type="VARCHAR2(2000)"/>
+            <column name="CONTACT" type="VARCHAR2(2000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-62" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SET_TYPE">
+            <column name="ID" type="NUMBER(38, 0)"/>
+            <column name="NAME" type="VARCHAR2(500)"/>
+            <column name="CREATE_DATE" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-63" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SET_UPLOAD_STATUS">
+            <column name="UPLOAD_ID" type="NUMBER"/>
+            <column name="SET_TYPE_ID" type="NUMBER(38, 0)"/>
+            <column name="SOURCE_CD" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NO_OF_RECORD" type="NUMBER"/>
+            <column name="LOADED_RECORD" type="NUMBER"/>
+            <column name="DELETED_RECORD" type="NUMBER"/>
+            <column name="LOAD_DATE" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="END_DATE" type="date"/>
+            <column name="LOAD_STATUS" type="VARCHAR2(100)"/>
+            <column name="TRANSFORM_NAME" type="VARCHAR2(500)"/>
+            <column name="MESSAGE" type="CLOB"/>
+            <column name="INPUT_FILE_NAME" type="CLOB"/>
+            <column name="LOG_FILE_NAME" type="CLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-64" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="SOURCE_MASTER">
+            <column name="SOURCE_CD" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="VARCHAR2(300)"/>
+            <column name="CREATE_DATE" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-65" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="TIMERS">
+            <column name="TIMERID" type="VARCHAR2(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TARGETID" type="VARCHAR2(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INITIALDATE" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TIMERINTERVAL" type="NUMBER(19, 0)"/>
+            <column name="INSTANCEPK" type="BLOB"/>
+            <column name="INFO" type="BLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-66" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="UPLOAD_STATUS">
+            <column name="UPLOAD_ID" type="NUMBER(38, 0)"/>
+            <column name="UPLOAD_LABEL" type="VARCHAR2(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR2(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SOURCE_CD" type="VARCHAR2(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NO_OF_RECORD" type="NUMBER"/>
+            <column name="LOADED_RECORD" type="NUMBER"/>
+            <column name="DELETED_RECORD" type="NUMBER"/>
+            <column name="LOAD_DATE" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="END_DATE" type="date"/>
+            <column name="LOAD_STATUS" type="VARCHAR2(100)"/>
+            <column name="TRANSFORM_NAME" type="VARCHAR2(500)"/>
+            <column name="MESSAGE" type="CLOB"/>
+            <column name="INPUT_FILE_NAME" type="CLOB"/>
+            <column name="LOG_FILE_NAME" type="CLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-67" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="VISIT_DIMENSION">
+            <column name="ENCOUNTER_NUM" type="NUMBER(38, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PATIENT_NUM" type="NUMBER(38, 0)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INOUT_CD" type="VARCHAR2(50)"/>
+            <column name="LOCATION_CD" type="VARCHAR2(50)"/>
+            <column name="LOCATION_PATH" type="VARCHAR2(900)"/>
+            <column name="START_DATE" type="date"/>
+            <column name="END_DATE" type="date"/>
+            <column name="UPDATE_DATE" type="date"/>
+            <column name="DOWNLOAD_DATE" type="date"/>
+            <column name="IMPORT_DATE" type="date"/>
+            <column name="SOURCESYSTEM_CD" type="VARCHAR2(50)"/>
+            <column name="UPLOAD_ID" type="NUMBER(38, 0)"/>
+            <column name="ACTIVE_STATUS_CD" type="VARCHAR2(50)"/>
+            <column name="VISIT_BLOB" type="CLOB"/>
+            <column name="LENGTH_OF_STAY" type="NUMBER(38, 0)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-68" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="PLUGIN_ID" constraintName="ANALYSIS_PLUGIN_PK" tableName="QT_ANALYSIS_PLUGIN"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-69" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="PLUGIN_ID, RESULT_TYPE_ID" constraintName="ANALYSIS_PLUGIN_RESULT_PK" tableName="QT_ANALYSIS_PLUGIN_RESULT_TYPE"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-70" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="TABLE_CD, COLUMN_CD, CODE_CD" constraintName="CODE_LOOKUP_PK" tableName="CODE_LOOKUP"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-71" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="MODIFIER_PATH" constraintName="MODIFIER_DIMENSION_PK" tableName="MODIFIER_DIMENSION"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-72" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="PROVIDER_PATH, PROVIDER_ID" constraintName="PROVIDER_DIMENSION_PK" tableName="PROVIDER_DIMENSION"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-73" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="SAMPLE_ID" constraintName="SAMPLE_ID_PK" tableName="SAMPLE_CATEGORIES"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-74" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="ID" constraintName="SYS_C00237010" tableName="ASYNC_JOB"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-75" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="MESSAGEID, DESTINATION" constraintName="SYS_C00237012" tableName="JMS_MESSAGES"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-76" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="QUERY_MASTER_ID" constraintName="SYS_C00237014" tableName="QT_QUERY_MASTER"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-77" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="QUERY_MASTER_ID" constraintName="SYS_C00237032" tableName="QT_PDO_QUERY_MASTER"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-78" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="TIMERID, TARGETID" constraintName="TIMERS_PK" tableName="TIMERS"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-79" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="ENCOUNTER_NUM, PATIENT_NUM" constraintName="VISIT_DIMENSION_PK" tableName="VISIT_DIMENSION"/>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-80" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="CL_IDX_NAME_CHAR" tableName="CODE_LOOKUP" unique="false">
+            <column name="NAME_CHAR"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-81" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="CL_IDX_UPLOADID" tableName="CODE_LOOKUP" unique="false">
+            <column name="UPLOAD_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-82" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="CONCEPTS_FOLDERS_PATS_IDX1" tableName="CONCEPTS_FOLDERS_PATIENTS" unique="false">
+            <column name="CONCEPT_PATH"/>
+            <column name="PATIENT_NUM"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-83" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="CONCEPT_COUNTS_INDEX1" tableName="CONCEPT_COUNTS" unique="false">
+            <column name="PARENT_CONCEPT_PATH"/>
+            <column name="PATIENT_COUNT"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-84" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="FACT_CNPT_PAT_ENCT_IDX" tableName="OBSERVATION_FACT" unique="false">
+            <column name="CONCEPT_CD"/>
+            <column name="INSTANCE_NUM"/>
+            <column name="PATIENT_NUM"/>
+            <column name="MODIFIER_CD"/>
+            <column name="ENCOUNTER_NUM"/>
+            <column name="VALTYPE_CD"/>
+            <column name="NVAL_NUM"/>
+            <column name="TVAL_CHAR"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-85" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="FACT_MOD_PAT_ENC" tableName="OBSERVATION_FACT" unique="false">
+            <column name="MODIFIER_CD"/>
+            <column name="ENCOUNTER_NUM"/>
+            <column name="PATIENT_NUM"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-86" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="IDX_CONCEPT_DIM3" tableName="CONCEPT_DIMENSION" unique="false">
+            <column name="CONCEPT_PATH"/>
+            <column name="CONCEPT_CD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-87" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="IDX_CONCEPT_DIM_1" tableName="CONCEPT_DIMENSION" unique="false">
+            <column name="CONCEPT_CD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-88" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="IDX_OB_FACT_1" tableName="OBSERVATION_FACT" unique="false">
+            <column name="CONCEPT_CD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-89" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="IDX_OB_FACT_2" tableName="OBSERVATION_FACT" unique="false">
+            <column name="CONCEPT_CD"/>
+            <column name="PATIENT_NUM"/>
+            <column name="ENCOUNTER_NUM"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-90" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="INDEX1" tableName="CONCEPT_COUNTS" unique="false">
+            <column name="PARENT_CONCEPT_PATH"/>
+            <column name="PATIENT_COUNT"/>
+            <column name="CONCEPT_PATH"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-91" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="JMS_MESSAGES_DESTINATION" tableName="JMS_MESSAGES" unique="false">
+            <column name="DESTINATION"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-92" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="JMS_MESSAGES_TXOP_TXID" tableName="JMS_MESSAGES" unique="false">
+            <column name="TXOP"/>
+            <column name="TXID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-93" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="MD_IDX_CD_PATH" tableName="MODIFIER_DIMENSION" unique="false">
+            <column name="MODIFIER_CD"/>
+            <column name="MODIFIER_PATH"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-94" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="MD_IDX_UPLOADID" tableName="MODIFIER_DIMENSION" unique="false">
+            <column name="UPLOAD_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-95" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="OB_FACT_PK" tableName="OBSERVATION_FACT" unique="true">
+            <column name="ENCOUNTER_NUM"/>
+            <column name="PATIENT_NUM"/>
+            <column name="CONCEPT_CD"/>
+            <column name="PROVIDER_ID"/>
+            <column name="START_DATE"/>
+            <column name="MODIFIER_CD"/>
+            <column name="INSTANCE_NUM"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-96" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="PATIENT_DIMENSION_INDEX1" tableName="PATIENT_DIMENSION" unique="false">
+            <column name="AGE_IN_YEARS_NUM"/>
+            <column name="PATIENT_NUM"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-97" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="PATIENT_TRIAL_INDEX1" tableName="PATIENT_TRIAL" unique="false">
+            <column name="PATIENT_NUM"/>
+            <column name="TRIAL"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-98" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="PD_IDX_ALLPATIENTDIM" tableName="PATIENT_DIMENSION" unique="false">
+            <column name="PATIENT_NUM"/>
+            <column name="VITAL_STATUS_CD"/>
+            <column name="BIRTH_DATE"/>
+            <column name="DEATH_DATE"/>
+            <column name="SEX_CD"/>
+            <column name="AGE_IN_YEARS_NUM"/>
+            <column name="LANGUAGE_CD"/>
+            <column name="RACE_CD"/>
+            <column name="MARITAL_STATUS_CD"/>
+            <column name="RELIGION_CD"/>
+            <column name="ZIP_CD"/>
+            <column name="INCOME_CD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-99" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="PD_IDX_NAME_CHAR" tableName="PROVIDER_DIMENSION" unique="false">
+            <column name="PROVIDER_ID"/>
+            <column name="NAME_CHAR"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-100" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="PROD_UPLOADID_IDX" tableName="PROVIDER_DIMENSION" unique="false">
+            <column name="UPLOAD_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-101" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="QT_APNAMEVERGRP_IDX" tableName="QT_ANALYSIS_PLUGIN" unique="false">
+            <column name="PLUGIN_NAME"/>
+            <column name="VERSION_CD"/>
+            <column name="GROUP_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-102" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="QT_IDX_PQM_UGID" tableName="QT_PDO_QUERY_MASTER" unique="false">
+            <column name="USER_ID"/>
+            <column name="GROUP_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-103" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="QT_IDX_QM_UGID" tableName="QT_QUERY_MASTER" unique="false">
+            <column name="USER_ID"/>
+            <column name="GROUP_ID"/>
+            <column name="MASTER_TYPE_CD"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-104" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="VD_UPLOADID_IDX" tableName="VISIT_DIMENSION" unique="false">
+            <column name="UPLOAD_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-105" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="VISITDIM_EN_PN_LP_IO_SD_IDX" tableName="VISIT_DIMENSION" unique="false">
+            <column name="ENCOUNTER_NUM"/>
+            <column name="PATIENT_NUM"/>
+            <column name="LOCATION_PATH"/>
+            <column name="INOUT_CD"/>
+            <column name="START_DATE"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-106" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="VISITDIM_STD_EDD_IDX" tableName="VISIT_DIMENSION" unique="false">
+            <column name="START_DATE"/>
+            <column name="END_DATE"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-107" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="VISIT_DIM_PK" tableName="VISIT_DIMENSION" unique="true">
+            <column name="PATIENT_NUM"/>
+            <column name="ENCOUNTER_NUM"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

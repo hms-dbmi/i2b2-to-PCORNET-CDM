@@ -1,0 +1,12 @@
+--------------------------------------------------------
+--  File created - Friday-January-03-2014   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Index FACT_PATCON_DATE_PRVD_IDX
+--------------------------------------------------------
+
+  CREATE INDEX "I2B2DEMODATA"."FACT_PATCON_DATE_PRVD_IDX" ON "I2B2DEMODATA"."OBSERVATION_FACT" ("PATIENT_NUM", "CONCEPT_CD", "START_DATE", "END_DATE", "ENCOUNTER_NUM", "INSTANCE_NUM", "PROVIDER_ID", "NVAL_NUM", "VALTYPE_CD") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "I2B2_DATA" ;
