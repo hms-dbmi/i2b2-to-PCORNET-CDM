@@ -1,4 +1,4 @@
-/* clinical Notes is exported to table i2b2demodata.Export_465_Clinical_Notes  through sqlldr*/
+/* Clinical Notes is exported to table i2b2demodata.Export_465_Clinical_Notes  through sqlldr*/
 delete from i2b2demodata.Observation_fact_465_Notes;
 
 insert/*+ APPEND NOLOGGING */ into i2b2demodata.Observation_fact_465_Notes
