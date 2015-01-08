@@ -211,4 +211,9 @@
             <column name="PROBESET_ID"/>
         </createIndex>
     </changeSet>
+
+    <changeSet author="mmcduffie (generated)" id="1418322730766-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange=”true”>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_wz/PROCEDURES/UTIL_GRANT_ALL.sql'/>
+     </changeSet>
+
 </databaseChangeLog>

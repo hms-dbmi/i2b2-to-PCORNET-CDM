@@ -1093,4 +1093,126 @@ group by
  
  </createView>
     </changeSet>
+
+
+     <changeSet author="mmcduffie (generated)" id="1418322255992-84" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange=”true”>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/BIO_ASSAY_ANALYSIS_UID.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/BIO_ASSAY_PLATFORM_UID.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/BIO_ASY_ANALYSIS_PLTFM_UID.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/BIO_COMPOUND_UID.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/BIO_CURATION_DATASET_UID.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/BIO_DISEASE_UID.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/BIO_EXPERIMENT_UID.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/BIO_JUB_ONCOL_DATA_UID.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/BIO_JUB_ONCOL_SUM_DATA_UID.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/BIOMARKER_GENE_UID.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/BIOMARKER_PATHWAY_UID.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/CZF_INIT_CAP.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/CZF_NUM_OCCURANCES.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/CZF_PARSE_NTH_VALUE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/INSERT_ETL_JOB_RUN.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/INSERT_ETL_JOB_STEP.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/IS_DATE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/IS_NUMBER.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/IS_NUMBER_V2.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/NUM_OCCURANCES.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/PARSE_NTH_VALUE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/RDC_INIT_CAP.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/STRING_AGG.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/TEXT_PARSER.sql'/>
+     </changeSet>
+<changeSet author="mmcduffie (generated)" id="1418322255992-85" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange=”true”>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CREATE_SYNONYMS.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZ_AUDIT_EXAMPLE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZ_END_AUDIT.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZ_ERROR_HANDLER.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZ_INFO_HANDLER.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZ_START_AUDIT.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZ_WRITE_AUDIT.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZ_WRITE_ERROR.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZ_WRITE_INFO.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZX_END_AUDIT.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZX_ERROR_HANDLER.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZX_INFO_HANDLER.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZX_RUN_ONE_TEST.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZX_RUN_TEST_CATEGORY.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZX_START_AUDIT.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZX_TABLE_PROFILER.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZX_WRITE_AUDIT.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZX_WRITE_ERROR.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZX_WRITE_INFO.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/DATA_EXPORT.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/DELETE_STUDY.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/DROP_TABLE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/DROPSYN.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/EXEC_TEST.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/EXEC_TEST_RUN.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_ADD_NODE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_ADD_ROOT_NODE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_ADD_SNP_BIOMARKER_NODES.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_BACKOUT_TRIAL.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_CLINICAL_DATA_EXTRNL_LT.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_COPY_TO_RELEASE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_CREATE_CONCEPT_COUNTS.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_CREATE_EXTERNAL_TABLES.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_CREATE_PATIENT_DIM.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_CREATE_PATIENT_TRIAL.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_CREATE_SECURITY_FOR_TRIAL.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_DELETE_1_NODE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_DELETE_ALL_NODES.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_FILL_IN_TREE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_HIDE_NODE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_LOAD_ACROSS_TRIALS.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_LOAD_ANNOTATION_DEAPP.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_LOAD_CLINICAL_DATA.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_LOAD_COMPOUND_METADATA.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_LOAD_FROM_RELEASE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_LOAD_NGS.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_LOAD_PROTEIN_DATA.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_LOAD_RBM_DATA.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_LOAD_SAMPLE_CATEGORIES.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_LOAD_SAMPLE_DATA.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_LOAD_SECURITY_DATA.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_LOAD_STUDY_METADATA.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_MOVE_NODE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_MOVE_STUDY.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_MRNA_DATA_EXTRNL_LT.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_MRNA_INDEX_MAINT.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_MRNA_ZSCORE_CALC.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_PROCESS_MRNA_DATA.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_PROCESS_PROTEIN_DATA.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_PROCESS_RAW_DATA.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_PROCESS_RAW_DATA_EXTRNL.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_PROCESS_RBM_DATA.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_PROTEIN_ZSCORE_CALC.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_RBM_ZSCORE_CALC.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_RENAME_NODE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_SHOW_NODE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_TABLE_BKP.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_TABLE_DEFRAG.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/I2B2_TRUNCATE_RELEASE_TABLES.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/LOAD_CENTCLIN_CONTENT_DATA.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/LOAD_DISEASE_UID.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/LOAD_JUB_TARGET_SUM_FROM_DB.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/LOAD_KEGG_COMP_PATH_DATA.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/LOAD_KEGG_CONTENT_DATA.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/PARSE_DESIGN_FIELD.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/SET_BIO_DATA_UID_DIS.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/SET_BIO_DATA_UID_PATH.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/UTIL_CREATE_SYNONYM_ALL.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/UTIL_DROP_ALL.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/UTIL_DROP_ANYTHING.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/UTIL_DROP_SYNONYM.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/UTIL_DROP_SYNONYM_BY_OWNER.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/UTIL_DROP_TABLE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/UTIL_GRANT_ALL.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/UTIL_GRANT_EXECUTE.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/UTIL_GRANT_SELECT.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/UTIL_IS_POPULATED.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/UTIL_MAKE_OBJECT_LIST.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/UTIL_RECOMPILE_ALL.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/UTIL_TRUNCATE_TABLE.sql'/>
+     </changeSet>
+
+
 </databaseChangeLog>

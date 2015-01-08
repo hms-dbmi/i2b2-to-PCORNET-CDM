@@ -651,4 +651,14 @@ sag.ID = sasoa.AUTH_PRINCIPAL_ID
     AND i.bio_assay_feature_group_id   IS NOT NULL
     )</createView>
     </changeSet>
+
+     <changeSet author="mmcduffie (generated)" id="1418322143334-75" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange=”true”>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/searchapp/FUNCTIONS/BIO_CLINICAL_TRIAL_UID.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/searchapp/FUNCTIONS/BIO_COMPOUND_UID.sql'/>
+     </changeSet>
+
+     <changeSet author="mmcduffie (generated)" id="1418322143334-76" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange=”true”>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/searchapp/PROCEDURES/CREATE_FILE_FROM_QUERY.sql'/>
+       <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/searchapp/PROCEDURES/PATIENT_SUBSET2.sql'/>
+     </changeSet>
 </databaseChangeLog>

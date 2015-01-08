@@ -293,5 +293,10 @@
             <column name="QBLOCK_NAME" type="VARCHAR2(30)"/>
             <column name="OTHER_XML" type="CLOB"/>
         </createTable>
-    </changeSet>
+    </changeSet>        
+    <changeSet author="mmcduffie (generated)" id="1418321081468-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange=”true”>    
+        <comment>Procedures</comment>
+        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart_user/PROCEDURES/CREATE_FILE_FROM_QUERY.sql'/>
+		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart_user/PROCEDURES/PATIENT_SUBSET2.sql'/>
+    </changeSet>        
 </databaseChangeLog>
