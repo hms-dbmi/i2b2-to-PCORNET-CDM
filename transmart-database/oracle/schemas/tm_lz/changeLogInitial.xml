@@ -1013,7 +1013,7 @@
             <column name="PATIENT_NUM"/>
         </createIndex>
     </changeSet>
-     <changeSet author="mmcduffie (generated)" id="1418322495087-63" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange=”true”>
+     <changeSet author="mmcduffie (generated)" id="1418322495087-63" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange='true'>
        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_lz/PROCEDURES/UTIL_GRANT_ALL.sql'/>
      </changeSet>
 </databaseChangeLog>

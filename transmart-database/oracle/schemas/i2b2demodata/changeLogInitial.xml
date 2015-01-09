@@ -987,7 +987,7 @@
             <column name="ENCOUNTER_NUM"/>
         </createIndex>
     </changeSet>
-    <changeSet author="mmcduffie (generated)" id="1418321432519-108" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange=”true”>
+    <changeSet author="mmcduffie (generated)" id="1418321432519-108" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange='true'>
     	<comment>Procedures</comment>
 		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_CONCEPT_TABLE.sql'/>
 		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_EID_TABLE.sql'/>

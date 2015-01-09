@@ -1095,7 +1095,7 @@ group by
     </changeSet>
 
 
-     <changeSet author="mmcduffie (generated)" id="1418322255992-84" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange=”true”>
+     <changeSet author="mmcduffie (generated)" id="1418322255992-84" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange='true'>
        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/BIO_ASSAY_ANALYSIS_UID.sql'/>
        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/BIO_ASSAY_PLATFORM_UID.sql'/>
        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/BIO_ASY_ANALYSIS_PLTFM_UID.sql'/>
@@ -1121,7 +1121,7 @@ group by
        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/STRING_AGG.sql'/>
        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/FUNCTIONS/TEXT_PARSER.sql'/>
      </changeSet>
-<changeSet author="mmcduffie (generated)" id="1418322255992-85" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange=”true”>
+<changeSet author="mmcduffie (generated)" id="1418322255992-85" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange='true'>
        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CREATE_SYNONYMS.sql'/>
        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZ_AUDIT_EXAMPLE.sql'/>
        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/tm_cz/PROCEDURES/CZ_END_AUDIT.sql'/>

@@ -2961,7 +2961,7 @@ order by REF_ARTICLE_PROTOCOL_ID, TRTMT_DESCRIPTION, TRTMT_OCS
  
  </createView>
      </changeSet>
-     <changeSet author="mmcduffie (generated)" id="1418320671446-258" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+     <changeSet author="mmcduffie (generated)" id="1418320671446-258" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange='true'>
      
 		<comment>Functions</comment>
 		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/BIO_ASSAY_ANALYSIS_UID.sql'/>
