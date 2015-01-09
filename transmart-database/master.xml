@@ -17,5 +17,5 @@
   <include file="./oracle/schemas/tm_cz/changeLogInitial.xml"/> 
   <include file="./oracle/schemas/tm_lz/changeLogInitial.xml"/> 
   <include file="./oracle/schemas/tm_wz/changeLogInitial.xml"/> 
-
+  <include file="./oracle/seed_data/changeLogInitial.xml"/> 
 </databaseChangeLog>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="mmcduffie (generated)" id="1" objectQuotingStrategy="QUOTE_ALL_OBJECTS" >    
+        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/seed_data/i2b2.sql'/>
+        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/seed_data/qt_priv.sql'/>
+        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/seed_data/qt_query_states_type.sql'/>
+        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/seed_data/qt_query_status_type.sql'/>
+        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/seed_data/qt_result_type.sql'/>
+        <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/seed_data/searchapp_data.sql'/>
+    </changeSet>        
+</databaseChangeLog>
