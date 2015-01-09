@@ -2964,25 +2964,25 @@ order by REF_ARTICLE_PROTOCOL_ID, TRTMT_DESCRIPTION, TRTMT_OCS
      <changeSet author="mmcduffie (generated)" id="1418320671446-258" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange='true'>
      
 		<comment>Functions</comment>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/BIO_ASSAY_ANALYSIS_UID.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/BIO_ASSAY_PLATFORM_UID.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/BIO_ASY_ANALYSIS_PLTFM_UID.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/BIO_COMPOUND_UID.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/BIO_CURATION_DATASET_UID.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/BIO_DISEASE_UID.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/BIO_EXPERIMENT_UID.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/BIO_JUB_ONCOL_DATA_UID.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/BIO_JUB_ONCOL_SUM_DATA_UID.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/BIOMARKER_GENE_UID.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/BIOMARKER_PATHWAY_UID.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/CUM_NORMAL_DIST.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/FRACT_ERROR_DIST.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/STRING_AGG.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/TAB_TO_STRING.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/FUNCTIONS/TEA_NPV_PRECOMPUTE.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/BIO_ASSAY_ANALYSIS_UID.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/BIO_ASSAY_PLATFORM_UID.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/BIO_ASY_ANALYSIS_PLTFM_UID.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/BIO_COMPOUND_UID.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/BIO_CURATION_DATASET_UID.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/BIO_DISEASE_UID.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/BIO_EXPERIMENT_UID.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/BIO_JUB_ONCOL_DATA_UID.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/BIO_JUB_ONCOL_SUM_DATA_UID.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/BIOMARKER_GENE_UID.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/BIOMARKER_PATHWAY_UID.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/CUM_NORMAL_DIST.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/FRACT_ERROR_DIST.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/STRING_AGG.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/TAB_TO_STRING.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/FUNCTIONS/TEA_NPV_PRECOMPUTE.sql'/>
 
 		<comment>Stored Procedures</comment>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/PROCEDURES/CREATE_FILE_FROM_QUERY.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/biomart/PROCEDURES/PATIENT_SUBSET2.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/PROCEDURES/CREATE_FILE_FROM_QUERY.sql'/>
+		<sqlFile path='./oracle/schemas/biomart/PROCEDURES/PATIENT_SUBSET2.sql'/>
      </changeSet>
 </databaseChangeLog>

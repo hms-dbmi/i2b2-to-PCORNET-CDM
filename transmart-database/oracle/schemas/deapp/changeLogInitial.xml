@@ -498,14 +498,14 @@
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321147021-66" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange='true'>    
 		<comment>Procedures</comment>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/deapp/PROCEDURES/DUMP_TABLE_TO_CSV.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/deapp/PROCEDURES/MICROARRAY_COMPARISON_QRY.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/deapp/PROCEDURES/PROTEIN_COMPARISON_QRY.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/deapp/PROCEDURES/PROTEIN_DBL_COMP_QRY.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/deapp/PROCEDURES/RBM_COMPARISON_QRY.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/deapp/PROCEDURES/RBM_DBL_COMP_QRY.sql'/>    
+		<sqlFile path='./oracle/schemas/deapp/PROCEDURES/DUMP_TABLE_TO_CSV.sql'/>
+		<sqlFile path='./oracle/schemas/deapp/PROCEDURES/MICROARRAY_COMPARISON_QRY.sql'/>
+		<sqlFile path='./oracle/schemas/deapp/PROCEDURES/PROTEIN_COMPARISON_QRY.sql'/>
+		<sqlFile path='./oracle/schemas/deapp/PROCEDURES/PROTEIN_DBL_COMP_QRY.sql'/>
+		<sqlFile path='./oracle/schemas/deapp/PROCEDURES/RBM_COMPARISON_QRY.sql'/>
+		<sqlFile path='./oracle/schemas/deapp/PROCEDURES/RBM_DBL_COMP_QRY.sql'/>    
 		<comment>Functions</comment>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/deapp/FUNCTIONS/NUMBER_PARSER.sql'/>
-		<sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/deapp/FUNCTIONS/TEXT_PARSER.sql'/>		
+		<sqlFile path='./oracle/schemas/deapp/FUNCTIONS/NUMBER_PARSER.sql'/>
+		<sqlFile path='./oracle/schemas/deapp/FUNCTIONS/TEXT_PARSER.sql'/>		
     </changeSet>    
 </databaseChangeLog>

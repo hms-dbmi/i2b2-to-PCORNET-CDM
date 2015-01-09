@@ -365,7 +365,7 @@
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-33" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange='true'>
-     <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/i2b2metadata/PROCEDURES/ADD_ONTOLOGY_NODE.sql'/>
-     <sqlFile path='/Users/mmcduffie/src/tranSMART/ETL/transmart-database/oracle/schemas/i2b2metadata/PROCEDURES/DEFRAG_I2B2METADATA.sql'/>
+     <sqlFile path='./oracle/schemas/i2b2metadata/PROCEDURES/ADD_ONTOLOGY_NODE.sql'/>
+     <sqlFile path='./oracle/schemas/i2b2metadata/PROCEDURES/DEFRAG_I2B2METADATA.sql'/>
     </changeSet>
 </databaseChangeLog>
