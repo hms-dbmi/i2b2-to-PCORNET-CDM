@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure PROTEIN_COMPARISON_QRY
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "DEAPP"."PROTEIN_COMPARISON_QRY" (
 	patient_ids	 IN VARCHAR2, -- CSV list of patient IDs

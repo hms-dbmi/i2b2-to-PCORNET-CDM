@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure PROTEIN_DBL_COMP_QRY
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "DEAPP"."PROTEIN_DBL_COMP_QRY" 
 (

@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure DUMP_TABLE_TO_CSV
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "DEAPP"."DUMP_TABLE_TO_CSV" ( p_tname in varchar2,
                                                    p_dir   in varchar2,

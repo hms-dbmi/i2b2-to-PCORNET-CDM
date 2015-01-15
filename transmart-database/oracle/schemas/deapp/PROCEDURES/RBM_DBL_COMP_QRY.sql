@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure RBM_DBL_COMP_QRY
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "DEAPP"."RBM_DBL_COMP_QRY" 
 (
