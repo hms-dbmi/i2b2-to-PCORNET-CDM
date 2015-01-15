@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet author="mmcduffie (generated)" id="1418322071315-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="WORKPLACE">
+        <createTable schemaName="I2B2WORKDATA" tableName="WORKPLACE">
             <column name="C_NAME" type="VARCHAR2(255)">
                 <constraints nullable="false"/>
             </column>
@@ -30,7 +30,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322071315-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="WORKPLACE_ACCESS">
+        <createTable schemaName="I2B2WORKDATA" tableName="WORKPLACE_ACCESS">
             <column name="C_TABLE_CD" type="VARCHAR2(255)">
                 <constraints nullable="false"/>
             </column>
@@ -65,9 +65,9 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322071315-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="C_INDEX" constraintName="WORKPLACE_ACCESS_PK" tableName="WORKPLACE_ACCESS"/>
+        <addPrimaryKey schemaName="I2B2WORKDATA" columnNames="C_INDEX" constraintName="WORKPLACE_ACCESS_PK" tableName="WORKPLACE_ACCESS"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322071315-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="C_INDEX" constraintName="WORKPLACE_PK" tableName="WORKPLACE"/>
+        <addPrimaryKey schemaName="I2B2WORKDATA" columnNames="C_INDEX" constraintName="WORKPLACE_PK" tableName="WORKPLACE"/>
     </changeSet>
 </databaseChangeLog>
