@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure INSERT_EID_MAP_FROMTEMP
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."INSERT_EID_MAP_FROMTEMP" (tempEidTableName IN VARCHAR,  upload_id IN NUMBER,
    errorMsg OUT VARCHAR ) 

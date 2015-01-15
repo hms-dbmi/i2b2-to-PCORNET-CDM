@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure INSERT_PROVIDER_FROMTEMP
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."INSERT_PROVIDER_FROMTEMP" (tempProviderTableName IN VARCHAR, upload_id IN NUMBER,
    errorMsg OUT VARCHAR)

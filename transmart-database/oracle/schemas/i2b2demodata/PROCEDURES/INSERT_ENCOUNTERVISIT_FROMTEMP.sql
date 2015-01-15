@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure INSERT_ENCOUNTERVISIT_FROMTEMP
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."INSERT_ENCOUNTERVISIT_FROMTEMP" (tempTableName IN VARCHAR, upload_id IN NUMBER,
   errorMsg OUT VARCHAR) 

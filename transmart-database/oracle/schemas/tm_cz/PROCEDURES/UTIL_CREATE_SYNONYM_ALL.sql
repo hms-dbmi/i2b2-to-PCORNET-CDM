@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure UTIL_CREATE_SYNONYM_ALL
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."UTIL_CREATE_SYNONYM_ALL" 
 (

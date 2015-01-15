@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure CREATE_TEMP_MODIFIER_TABLE
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."CREATE_TEMP_MODIFIER_TABLE" (tempModifierTableName IN VARCHAR, 
   errorMsg OUT VARCHAR) 

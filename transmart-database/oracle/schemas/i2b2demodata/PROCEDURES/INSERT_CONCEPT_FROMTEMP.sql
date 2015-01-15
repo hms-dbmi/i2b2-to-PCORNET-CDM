@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure INSERT_CONCEPT_FROMTEMP
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."INSERT_CONCEPT_FROMTEMP" (tempConceptTableName IN VARCHAR, upload_id IN NUMBER, errorMsg OUT VARCHAR ) 
 IS 

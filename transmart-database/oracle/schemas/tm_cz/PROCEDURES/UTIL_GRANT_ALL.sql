@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure UTIL_GRANT_ALL
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."UTIL_GRANT_ALL" 
 (username	varchar2 := 'DATATRUST'

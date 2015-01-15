@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure CZX_WRITE_INFO
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."CZX_WRITE_INFO" 
 (

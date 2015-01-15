@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure ADD_ONTOLOGY_NODE
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2METADATA"."ADD_ONTOLOGY_NODE" 
 (parent_path_src varchar2--(255)

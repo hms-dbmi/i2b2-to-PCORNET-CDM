@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure SYNC_CLEAR_PROVIDER_TABLE
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."SYNC_CLEAR_PROVIDER_TABLE" (tempProviderTableName in VARCHAR, backupProviderTableName IN VARCHAR, uploadId in NUMBER, errorMsg OUT VARCHAR ) 
 IS 

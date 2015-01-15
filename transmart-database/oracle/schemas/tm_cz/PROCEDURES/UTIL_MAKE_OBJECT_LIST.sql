@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure UTIL_MAKE_OBJECT_LIST
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."UTIL_MAKE_OBJECT_LIST" 
 (

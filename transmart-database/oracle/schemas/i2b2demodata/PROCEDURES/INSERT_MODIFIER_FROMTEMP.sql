@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure INSERT_MODIFIER_FROMTEMP
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."INSERT_MODIFIER_FROMTEMP" (tempModifierTableName IN VARCHAR, upload_id IN NUMBER, errorMsg OUT VARCHAR ) 
 IS 

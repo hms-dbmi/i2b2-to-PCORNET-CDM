@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure I2B2_LOAD_RBM_DATA
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."I2B2_LOAD_RBM_DATA" 
 (

@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure CZX_ERROR_HANDLER
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."CZX_ERROR_HANDLER" (JOBID NUMBER,
 	PROCEDURENAME NVARCHAR2)

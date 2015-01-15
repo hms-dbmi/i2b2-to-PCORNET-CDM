@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure CREATE_TEMP_PROVIDER_TABLE
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."CREATE_TEMP_PROVIDER_TABLE" (tempProviderTableName IN VARCHAR, 
    errorMsg OUT VARCHAR) 

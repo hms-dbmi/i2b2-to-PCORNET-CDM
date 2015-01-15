@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure UTIL_TRUNCATE_TABLE
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."UTIL_TRUNCATE_TABLE" 
 (

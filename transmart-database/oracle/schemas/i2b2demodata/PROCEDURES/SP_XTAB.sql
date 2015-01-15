@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure SP_XTAB
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."SP_XTAB" (v_variable IN varchar2,
                                     v_protocol IN number,

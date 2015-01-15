@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure PARSE_DESIGN_FIELD
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."PARSE_DESIGN_FIELD" 
 as

@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure CZ_AUDIT_EXAMPLE
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."CZ_AUDIT_EXAMPLE" 
 (

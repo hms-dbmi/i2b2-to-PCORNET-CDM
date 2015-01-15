@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure DROP_TABLE
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."DROP_TABLE" (
   TabOwner in VARCHAR2,

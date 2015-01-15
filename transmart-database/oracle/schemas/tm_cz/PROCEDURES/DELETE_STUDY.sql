@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure DELETE_STUDY
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."DELETE_STUDY" 
 (

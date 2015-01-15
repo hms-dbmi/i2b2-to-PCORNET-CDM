@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure DROPSYN
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."DROPSYN" IS
  CURSOR s_cur IS

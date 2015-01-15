@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure I2B2_BACKOUT_TRIAL
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."I2B2_BACKOUT_TRIAL" 
 (

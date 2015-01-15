@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure CZX_START_AUDIT
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."CZX_START_AUDIT" 
 (V_JOB_NAME IN VARCHAR2 DEFAULT NULL ,

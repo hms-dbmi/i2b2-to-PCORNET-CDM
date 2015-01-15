@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure LOAD_CENTCLIN_CONTENT_DATA
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."LOAD_CENTCLIN_CONTENT_DATA" 
 as

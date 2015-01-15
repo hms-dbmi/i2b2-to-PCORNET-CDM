@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure CZ_ERROR_HANDLER
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."CZ_ERROR_HANDLER" 
 (

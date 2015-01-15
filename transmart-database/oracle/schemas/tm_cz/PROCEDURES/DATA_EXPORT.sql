@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure DATA_EXPORT
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."DATA_EXPORT" 
 AS

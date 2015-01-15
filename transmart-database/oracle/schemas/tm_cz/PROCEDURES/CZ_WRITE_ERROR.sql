@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure CZ_WRITE_ERROR
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."CZ_WRITE_ERROR" 
 (

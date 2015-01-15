@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure SET_BIO_DATA_UID_PATH
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."SET_BIO_DATA_UID_PATH" 
 as

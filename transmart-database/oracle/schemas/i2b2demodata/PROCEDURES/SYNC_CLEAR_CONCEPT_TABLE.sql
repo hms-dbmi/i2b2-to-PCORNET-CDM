@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure SYNC_CLEAR_CONCEPT_TABLE
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."SYNC_CLEAR_CONCEPT_TABLE" (tempConceptTableName in VARCHAR, backupConceptTableName IN VARCHAR, uploadId in NUMBER, errorMsg OUT VARCHAR ) 
 IS 

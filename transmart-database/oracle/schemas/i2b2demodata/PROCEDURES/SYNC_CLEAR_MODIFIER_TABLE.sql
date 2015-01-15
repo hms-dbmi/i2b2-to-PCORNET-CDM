@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure SYNC_CLEAR_MODIFIER_TABLE
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."SYNC_CLEAR_MODIFIER_TABLE" (tempModifierTableName in VARCHAR, backupModifierTableName IN VARCHAR, uploadId in NUMBER, errorMsg OUT VARCHAR ) 
 IS 

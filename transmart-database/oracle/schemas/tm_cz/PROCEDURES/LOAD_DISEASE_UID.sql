@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure LOAD_DISEASE_UID
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."LOAD_DISEASE_UID" 
 AS

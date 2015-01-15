@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure UPDATE_OBSERVATION_FACT
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."UPDATE_OBSERVATION_FACT" (upload_temptable_name IN VARCHAR, upload_id IN NUMBER, appendFlag IN NUMBER,
    errorMsg OUT VARCHAR)

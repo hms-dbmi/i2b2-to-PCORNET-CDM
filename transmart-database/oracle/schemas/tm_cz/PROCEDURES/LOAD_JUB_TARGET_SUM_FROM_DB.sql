@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure LOAD_JUB_TARGET_SUM_FROM_DB
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."LOAD_JUB_TARGET_SUM_FROM_DB" 
 AS

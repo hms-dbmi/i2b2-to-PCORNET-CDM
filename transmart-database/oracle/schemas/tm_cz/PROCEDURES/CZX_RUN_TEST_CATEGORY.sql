@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure CZX_RUN_TEST_CATEGORY
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."CZX_RUN_TEST_CATEGORY" 
 (

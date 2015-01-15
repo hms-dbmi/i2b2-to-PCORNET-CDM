@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure EXEC_TEST_RUN
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."EXEC_TEST_RUN" (
   v_test_category_id integer,

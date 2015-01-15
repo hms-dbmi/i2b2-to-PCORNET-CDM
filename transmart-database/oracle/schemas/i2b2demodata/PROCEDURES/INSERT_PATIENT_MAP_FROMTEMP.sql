@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure INSERT_PATIENT_MAP_FROMTEMP
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."INSERT_PATIENT_MAP_FROMTEMP" (tempPatientTableName IN VARCHAR,  upload_id IN NUMBER,
    errorMsg OUT VARCHAR ) 

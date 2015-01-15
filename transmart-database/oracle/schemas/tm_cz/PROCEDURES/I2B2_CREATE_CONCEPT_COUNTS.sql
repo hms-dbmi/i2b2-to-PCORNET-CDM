@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure I2B2_CREATE_CONCEPT_COUNTS
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."I2B2_CREATE_CONCEPT_COUNTS" 
 (

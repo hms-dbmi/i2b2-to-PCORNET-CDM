@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure CZX_WRITE_AUDIT
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."CZX_WRITE_AUDIT" (JOBID IN NUMBER,
 	DATABASENAME IN VARCHAR2 ,

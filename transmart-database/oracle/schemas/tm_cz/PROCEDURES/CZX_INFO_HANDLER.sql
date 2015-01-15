@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure CZX_INFO_HANDLER
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."CZX_INFO_HANDLER" 
 (

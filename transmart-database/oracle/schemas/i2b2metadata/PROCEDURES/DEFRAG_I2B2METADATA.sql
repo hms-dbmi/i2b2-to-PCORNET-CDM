@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure DEFRAG_I2B2METADATA
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2METADATA"."DEFRAG_I2B2METADATA" 
 AS

@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure CZX_TABLE_PROFILER
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."CZX_TABLE_PROFILER" 
 (

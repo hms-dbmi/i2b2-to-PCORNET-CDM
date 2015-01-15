@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure CZ_END_AUDIT
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."CZ_END_AUDIT" 
 (

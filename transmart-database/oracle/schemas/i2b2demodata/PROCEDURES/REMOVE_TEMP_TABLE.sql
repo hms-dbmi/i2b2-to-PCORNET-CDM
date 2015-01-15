@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure REMOVE_TEMP_TABLE
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."REMOVE_TEMP_TABLE" (tempTableName VARCHAR) 
 IS

@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure INSERT_PID_MAP_FROMTEMP
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."INSERT_PID_MAP_FROMTEMP" (tempPidTableName IN VARCHAR,  upload_id IN NUMBER, 
    errorMsg OUT VARCHAR) 

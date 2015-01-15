@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure CZX_END_AUDIT
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."CZX_END_AUDIT" (V_JOB_ID IN NUMBER DEFAULT NULL ,
   V_JOB_STATUS IN VARCHAR2 DEFAULT 'Success')

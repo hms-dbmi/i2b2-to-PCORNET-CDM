@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure PATIENT_SUBSET2
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "I2B2DEMODATA"."PATIENT_SUBSET2" (
   p_result_instance_id IN VARCHAR2,

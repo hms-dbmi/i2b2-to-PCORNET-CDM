@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  DDL for Procedure CREATE_SYNONYMS
 --------------------------------------------------------
-set define off;
+
 
   CREATE OR REPLACE PROCEDURE "TM_CZ"."CREATE_SYNONYMS" (
   fromDB IN VARCHAR2,
