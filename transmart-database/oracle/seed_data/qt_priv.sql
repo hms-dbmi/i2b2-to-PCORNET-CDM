@@ -1,7 +1,7 @@
 --------------------------------------------------------
 --  File created - Wednesday-December-10-2014   
 --------------------------------------------------------
- INSERTING into I2B2DEMODATA.QT_PRIVILEGE
+ I2B2DEMODATA.QT_PRIVILEGE
 
 Insert into I2B2DEMODATA.QT_PRIVILEGE (PROTECTION_LABEL_CD,DATAPROT_CD,HIVEMGMT_CD,PLUGIN_ID) values ('PDO_WITHOUT_BLOB','DATA_LDS','USER',null);
 Insert into I2B2DEMODATA.QT_PRIVILEGE (PROTECTION_LABEL_CD,DATAPROT_CD,HIVEMGMT_CD,PLUGIN_ID) values ('PDO_WITH_BLOB','DATA_DEID','USER',null);
