@@ -90,7 +90,7 @@ BEGIN
 		  ,la.c_columndatatype
 		  ,la.c_basecode
 		  ,REGEXP_REPLACE('\Across Trials\' || replace(replace(t.xtrial_category_cd,'+','\'),'_',' ')  || '\' || t.xtrial_name || '\' || 
-		   decode(la.c_columndatatype,'T',la.c_name,'') || '\' || base.c_name || '\','(\\){2,}', '\')
+		   decode(la.c_columndatatype,'T',la.c_name,'') || '\' || base.c_name || '\','(\\\\\\\\)|(\\\\\\)|(\\\\)', '\')
 	from cz_xtrial_codes t
 		,i2b2 fa
 		,i2b2 la
@@ -126,7 +126,7 @@ BEGIN
 		  ,la.c_columndatatype
 		  ,la.c_basecode
 		  ,REGEXP_REPLACE('\Across Trials\' || replace(replace(t.xtrial_category_cd,'+','\'),'_',' ')  || '\' || t.xtrial_name || '\' || 
-			'\' || base.c_name || '\' ,'(\\){2,}', '\')
+			'\' || base.c_name || '\' ,'(\\\\\\\\)|(\\\\\\)|(\\\\)', '\')
 	from cz_xtrial_codes t
 		,i2b2 la
 		,i2b2 base

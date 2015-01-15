@@ -74,7 +74,7 @@ BEGIN
 		   sysdate,
 		   sysdate,
 		   regexp_replace(s.trial_cd || ':S:' || s.site_cd || ':' || s.subject_cd || ':' || s.sample_cd,
-						  '(::){2,}', ':')
+						  '(::::)|(:::)|(::)', ':')
 	from (select distinct trial_cd
 	             ,site_cd
 				 ,subject_cd
@@ -85,7 +85,7 @@ BEGIN
 				(select 1 from patient_dimension x
 				 where x.sourcesystem_cd = 
 					   regexp_replace(s.trial_cd || ':S:' || s.site_cd || ':' || s.subject_cd || ':' || s.sample_cd,
-					 '(::){2,}', ':'))
+					 '(::::)|(:::)|(::)', ':'))
 		  ) s;
 			
 	stepCt := stepCt + 1;
@@ -115,8 +115,8 @@ BEGIN
 	  and s.category_value is not null
 	  and p.sourcesystem_cd = 
 		  case when s.sample_cd is null 
-			   then regexp_replace(s.trial_cd || ':' || s.site_cd || ':' || s.subject_cd,'(::){2,}', ':')
-			   else regexp_replace(s.trial_cd || ':S:' || s.site_cd || ':' || s.subject_cd || ':' || s.sample_cd,'(::){2,}', ':')
+			   then regexp_replace(s.trial_cd || ':' || s.site_cd || ':' || s.subject_cd,'(::::)|(:::)|(::)', ':')
+			   else regexp_replace(s.trial_cd || ':S:' || s.site_cd || ':' || s.subject_cd || ':' || s.sample_cd,'(::::)|(:::)|(::)', ':')
 		  end
 	  and s.trial_cd = f.sourcesystem_cd
 	  and f.c_hlevel = 0

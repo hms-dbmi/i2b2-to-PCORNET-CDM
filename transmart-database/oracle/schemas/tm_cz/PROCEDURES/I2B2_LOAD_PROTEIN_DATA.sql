@@ -27,7 +27,7 @@ AS
 	
   CURSOR addNodes is
   select distinct REGEXP_REPLACE('\' || rootnode || '\' || TrialID || '\Biomarker Data\Protein\Proteomics\' || timepoint || '\' ,
-                  '(\\){2,}', '\') as path
+                  '(\\\\\\\\)|(\\\\\\)|(\\\\)', '\') as path
          ,timepoint as node_name
   from  deapp.de_subject_protein_data
   where trial_name = TrialId;

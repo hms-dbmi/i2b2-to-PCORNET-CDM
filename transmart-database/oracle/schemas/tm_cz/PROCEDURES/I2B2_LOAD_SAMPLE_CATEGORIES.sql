@@ -76,7 +76,7 @@ BEGIN
 		   sysdate,
 		   sysdate,
 		   regexp_replace(s.trial_cd || ':S:' || s.site_cd || ':' || s.subject_cd || ':' || s.sample_cd,
-						  '(::){1,}', ':')
+						  '(::::)|(:::)|(::)', ':')
 	from (select distinct trial_cd
 	             ,site_cd
 				 ,subject_cd
@@ -87,7 +87,7 @@ BEGIN
 				(select 1 from patient_dimension x
 				 where x.sourcesystem_cd = 
 					   regexp_replace(s.trial_cd || ':S:' || s.site_cd || ':' || s.subject_cd || ':' || s.sample_cd,
-					 '(::){1,}', ':'))
+					 '(::::)|(:::)|(::)', ':'))
 		  ) s;
 			
 	stepCt := stepCt + 1;

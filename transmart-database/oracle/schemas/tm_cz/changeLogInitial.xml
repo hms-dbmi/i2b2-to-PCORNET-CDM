@@ -993,7 +993,6 @@ WHERE
        <sqlFile endDelimiter="^/$" path='./oracle/schemas/tm_cz/PROCEDURES/EXEC_TEST_RUN.sql'/>
        <sqlFile endDelimiter="^/$" path='./oracle/schemas/tm_cz/PROCEDURES/I2B2_ADD_NODE.sql'/>
        <sqlFile endDelimiter="^/$" path='./oracle/schemas/tm_cz/PROCEDURES/I2B2_ADD_ROOT_NODE.sql'/>
-       <sqlFile endDelimiter="^/$" path='./oracle/schemas/tm_cz/PROCEDURES/I2B2_ADD_SNP_BIOMARKER_NODES.sql'/>
        <sqlFile endDelimiter="^/$" path='./oracle/schemas/tm_cz/PROCEDURES/I2B2_BACKOUT_TRIAL.sql'/>
        <sqlFile endDelimiter="^/$" path='./oracle/schemas/tm_cz/PROCEDURES/I2B2_CLINICAL_DATA_EXTRNL_LT.sql'/>
        <sqlFile endDelimiter="^/$" path='./oracle/schemas/tm_cz/PROCEDURES/I2B2_COPY_TO_RELEASE.sql'/>

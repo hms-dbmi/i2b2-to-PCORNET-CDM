@@ -116,7 +116,7 @@ BEGIN
 		secureStudy := 'Y';
 	end if;
 	
-	topNode := REGEXP_REPLACE('\' || top_node || '\','(\\){2,}', '\');	
+	topNode := REGEXP_REPLACE('\' || top_node || '\','(\\\\\\\\)|(\\\\\\)|(\\\\)', '\');	
 	select length(topNode)-length(replace(topNode,'\','')) into topLevel from dual;
 	
 	if data_type is null then
@@ -228,7 +228,7 @@ BEGIN
 	
 	--	Add any upper level nodes as needed
 	
-	tPath := REGEXP_REPLACE(replace(top_node,study_name,null),'(\\){2,}', '\');
+	tPath := REGEXP_REPLACE(replace(top_node,study_name,null),'(\\\\\\\\)|(\\\\\\)|(\\\\)', '\');
 	select length(tPath) - length(replace(tPath,'\',null)) into pCount from dual;
 
 	if pCount > 2 then
@@ -268,7 +268,7 @@ BEGIN
 	from (select distinct 'Unknown' as sex_cd,
 				 0 as age_in_years_num,
 				 null as race_cd,
-				 regexp_replace(TrialID || ':' || s.site_id || ':' || s.subject_id,'(::){1,}', ':') as sourcesystem_cd
+				 regexp_replace(TrialID || ':' || s.site_id || ':' || s.subject_id,'(::::)|(:::)|(::)', ':') as sourcesystem_cd
 		 from lt_src_mrna_subj_samp_map s
 		     ,de_gpl_info g
 		 where s.subject_id is not null
@@ -279,7 +279,7 @@ BEGIN
 		   and not exists
 			  (select 1 from patient_dimension x
 			   where x.sourcesystem_cd = 
-				 regexp_replace(TrialID || ':' || s.site_id || ':' || s.subject_id,'(::){1,}', ':'))
+				 regexp_replace(TrialID || ':' || s.site_id || ':' || s.subject_id,'(::::)|(:::)|(::)', ':'))
 		) x;
 	
 	pCount := SQL%ROWCOUNT;
@@ -408,7 +408,7 @@ BEGIN
 	,node_type
 	)
 	select distinct topNode || regexp_replace(replace(replace(replace(replace(replace(replace(
-	       category_cd,'PLATFORM',title),'ATTR1',attribute_1),'ATTR2',attribute_2),'TISSUETYPE',tissue_type),'+','\'),'_',' ') || '\','(\\){2,}', '\') 
+	       category_cd,'PLATFORM',title),'ATTR1',attribute_1),'ATTR2',attribute_2),'TISSUETYPE',tissue_type),'+','\'),'_',' ') || '\','(\\\\\\\\)|(\\\\\\)|(\\\\)', '\') 
 		  ,category_cd
 		  ,platform as platform
 		  ,tissue_type
@@ -434,7 +434,7 @@ BEGIN
 	)
 	select distinct topNode || regexp_replace(replace(replace(replace(replace(replace(replace(
 	       substr(category_cd,1,instr(category_cd,'PLATFORM')+8),'PLATFORM',title),'ATTR1',attribute_1),'ATTR2',attribute_2),'TISSUETYPE',tissue_type),'+','\'),'_',' ') || '\',
-		   '(\\){2,}', '\')
+		   '(\\\\\\\\)|(\\\\\\)|(\\\\)', '\')
 		  ,substr(category_cd,1,instr(category_cd,'PLATFORM')+8)
 		  ,platform as platform
 		  ,case when instr(substr(category_cd,1,instr(category_cd,'PLATFORM')+8),'TISSUETYPE') > 1 then tissue_type else null end as tissue_type
@@ -460,7 +460,7 @@ BEGIN
 	)
 	select distinct topNode || regexp_replace(replace(replace(replace(replace(replace(replace(
 	       substr(category_cd,1,instr(category_cd,'ATTR1')+5),'PLATFORM',title),'ATTR1',attribute_1),'ATTR2',attribute_2),'TISSUETYPE',tissue_type),'+','\'),'_',' ') || '\',
-		   '(\\){2,}', '\')
+		   '(\\\\\\\\)|(\\\\\\)|(\\\\)', '\')
 		  ,substr(category_cd,1,instr(category_cd,'ATTR1')+5)
 		  ,case when instr(substr(category_cd,1,instr(category_cd,'ATTR1')+5),'PLATFORM') > 1 then platform else null end as platform
 		  ,case when instr(substr(category_cd,1,instr(category_cd,'ATTR1')+5),'TISSUETYPE') > 1 then tissue_type else null end as tissue_type
@@ -488,7 +488,7 @@ BEGIN
 	)
 	select distinct topNode || regexp_replace(replace(replace(replace(replace(replace(replace(
 	       substr(category_cd,1,instr(category_cd,'ATTR2')+5),'PLATFORM',title),'ATTR1',attribute_1),'ATTR2',attribute_2),'TISSUETYPE',tissue_type),'+','\'),'_',' ') || '\',
-		   '(\\){2,}', '\')
+		   '(\\\\\\\\)|(\\\\\\)|(\\\\)', '\')
 		  ,substr(category_cd,1,instr(category_cd,'ATTR2')+5)
 		  ,case when instr(substr(category_cd,1,instr(category_cd,'ATTR2')+5),'PLATFORM') > 1 then platform else null end as platform
 		  ,case when instr(substr(category_cd,1,instr(category_cd,'ATTR1')+5),'TISSUETYPE') > 1 then tissue_type else null end as tissue_type
@@ -516,7 +516,7 @@ BEGIN
 	)
 	select distinct topNode || regexp_replace(replace(replace(replace(replace(replace(replace(
 	       substr(category_cd,1,instr(category_cd,'TISSUETYPE')+10),'PLATFORM',title),'ATTR1',attribute_1),'ATTR2',attribute_2),'TISSUETYPE',tissue_type),'+','\'),'_',' ') || '\',
-		   '(\\){2,}', '\')
+		   '(\\\\\\\\)|(\\\\\\)|(\\\\)', '\')
 		  ,substr(category_cd,1,instr(category_cd,'TISSUETYPE')+10)
 		  ,case when instr(substr(category_cd,1,instr(category_cd,'TISSUETYPE')+10),'PLATFORM') > 1 then platform else null end as platform
 		  ,tissue_type as tissue_type
@@ -679,7 +679,7 @@ BEGIN
 		from lt_src_mrna_subj_samp_map a		
 		--Joining to Pat_dim to ensure the ID's match. If not I2B2 won't work.
 		inner join patient_dimension b
-		  on regexp_replace(TrialID || ':' || a.site_id || ':' || a.subject_id,'(::){1,}', ':') = b.sourcesystem_cd
+		  on regexp_replace(TrialID || ':' || a.site_id || ':' || a.subject_id,'(::::)|(:::)|(::)', ':') = b.sourcesystem_cd
 		inner join wt_mrna_nodes ln
 			on a.platform = ln.platform
 			and a.tissue_type = ln.tissue_type
@@ -712,7 +712,7 @@ BEGIN
 			and a2.node_type = 'ATTR2'			  
 		left outer join patient_dimension sid
 			on  regexp_replace(TrialId || ':S:' || a.site_id || ':' || a.subject_id || ':' || a.sample_cd,
-							  '(::){1,}', ':') = sid.sourcesystem_cd
+							  '(::::)|(:::)|(::)', ':') = sid.sourcesystem_cd
 		where a.trial_name = TrialID
 		  and a.source_cd = sourceCD
 		  and  ln.concept_cd is not null) t;

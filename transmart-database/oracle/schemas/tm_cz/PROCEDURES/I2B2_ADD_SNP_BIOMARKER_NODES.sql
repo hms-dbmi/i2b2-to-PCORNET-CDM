@@ -41,7 +41,7 @@ AS
 
 	cursor addPlatform is
 	select distinct REGEXP_REPLACE(ont_path || '\' || g.title || '\' ,
-                  '(\\){2,}', '\') as path
+                  '(\\\\\\\\)|(\\\\\\)|(\\\\)', '\') as path
 		   ,g.title
 	from de_subject_snp_dataset s
 		,de_gpl_info g
@@ -53,7 +53,7 @@ AS
 
 	cursor addSample is
 	select distinct REGEXP_REPLACE(ont_path || '\' || g.title || '\' ||
-                    s.sample_type || '\',	'(\\){2,}', '\') as sample_path
+                    s.sample_type || '\',	'(\\\\\\\\)|(\\\\\\)|(\\\\)', '\') as sample_path
 		   ,s.sample_type as sample_name
 	from de_subject_snp_dataset s
 		,de_gpl_info g
@@ -95,10 +95,10 @@ BEGIN
 	select count(*)
 	into pExists
 	from i2b2
-	where c_fullname = REGEXP_REPLACE(ont_path || '\','(\\){2,}', '\');
+	where c_fullname = REGEXP_REPLACE(ont_path || '\','(\\\\\\\\)|(\\\\\\)|(\\\\)', '\');
   
 	if pExists = 0 then 
-		i2b2_add_node(TrialId, REGEXP_REPLACE(ont_path || '\','(\\){2,}', '\'), nodeName, jobID);
+		i2b2_add_node(TrialId, REGEXP_REPLACE(ont_path || '\','(\\\\\\\\)|(\\\\\\)|(\\\\)', '\'), nodeName, jobID);
         stepCt := stepCt + 1;
 	    cz_write_audit(jobId,databaseName,procedureName,'Add node for ontPath',0,stepCt,'Done');
 	end if;
@@ -122,7 +122,7 @@ BEGIN
 	
 	for r_addPlatform in addPlatform Loop
 	
-		i2b2_delete_all_nodes(REGEXP_REPLACE(ont_path || '\','(\\){2,}', '\') || r_addPlatform.title || '\', jobID);
+		i2b2_delete_all_nodes(REGEXP_REPLACE(ont_path || '\','(\\\\\\\\)|(\\\\\\)|(\\\\)', '\') || r_addPlatform.title || '\', jobID);
 		stepCt := stepCt + 1;
 		cz_write_audit(jobId,databaseName,procedureName,'Delete existing SNP Platform for trial in I2B2METADATA i2b2',0,stepCt,'Done');
 		
@@ -181,7 +181,7 @@ BEGIN
     where p.trial_name =  TrialId
 	  and nvl(p.platform_name,'GPL570') = g.platform
 	  and upper(g.organism) = 'HOMO SAPIENS'
-	  and t.concept_path = REGEXP_REPLACE(ont_path || '\','(\\){2,}', '\') || g.title || '\' || p.sample_type || '\'
+	  and t.concept_path = REGEXP_REPLACE(ont_path || '\','(\\\\\\\\)|(\\\\\\)|(\\\\)', '\') || g.title || '\' || p.sample_type || '\'
     group by p.patient_num
 			,t.concept_cd
 			,t.sourcesystem_cd;
@@ -199,7 +199,7 @@ BEGIN
 					  where d.subject_snp_dataset_id = p.subject_snp_dataset_id
 						and nvl(p.platform_name,'GPL570') = g.platform
 						and upper(g.organism) = 'HOMO SAPIENS'
-						and t.concept_path = REGEXP_REPLACE(ont_path || '\','(\\){2,}', '\') || g.title || '\' || p.sample_type || '\'
+						and t.concept_path = REGEXP_REPLACE(ont_path || '\','(\\\\\\\\)|(\\\\\\)|(\\\\)', '\') || g.title || '\' || p.sample_type || '\'
 					  )
 	where d.trial_name = TrialId;
 	
@@ -214,7 +214,7 @@ BEGIN
     where 1 = (select count(*)
 			   from i2b2 b
 			   where b.c_fullname like (a.c_fullname || '%'))
-      and a.c_fullname like REGEXP_REPLACE(ont_path || '\','(\\){2,}', '\') || '%';
+      and a.c_fullname like REGEXP_REPLACE(ont_path || '\','(\\\\\\\\)|(\\\\\\)|(\\\\)', '\') || '%';
     stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Update leaf active attribute for trial in I2B2METADATA i2b2',SQL%ROWCOUNT,stepCt,'Done');
     commit;
@@ -232,14 +232,14 @@ BEGIN
 	  and ontPath like b.c_fullname || '%'
 	  and b.sourcesystem_cd = TrialId;
 
-	i2b2_fill_in_tree(TrialID,REGEXP_REPLACE(nodeName || '\','(\\){2,}', '\'), jobID);
+	i2b2_fill_in_tree(TrialID,REGEXP_REPLACE(nodeName || '\','(\\\\\\\\)|(\\\\\\)|(\\\\)', '\'), jobID);
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Fill in tree for Biomarker Data for trial',SQL%ROWCOUNT,stepCt,'Done');
   
   --Build concept Counts
   --Also marks any i2B2 records with no underlying data as Hidden, need to do at Biomarker level because there may be multiple platforms and patient count can vary
   
-    i2b2_create_concept_counts(REGEXP_REPLACE(nodeName || '\','(\\){2,}', '\'),jobID );
+    i2b2_create_concept_counts(REGEXP_REPLACE(nodeName || '\','(\\\\\\\\)|(\\\\\\)|(\\\\)', '\'),jobID );
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Create concept counts',0,stepCt,'Done');
 
