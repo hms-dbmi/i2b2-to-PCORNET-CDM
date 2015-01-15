@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet author="mmcduffie (generated)" id="1418322143334-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="HIBERNATE_SEQUENCE" startValue="104064"/>
+        <createSequence schemaName="SEARCHAPP" cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="HIBERNATE_SEQUENCE" startValue="104064"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="PLUGIN_MODULE_SEQ" startValue="41"/>
+        <createSequence schemaName="SEARCHAPP" cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="PLUGIN_MODULE_SEQ" startValue="41"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="PLUGIN_SEQ" startValue="1"/>
+        <createSequence schemaName="SEARCHAPP" cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="PLUGIN_SEQ" startValue="1"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_SEARCH_DATA_ID" startValue="1999000"/>
+        <createSequence schemaName="SEARCHAPP" cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_SEARCH_DATA_ID" startValue="1999000"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PASSWORD_DICTIONARY">
+        <createTable schemaName="SEARCHAPP" tableName="PASSWORD_DICTIONARY">
             <column name="TERM" type="VARCHAR2(200)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PLUGIN">
+        <createTable schemaName="SEARCHAPP" tableName="PLUGIN">
             <column name="PLUGIN_SEQ" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
@@ -43,7 +43,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PLUGIN1">
+        <createTable schemaName="SEARCHAPP" tableName="PLUGIN1">
             <column name="PLUGIN_SEQ" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
@@ -68,7 +68,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PLUGIN_MODULE">
+        <createTable schemaName="SEARCHAPP" tableName="PLUGIN_MODULE">
             <column name="MODULE_SEQ" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
@@ -99,7 +99,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PLUGIN_MODULE1">
+        <createTable schemaName="SEARCHAPP" tableName="PLUGIN_MODULE1">
             <column name="MODULE_SEQ" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
@@ -130,7 +130,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_APP_ACCESS_LOG">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_APP_ACCESS_LOG">
             <column name="ID" type="NUMBER(19, 0)"/>
             <column name="ACCESS_TIME" type="TIMESTAMP"/>
             <column name="EVENT" type="VARCHAR2(255 CHAR)"/>
@@ -140,7 +140,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_AUTH_GROUP">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_AUTH_GROUP">
             <column name="ID" type="NUMBER(19, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -148,13 +148,13 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_AUTH_GROUP_MEMBER">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_AUTH_GROUP_MEMBER">
             <column name="AUTH_USER_ID" type="NUMBER(19, 0)"/>
             <column name="AUTH_GROUP_ID" type="NUMBER(19, 0)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_AUTH_PRINCIPAL">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_AUTH_PRINCIPAL">
             <column name="ID" type="NUMBER(19, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -172,7 +172,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_AUTH_SEC_OBJECT_ACCESS">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_AUTH_SEC_OBJECT_ACCESS">
             <column name="AUTH_SEC_OBJ_ACCESS_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -182,7 +182,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_AUTH_USER">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_AUTH_USER">
             <column name="ID" type="NUMBER(19, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -198,7 +198,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_AUTH_USER_SEC_ACCESS">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_AUTH_USER_SEC_ACCESS">
             <column name="SEARCH_AUTH_USER_SEC_ACCESS_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -208,7 +208,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_CUSTOM_FILTER">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_CUSTOM_FILTER">
             <column name="SEARCH_CUSTOM_FILTER_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -225,7 +225,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_CUSTOM_FILTER_ITEM">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_CUSTOM_FILTER_ITEM">
             <column name="SEARCH_CUSTOM_FILTER_ITEM_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -241,7 +241,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_GENE_SIGNATURE">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_GENE_SIGNATURE">
             <column name="SEARCH_GENE_SIGNATURE_ID" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
@@ -312,7 +312,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_GENE_SIGNATURE_ITEM">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_GENE_SIGNATURE_ITEM">
             <column name="SEARCH_GENE_SIGNATURE_ID" remarks="associated gene signature" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
@@ -326,7 +326,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-21" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable remarks="Represents file schemas used to represent a gene signature upload. Normally this table would be populated only by seed data" tableName="SEARCH_GENE_SIG_FILE_SCHEMA">
+        <createTable schemaName="SEARCHAPP" remarks="Represents file schemas used to represent a gene signature upload. Normally this table would be populated only by seed data" tableName="SEARCH_GENE_SIG_FILE_SCHEMA">
             <column name="SEARCH_GENE_SIG_FILE_SCHEMA_ID" remarks="primary key" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
@@ -343,7 +343,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-22" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_KEYWORD">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_KEYWORD">
             <column name="KEYWORD" type="NVARCHAR2(200)"/>
             <column name="BIO_DATA_ID" type="NUMBER(18, 0)"/>
             <column name="UNIQUE_ID" type="NVARCHAR2(500)">
@@ -361,7 +361,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-23" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_KEYWORD_TERM">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_KEYWORD_TERM">
             <column name="KEYWORD_TERM" type="VARCHAR2(200)"/>
             <column name="SEARCH_KEYWORD_ID" type="NUMBER(18, 0)"/>
             <column name="RANK" type="NUMBER(18, 0)"/>
@@ -373,7 +373,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-24" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_REQUEST_MAP">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_REQUEST_MAP">
             <column name="ID" type="NUMBER(19, 0)"/>
             <column name="VERSION" type="NUMBER(19, 0)"/>
             <column name="CONFIG_ATTRIBUTE" type="VARCHAR2(255 CHAR)"/>
@@ -381,7 +381,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-25" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_ROLE">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_ROLE">
             <column name="ID" type="NUMBER(19, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -391,13 +391,13 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-26" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_ROLE_AUTH_USER">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_ROLE_AUTH_USER">
             <column name="PEOPLE_ID" type="NUMBER(19, 0)"/>
             <column name="AUTHORITIES_ID" type="NUMBER(19, 0)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-27" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_SECURE_OBJECT">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_SECURE_OBJECT">
             <column name="SEARCH_SECURE_OBJECT_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -408,7 +408,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-28" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_SECURE_OBJECT_PATH">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_SECURE_OBJECT_PATH">
             <column name="SEARCH_SECURE_OBJECT_ID" type="NUMBER(18, 0)"/>
             <column name="I2B2_CONCEPT_PATH" type="NVARCHAR2(2000)"/>
             <column name="SEARCH_SECURE_OBJ_PATH_ID" type="NUMBER(18, 0)">
@@ -417,7 +417,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-29" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_SEC_ACCESS_LEVEL">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_SEC_ACCESS_LEVEL">
             <column name="SEARCH_SEC_ACCESS_LEVEL_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -426,7 +426,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-30" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_USER_FEEDBACK">
+        <createTable schemaName="SEARCHAPP" tableName="SEARCH_USER_FEEDBACK">
             <column name="SEARCH_USER_FEEDBACK_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -437,141 +437,141 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-31" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="ID" constraintName="PK_AUTH_USR_GROUP" tableName="SEARCH_AUTH_GROUP"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="ID" constraintName="PK_AUTH_USR_GROUP" tableName="SEARCH_AUTH_GROUP"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-32" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="ID" constraintName="PK_SEARCH_PRINCIPAL" tableName="SEARCH_AUTH_PRINCIPAL"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="ID" constraintName="PK_SEARCH_PRINCIPAL" tableName="SEARCH_AUTH_PRINCIPAL"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-33" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="MODULE_SEQ" constraintName="PLUGIN_MODULE_PK" tableName="PLUGIN_MODULE1"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="MODULE_SEQ" constraintName="PLUGIN_MODULE_PK" tableName="PLUGIN_MODULE1"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-34" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="PLUGIN_SEQ" constraintName="PLUGIN_PK" tableName="PLUGIN1"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="PLUGIN_SEQ" constraintName="PLUGIN_PK" tableName="PLUGIN1"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-35" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="SEARCH_USER_FEEDBACK_ID" constraintName="RDT_SEARCH_USER_FDBK_PK" tableName="SEARCH_USER_FEEDBACK"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="SEARCH_USER_FEEDBACK_ID" constraintName="RDT_SEARCH_USER_FDBK_PK" tableName="SEARCH_USER_FEEDBACK"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-36" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="AUTH_SEC_OBJ_ACCESS_ID" constraintName="SCH_SEC_A_A_S_A_PK" tableName="SEARCH_AUTH_SEC_OBJECT_ACCESS"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="AUTH_SEC_OBJ_ACCESS_ID" constraintName="SCH_SEC_A_A_S_A_PK" tableName="SEARCH_AUTH_SEC_OBJECT_ACCESS"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-37" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="SEARCH_CUSTOM_FILTER_ID" constraintName="SEARCH_CUSTOM_FILTER_PK" tableName="SEARCH_CUSTOM_FILTER"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="SEARCH_CUSTOM_FILTER_ID" constraintName="SEARCH_CUSTOM_FILTER_PK" tableName="SEARCH_CUSTOM_FILTER"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-38" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="SEARCH_CUSTOM_FILTER_ITEM_ID" constraintName="SEARCH_CUST_FIL_ITEM_PK" tableName="SEARCH_CUSTOM_FILTER_ITEM"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="SEARCH_CUSTOM_FILTER_ITEM_ID" constraintName="SEARCH_CUST_FIL_ITEM_PK" tableName="SEARCH_CUSTOM_FILTER_ITEM"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-39" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="ID" constraintName="SEARCH_GENE_SIGNATURE_ITE_PK" tableName="SEARCH_GENE_SIGNATURE_ITEM"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="ID" constraintName="SEARCH_GENE_SIGNATURE_ITE_PK" tableName="SEARCH_GENE_SIGNATURE_ITEM"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-40" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="SEARCH_GENE_SIGNATURE_ID" constraintName="SEARCH_GENE_SIG_DESCR_PK" tableName="SEARCH_GENE_SIGNATURE"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="SEARCH_GENE_SIGNATURE_ID" constraintName="SEARCH_GENE_SIG_DESCR_PK" tableName="SEARCH_GENE_SIGNATURE"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-41" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="SEARCH_GENE_SIG_FILE_SCHEMA_ID" constraintName="SEARCH_GENE_SIG_FILE_SCHE_PK" tableName="SEARCH_GENE_SIG_FILE_SCHEMA"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="SEARCH_GENE_SIG_FILE_SCHEMA_ID" constraintName="SEARCH_GENE_SIG_FILE_SCHE_PK" tableName="SEARCH_GENE_SIG_FILE_SCHEMA"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-42" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="SEARCH_KEYWORD_ID" constraintName="SEARCH_KW_PK" tableName="SEARCH_KEYWORD"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="SEARCH_KEYWORD_ID" constraintName="SEARCH_KW_PK" tableName="SEARCH_KEYWORD"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-43" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="SEARCH_KEYWORD_TERM_ID" constraintName="SEARCH_KW_TERM_PK" tableName="SEARCH_KEYWORD_TERM"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="SEARCH_KEYWORD_TERM_ID" constraintName="SEARCH_KW_TERM_PK" tableName="SEARCH_KEYWORD_TERM"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-44" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="SEARCH_SEC_ACCESS_LEVEL_ID" constraintName="SEARCH_SEC_AC_LEVEL_PK" tableName="SEARCH_SEC_ACCESS_LEVEL"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="SEARCH_SEC_ACCESS_LEVEL_ID" constraintName="SEARCH_SEC_AC_LEVEL_PK" tableName="SEARCH_SEC_ACCESS_LEVEL"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-45" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="SEARCH_AUTH_USER_SEC_ACCESS_ID" constraintName="SEARCH_SEC_A_U_S_A_PK" tableName="SEARCH_AUTH_USER_SEC_ACCESS"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="SEARCH_AUTH_USER_SEC_ACCESS_ID" constraintName="SEARCH_SEC_A_U_S_A_PK" tableName="SEARCH_AUTH_USER_SEC_ACCESS"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-46" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="SEARCH_SECURE_OBJECT_ID" constraintName="SEARCH_SEC_OBJ_PK" tableName="SEARCH_SECURE_OBJECT"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="SEARCH_SECURE_OBJECT_ID" constraintName="SEARCH_SEC_OBJ_PK" tableName="SEARCH_SECURE_OBJECT"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-47" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="SEARCH_SECURE_OBJ_PATH_ID" constraintName="SEARCH_SEC_OBJ__PATH_PK" tableName="SEARCH_SECURE_OBJECT_PATH"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="SEARCH_SECURE_OBJ_PATH_ID" constraintName="SEARCH_SEC_OBJ__PATH_PK" tableName="SEARCH_SECURE_OBJECT_PATH"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-48" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="ID" constraintName="SYS_C00236974" tableName="SEARCH_AUTH_USER"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="ID" constraintName="SYS_C00236974" tableName="SEARCH_AUTH_USER"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-49" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="ID" constraintName="SYS_C00236982" tableName="SEARCH_ROLE"/>
+        <addPrimaryKey schemaName="SEARCHAPP" columnNames="ID" constraintName="SYS_C00236982" tableName="SEARCH_ROLE"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-50" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addUniqueConstraint columnNames="UNIQUE_ID, DATA_CATEGORY" constraintName="SEARCH_KEYWORD_UK" deferrable="false" disabled="false" initiallyDeferred="false" tableName="SEARCH_KEYWORD"/>
+        <addUniqueConstraint schemaName="SEARCHAPP" columnNames="UNIQUE_ID, DATA_CATEGORY" constraintName="SEARCH_KEYWORD_UK" deferrable="false" disabled="false" initiallyDeferred="false" tableName="SEARCH_KEYWORD"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-51" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="AUTHORITIES_ID" baseTableName="SEARCH_ROLE_AUTH_USER" constraintName="FKFB14EF79287E0CAC" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_USER"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="AUTHORITIES_ID" baseTableName="SEARCH_ROLE_AUTH_USER" constraintName="FKFB14EF79287E0CAC" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_USER"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-52" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="PEOPLE_ID" baseTableName="SEARCH_ROLE_AUTH_USER" constraintName="FKFB14EF798F01F561" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_ROLE"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="PEOPLE_ID" baseTableName="SEARCH_ROLE_AUTH_USER" constraintName="FKFB14EF798F01F561" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_ROLE"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-53" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="CREATED_BY_AUTH_USER_ID" baseTableName="SEARCH_GENE_SIGNATURE" constraintName="GENE_SIG_CREATE_AUTH_USER_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_USER"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="CREATED_BY_AUTH_USER_ID" baseTableName="SEARCH_GENE_SIGNATURE" constraintName="GENE_SIG_CREATE_AUTH_USER_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_USER"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-54" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="SEARCH_GENE_SIG_FILE_SCHEMA_ID" baseTableName="SEARCH_GENE_SIGNATURE" constraintName="GENE_SIG_FILE_SCHEMA_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_GENE_SIG_FILE_SCHEMA_ID" referencedTableName="SEARCH_GENE_SIG_FILE_SCHEMA"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="SEARCH_GENE_SIG_FILE_SCHEMA_ID" baseTableName="SEARCH_GENE_SIGNATURE" constraintName="GENE_SIG_FILE_SCHEMA_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_GENE_SIG_FILE_SCHEMA_ID" referencedTableName="SEARCH_GENE_SIG_FILE_SCHEMA"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-55" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="MODIFIED_BY_AUTH_USER_ID" baseTableName="SEARCH_GENE_SIGNATURE" constraintName="GENE_SIG_MOD_AUTH_USER_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_USER"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="MODIFIED_BY_AUTH_USER_ID" baseTableName="SEARCH_GENE_SIGNATURE" constraintName="GENE_SIG_MOD_AUTH_USER_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_USER"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-56" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="PARENT_GENE_SIGNATURE_ID" baseTableName="SEARCH_GENE_SIGNATURE" constraintName="GENE_SIG_PARENT_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_GENE_SIGNATURE_ID" referencedTableName="SEARCH_GENE_SIGNATURE"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="PARENT_GENE_SIGNATURE_ID" baseTableName="SEARCH_GENE_SIGNATURE" constraintName="GENE_SIG_PARENT_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_GENE_SIGNATURE_ID" referencedTableName="SEARCH_GENE_SIGNATURE"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-57" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="PLUGIN_SEQ" baseTableName="PLUGIN_MODULE1" constraintName="PLUGIN_MODULE_PLUGIN_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="PLUGIN_SEQ" referencedTableName="PLUGIN1"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="PLUGIN_SEQ" baseTableName="PLUGIN_MODULE1" constraintName="PLUGIN_MODULE_PLUGIN_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="PLUGIN_SEQ" referencedTableName="PLUGIN1"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-58" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="AUTH_PRINCIPAL_ID" baseTableName="SEARCH_AUTH_SEC_OBJECT_ACCESS" constraintName="SCH_SEC_A_U_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_PRINCIPAL"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="AUTH_PRINCIPAL_ID" baseTableName="SEARCH_AUTH_SEC_OBJECT_ACCESS" constraintName="SCH_SEC_A_U_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_PRINCIPAL"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-59" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="SECURE_ACCESS_LEVEL_ID" baseTableName="SEARCH_AUTH_SEC_OBJECT_ACCESS" constraintName="SCH_SEC_S_A_L_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_SEC_ACCESS_LEVEL_ID" referencedTableName="SEARCH_SEC_ACCESS_LEVEL"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="SECURE_ACCESS_LEVEL_ID" baseTableName="SEARCH_AUTH_SEC_OBJECT_ACCESS" constraintName="SCH_SEC_S_A_L_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_SEC_ACCESS_LEVEL_ID" referencedTableName="SEARCH_SEC_ACCESS_LEVEL"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-60" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="SECURE_OBJECT_ID" baseTableName="SEARCH_AUTH_SEC_OBJECT_ACCESS" constraintName="SCH_SEC_S_O_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_SECURE_OBJECT_ID" referencedTableName="SEARCH_SECURE_OBJECT"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="SECURE_OBJECT_ID" baseTableName="SEARCH_AUTH_SEC_OBJECT_ACCESS" constraintName="SCH_SEC_S_O_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_SECURE_OBJECT_ID" referencedTableName="SEARCH_SECURE_OBJECT"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-61" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="AUTH_GROUP_ID" baseTableName="SEARCH_AUTH_GROUP_MEMBER" constraintName="SCH_USER_GP_M_GRP_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_GROUP"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="AUTH_GROUP_ID" baseTableName="SEARCH_AUTH_GROUP_MEMBER" constraintName="SCH_USER_GP_M_GRP_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_GROUP"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-62" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="AUTH_USER_ID" baseTableName="SEARCH_AUTH_GROUP_MEMBER" constraintName="SCH_USER_GP_M_USR_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_PRINCIPAL"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="AUTH_USER_ID" baseTableName="SEARCH_AUTH_GROUP_MEMBER" constraintName="SCH_USER_GP_M_USR_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_PRINCIPAL"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-63" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="SEARCH_KEYWORD_ID" baseTableName="SEARCH_KEYWORD_TERM" constraintName="SEARCH_KW_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_KEYWORD_ID" referencedTableName="SEARCH_KEYWORD"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="SEARCH_KEYWORD_ID" baseTableName="SEARCH_KEYWORD_TERM" constraintName="SEARCH_KW_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_KEYWORD_ID" referencedTableName="SEARCH_KEYWORD"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-64" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="SEARCH_AUTH_USER_ID" baseTableName="SEARCH_AUTH_USER_SEC_ACCESS" constraintName="SEARCH_SEC_A_U_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_USER"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="SEARCH_AUTH_USER_ID" baseTableName="SEARCH_AUTH_USER_SEC_ACCESS" constraintName="SEARCH_SEC_A_U_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_USER"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-65" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="SEARCH_SEC_ACCESS_LEVEL_ID" baseTableName="SEARCH_AUTH_USER_SEC_ACCESS" constraintName="SEARCH_SEC_S_A_L_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_SEC_ACCESS_LEVEL_ID" referencedTableName="SEARCH_SEC_ACCESS_LEVEL"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="SEARCH_SEC_ACCESS_LEVEL_ID" baseTableName="SEARCH_AUTH_USER_SEC_ACCESS" constraintName="SEARCH_SEC_S_A_L_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_SEC_ACCESS_LEVEL_ID" referencedTableName="SEARCH_SEC_ACCESS_LEVEL"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-66" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="SEARCH_SECURE_OBJECT_ID" baseTableName="SEARCH_AUTH_USER_SEC_ACCESS" constraintName="SEARCH_SEC_S_O_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_SECURE_OBJECT_ID" referencedTableName="SEARCH_SECURE_OBJECT"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="SEARCH_SECURE_OBJECT_ID" baseTableName="SEARCH_AUTH_USER_SEC_ACCESS" constraintName="SEARCH_SEC_S_O_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SEARCH_SECURE_OBJECT_ID" referencedTableName="SEARCH_SECURE_OBJECT"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-67" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="ID" baseTableName="SEARCH_AUTH_GROUP" constraintName="SH_AUTH_GP_ID_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_PRINCIPAL"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="ID" baseTableName="SEARCH_AUTH_GROUP" constraintName="SH_AUTH_GP_ID_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_PRINCIPAL"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-68" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="ID" baseTableName="SEARCH_AUTH_USER" constraintName="SH_AUTH_USER_ID_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_PRINCIPAL"/>
+        <addForeignKeyConstraint baseTableSchemaName="SEARCHAPP" referencedTableSchemaName="SEARCHAPP" baseColumnNames="ID" baseTableName="SEARCH_AUTH_USER" constraintName="SH_AUTH_USER_ID_FK" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ID" referencedTableName="SEARCH_AUTH_PRINCIPAL"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-69" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="SEARCH_KEYWORD_INDEX1" tableName="SEARCH_KEYWORD" unique="false">
+        <createIndex schemaName="SEARCHAPP" indexName="SEARCH_KEYWORD_INDEX1" tableName="SEARCH_KEYWORD" unique="false">
             <column name="KEYWORD"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-70" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="SEARCH_KEYWORD_INDEX2" tableName="SEARCH_KEYWORD" unique="false">
+        <createIndex schemaName="SEARCHAPP" indexName="SEARCH_KEYWORD_INDEX2" tableName="SEARCH_KEYWORD" unique="false">
             <column name="BIO_DATA_ID"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-71" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="SEARCH_KEYWORD_INDEX3" tableName="SEARCH_KEYWORD" unique="false">
+        <createIndex schemaName="SEARCHAPP" indexName="SEARCH_KEYWORD_INDEX3" tableName="SEARCH_KEYWORD" unique="false">
             <column name="OWNER_AUTH_USER_ID"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-72" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="SEARCH_KW_TERM_SKID_IDX" tableName="SEARCH_KEYWORD_TERM" unique="false">
+        <createIndex schemaName="SEARCHAPP" indexName="SEARCH_KW_TERM_SKID_IDX" tableName="SEARCH_KEYWORD_TERM" unique="false">
             <column name="SEARCH_KEYWORD_ID"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-73" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createView fullDefinition="true" viewName="SEARCH_AUTH_USER_SEC_ACCESS_V">CREATE OR REPLACE FORCE VIEW SEARCH_AUTH_USER_SEC_ACCESS_V (SEARCH_AUTH_USER_SEC_ACCESS_ID, SEARCH_AUTH_USER_ID, SEARCH_SECURE_OBJECT_ID, SEARCH_SEC_ACCESS_LEVEL_ID) AS SELECT 
+        <createView schemaName="SEARCHAPP" fullDefinition="true" viewName="SEARCH_AUTH_USER_SEC_ACCESS_V">CREATE OR REPLACE FORCE VIEW SEARCH_AUTH_USER_SEC_ACCESS_V (SEARCH_AUTH_USER_SEC_ACCESS_ID, SEARCH_AUTH_USER_ID, SEARCH_SECURE_OBJECT_ID, SEARCH_SEC_ACCESS_LEVEL_ID) AS SELECT 
  sasoa.AUTH_SEC_OBJ_ACCESS_ID AS SEARCH_AUTH_USER_SEC_ACCESS_ID,
  sasoa.AUTH_PRINCIPAL_ID AS SEARCH_AUTH_USER_ID,
  sasoa.SECURE_OBJECT_ID AS SEARCH_SECURE_OBJECT_ID,
@@ -612,7 +612,7 @@ sag.ID = sasoa.AUTH_PRINCIPAL_ID
  </createView>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322143334-74" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createView fullDefinition="true" viewName="SEARCH_BIO_MKR_CORREL_VIEW">CREATE OR REPLACE FORCE VIEW SEARCH_BIO_MKR_CORREL_VIEW (DOMAIN_OBJECT_ID, ASSO_BIO_MARKER_ID, CORREL_TYPE, VALUE_METRIC, MV_ID) AS SELECT domain_object_id,
+        <createView schemaName="SEARCHAPP" fullDefinition="true" viewName="SEARCH_BIO_MKR_CORREL_VIEW">CREATE OR REPLACE FORCE VIEW SEARCH_BIO_MKR_CORREL_VIEW (DOMAIN_OBJECT_ID, ASSO_BIO_MARKER_ID, CORREL_TYPE, VALUE_METRIC, MV_ID) AS SELECT domain_object_id,
     asso_bio_marker_id,
     correl_type,
     value_metric,

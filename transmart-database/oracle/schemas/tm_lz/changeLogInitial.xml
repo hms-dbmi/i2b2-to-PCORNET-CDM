@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet author="mmcduffie (generated)" id="1418322495087-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="SQ_UNIQ_ID" startValue="39741"/>
+        <createSequence schemaName="TM_LZ" cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="SQ_UNIQ_ID" startValue="39741"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="ALL_SAMPLE_DATA">
+        <createTable schemaName="TM_LZ" tableName="ALL_SAMPLE_DATA">
             <column name="INDIVIDUAL_NAME" type="VARCHAR2(2000)"/>
             <column name="SAMPLE_NAME" type="VARCHAR2(2000)"/>
             <column name="COLLECTION_DESCRIPTION" type="VARCHAR2(2000)"/>
@@ -61,7 +61,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="AN_AGRE_PEDIGRE">
+        <createTable schemaName="TM_LZ" tableName="AN_AGRE_PEDIGRE">
             <column name="INDIVIDUAL_CODE" type="VARCHAR2(10)">
                 <constraints nullable="false"/>
             </column>
@@ -75,7 +75,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="AN_GENOPHENO_TO_MRN">
+        <createTable schemaName="TM_LZ" tableName="AN_GENOPHENO_TO_MRN">
             <column name="MRN" type="VARCHAR2(15)"/>
             <column name="ID" type="VARCHAR2(10)">
                 <constraints nullable="false"/>
@@ -83,7 +83,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="AN_MAPPING">
+        <createTable schemaName="TM_LZ" tableName="AN_MAPPING">
             <column name="SSC_SOURCESYSTEM_CD" type="VARCHAR2(200)"/>
             <column name="ID_4DIGIT" type="VARCHAR2(200)"/>
             <column name="ID_5DIGIT" type="VARCHAR2(200)"/>
@@ -96,14 +96,14 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="AN_MASTER_MAPPING">
+        <createTable schemaName="TM_LZ" tableName="AN_MASTER_MAPPING">
             <column name="UNIQ_ID" type="NUMBER"/>
             <column name="SOURCE_ID" type="VARCHAR2(200)"/>
             <column name="SOURCE" type="CHAR(16)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="AN_SSC_ID_MAPPING">
+        <createTable schemaName="TM_LZ" tableName="AN_SSC_ID_MAPPING">
             <column name="COLLECTIONID" type="VARCHAR2(10)">
                 <constraints nullable="false"/>
             </column>
@@ -130,7 +130,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="AN_SSC_INDIVIDUAL_14">
+        <createTable schemaName="TM_LZ" tableName="AN_SSC_INDIVIDUAL_14">
             <column name="FAMILY" type="NUMBER(*, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -143,7 +143,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="AN_TEMP">
+        <createTable schemaName="TM_LZ" tableName="AN_TEMP">
             <column name="ENCOUNTER_NUM" type="NUMBER(38, 0)"/>
             <column name="PATIENT_NUM" type="NUMBER(38, 0)">
                 <constraints nullable="false"/>
@@ -177,13 +177,13 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="AN_VIP_TO_MRN">
+        <createTable schemaName="TM_LZ" tableName="AN_VIP_TO_MRN">
             <column name="MRN" type="VARCHAR2(10)"/>
             <column name="ID" type="VARCHAR2(10)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="AN_VIP_TO_MRN_NEW">
+        <createTable schemaName="TM_LZ" tableName="AN_VIP_TO_MRN_NEW">
             <column name="PARTICIPATION_ID" type="VARCHAR2(10)"/>
             <column name="ID" type="VARCHAR2(10)">
                 <constraints nullable="false"/>
@@ -192,7 +192,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="AUTISM_ALIQUOT">
+        <createTable schemaName="TM_LZ" tableName="AUTISM_ALIQUOT">
             <column name="INDIVIDUAL_NAME" type="VARCHAR2(2000)"/>
             <column name="COLLECTION_DATE" type="VARCHAR2(2000)"/>
             <column name="COLLECTION_TIME" type="VARCHAR2(2000)"/>
@@ -217,7 +217,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="AUTISM_ANALYSIS">
+        <createTable schemaName="TM_LZ" tableName="AUTISM_ANALYSIS">
             <column name="INDIVIDUAL_NAME" type="VARCHAR2(2000)"/>
             <column name="SAMPLE_NAME" type="VARCHAR2(2000)"/>
             <column name="ANALYSIS" type="VARCHAR2(2000)"/>
@@ -229,7 +229,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="AUTISM_COLLECTION">
+        <createTable schemaName="TM_LZ" tableName="AUTISM_COLLECTION">
             <column name="INDIVIDUAL_NAME" type="VARCHAR2(2000)"/>
             <column name="SAMPLE_NAME" type="VARCHAR2(2000)"/>
             <column name="COLLECTION_DESCRIPTION" type="VARCHAR2(2000)"/>
@@ -257,7 +257,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="AUTISM_SUBJECT">
+        <createTable schemaName="TM_LZ" tableName="AUTISM_SUBJECT">
             <column name="PROTOCOL_ID" type="VARCHAR2(2000)"/>
             <column name="PROTOCOL_TITLE" type="VARCHAR2(2000)"/>
             <column name="INDIVIDUAL_NAME" type="VARCHAR2(2000)"/>
@@ -269,25 +269,25 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="BCH_MRN_TO_FAMILY_ID">
+        <createTable schemaName="TM_LZ" tableName="BCH_MRN_TO_FAMILY_ID">
             <column name="MRN" type="VARCHAR2(2000)"/>
             <column name="PRIMARY_ID" type="VARCHAR2(2000)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="BCH_MRN_TO_FAMILY_ID_FULL">
+        <createTable schemaName="TM_LZ" tableName="BCH_MRN_TO_FAMILY_ID_FULL">
             <column name="MRN" type="VARCHAR2(2000)"/>
             <column name="PRIMARY_ID" type="VARCHAR2(2000)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="BCH_TO_MRN_08292014">
+        <createTable schemaName="TM_LZ" tableName="BCH_TO_MRN_08292014">
             <column name="ID" type="VARCHAR2(20)"/>
             <column name="MRN" type="VARCHAR2(20)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CONCEPT_DIMENSION_CTAKES">
+        <createTable schemaName="TM_LZ" tableName="CONCEPT_DIMENSION_CTAKES">
             <column name="CONCEPT_CD" type="VARCHAR2(20)"/>
             <column name="CONCEPT_PATH" type="VARCHAR2(250)"/>
             <column name="NAME_CHAR" type="VARCHAR2(100)"/>
@@ -301,7 +301,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CONCEPT_DIMENSION_I2B2_MTM">
+        <createTable schemaName="TM_LZ" tableName="CONCEPT_DIMENSION_I2B2_MTM">
             <column name="UPLOAD_ID" type="VARCHAR2(2000)"/>
             <column name="SOURCESYSTEM_CD" type="VARCHAR2(2000)"/>
             <column name="CONCEPT_CD" type="VARCHAR2(2000)"/>
@@ -314,17 +314,17 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-21" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="GENOPHENO_PATIENTS_0820">
+        <createTable schemaName="TM_LZ" tableName="GENOPHENO_PATIENTS_0820">
             <column name="ID" type="VARCHAR2(20)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-22" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="GENOPHENO_PATIENTS_0822">
+        <createTable schemaName="TM_LZ" tableName="GENOPHENO_PATIENTS_0822">
             <column name="ID" type="VARCHAR2(20)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-23" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="I2B2_CTAKES">
+        <createTable schemaName="TM_LZ" tableName="I2B2_CTAKES">
             <column name="C_HLEVEL" type="VARCHAR2(255)"/>
             <column name="C_FULLNAME" type="VARCHAR2(2000)"/>
             <column name="C_NAME" type="VARCHAR2(255)"/>
@@ -354,7 +354,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-24" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="I2B2_I2B2_MTM">
+        <createTable schemaName="TM_LZ" tableName="I2B2_I2B2_MTM">
             <column name="C_HLEVEL" type="VARCHAR2(2000)"/>
             <column name="C_FULLNAME" type="VARCHAR2(2000)"/>
             <column name="C_NAME" type="VARCHAR2(2000)"/>
@@ -384,13 +384,13 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-25" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="I2B2_TO_BCH_MRN">
+        <createTable schemaName="TM_LZ" tableName="I2B2_TO_BCH_MRN">
             <column name="PATIENT_NUM" type="VARCHAR2(2000)"/>
             <column name="MRN" type="VARCHAR2(2000)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-26" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="LT_SRC_CLINICAL_DATA">
+        <createTable schemaName="TM_LZ" tableName="LT_SRC_CLINICAL_DATA">
             <column name="STUDY_ID" type="VARCHAR2(25)"/>
             <column name="SITE_ID" type="VARCHAR2(50)"/>
             <column name="SUBJECT_ID" type="VARCHAR2(20)"/>
@@ -402,7 +402,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-27" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="LT_SRC_DEAPP_ANNOT">
+        <createTable schemaName="TM_LZ" tableName="LT_SRC_DEAPP_ANNOT">
             <column name="GPL_ID" type="VARCHAR2(100)"/>
             <column name="PROBE_ID" type="VARCHAR2(100)"/>
             <column name="GENE_SYMBOL" type="VARCHAR2(100)"/>
@@ -411,7 +411,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-28" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="LT_SRC_MRNA_DATA">
+        <createTable schemaName="TM_LZ" tableName="LT_SRC_MRNA_DATA">
             <column name="TRIAL_NAME" type="VARCHAR2(25)"/>
             <column name="PROBESET" type="VARCHAR2(100)"/>
             <column name="EXPR_ID" type="VARCHAR2(100)"/>
@@ -419,7 +419,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-29" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="LT_SRC_MRNA_SUBJ_SAMP_MAP">
+        <createTable schemaName="TM_LZ" tableName="LT_SRC_MRNA_SUBJ_SAMP_MAP">
             <column name="TRIAL_NAME" type="VARCHAR2(100)"/>
             <column name="SITE_ID" type="VARCHAR2(100)"/>
             <column name="SUBJECT_ID" type="VARCHAR2(100)"/>
@@ -433,7 +433,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-30" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="LT_SRC_NGS">
+        <createTable schemaName="TM_LZ" tableName="LT_SRC_NGS">
             <column name="STUDY_ID" type="VARCHAR2(50 CHAR)"/>
             <column name="SITE_ID" type="VARCHAR2(50 CHAR)"/>
             <column name="SUBJECT_ID" type="VARCHAR2(50 CHAR)"/>
@@ -445,7 +445,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-31" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="LT_SRC_SAMPLE_CATEGORIES">
+        <createTable schemaName="TM_LZ" tableName="LT_SRC_SAMPLE_CATEGORIES">
             <column name="TRIAL_CD" type="VARCHAR2(200)"/>
             <column name="SITE_CD" type="VARCHAR2(200)"/>
             <column name="SUBJECT_CD" type="VARCHAR2(200)"/>
@@ -455,7 +455,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-32" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="LT_SRC_STUDY_METADATA">
+        <createTable schemaName="TM_LZ" tableName="LT_SRC_STUDY_METADATA">
             <column name="STUDY_ID" type="VARCHAR2(100)"/>
             <column name="TITLE" type="VARCHAR2(1000)"/>
             <column name="DESCRIPTION" type="VARCHAR2(2000)"/>
@@ -502,7 +502,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-33" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="LZ_SRC_CLINICAL_DATA">
+        <createTable schemaName="TM_LZ" tableName="LZ_SRC_CLINICAL_DATA">
             <column name="STUDY_ID" type="VARCHAR2(25)"/>
             <column name="SITE_ID" type="VARCHAR2(50)"/>
             <column name="SUBJECT_ID" type="VARCHAR2(20)"/>
@@ -516,7 +516,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-34" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="LZ_SRC_MRNA_DATA">
+        <createTable schemaName="TM_LZ" tableName="LZ_SRC_MRNA_DATA">
             <column name="TRIAL_NAME" type="VARCHAR2(25)"/>
             <column name="PROBESET" type="VARCHAR2(100)"/>
             <column name="EXPR_ID" type="VARCHAR2(100)"/>
@@ -525,7 +525,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-35" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="LZ_SRC_MRNA_SUBJ_SAMP_MAP">
+        <createTable schemaName="TM_LZ" tableName="LZ_SRC_MRNA_SUBJ_SAMP_MAP">
             <column name="TRIAL_NAME" type="VARCHAR2(100)"/>
             <column name="SITE_ID" type="VARCHAR2(100)"/>
             <column name="SUBJECT_ID" type="VARCHAR2(100)"/>
@@ -539,7 +539,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-36" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="LZ_SRC_SAMPLE_CATEGORIES">
+        <createTable schemaName="TM_LZ" tableName="LZ_SRC_SAMPLE_CATEGORIES">
             <column name="TRIAL_CD" type="VARCHAR2(200)"/>
             <column name="SITE_CD" type="VARCHAR2(200)"/>
             <column name="SUBJECT_CD" type="VARCHAR2(200)"/>
@@ -549,7 +549,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-37" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="LZ_SRC_SAMPLE_CATEGORIES_BKUP">
+        <createTable schemaName="TM_LZ" tableName="LZ_SRC_SAMPLE_CATEGORIES_BKUP">
             <column name="TRIAL_CD" type="VARCHAR2(200)"/>
             <column name="SITE_CD" type="VARCHAR2(200)"/>
             <column name="SUBJECT_CD" type="VARCHAR2(200)"/>
@@ -559,13 +559,13 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-38" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="MAP_4ID_TO_5ID">
+        <createTable schemaName="TM_LZ" tableName="MAP_4ID_TO_5ID">
             <column name="ID1" type="VARCHAR2(2000)"/>
             <column name="ID2" type="VARCHAR2(2000)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-39" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="MASTER_BCH_MAPPING">
+        <createTable schemaName="TM_LZ" tableName="MASTER_BCH_MAPPING">
             <column name="SSC_SOURCESYSTEM_CD" type="VARCHAR2(200)"/>
             <column name="ID_4DIGIT" type="VARCHAR2(200)"/>
             <column name="ID_5DIGIT" type="VARCHAR2(200)"/>
@@ -577,7 +577,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-40" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="MODIFIER_DIMENSION_I2B2_MTM">
+        <createTable schemaName="TM_LZ" tableName="MODIFIER_DIMENSION_I2B2_MTM">
             <column name="UPLOAD_ID" type="VARCHAR2(2000)"/>
             <column name="SOURCESYSTEM_CD" type="VARCHAR2(2000)"/>
             <column name="MODIFIER_CD" type="VARCHAR2(2000)"/>
@@ -590,19 +590,19 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-41" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="NEW_ENCOUNTER_NUM">
+        <createTable schemaName="TM_LZ" tableName="NEW_ENCOUNTER_NUM">
             <column name="ENCOUNTER_NUM" type="VARCHAR2(2000)"/>
             <column name="NEW_ENCOUNTER_NUM" type="VARCHAR2(2000)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-42" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="NEW_PATIENT_NUM">
+        <createTable schemaName="TM_LZ" tableName="NEW_PATIENT_NUM">
             <column name="PATIENT_NUM" type="VARCHAR2(2000)"/>
             <column name="NEW_PATIENT_NUM" type="VARCHAR2(2000)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-43" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="NODE_METADATA_CTAKES">
+        <createTable schemaName="TM_LZ" tableName="NODE_METADATA_CTAKES">
             <column name="CONCEPT_PATH" type="VARCHAR2(2000)"/>
             <column name="PARENT_CONCEPT_PATH" type="VARCHAR2(2000)"/>
             <column name="VALUE" type="VARCHAR2(2000)"/>
@@ -610,7 +610,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-44" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="OBSERVATION_FACT_CTAKES">
+        <createTable schemaName="TM_LZ" tableName="OBSERVATION_FACT_CTAKES">
             <column name="ENCOUNTER_NUM" type="VARCHAR2(255)"/>
             <column name="PATIENT_NUM" type="VARCHAR2(255)"/>
             <column name="CONCEPT_CD" type="VARCHAR2(255)"/>
@@ -637,7 +637,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-45" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="OBSERVATION_FACT_I2B2_MTM">
+        <createTable schemaName="TM_LZ" tableName="OBSERVATION_FACT_I2B2_MTM">
             <column name="UPLOAD_ID" type="VARCHAR2(20)"/>
             <column name="TEXT_SEARCH_INDEX" type="VARCHAR2(2000)"/>
             <column name="UNITS_CD" type="VARCHAR2(2000)"/>
@@ -664,7 +664,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-46" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="OBSERVATION_FACT_MTM_S">
+        <createTable schemaName="TM_LZ" tableName="OBSERVATION_FACT_MTM_S">
             <column name="ENCOUNTER_NUM" type="VARCHAR2(2000)"/>
             <column name="PATIENT_NUM" type="VARCHAR2(2000)"/>
             <column name="CONCEPT_CD" type="VARCHAR2(2000)"/>
@@ -690,7 +690,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-47" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PATIENT_DIMENSION_I2B2_MTM">
+        <createTable schemaName="TM_LZ" tableName="PATIENT_DIMENSION_I2B2_MTM">
             <column name="ZIP_CD" type="VARCHAR2(2000)"/>
             <column name="UPLOAD_ID" type="VARCHAR2(2000)"/>
             <column name="DEATH_DATE" type="VARCHAR2(2000)"/>
@@ -713,7 +713,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-48" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SSC_LINKAGE">
+        <createTable schemaName="TM_LZ" tableName="SSC_LINKAGE">
             <column name="INTERNAL_FAMILY_ID" type="VARCHAR2(2000)"/>
             <column name="PRIMARY_ID" type="VARCHAR2(2000)"/>
             <column name="SECONDARY_ID" type="VARCHAR2(2000)"/>
@@ -724,7 +724,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-49" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SSC_TO_MRN">
+        <createTable schemaName="TM_LZ" tableName="SSC_TO_MRN">
             <column name="SOURCESYSTEM_CD" type="VARCHAR2(200)"/>
             <column name="ID1" type="VARCHAR2(200)"/>
             <column name="ID2" type="VARCHAR2(200)"/>
@@ -733,13 +733,13 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-50" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TABLE1">
+        <createTable schemaName="TM_LZ" tableName="TABLE1">
             <column name="ID1" type="VARCHAR2(2000)"/>
             <column name="ID2" type="VARCHAR2(2000)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-51" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="UMLS">
+        <createTable schemaName="TM_LZ" tableName="UMLS">
             <column name="ID" type="VARCHAR2(100)"/>
             <column name="PATIENT_ID" type="VARCHAR2(100)"/>
             <column name="STR" type="VARCHAR2(1000)"/>
@@ -747,7 +747,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-52" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="UMLS2">
+        <createTable schemaName="TM_LZ" tableName="UMLS2">
             <column name="ID" type="VARCHAR2(100)"/>
             <column name="PATIENT_ID" type="VARCHAR2(100)"/>
             <column name="STR" type="VARCHAR2(1000)"/>
@@ -755,7 +755,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-53" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="VARIANT_EXPLORER">
+        <createTable schemaName="TM_LZ" tableName="VARIANT_EXPLORER">
             <column name="VARIANT_EXPLORER_ID" type="VARCHAR2(2000)"/>
             <column name="INDIVIDUAL" type="VARCHAR2(4000)"/>
             <column name="CHR" type="VARCHAR2(4000)"/>
@@ -839,7 +839,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-54" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="VARIANT_EXPLORER_BCH">
+        <createTable schemaName="TM_LZ" tableName="VARIANT_EXPLORER_BCH">
             <column name="VARIANT_EXPLORER_ID" type="VARCHAR2(2000)"/>
             <column name="VARID" type="VARCHAR2(4000)"/>
             <column name="SAMPLE_ID" type="VARCHAR2(4000)"/>
@@ -921,7 +921,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-55" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="VIP_GENO">
+        <createTable schemaName="TM_LZ" tableName="VIP_GENO">
             <column name="ENCOUNTER_NUM" type="NUMBER(38, 0)"/>
             <column name="PATIENT_NUM" type="NUMBER(38, 0)">
                 <constraints nullable="false"/>
@@ -954,7 +954,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-56" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="VISIT_DIMENSION_I2B2_MTM">
+        <createTable schemaName="TM_LZ" tableName="VISIT_DIMENSION_I2B2_MTM">
             <column name="UPLOAD_ID" type="VARCHAR2(2000)"/>
             <column name="ACTIVE_STATUS_CD" type="VARCHAR2(2000)"/>
             <column name="END_DATE" type="VARCHAR2(2000)"/>
@@ -973,7 +973,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-57" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="WT_SNP_NODES">
+        <createTable schemaName="TM_LZ" tableName="WT_SNP_NODES">
             <column name="LEAF_NODE" type="VARCHAR2(2000)"/>
             <column name="CATEGORY_CD" type="VARCHAR2(500)"/>
             <column name="PLATFORM" type="VARCHAR2(500)"/>
@@ -983,7 +983,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-58" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="WT_SNP_NODE_VALUES">
+        <createTable schemaName="TM_LZ" tableName="WT_SNP_NODE_VALUES">
             <column name="CATEGORY_CD" type="VARCHAR2(500)"/>
             <column name="SAMPLE_TYPE" type="VARCHAR2(200)"/>
             <column name="TIMEPOINT" type="VARCHAR2(200)"/>
@@ -991,24 +991,24 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-59" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="CONCEPT_DIMENSION_I2B2_INDEX1" tableName="CONCEPT_DIMENSION_I2B2_MTM" unique="false">
+        <createIndex schemaName="TM_LZ" indexName="CONCEPT_DIMENSION_I2B2_INDEX1" tableName="CONCEPT_DIMENSION_I2B2_MTM" unique="false">
             <column name="CONCEPT_CD"/>
             <column name="CONCEPT_PATH"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-60" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="IDX_LT_SRC_CLINICAL_DATA" tableName="LT_SRC_CLINICAL_DATA" unique="false">
+        <createIndex schemaName="TM_LZ" indexName="IDX_LT_SRC_CLINICAL_DATA" tableName="LT_SRC_CLINICAL_DATA" unique="false">
             <column name="STUDY_ID"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-61" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="LZ_SRC_MRNA_SUBJ_SAMP_IDX1" tableName="LZ_SRC_MRNA_SUBJ_SAMP_MAP" unique="false">
+        <createIndex schemaName="TM_LZ" indexName="LZ_SRC_MRNA_SUBJ_SAMP_IDX1" tableName="LZ_SRC_MRNA_SUBJ_SAMP_MAP" unique="false">
             <column name="TRIAL_NAME"/>
             <column name="SOURCE_CD"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322495087-62" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="OBSERVATION_FACT_I2B2_INDEX1" tableName="OBSERVATION_FACT_I2B2_MTM" unique="false">
+        <createIndex schemaName="TM_LZ" indexName="OBSERVATION_FACT_I2B2_INDEX1" tableName="OBSERVATION_FACT_I2B2_MTM" unique="false">
             <column name="ENCOUNTER_NUM"/>
             <column name="PATIENT_NUM"/>
         </createIndex>

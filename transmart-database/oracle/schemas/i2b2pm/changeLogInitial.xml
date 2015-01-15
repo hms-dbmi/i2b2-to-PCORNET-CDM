@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet author="mmcduffie (generated)" id="1418321705302-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="PM_PARAMS" startValue="21"/>
+        <createSequence schemaName="I2B2PM" cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="PM_PARAMS" startValue="21"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_APPROVALS">
+        <createTable schemaName="I2B2PM" tableName="PM_APPROVALS">
             <column name="APPROVAL_ID" type="VARCHAR2(50)">
                 <constraints nullable="false"/>
             </column>
@@ -20,7 +20,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_APPROVALS_PARAMS">
+        <createTable schemaName="I2B2PM" tableName="PM_APPROVALS_PARAMS">
             <column name="ID" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
@@ -42,7 +42,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_CELL_DATA">
+        <createTable schemaName="I2B2PM" tableName="PM_CELL_DATA">
             <column name="CELL_ID" type="VARCHAR2(50)">
                 <constraints nullable="false"/>
             </column>
@@ -60,7 +60,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_CELL_PARAMS">
+        <createTable schemaName="I2B2PM" tableName="PM_CELL_PARAMS">
             <column name="ID" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
@@ -83,7 +83,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_GLOBAL_PARAMS">
+        <createTable schemaName="I2B2PM" tableName="PM_GLOBAL_PARAMS">
             <column name="ID" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
@@ -103,7 +103,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_HIVE_DATA">
+        <createTable schemaName="I2B2PM" tableName="PM_HIVE_DATA">
             <column name="DOMAIN_ID" type="VARCHAR2(50)">
                 <constraints nullable="false"/>
             </column>
@@ -118,7 +118,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_HIVE_PARAMS">
+        <createTable schemaName="I2B2PM" tableName="PM_HIVE_PARAMS">
             <column name="ID" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
@@ -137,7 +137,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_PROJECT_DATA">
+        <createTable schemaName="I2B2PM" tableName="PM_PROJECT_DATA">
             <column name="PROJECT_ID" type="VARCHAR2(50)">
                 <constraints nullable="false"/>
             </column>
@@ -153,7 +153,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_PROJECT_PARAMS">
+        <createTable schemaName="I2B2PM" tableName="PM_PROJECT_PARAMS">
             <column name="ID" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
@@ -172,7 +172,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_PROJECT_REQUEST">
+        <createTable schemaName="I2B2PM" tableName="PM_PROJECT_REQUEST">
             <column name="ID" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
@@ -189,7 +189,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_PROJECT_USER_PARAMS">
+        <createTable schemaName="I2B2PM" tableName="PM_PROJECT_USER_PARAMS">
             <column name="ID" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
@@ -211,7 +211,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_PROJECT_USER_ROLES">
+        <createTable schemaName="I2B2PM" tableName="PM_PROJECT_USER_ROLES">
             <column name="PROJECT_ID" type="VARCHAR2(50)">
                 <constraints nullable="false"/>
             </column>
@@ -228,7 +228,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_ROLE_REQUIREMENT">
+        <createTable schemaName="I2B2PM" tableName="PM_ROLE_REQUIREMENT">
             <column name="TABLE_CD" type="VARCHAR2(50)">
                 <constraints nullable="false"/>
             </column>
@@ -249,7 +249,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_USER_DATA">
+        <createTable schemaName="I2B2PM" tableName="PM_USER_DATA">
             <column name="USER_ID" type="VARCHAR2(50)">
                 <constraints nullable="false"/>
             </column>
@@ -263,7 +263,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_USER_PARAMS">
+        <createTable schemaName="I2B2PM" tableName="PM_USER_PARAMS">
             <column name="ID" type="NUMBER">
                 <constraints nullable="false"/>
             </column>
@@ -282,7 +282,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PM_USER_SESSION">
+        <createTable schemaName="I2B2PM" tableName="PM_USER_SESSION">
             <column name="USER_ID" type="VARCHAR2(50)">
                 <constraints nullable="false"/>
             </column>
@@ -297,48 +297,48 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="CELL_ID, PROJECT_PATH" constraintName="SYS_C00236999" tableName="PM_CELL_DATA"/>
+        <addPrimaryKey schemaName="I2B2PM" columnNames="CELL_ID, PROJECT_PATH" constraintName="SYS_C00236999" tableName="PM_CELL_DATA"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="DOMAIN_ID" constraintName="SYS_C00237000" tableName="PM_HIVE_DATA"/>
+        <addPrimaryKey schemaName="I2B2PM" columnNames="DOMAIN_ID" constraintName="SYS_C00237000" tableName="PM_HIVE_DATA"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="PROJECT_ID" constraintName="SYS_C00237001" tableName="PM_PROJECT_DATA"/>
+        <addPrimaryKey schemaName="I2B2PM" columnNames="PROJECT_ID" constraintName="SYS_C00237001" tableName="PM_PROJECT_DATA"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-21" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="PROJECT_ID, USER_ID, USER_ROLE_CD" constraintName="SYS_C00237002" tableName="PM_PROJECT_USER_ROLES"/>
+        <addPrimaryKey schemaName="I2B2PM" columnNames="PROJECT_ID, USER_ID, USER_ROLE_CD" constraintName="SYS_C00237002" tableName="PM_PROJECT_USER_ROLES"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-22" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="USER_ID" constraintName="SYS_C00237003" tableName="PM_USER_DATA"/>
+        <addPrimaryKey schemaName="I2B2PM" columnNames="USER_ID" constraintName="SYS_C00237003" tableName="PM_USER_DATA"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-23" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="TABLE_CD, COLUMN_CD, READ_HIVEMGMT_CD, WRITE_HIVEMGMT_CD" constraintName="SYS_C00237004" tableName="PM_ROLE_REQUIREMENT"/>
+        <addPrimaryKey schemaName="I2B2PM" columnNames="TABLE_CD, COLUMN_CD, READ_HIVEMGMT_CD, WRITE_HIVEMGMT_CD" constraintName="SYS_C00237004" tableName="PM_ROLE_REQUIREMENT"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-24" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="SESSION_ID, USER_ID" constraintName="SYS_C00237005" tableName="PM_USER_SESSION"/>
+        <addPrimaryKey schemaName="I2B2PM" columnNames="SESSION_ID, USER_ID" constraintName="SYS_C00237005" tableName="PM_USER_SESSION"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-25" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="ID" constraintName="SYS_C00237006" tableName="PM_APPROVALS_PARAMS"/>
+        <addPrimaryKey schemaName="I2B2PM" columnNames="ID" constraintName="SYS_C00237006" tableName="PM_APPROVALS_PARAMS"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-26" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="ID" constraintName="SYS_C00237033" tableName="PM_CELL_PARAMS"/>
+        <addPrimaryKey schemaName="I2B2PM" columnNames="ID" constraintName="SYS_C00237033" tableName="PM_CELL_PARAMS"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-27" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="ID" constraintName="SYS_C00237034" tableName="PM_GLOBAL_PARAMS"/>
+        <addPrimaryKey schemaName="I2B2PM" columnNames="ID" constraintName="SYS_C00237034" tableName="PM_GLOBAL_PARAMS"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-28" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="ID" constraintName="SYS_C00237035" tableName="PM_HIVE_PARAMS"/>
+        <addPrimaryKey schemaName="I2B2PM" columnNames="ID" constraintName="SYS_C00237035" tableName="PM_HIVE_PARAMS"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-29" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="ID" constraintName="SYS_C00237036" tableName="PM_PROJECT_PARAMS"/>
+        <addPrimaryKey schemaName="I2B2PM" columnNames="ID" constraintName="SYS_C00237036" tableName="PM_PROJECT_PARAMS"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-30" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="ID" constraintName="SYS_C00237037" tableName="PM_PROJECT_USER_PARAMS"/>
+        <addPrimaryKey schemaName="I2B2PM" columnNames="ID" constraintName="SYS_C00237037" tableName="PM_PROJECT_USER_PARAMS"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-31" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="ID" constraintName="SYS_C00237038" tableName="PM_USER_PARAMS"/>
+        <addPrimaryKey schemaName="I2B2PM" columnNames="ID" constraintName="SYS_C00237038" tableName="PM_USER_PARAMS"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321705302-32" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="ID" constraintName="SYS_C00237039" tableName="PM_PROJECT_REQUEST"/>
+        <addPrimaryKey schemaName="I2B2PM" columnNames="ID" constraintName="SYS_C00237039" tableName="PM_PROJECT_REQUEST"/>
     </changeSet>
 </databaseChangeLog>

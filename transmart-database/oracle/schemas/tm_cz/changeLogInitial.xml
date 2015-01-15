@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet author="mmcduffie (generated)" id="1418322255992-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="EMT_TEMP_SEQ" startValue="11621"/>
+        <createSequence schemaName="TM_CZ" cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="EMT_TEMP_SEQ" startValue="11621"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="RTQALIMITS_TESTID_SEQ" startValue="1"/>
+        <createSequence schemaName="TM_CZ" cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="RTQALIMITS_TESTID_SEQ" startValue="1"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="RTQASTATSLIST_TESTID_SEQ" startValue="80000"/>
+        <createSequence schemaName="TM_CZ" cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="RTQASTATSLIST_TESTID_SEQ" startValue="80000"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CHILD_ROLLUP_ID" startValue="1681"/>
+        <createSequence schemaName="TM_CZ" cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CHILD_ROLLUP_ID" startValue="1681"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ" startValue="141"/>
+        <createSequence schemaName="TM_CZ" cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ" startValue="141"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_DATA" startValue="5"/>
+        <createSequence schemaName="TM_CZ" cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_DATA" startValue="5"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_DATA_FILE" startValue="6"/>
+        <createSequence schemaName="TM_CZ" cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_DATA_FILE" startValue="6"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_DW_VERSION_ID" startValue="41"/>
+        <createSequence schemaName="TM_CZ" cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_DW_VERSION_ID" startValue="41"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_JOB_AUDIT" startValue="380815"/>
+        <createSequence schemaName="TM_CZ" cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_JOB_AUDIT" startValue="380815"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_JOB_ID" startValue="413"/>
+        <createSequence schemaName="TM_CZ" cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_JOB_ID" startValue="413"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_JOB_MASTER" startValue="12962"/>
+        <createSequence schemaName="TM_CZ" cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_JOB_MASTER" startValue="12962"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_JOB_MESSAGE" startValue="1"/>
+        <createSequence schemaName="TM_CZ" cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_JOB_MESSAGE" startValue="1"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_PERSON_ID" startValue="41"/>
+        <createSequence schemaName="TM_CZ" cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_PERSON_ID" startValue="41"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_TEST" startValue="8259"/>
+        <createSequence schemaName="TM_CZ" cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_TEST" startValue="8259"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_TEST_CATEGORY" startValue="5"/>
+        <createSequence schemaName="TM_CZ" cacheSize="2" cycle="false" incrementBy="1" maxValue="999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CZ_TEST_CATEGORY" startValue="5"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="99999999" minValue="1" ordered="false" sequenceName="SEQ_PROBESET_ID" startValue="432301"/>
+        <createSequence schemaName="TM_CZ" cacheSize="20" cycle="false" incrementBy="1" maxValue="99999999" minValue="1" ordered="false" sequenceName="SEQ_PROBESET_ID" startValue="432301"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="ANNOTATION_DEAPP">
+        <createTable schemaName="TM_CZ" tableName="ANNOTATION_DEAPP">
             <column name="GPL_ID" type="VARCHAR2(100)"/>
             <column name="PROBE_ID" type="VARCHAR2(100)"/>
             <column name="GENE_SYMBOL" type="VARCHAR2(100)"/>
@@ -59,7 +59,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="ANNOTATION_DEAPP_20120206">
+        <createTable schemaName="TM_CZ" tableName="ANNOTATION_DEAPP_20120206">
             <column name="GPL_ID" type="VARCHAR2(100)"/>
             <column name="PROBE_ID" type="VARCHAR2(100)"/>
             <column name="GENE_SYMBOL" type="VARCHAR2(100)"/>
@@ -68,7 +68,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="BIO_CLINICAL_TRIAL_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="BIO_CLINICAL_TRIAL_RELEASE">
             <column name="TRIAL_NUMBER" type="NVARCHAR2(510)"/>
             <column name="STUDY_OWNER" type="NVARCHAR2(510)"/>
             <column name="STUDY_PHASE" type="VARCHAR2(100)"/>
@@ -101,7 +101,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="BIO_DATA_COMPOUND_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="BIO_DATA_COMPOUND_RELEASE">
             <column name="BIO_DATA_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -113,7 +113,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-21" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="BIO_DATA_UID_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="BIO_DATA_UID_RELEASE">
             <column name="BIO_DATA_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -129,7 +129,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-22" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="BIO_EXPERIMENT_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="BIO_EXPERIMENT_RELEASE">
             <column name="BIO_EXPERIMENT_ID" type="NUMBER(18, 0)"/>
             <column name="BIO_EXPERIMENT_TYPE" type="NVARCHAR2(200)"/>
             <column name="TITLE" type="NVARCHAR2(1000)"/>
@@ -154,12 +154,12 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-23" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CATEGORY_PATH_EXCLUDED_WORDS">
+        <createTable schemaName="TM_CZ" tableName="CATEGORY_PATH_EXCLUDED_WORDS">
             <column name="EXCLUDED_TEXT" type="VARCHAR2(100)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-24" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CONCEPT_DIMENSION_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="CONCEPT_DIMENSION_RELEASE">
             <column name="CONCEPT_CD" type="VARCHAR2(50)">
                 <constraints nullable="false"/>
             </column>
@@ -178,7 +178,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-25" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CZ_DATA_PROFILE_COLUMN_EXCLUSI">
+        <createTable schemaName="TM_CZ" tableName="CZ_DATA_PROFILE_COLUMN_EXCLUSI">
             <column name="TABLE_NAME" type="VARCHAR2(500)">
                 <constraints nullable="false"/>
             </column>
@@ -192,7 +192,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-26" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CZ_DATA_PROFILE_COLUMN_SAMPLE">
+        <createTable schemaName="TM_CZ" tableName="CZ_DATA_PROFILE_COLUMN_SAMPLE">
             <column name="TABLE_NAME" type="VARCHAR2(500)"/>
             <column name="COLUMN_NAME" type="VARCHAR2(500)"/>
             <column name="VALUE" type="VARCHAR2(4000)"/>
@@ -203,7 +203,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-27" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CZ_DATA_PROFILE_STATS">
+        <createTable schemaName="TM_CZ" tableName="CZ_DATA_PROFILE_STATS">
             <column name="TABLE_NAME" type="VARCHAR2(500)">
                 <constraints nullable="false"/>
             </column>
@@ -233,7 +233,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-28" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CZ_JOB_AUDIT">
+        <createTable schemaName="TM_CZ" tableName="CZ_JOB_AUDIT">
             <column name="SEQ_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -251,7 +251,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-29" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CZ_JOB_ERROR">
+        <createTable schemaName="TM_CZ" tableName="CZ_JOB_ERROR">
             <column name="JOB_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -265,7 +265,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-30" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CZ_JOB_MASTER">
+        <createTable schemaName="TM_CZ" tableName="CZ_JOB_MASTER">
             <column defaultValueComputed="NULL" name="JOB_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -281,7 +281,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-31" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CZ_JOB_MESSAGE">
+        <createTable schemaName="TM_CZ" tableName="CZ_JOB_MESSAGE">
             <column name="JOB_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -295,7 +295,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-32" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CZ_PERSON">
+        <createTable schemaName="TM_CZ" tableName="CZ_PERSON">
             <column name="PERSON_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -311,7 +311,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-33" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CZ_TEST">
+        <createTable schemaName="TM_CZ" tableName="CZ_TEST">
             <column name="TEST_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -333,7 +333,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-34" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CZ_TEST_CATEGORY">
+        <createTable schemaName="TM_CZ" tableName="CZ_TEST_CATEGORY">
             <column name="TEST_CATEGORY_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -343,7 +343,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-35" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CZ_TEST_RESULT">
+        <createTable schemaName="TM_CZ" tableName="CZ_TEST_RESULT">
             <column name="TEST_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -359,7 +359,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-36" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CZ_XTRIAL_CTRL_VOCAB">
+        <createTable schemaName="TM_CZ" tableName="CZ_XTRIAL_CTRL_VOCAB">
             <column name="CTRL_VOCAB_CODE" type="VARCHAR2(200)">
                 <constraints nullable="false"/>
             </column>
@@ -373,12 +373,12 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-37" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CZ_XTRIAL_EXCLUSION">
+        <createTable schemaName="TM_CZ" tableName="CZ_XTRIAL_EXCLUSION">
             <column name="TRIAL_ID" type="VARCHAR2(200)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-38" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="DE_GPL_INFO_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="DE_GPL_INFO_RELEASE">
             <column name="PLATFORM" type="VARCHAR2(10)"/>
             <column name="TITLE" type="VARCHAR2(500)"/>
             <column name="ORGANISM" type="VARCHAR2(100)"/>
@@ -386,7 +386,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-39" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="DE_MRNA_ANNOTATION_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="DE_MRNA_ANNOTATION_RELEASE">
             <column name="GPL_ID" type="VARCHAR2(100)"/>
             <column name="PROBE_ID" type="VARCHAR2(100)"/>
             <column name="GENE_SYMBOL" type="VARCHAR2(100)"/>
@@ -395,7 +395,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-40" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="DE_SNP_DATA_BY_PATIENT_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="DE_SNP_DATA_BY_PATIENT_RELEASE">
             <column name="SNP_DATA_BY_PATIENT_ID" type="NUMBER(22, 0)"/>
             <column name="SNP_DATASET_ID" type="NUMBER(22, 0)"/>
             <column name="TRIAL_NAME" type="VARCHAR2(255)"/>
@@ -407,7 +407,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-41" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="DE_SNP_DATA_BY_PROBE_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="DE_SNP_DATA_BY_PROBE_RELEASE">
             <column name="SNP_DATA_BY_PROBE_ID" type="NUMBER(22, 0)"/>
             <column name="PROBE_ID" type="NUMBER(22, 0)"/>
             <column name="PROBE_NAME" type="VARCHAR2(255)"/>
@@ -419,7 +419,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-42" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="DE_SNP_DATA_DS_LOC_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="DE_SNP_DATA_DS_LOC_RELEASE">
             <column name="SNP_DATA_DATASET_LOC_ID" type="NUMBER(22, 0)"/>
             <column name="TRIAL_NAME" type="VARCHAR2(255)"/>
             <column name="SNP_DATASET_ID" type="NUMBER(22, 0)"/>
@@ -428,14 +428,14 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-43" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="DE_SNP_GENE_MAP_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="DE_SNP_GENE_MAP_RELEASE">
             <column name="SNP_ID" type="NUMBER(22, 0)"/>
             <column name="SNP_NAME" type="VARCHAR2(255)"/>
             <column name="ENTREZ_GENE_ID" type="NUMBER"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-44" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="DE_SNP_INFO_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="DE_SNP_INFO_RELEASE">
             <column name="SNP_INFO_ID" type="NUMBER(22, 0)"/>
             <column name="NAME" type="VARCHAR2(255)"/>
             <column name="CHROM" type="VARCHAR2(16)"/>
@@ -443,7 +443,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-45" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="DE_SNP_PROBE_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="DE_SNP_PROBE_RELEASE">
             <column name="SNP_PROBE_ID" type="NUMBER(22, 0)"/>
             <column name="PROBE_NAME" type="VARCHAR2(255)"/>
             <column name="SNP_ID" type="NUMBER(22, 0)"/>
@@ -452,7 +452,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-46" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="DE_SNP_PROBE_SORT_DEF_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="DE_SNP_PROBE_SORT_DEF_RELEASE">
             <column name="SNP_PROBE_SORTED_DEF_ID" type="NUMBER(22, 0)"/>
             <column name="PLATFORM_NAME" type="VARCHAR2(255)"/>
             <column name="NUM_PROBE" type="NUMBER"/>
@@ -462,7 +462,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-47" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="DE_SUBJECT_MRNA_DATA_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="DE_SUBJECT_MRNA_DATA_RELEASE">
             <column name="TRIAL_NAME" type="VARCHAR2(50)"/>
             <column name="PROBESET_ID" type="NUMBER(22, 0)"/>
             <column name="ASSAY_ID" type="NUMBER(18, 0)"/>
@@ -482,7 +482,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-48" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="DE_SUBJECT_RBM_DATA_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="DE_SUBJECT_RBM_DATA_RELEASE">
             <column name="TRIAL_NAME" type="VARCHAR2(15)"/>
             <column name="ANTIGEN_NAME" type="VARCHAR2(100)"/>
             <column name="N_VALUE" type="NUMBER"/>
@@ -505,7 +505,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-49" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="DE_SUBJ_PROTEIN_DATA_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="DE_SUBJ_PROTEIN_DATA_RELEASE">
             <column name="TRIAL_NAME" type="VARCHAR2(15)"/>
             <column name="COMPONENT" type="VARCHAR2(15)"/>
             <column name="INTENSITY" type="NUMBER"/>
@@ -524,7 +524,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-50" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="DE_SUBJ_SAMPLE_MAP_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="DE_SUBJ_SAMPLE_MAP_RELEASE">
             <column name="PATIENT_ID" type="NUMBER(18, 0)"/>
             <column name="SITE_ID" type="NVARCHAR2(100)"/>
             <column name="SUBJECT_ID" type="NVARCHAR2(100)"/>
@@ -552,7 +552,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-51" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="HAPLOVIEW_DATA_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="HAPLOVIEW_DATA_RELEASE">
             <column name="I2B2_ID" type="NUMBER(20, 0)"/>
             <column name="JNJ_ID" type="VARCHAR2(30)"/>
             <column name="FATHER_ID" type="NUMBER(5, 0)"/>
@@ -569,7 +569,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-52" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="I2B2_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="I2B2_RELEASE">
             <column name="C_HLEVEL" type="NUMBER(22, 0)"/>
             <column name="C_FULLNAME" type="VARCHAR2(900)">
                 <constraints nullable="false"/>
@@ -598,7 +598,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-53" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="I2B2_TAGS_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="I2B2_TAGS_RELEASE">
             <column name="TAG_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -609,7 +609,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-54" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="NODE_CURATION">
+        <createTable schemaName="TM_CZ" tableName="NODE_CURATION">
             <column name="NODE_TYPE" type="VARCHAR2(25)"/>
             <column name="NODE_NAME" type="VARCHAR2(250)"/>
             <column name="DISPLAY_NAME" type="VARCHAR2(250)"/>
@@ -623,7 +623,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-55" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="OBSERVATION_FACT_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="OBSERVATION_FACT_RELEASE">
             <column name="ENCOUNTER_NUM" type="NUMBER(38, 0)"/>
             <column name="PATIENT_NUM" type="NUMBER(38, 0)"/>
             <column name="CONCEPT_CD" type="VARCHAR2(50)">
@@ -655,7 +655,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-56" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PATIENT_DIMENSION_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="PATIENT_DIMENSION_RELEASE">
             <column name="PATIENT_NUM" type="NUMBER(38, 0)"/>
             <column name="VITAL_STATUS_CD" type="VARCHAR2(50)"/>
             <column name="BIRTH_DATE" type="date"/>
@@ -678,7 +678,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-57" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PROBESET_DEAPP">
+        <createTable schemaName="TM_CZ" tableName="PROBESET_DEAPP">
             <column name="PROBESET_ID" type="NUMBER(38, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -692,7 +692,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-58" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="PROBESET_DEAPP_20120206">
+        <createTable schemaName="TM_CZ" tableName="PROBESET_DEAPP_20120206">
             <column name="PROBESET_ID" type="NUMBER(38, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -705,7 +705,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-59" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SAMPLE_CATEGORIES_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="SAMPLE_CATEGORIES_RELEASE">
             <column name="TRIAL_CD" type="VARCHAR2(200)"/>
             <column name="SITE_CD" type="VARCHAR2(200)"/>
             <column name="SUBJECT_CD" type="VARCHAR2(200)"/>
@@ -716,7 +716,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-60" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SEARCH_SECURE_OBJECT_RELEASE">
+        <createTable schemaName="TM_CZ" tableName="SEARCH_SECURE_OBJECT_RELEASE">
             <column name="SEARCH_SECURE_OBJECT_ID" type="NUMBER(18, 0)"/>
             <column name="BIO_DATA_ID" type="NUMBER(18, 0)"/>
             <column name="DISPLAY_NAME" type="NVARCHAR2(100)"/>
@@ -726,7 +726,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-61" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TMP_NUM_DATA_TYPES">
+        <createTable schemaName="TM_CZ" tableName="TMP_NUM_DATA_TYPES">
             <column name="CATEGORY_CD" type="VARCHAR2(200)"/>
             <column name="DATA_LABEL" type="VARCHAR2(500)"/>
             <column name="PERIOD" type="VARCHAR2(100)"/>
@@ -735,7 +735,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-62" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TMP_SUBJECT_INFO">
+        <createTable schemaName="TM_CZ" tableName="TMP_SUBJECT_INFO">
             <column name="USUBJID" type="VARCHAR2(100)"/>
             <column name="AGE_IN_YEARS_NUM" type="NUMBER(3, 0)"/>
             <column name="SEX_CD" type="VARCHAR2(50)"/>
@@ -743,7 +743,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-63" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TMP_TRIAL_DATA">
+        <createTable schemaName="TM_CZ" tableName="TMP_TRIAL_DATA">
             <column name="USUBJID" type="VARCHAR2(50)"/>
             <column name="STUDY_ID" type="VARCHAR2(25)"/>
             <column name="DATA_TYPE" type="CHAR(1)"/>
@@ -760,7 +760,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-64" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TMP_TRIAL_NODES">
+        <createTable schemaName="TM_CZ" tableName="TMP_TRIAL_NODES">
             <column name="LEAF_NODE" type="VARCHAR2(4000)"/>
             <column name="CATEGORY_CD" type="VARCHAR2(200)"/>
             <column name="VISIT_NAME" type="VARCHAR2(100)"/>
@@ -772,43 +772,43 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-65" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="SEQ_ID" constraintName="CZ_JOB_AUDIT_PK" tableName="CZ_JOB_AUDIT"/>
+        <addPrimaryKey schemaName="TM_CZ" columnNames="SEQ_ID" constraintName="CZ_JOB_AUDIT_PK" tableName="CZ_JOB_AUDIT"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-66" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="JOB_ID" constraintName="CZ_JOB_MASTER_PK" tableName="CZ_JOB_MASTER"/>
+        <addPrimaryKey schemaName="TM_CZ" columnNames="JOB_ID" constraintName="CZ_JOB_MASTER_PK" tableName="CZ_JOB_MASTER"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-67" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="PERSON_ID" constraintName="CZ_PERSON_PK" tableName="CZ_PERSON"/>
+        <addPrimaryKey schemaName="TM_CZ" columnNames="PERSON_ID" constraintName="CZ_PERSON_PK" tableName="CZ_PERSON"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-68" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="TEST_CATEGORY_ID" constraintName="CZ_TEST_CATEGORY_PK" tableName="CZ_TEST_CATEGORY"/>
+        <addPrimaryKey schemaName="TM_CZ" columnNames="TEST_CATEGORY_ID" constraintName="CZ_TEST_CATEGORY_PK" tableName="CZ_TEST_CATEGORY"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-69" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="TEST_ID" constraintName="CZ_TEST_PK" tableName="CZ_TEST"/>
+        <addPrimaryKey schemaName="TM_CZ" columnNames="TEST_ID" constraintName="CZ_TEST_PK" tableName="CZ_TEST"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-70" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addForeignKeyConstraint baseColumnNames="TEST_CATEGORY_ID" baseTableName="CZ_TEST" constraintName="CZ_TEST_CZ_TEST_CATEGORY_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="TEST_CATEGORY_ID" referencedTableName="CZ_TEST_CATEGORY"/>
+        <addForeignKeyConstraint baseTableSchemaName="TM_CZ" referencedTableSchemaName="TM_CZ" baseColumnNames="TEST_CATEGORY_ID" baseTableName="CZ_TEST" constraintName="CZ_TEST_CZ_TEST_CATEGORY_FK1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="TEST_CATEGORY_ID" referencedTableName="CZ_TEST_CATEGORY"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-71" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="NODE_CURATION_PK" tableName="NODE_CURATION" unique="true">
+        <createIndex schemaName="TM_CZ" indexName="NODE_CURATION_PK" tableName="NODE_CURATION" unique="true">
             <column name="NODE_TYPE"/>
             <column name="NODE_NAME"/>
             <column name="STUDY_ID"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-72" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="PROBESET_DEAPP_I1" tableName="PROBESET_DEAPP" unique="false">
+        <createIndex schemaName="TM_CZ" indexName="PROBESET_DEAPP_I1" tableName="PROBESET_DEAPP" unique="false">
             <column name="PROBESET_ID"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-73" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="PROBESET_DEAPP_I2" tableName="PROBESET_DEAPP" unique="false">
+        <createIndex schemaName="TM_CZ" indexName="PROBESET_DEAPP_I2" tableName="PROBESET_DEAPP" unique="false">
             <column name="PROBESET"/>
             <column name="PLATFORM"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-74" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createView fullDefinition="true" viewName="ALL_TEST_DETAIL_VIEW">CREATE OR REPLACE FORCE VIEW ALL_TEST_DETAIL_VIEW (RUN_ID, TEST_ID, RUN_NAME, TABLE, "COLUMN", CATEGORY, SUB_CATEGORY1, SUB_CATEGORY2, SQL, START_DATE, END_DATE, STATUS, TEST_SEVERITY_CD, ACT_RECORD_CNT, MIN_VALUE_ALLOWED, MAX_VALUE_ALLOWED, ERROR_CODE, ERROR_MESSAGE) AS select
+        <createView schemaName="TM_CZ" fullDefinition="true" viewName="ALL_TEST_DETAIL_VIEW">CREATE OR REPLACE FORCE VIEW ALL_TEST_DETAIL_VIEW (RUN_ID, TEST_ID, RUN_NAME, TABLE, "COLUMN", CATEGORY, SUB_CATEGORY1, SUB_CATEGORY2, SQL, START_DATE, END_DATE, STATUS, TEST_SEVERITY_CD, ACT_RECORD_CNT, MIN_VALUE_ALLOWED, MAX_VALUE_ALLOWED, ERROR_CODE, ERROR_MESSAGE) AS select
   a.test_run_id RUN_ID,
   c.test_id,
   a.test_run_name RUN_NAME,
@@ -843,7 +843,7 @@ ORDER BY a.TEST_RUN_ID, c.test_table, c.test_column
  </createView>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-75" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createView fullDefinition="true" viewName="ALL_TEST_SUMMARY_VIEW">CREATE OR REPLACE FORCE VIEW ALL_TEST_SUMMARY_VIEW (TEST_RUN_ID, TEST_RUN_NAME, START_DATE, END_DATE, STATUS, TEST_CATEGORY, TEST_SUB_CATEGORY1, TEST_SUB_CATEGORY2, PASS, WARNING, FAIL, ERROR, TOTAL, DB_VERSION) AS select
+        <createView schemaName="TM_CZ" fullDefinition="true" viewName="ALL_TEST_SUMMARY_VIEW">CREATE OR REPLACE FORCE VIEW ALL_TEST_SUMMARY_VIEW (TEST_RUN_ID, TEST_RUN_NAME, START_DATE, END_DATE, STATUS, TEST_CATEGORY, TEST_SUB_CATEGORY1, TEST_SUB_CATEGORY2, PASS, WARNING, FAIL, ERROR, TOTAL, DB_VERSION) AS select
   a.test_run_id,
   a.test_run_name,
   to_char(a.start_date,'DD/MM/YYYY HH24:MI:SS') start_date,
@@ -885,7 +885,7 @@ group by
  </createView>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-76" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createView fullDefinition="true" viewName="CZV_PIVOT_SAMPLE_CATEGORIES">CREATE OR REPLACE FORCE VIEW CZV_PIVOT_SAMPLE_CATEGORIES (TRIAL_CD, SAMPLE_ID, TRIAL_NAME, PATHOLOGY, RACE, TISSUE_TYPE, GENDER, BIOMARKER, ACCESS_TYPE, INSTITUTION, PROGRAM_INITIATIVE, ORGANISM) AS select x.trial_cd
+        <createView schemaName="TM_CZ" fullDefinition="true" viewName="CZV_PIVOT_SAMPLE_CATEGORIES">CREATE OR REPLACE FORCE VIEW CZV_PIVOT_SAMPLE_CATEGORIES (TRIAL_CD, SAMPLE_ID, TRIAL_NAME, PATHOLOGY, RACE, TISSUE_TYPE, GENDER, BIOMARKER, ACCESS_TYPE, INSTITUTION, PROGRAM_INITIATIVE, ORGANISM) AS select x.trial_cd
       ,x.sample_cd as sample_id			--	RDC tranSMART
 	  ,x.trial_name
 	  ,coalesce(x.pathology,'Not Applicable') as pathology
@@ -933,12 +933,12 @@ from
 ) x</createView>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-77" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createView fullDefinition="true" viewName="LAST_JOB">CREATE OR REPLACE FORCE VIEW LAST_JOB (SEQ_ID, JOB_ID, DATABASE_NAME, PROCEDURE_NAME, STEP_DESC, STEP_STATUS, RECORDS_MANIPULATED, STEP_NUMBER, JOB_DATE, TIME_ELAPSED_SECS) AS SELECT "SEQ_ID","JOB_ID","DATABASE_NAME","PROCEDURE_NAME","STEP_DESC","STEP_STATUS","RECORDS_MANIPULATED","STEP_NUMBER", TO_CHAR (JOB_DATE, 'YYYY-MON-DD HH24:MI:SS') JOB_DATE ,"TIME_ELAPSED_SECS" FROM CZ_JOB_AUDIT
+        <createView schemaName="TM_CZ" fullDefinition="true" viewName="LAST_JOB">CREATE OR REPLACE FORCE VIEW LAST_JOB (SEQ_ID, JOB_ID, DATABASE_NAME, PROCEDURE_NAME, STEP_DESC, STEP_STATUS, RECORDS_MANIPULATED, STEP_NUMBER, JOB_DATE, TIME_ELAPSED_SECS) AS SELECT "SEQ_ID","JOB_ID","DATABASE_NAME","PROCEDURE_NAME","STEP_DESC","STEP_STATUS","RECORDS_MANIPULATED","STEP_NUMBER", TO_CHAR (JOB_DATE, 'YYYY-MON-DD HH24:MI:SS') JOB_DATE ,"TIME_ELAPSED_SECS" FROM CZ_JOB_AUDIT
 where  JOB_ID in (SELECT  max(JOB_ID) FROM CZ_JOB_AUDIT)
 order by SEQ_ID</createView>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-78" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createView fullDefinition="true" viewName="LAST_JOB_BY_DATE">CREATE OR REPLACE FORCE VIEW LAST_JOB_BY_DATE (SEQ_ID, JOB_ID, DATABASE_NAME, PROCEDURE_NAME, STEP_DESC, STEP_STATUS, RECORDS_MANIPULATED, STEP_NUMBER, JOB_DATE, TIME_ELAPSED_SECS) AS SELECT
+        <createView schemaName="TM_CZ" fullDefinition="true" viewName="LAST_JOB_BY_DATE">CREATE OR REPLACE FORCE VIEW LAST_JOB_BY_DATE (SEQ_ID, JOB_ID, DATABASE_NAME, PROCEDURE_NAME, STEP_DESC, STEP_STATUS, RECORDS_MANIPULATED, STEP_NUMBER, JOB_DATE, TIME_ELAPSED_SECS) AS SELECT
     "SEQ_ID",
     "JOB_ID",
     "DATABASE_NAME",
@@ -956,7 +956,7 @@ ORDER BY
     SEQ_ID</createView>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-79" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createView fullDefinition="true" viewName="LAST_JOB_BY_SEQID_180000">CREATE OR REPLACE FORCE VIEW LAST_JOB_BY_SEQID_180000 (SEQ_ID, JOB_ID, DATABASE_NAME, PROCEDURE_NAME, STEP_DESC, STEP_STATUS, RECORDS_MANIPULATED, STEP_NUMBER, JOB_DATE, TIME_ELAPSED_SECS) AS SELECT
+        <createView schemaName="TM_CZ" fullDefinition="true" viewName="LAST_JOB_BY_SEQID_180000">CREATE OR REPLACE FORCE VIEW LAST_JOB_BY_SEQID_180000 (SEQ_ID, JOB_ID, DATABASE_NAME, PROCEDURE_NAME, STEP_DESC, STEP_STATUS, RECORDS_MANIPULATED, STEP_NUMBER, JOB_DATE, TIME_ELAPSED_SECS) AS SELECT
     "SEQ_ID",
     "JOB_ID",
     "DATABASE_NAME",
@@ -974,7 +974,7 @@ ORDER BY
     SEQ_ID</createView>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-80" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createView fullDefinition="true" viewName="LAST_JOB_BY_SEQID_182957">CREATE OR REPLACE FORCE VIEW LAST_JOB_BY_SEQID_182957 (SEQ_ID, JOB_ID, DATABASE_NAME, PROCEDURE_NAME, STEP_DESC, STEP_STATUS, RECORDS_MANIPULATED, STEP_NUMBER, JOB_DATE, TIME_ELAPSED_SECS) AS SELECT
+        <createView schemaName="TM_CZ" fullDefinition="true" viewName="LAST_JOB_BY_SEQID_182957">CREATE OR REPLACE FORCE VIEW LAST_JOB_BY_SEQID_182957 (SEQ_ID, JOB_ID, DATABASE_NAME, PROCEDURE_NAME, STEP_DESC, STEP_STATUS, RECORDS_MANIPULATED, STEP_NUMBER, JOB_DATE, TIME_ELAPSED_SECS) AS SELECT
     "SEQ_ID",
     "JOB_ID",
     "DATABASE_NAME",
@@ -993,7 +993,7 @@ ORDER BY
     SEQ_ID</createView>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-81" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createView fullDefinition="true" viewName="LAST_SEQ_ID">CREATE OR REPLACE FORCE VIEW LAST_SEQ_ID (SEQ_ID, JOB_ID, DATABASE_NAME, PROCEDURE_NAME, STEP_DESC, STEP_STATUS, RECORDS_MANIPULATED, STEP_NUMBER, JOB_DATE, TIME_ELAPSED_SECS) AS SELECT
+        <createView schemaName="TM_CZ" fullDefinition="true" viewName="LAST_SEQ_ID">CREATE OR REPLACE FORCE VIEW LAST_SEQ_ID (SEQ_ID, JOB_ID, DATABASE_NAME, PROCEDURE_NAME, STEP_DESC, STEP_STATUS, RECORDS_MANIPULATED, STEP_NUMBER, JOB_DATE, TIME_ELAPSED_SECS) AS SELECT
     "SEQ_ID",
     "JOB_ID",
     "DATABASE_NAME",
@@ -1015,7 +1015,7 @@ WHERE
             CZ_JOB_AUDIT)</createView>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-82" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createView fullDefinition="true" viewName="LAST_TEST_DETAIL_VIEW">CREATE OR REPLACE FORCE VIEW LAST_TEST_DETAIL_VIEW (RUN_ID, TEST_ID, RUN_NAME, TABLE, "COLUMN", CATEGORY, SUB_CATEGORY1, SUB_CATEGORY2, SQL, START_DATE, END_DATE, STATUS, TEST_SEVERITY_CD, ACT_RECORD_CNT, MIN_VALUE_ALLOWED, MAX_VALUE_ALLOWED, ERROR_CODE, ERROR_MESSAGE) AS select
+        <createView schemaName="TM_CZ" fullDefinition="true" viewName="LAST_TEST_DETAIL_VIEW">CREATE OR REPLACE FORCE VIEW LAST_TEST_DETAIL_VIEW (RUN_ID, TEST_ID, RUN_NAME, TABLE, "COLUMN", CATEGORY, SUB_CATEGORY1, SUB_CATEGORY2, SQL, START_DATE, END_DATE, STATUS, TEST_SEVERITY_CD, ACT_RECORD_CNT, MIN_VALUE_ALLOWED, MAX_VALUE_ALLOWED, ERROR_CODE, ERROR_MESSAGE) AS select
   a.test_run_id RUN_ID,
   c.test_id,
   a.test_run_name RUN_NAME,
@@ -1051,7 +1051,7 @@ ORDER BY a.TEST_RUN_ID, c.test_table, c.test_column
  </createView>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418322255992-83" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createView fullDefinition="true" viewName="LAST_TEST_SUMMARY_VIEW">CREATE OR REPLACE FORCE VIEW LAST_TEST_SUMMARY_VIEW (TEST_RUN_ID, TEST_RUN_NAME, START_DATE, END_DATE, STATUS, TEST_CATEGORY, TEST_SUB_CATEGORY1, TEST_SUB_CATEGORY2, PASS, WARNING, FAIL, ERROR, TOTAL, DB_VERSION) AS select
+        <createView schemaName="TM_CZ" fullDefinition="true" viewName="LAST_TEST_SUMMARY_VIEW">CREATE OR REPLACE FORCE VIEW LAST_TEST_SUMMARY_VIEW (TEST_RUN_ID, TEST_RUN_NAME, START_DATE, END_DATE, STATUS, TEST_CATEGORY, TEST_SUB_CATEGORY1, TEST_SUB_CATEGORY2, PASS, WARNING, FAIL, ERROR, TOTAL, DB_VERSION) AS select
   a.test_run_id,
   a.test_run_name,
   to_char(a.start_date,'DD/MM/YYYY HH24:MI:SS') start_date,
