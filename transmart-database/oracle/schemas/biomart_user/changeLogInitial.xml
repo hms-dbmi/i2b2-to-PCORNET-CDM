@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet author="mmcduffie (generated)" id="1418321081468-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="AN_TEMP">
+        <createTable schemaName="BIOMART_USER" tableName="AN_TEMP">
             <column name="ENCOUNTER_NUM" type="NUMBER(38, 0)"/>
             <column name="PATIENT_NUM" type="NUMBER(38, 0)">
                 <constraints nullable="false"/>
@@ -34,7 +34,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321081468-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="IMPORT_CONSENT">
+        <createTable schemaName="BIOMART_USER" tableName="IMPORT_CONSENT">
             <column name="COL1" type="VARCHAR2(2000)"/>
             <column name="COL2" type="VARCHAR2(2000)"/>
             <column name="COL3" type="VARCHAR2(2000)"/>
@@ -60,7 +60,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321081468-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="IOE_TEMP_OBJ_REG2">
+        <createTable schemaName="BIOMART_USER" tableName="IOE_TEMP_OBJ_REG2">
             <column name="OBJECT_SCHEMA" type="VARCHAR2(32)"/>
             <column name="OBJECT_NAME" type="VARCHAR2(32)"/>
             <column name="OBJECT_TYPE" type="VARCHAR2(64)"/>
@@ -70,7 +70,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321081468-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="KDE_TEMP_OBJ_REG3">
+        <createTable schemaName="BIOMART_USER" tableName="KDE_TEMP_OBJ_REG3">
             <column name="OBJECT_SCHEMA" type="VARCHAR2(32)"/>
             <column name="OBJECT_NAME" type="VARCHAR2(32)"/>
             <column name="OBJECT_TYPE" type="VARCHAR2(64)"/>
@@ -80,7 +80,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321081468-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="NEW_TABLE">
+        <createTable schemaName="BIOMART_USER" tableName="NEW_TABLE">
             <column name="ENCOUNTER_NUM" type="NUMBER(38, 0)"/>
             <column name="PATIENT_NUM" type="NUMBER(38, 0)"/>
             <column name="CONCEPT_CD" type="VARCHAR2(50)">
@@ -110,7 +110,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321081468-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="NEW_TABLE_MRNA">
+        <createTable schemaName="BIOMART_USER" tableName="NEW_TABLE_MRNA">
             <column name="TRIAL_SOURCE" type="VARCHAR2(200)"/>
             <column name="TRIAL_NAME" type="VARCHAR2(50)"/>
             <column name="PROBESET_ID" type="NUMBER(22, 0)"/>
@@ -122,7 +122,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321081468-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="OBSF_OTHER_STUDIES">
+        <createTable schemaName="BIOMART_USER" tableName="OBSF_OTHER_STUDIES">
             <column name="ENCOUNTER_NUM" type="NUMBER(38, 0)"/>
             <column name="PATIENT_NUM" type="NUMBER(38, 0)">
                 <constraints nullable="false"/>
@@ -154,7 +154,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321081468-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="OBSF_UPDATE_MFCD_AUTISM">
+        <createTable schemaName="BIOMART_USER" tableName="OBSF_UPDATE_MFCD_AUTISM">
             <column name="ENCOUNTER_NUM" type="NUMBER(38, 0)"/>
             <column name="PATIENT_NUM" type="NUMBER(38, 0)">
                 <constraints nullable="false"/>
@@ -186,27 +186,27 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321081468-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TEMP_CONSENTED_GENOPHENO">
+        <createTable schemaName="BIOMART_USER" tableName="TEMP_CONSENTED_GENOPHENO">
             <column name="PATIENT_NUM" type="NUMBER(38, 0)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321081468-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TEMP_CTAKES_PATIENTS">
+        <createTable schemaName="BIOMART_USER" tableName="TEMP_CTAKES_PATIENTS">
             <column name="PATIENT_NUM" type="VARCHAR2(255)"/>
             <column name="NEW_PATIENT_NUM" type="NUMBER"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321081468-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TEMP_GENOPHENO">
+        <createTable schemaName="BIOMART_USER" tableName="TEMP_GENOPHENO">
             <column name="PATIENT_NUM" type="NUMBER(38, 0)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321081468-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TEMP_MTM_AUTISMROW">
+        <createTable schemaName="BIOMART_USER" tableName="TEMP_MTM_AUTISMROW">
             <column name="C_HLEVEL" type="NUMBER(22, 0)"/>
             <column name="C_FULLNAME" type="VARCHAR2(700)">
                 <constraints nullable="false"/>
@@ -240,7 +240,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321081468-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TEMP_PATIENT_MAPPING">
+        <createTable schemaName="BIOMART_USER" tableName="TEMP_PATIENT_MAPPING">
             <column name="PATIENT_NUM" type="NUMBER(38, 0)"/>
             <column name="IDE" type="VARCHAR2(200)"/>
             <column name="SOURCE_CD" type="VARCHAR2(14)"/>
@@ -248,14 +248,14 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321081468-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TEMP_WES_INVENTORY">
+        <createTable schemaName="BIOMART_USER" tableName="TEMP_WES_INVENTORY">
             <column name="PATIENT_NUM" type="NUMBER(38, 0)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321081468-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TOAD_PLAN_TABLE">
+        <createTable schemaName="BIOMART_USER" tableName="TOAD_PLAN_TABLE">
             <column name="STATEMENT_ID" type="VARCHAR2(30)"/>
             <column name="PLAN_ID" type="NUMBER"/>
             <column name="TIMESTAMP" type="date"/>
@@ -296,7 +296,7 @@
     </changeSet>        
     <changeSet author="mmcduffie (generated)" id="1418321081468-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange='true'>    
         <comment>Procedures</comment>
-        <sqlFile path='./oracle/schemas/biomart_user/PROCEDURES/CREATE_FILE_FROM_QUERY.sql'/>
-		<sqlFile path='./oracle/schemas/biomart_user/PROCEDURES/PATIENT_SUBSET2.sql'/>
+        <sqlFile endDelimiter="^/$" path='./oracle/schemas/biomart_user/PROCEDURES/CREATE_FILE_FROM_QUERY.sql'/>
+	<sqlFile endDelimiter="^/$" path='./oracle/schemas/biomart_user/PROCEDURES/PATIENT_SUBSET2.sql'/>
     </changeSet>        
 </databaseChangeLog>
