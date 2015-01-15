@@ -7,5 +7,6 @@
         <sqlFile path='./oracle/seed_data/qt_query_status_type.sql'/>
         <sqlFile path='./oracle/seed_data/qt_result_type.sql'/>
         <sqlFile path='./oracle/seed_data/searchapp_data.sql'/>
+        <sqlFile path='./oracle/seed_data/create_synonyms.sql'/>
     </changeSet>        
 </databaseChangeLog>
