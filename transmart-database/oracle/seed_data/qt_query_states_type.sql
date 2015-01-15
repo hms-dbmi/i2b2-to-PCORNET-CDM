@@ -1,7 +1,6 @@
 --------------------------------------------------------
 --  File created - Wednesday-December-10-2014   
 --------------------------------------------------------
- I2B2DEMODATA.QT_QUERY_STATUS_TYPE
 
 Insert into I2B2DEMODATA.QT_QUERY_STATUS_TYPE (STATUS_TYPE_ID,NAME,DESCRIPTION) values (1,'QUEUED',' WAITING IN QUEUE TO START PROCESS');
 Insert into I2B2DEMODATA.QT_QUERY_STATUS_TYPE (STATUS_TYPE_ID,NAME,DESCRIPTION) values (2,'PROCESSING','PROCESSING');
