@@ -989,34 +989,34 @@
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321432519-108" objectQuotingStrategy="QUOTE_ALL_OBJECTS" runOnChange='true'>
     	<comment>Procedures</comment>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_CONCEPT_TABLE.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_EID_TABLE.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_MODIFIER_TABLE.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_PATIENT_TABLE.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_PID_TABLE.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_PROVIDER_TABLE.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_TABLE.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_VISIT_TABLE.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/DEFRAG_I2B2DEMODATA.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/INSERT_CONCEPT_FROMTEMP.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/INSERT_EID_MAP_FROMTEMP.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/INSERT_ENCOUNTERVISIT_FROMTEMP.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/INSERT_MODIFIER_FROMTEMP.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/INSERT_PATIENT_MAP_FROMTEMP.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/INSERT_PID_MAP_FROMTEMP.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/INSERT_PROVIDER_FROMTEMP.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/PATIENT_SUBSET2.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/REMOVE_TEMP_TABLE.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/SETONT.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/SP_XTAB.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/SYNC_CLEAR_CONCEPT_TABLE.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/SYNC_CLEAR_MODIFIER_TABLE.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/SYNC_CLEAR_PROVIDER_TABLE.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/PROCEDURES/UPDATE_OBSERVATION_FACT.sql'/>    	
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_CONCEPT_TABLE.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_EID_TABLE.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_MODIFIER_TABLE.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_PATIENT_TABLE.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_PID_TABLE.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_PROVIDER_TABLE.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_TABLE.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/CREATE_TEMP_VISIT_TABLE.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/DEFRAG_I2B2DEMODATA.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/INSERT_CONCEPT_FROMTEMP.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/INSERT_EID_MAP_FROMTEMP.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/INSERT_ENCOUNTERVISIT_FROMTEMP.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/INSERT_MODIFIER_FROMTEMP.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/INSERT_PATIENT_MAP_FROMTEMP.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/INSERT_PID_MAP_FROMTEMP.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/INSERT_PROVIDER_FROMTEMP.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/PATIENT_SUBSET2.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/REMOVE_TEMP_TABLE.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/SETONT.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/SP_XTAB.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/SYNC_CLEAR_CONCEPT_TABLE.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/SYNC_CLEAR_MODIFIER_TABLE.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/SYNC_CLEAR_PROVIDER_TABLE.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/PROCEDURES/UPDATE_OBSERVATION_FACT.sql'/>    	
 
     	<comment>Functions</comment>		
-		<sqlFile path='./oracle/schemas/i2b2demodata/FUNCTIONS/ISNUMERIC.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/FUNCTIONS/SF_GET_VISIT.sql'/>
-		<sqlFile path='./oracle/schemas/i2b2demodata/FUNCTIONS/SF_XTAB.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/FUNCTIONS/ISNUMERIC.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/FUNCTIONS/SF_GET_VISIT.sql'/>
+		<sqlFile endDelimiter="^/$" path='./oracle/schemas/i2b2demodata/FUNCTIONS/SF_XTAB.sql'/>
     </changeSet>
 </databaseChangeLog>
