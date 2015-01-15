@@ -3,7 +3,6 @@
 --------------------------------------------------------
 
 Insert into SEARCHAPP.PLUGIN (PLUGIN_SEQ,NAME,PLUGIN_NAME,HAS_MODULES,HAS_FORM,DEFAULT_LINK,FORM_LINK,FORM_PAGE,ACTIVE) values (1,'R-Modules','R Modules','Y','N','/RModules/default',null,null,'Y');
- SEARCHAPP.PLUGIN_MODULE
 
 Insert into SEARCHAPP.PLUGIN_MODULE (MODULE_SEQ,PLUGIN_SEQ,NAME,VERSION,ACTIVE,HAS_FORM,FORM_LINK,FORM_PAGE,MODULE_NAME,CATEGORY) values (31,1,'Scatter Plot with Linear Regression','.1','Y','N',null,'ScatterPlot','scatterPlot','DEFAULT');
 Insert into SEARCHAPP.PLUGIN_MODULE (MODULE_SEQ,PLUGIN_SEQ,NAME,VERSION,ACTIVE,HAS_FORM,FORM_LINK,FORM_PAGE,MODULE_NAME,CATEGORY) values (66,1,'PCA','.1','Y','N',null,'PCA','pca','DEFAULT');
