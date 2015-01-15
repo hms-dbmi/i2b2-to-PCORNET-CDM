@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet author="mmcduffie (generated)" id="1418321503315-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CRC_ANALYSIS_JOB">
+        <createTable schemaName="I2B2HIVE" tableName="CRC_ANALYSIS_JOB">
             <column name="JOB_ID" type="VARCHAR2(10)"/>
             <column name="QUEUE_NAME" type="VARCHAR2(50)"/>
             <column name="STATUS_TYPE_ID" type="NUMBER(*, 0)"/>
@@ -14,7 +14,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CRC_DB_LOOKUP">
+        <createTable schemaName="I2B2HIVE" tableName="CRC_DB_LOOKUP">
             <column name="C_DOMAIN_ID" type="VARCHAR2(255)">
                 <constraints nullable="false"/>
             </column>
@@ -42,7 +42,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="HILOSEQUENCES">
+        <createTable schemaName="I2B2HIVE" tableName="HILOSEQUENCES">
             <column name="SEQUENCENAME" type="VARCHAR2(50)">
                 <constraints nullable="false"/>
             </column>
@@ -50,7 +50,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="JMS_MESSAGES">
+        <createTable schemaName="I2B2HIVE" tableName="JMS_MESSAGES">
             <column name="MESSAGEID" type="NUMBER(38, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -63,7 +63,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="JMS_ROLES">
+        <createTable schemaName="I2B2HIVE" tableName="JMS_ROLES">
             <column name="ROLEID" type="VARCHAR2(32)">
                 <constraints nullable="false"/>
             </column>
@@ -73,7 +73,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="JMS_SUBSCRIPTIONS">
+        <createTable schemaName="I2B2HIVE" tableName="JMS_SUBSCRIPTIONS">
             <column name="CLIENTID" type="VARCHAR2(128)">
                 <constraints nullable="false"/>
             </column>
@@ -87,14 +87,14 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="JMS_TRANSACTIONS">
+        <createTable schemaName="I2B2HIVE" tableName="JMS_TRANSACTIONS">
             <column name="TXID" type="NUMBER(38, 0)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="JMS_USERS">
+        <createTable schemaName="I2B2HIVE" tableName="JMS_USERS">
             <column name="USERID" type="VARCHAR2(32)">
                 <constraints nullable="false"/>
             </column>
@@ -105,7 +105,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="ONT_DB_LOOKUP">
+        <createTable schemaName="I2B2HIVE" tableName="ONT_DB_LOOKUP">
             <column name="C_DOMAIN_ID" type="VARCHAR2(255)">
                 <constraints nullable="false"/>
             </column>
@@ -133,7 +133,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TIMERS">
+        <createTable schemaName="I2B2HIVE" tableName="TIMERS">
             <column name="TIMERID" type="VARCHAR2(80)"/>
             <column name="TARGETID" type="VARCHAR2(250)"/>
             <column name="INITIALDATE" type="TIMESTAMP"/>
@@ -143,7 +143,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="WORK_DB_LOOKUP">
+        <createTable schemaName="I2B2HIVE" tableName="WORK_DB_LOOKUP">
             <column name="C_DOMAIN_ID" type="VARCHAR2(255)">
                 <constraints nullable="false"/>
             </column>
@@ -171,44 +171,44 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="C_DOMAIN_ID, C_PROJECT_PATH, C_OWNER_ID" constraintName="CRC_DB_LOOKUP_PK" tableName="CRC_DB_LOOKUP"/>
+        <addPrimaryKey schemaName="I2B2HIVE" columnNames="C_DOMAIN_ID, C_PROJECT_PATH, C_OWNER_ID" constraintName="CRC_DB_LOOKUP_PK" tableName="CRC_DB_LOOKUP"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="SEQUENCENAME" constraintName="HILO_PK" tableName="HILOSEQUENCES"/>
+        <addPrimaryKey schemaName="I2B2HIVE" columnNames="SEQUENCENAME" constraintName="HILO_PK" tableName="HILOSEQUENCES"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="C_DOMAIN_ID, C_PROJECT_PATH, C_OWNER_ID" constraintName="ONT_DB_LOOKUP_PK" tableName="ONT_DB_LOOKUP"/>
+        <addPrimaryKey schemaName="I2B2HIVE" columnNames="C_DOMAIN_ID, C_PROJECT_PATH, C_OWNER_ID" constraintName="ONT_DB_LOOKUP_PK" tableName="ONT_DB_LOOKUP"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="USERID, ROLEID" constraintName="SYS_C00236992" tableName="JMS_ROLES"/>
+        <addPrimaryKey schemaName="I2B2HIVE" columnNames="USERID, ROLEID" constraintName="SYS_C00236992" tableName="JMS_ROLES"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="CLIENTID, SUBNAME" constraintName="SYS_C00236993" tableName="JMS_SUBSCRIPTIONS"/>
+        <addPrimaryKey schemaName="I2B2HIVE" columnNames="CLIENTID, SUBNAME" constraintName="SYS_C00236993" tableName="JMS_SUBSCRIPTIONS"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="TXID" constraintName="SYS_C00236994" tableName="JMS_TRANSACTIONS"/>
+        <addPrimaryKey schemaName="I2B2HIVE" columnNames="TXID" constraintName="SYS_C00236994" tableName="JMS_TRANSACTIONS"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="USERID" constraintName="SYS_C00236995" tableName="JMS_USERS"/>
+        <addPrimaryKey schemaName="I2B2HIVE" columnNames="USERID" constraintName="SYS_C00236995" tableName="JMS_USERS"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="MESSAGEID, DESTINATION" constraintName="SYS_C00237027" tableName="JMS_MESSAGES"/>
+        <addPrimaryKey schemaName="I2B2HIVE" columnNames="MESSAGEID, DESTINATION" constraintName="SYS_C00237027" tableName="JMS_MESSAGES"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="C_DOMAIN_ID, C_PROJECT_PATH, C_OWNER_ID" constraintName="WORK_DB_LOOKUP_PK" tableName="WORK_DB_LOOKUP"/>
+        <addPrimaryKey schemaName="I2B2HIVE" columnNames="C_DOMAIN_ID, C_PROJECT_PATH, C_OWNER_ID" constraintName="WORK_DB_LOOKUP_PK" tableName="WORK_DB_LOOKUP"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-21" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="ANALSIS_JOB_PK" tableName="CRC_ANALYSIS_JOB" unique="true">
+        <createIndex schemaName="I2B2HIVE" indexName="ANALSIS_JOB_PK" tableName="CRC_ANALYSIS_JOB" unique="true">
             <column name="JOB_ID"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-22" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="JMS_MESSAGES_DESTINATION" tableName="JMS_MESSAGES" unique="false">
+        <createIndex schemaName="I2B2HIVE" indexName="JMS_MESSAGES_DESTINATION" tableName="JMS_MESSAGES" unique="false">
             <column name="DESTINATION"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321503315-23" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="JMS_MESSAGES_TXOP_TXID" tableName="JMS_MESSAGES" unique="false">
+        <createIndex schemaName="I2B2HIVE" indexName="JMS_MESSAGES_TXOP_TXID" tableName="JMS_MESSAGES" unique="false">
             <column name="TXOP"/>
             <column name="TXID"/>
         </createIndex>
