@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet author="mmcduffie (generated)" id="1418321616783-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="I2B2_ID_SEQ" startValue="26383730"/>
+        <createSequence schemaName="I2B2METADATA" cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="I2B2_ID_SEQ" startValue="26383730"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="ONT_SQ_PS_PRID" startValue="1"/>
+        <createSequence schemaName="I2B2METADATA" cacheSize="20" cycle="false" incrementBy="1" maxValue="9999999999999999999999999999" minValue="1" ordered="false" sequenceName="ONT_SQ_PS_PRID" startValue="1"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CONCEPT_CODE" startValue="1020"/>
+        <createSequence schemaName="I2B2METADATA" cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_CONCEPT_CODE" startValue="1020"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createSequence cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_I2B2_DATA_ID" startValue="1710"/>
+        <createSequence schemaName="I2B2METADATA" cacheSize="20" cycle="false" incrementBy="1" maxValue="999999999999999999999999999" minValue="1" ordered="false" sequenceName="SEQ_I2B2_DATA_ID" startValue="1710"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="CUSTOM_META">
+        <createTable schemaName="I2B2METADATA" tableName="CUSTOM_META">
             <column name="C_HLEVEL" type="NUMBER(22, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -68,7 +68,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="I2B2">
+        <createTable schemaName="I2B2METADATA" tableName="I2B2">
             <column name="C_HLEVEL" type="NUMBER(22, 0)"/>
             <column name="C_FULLNAME" type="VARCHAR2(700)">
                 <constraints nullable="false"/>
@@ -102,7 +102,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="I2B2_OLD">
+        <createTable schemaName="I2B2METADATA" tableName="I2B2_OLD">
             <column name="C_HLEVEL" type="NUMBER(22, 0)"/>
             <column name="C_FULLNAME" type="VARCHAR2(700)">
                 <constraints nullable="false"/>
@@ -136,7 +136,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="I2B2_SECURE">
+        <createTable schemaName="I2B2METADATA" tableName="I2B2_SECURE">
             <column name="C_HLEVEL" type="NUMBER(22, 0)"/>
             <column name="C_FULLNAME" type="VARCHAR2(900)">
                 <constraints nullable="false"/>
@@ -166,7 +166,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="I2B2_TAGS">
+        <createTable schemaName="I2B2METADATA" tableName="I2B2_TAGS">
             <column name="TAG_ID" type="NUMBER(18, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -179,7 +179,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="ONT_DB_LOOKUP">
+        <createTable schemaName="I2B2METADATA" tableName="ONT_DB_LOOKUP">
             <column name="C_DOMAIN_ID" type="VARCHAR2(255)"/>
             <column name="C_PROJECT_PATH" type="VARCHAR2(255)"/>
             <column name="C_OWNER_ID" type="VARCHAR2(255)"/>
@@ -195,7 +195,7 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="ONT_PROCESS_STATUS">
+        <createTable schemaName="I2B2METADATA" tableName="ONT_PROCESS_STATUS">
             <column name="PROCESS_ID" type="NUMBER(5, 0)">
                 <constraints nullable="false"/>
             </column>
@@ -213,20 +213,20 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="QUERY1">
+        <createTable schemaName="I2B2METADATA" tableName="QUERY1">
             <column name="TRIALNUMBER" type="NVARCHAR2(255)"/>
             <column name="DESCRIPTION" type="NCLOB"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="SCHEMES">
+        <createTable schemaName="I2B2METADATA" tableName="SCHEMES">
             <column name="C_KEY" type="VARCHAR2(50)"/>
             <column name="C_NAME" type="VARCHAR2(50)"/>
             <column name="C_DESCRIPTION" type="VARCHAR2(100)"/>
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createTable tableName="TABLE_ACCESS">
+        <createTable schemaName="I2B2METADATA" tableName="TABLE_ACCESS">
             <column name="C_TABLE_CD" type="VARCHAR2(50)"/>
             <column name="C_TABLE_NAME" type="VARCHAR2(50)"/>
             <column name="C_PROTECTED_ACCESS" type="CHAR(1)"/>
@@ -253,32 +253,32 @@
         </createTable>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addPrimaryKey columnNames="PROCESS_ID" constraintName="SYS_C00236998" tableName="ONT_PROCESS_STATUS"/>
+        <addPrimaryKey schemaName="I2B2METADATA" columnNames="PROCESS_ID" constraintName="SYS_C00236998" tableName="ONT_PROCESS_STATUS"/>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="I2B2_C_HLEVEL_BASECODE" tableName="I2B2_OLD" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="I2B2_C_HLEVEL_BASECODE" tableName="I2B2_OLD" unique="false">
             <column name="C_HLEVEL"/>
             <column name="C_BASECODE"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="I2B2_C_HLEVEL_BASECODE_PART" tableName="I2B2" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="I2B2_C_HLEVEL_BASECODE_PART" tableName="I2B2" unique="false">
             <column name="C_HLEVEL"/>
             <column name="C_BASECODE"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="I2B2_IDX1" tableName="I2B2_OLD" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="I2B2_IDX1" tableName="I2B2_OLD" unique="false">
             <column name="C_FULLNAME"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="I2B2_IDX1_PART" tableName="I2B2" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="I2B2_IDX1_PART" tableName="I2B2" unique="false">
             <column name="C_FULLNAME"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="I2B2_INDEX1" tableName="I2B2_OLD" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="I2B2_INDEX1" tableName="I2B2_OLD" unique="false">
             <column name="C_FULLNAME"/>
             <column name="C_HLEVEL"/>
             <column name="C_SYNONYM_CD"/>
@@ -286,7 +286,7 @@
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-21" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="I2B2_INDEX1_PART" tableName="I2B2" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="I2B2_INDEX1_PART" tableName="I2B2" unique="false">
             <column name="C_FULLNAME"/>
             <column name="C_HLEVEL"/>
             <column name="C_SYNONYM_CD"/>
@@ -294,57 +294,57 @@
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-22" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="I2B2_INDEX2" tableName="I2B2_OLD" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="I2B2_INDEX2" tableName="I2B2_OLD" unique="false">
             <column name="C_FULLNAME"/>
             <column name="C_SYNONYM_CD"/>
             <column name="C_HLEVEL"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-23" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="I2B2_INDEX2_PART" tableName="I2B2" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="I2B2_INDEX2_PART" tableName="I2B2" unique="false">
             <column name="C_FULLNAME"/>
             <column name="C_SYNONYM_CD"/>
             <column name="C_HLEVEL"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-24" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="I2B2_INDEX3" tableName="I2B2_OLD" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="I2B2_INDEX3" tableName="I2B2_OLD" unique="false">
             <column name="C_BASECODE"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-25" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="I2B2_INDEX3_PART" tableName="I2B2" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="I2B2_INDEX3_PART" tableName="I2B2" unique="false">
             <column name="C_BASECODE"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-26" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="I2B2_INDEX4" tableName="I2B2_OLD" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="I2B2_INDEX4" tableName="I2B2_OLD" unique="false">
             <column name="C_FULLNAME"/>
             <column name="C_BASECODE"/>
             <column name="C_VISUALATTRIBUTES"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-27" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="I2B2_INDEX4_PART" tableName="I2B2" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="I2B2_INDEX4_PART" tableName="I2B2" unique="false">
             <column name="C_FULLNAME"/>
             <column name="C_BASECODE"/>
             <column name="C_VISUALATTRIBUTES"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-28" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="I2B2_S_IDX1" tableName="I2B2_SECURE" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="I2B2_S_IDX1" tableName="I2B2_SECURE" unique="false">
             <column name="C_FULLNAME"/>
             <column name="C_HLEVEL"/>
             <column name="SECURE_OBJ_TOKEN"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-29" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="META_APPLIED_PATH_CUSTOM_IDX" tableName="CUSTOM_META" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="META_APPLIED_PATH_CUSTOM_IDX" tableName="CUSTOM_META" unique="false">
             <column name="M_APPLIED_PATH"/>
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-30" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="META_APPLIED_PATH_I2B2_IDX" tableName="I2B2_OLD" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="META_APPLIED_PATH_I2B2_IDX" tableName="I2B2_OLD" unique="false">
             <column name="C_HLEVEL"/>
             <column name="M_APPLIED_PATH"/>
             <column name="M_EXCLUSION_CD"/>
@@ -352,7 +352,7 @@
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-31" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="META_APPLIED_PATH_I2B2_PART" tableName="I2B2" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="META_APPLIED_PATH_I2B2_PART" tableName="I2B2" unique="false">
             <column name="C_HLEVEL"/>
             <column name="M_APPLIED_PATH"/>
             <column name="M_EXCLUSION_CD"/>
@@ -360,7 +360,7 @@
         </createIndex>
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321616783-32" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <createIndex indexName="META_FULLNAME_CUSTOM_IDX" tableName="CUSTOM_META" unique="false">
+        <createIndex schemaName="I2B2METADATA" indexName="META_FULLNAME_CUSTOM_IDX" tableName="CUSTOM_META" unique="false">
             <column name="C_FULLNAME"/>
         </createIndex>
     </changeSet>
