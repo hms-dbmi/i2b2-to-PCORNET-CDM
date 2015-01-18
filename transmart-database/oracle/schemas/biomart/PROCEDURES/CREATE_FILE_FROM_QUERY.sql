@@ -1,7 +1,6 @@
 --------------------------------------------------------
 --  DDL for Procedure CREATE_FILE_FROM_QUERY
 --------------------------------------------------------
-set define off;
 
   CREATE OR REPLACE PROCEDURE "BIOMART_USER"."CREATE_FILE_FROM_QUERY" ( p_query in varchar2,
                                   p_dir   in varchar2,
