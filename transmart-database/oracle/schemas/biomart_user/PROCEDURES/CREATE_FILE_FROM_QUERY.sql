@@ -68,6 +68,3 @@ exception
          execute immediate 'alter session set nls_date_format=''dd-MON-yy'' ';
          raise;
 end;
- 
-
-/
