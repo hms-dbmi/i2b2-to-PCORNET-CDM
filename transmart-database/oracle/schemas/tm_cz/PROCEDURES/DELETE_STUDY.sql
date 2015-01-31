@@ -97,4 +97,4 @@ delete from I2B2METADATA.TABLE_ACCESS where C_FULLNAME in (
 
 END DELETE_STUDY;
 
-/
+

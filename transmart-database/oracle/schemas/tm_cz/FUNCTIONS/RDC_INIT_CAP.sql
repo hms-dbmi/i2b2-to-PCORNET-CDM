@@ -105,4 +105,4 @@ BEGIN
   
 END RDC_INIT_CAP;
 
-/
+
