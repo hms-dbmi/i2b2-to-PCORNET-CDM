@@ -1,9 +1,4 @@
---------------------------------------------------------
---  DDL for Procedure I2B2_LOAD_CLINICAL_DATA
---------------------------------------------------------
-
-
-  CREATE OR REPLACE PROCEDURE "TM_CZ"."I2B2_LOAD_CLINICAL_DATA" 
+create or replace PROCEDURE                                       "I2B2_LOAD_CLINICAL_DATA" 
 (
   trial_id 			IN	VARCHAR2
  ,top_node			in  varchar2
@@ -105,7 +100,7 @@ BEGIN
 
    -----------
    --DROP Index on WZ Table.
-   execute immediate('drop index TM_WZ.LEAF_NODE_IDX');
+   /* execute immediate('drop index TM_WZ.LEAF_NODE_IDX'); */
    -----------
 
   -----------
@@ -675,12 +670,12 @@ BEGIN
 	DBMS_STATS.UNLOCK_TABLE_STATS('TM_WZ','WT_TRIAL_NODES');
 	execute immediate('analyze table tm_wz.wt_trial_nodes compute statistics');
 	-----------
-  
+  /*
   -----------
   -- NEW INDEX
 	execute immediate('CREATE INDEX  TM_WZ.LEAF_NODE_IDX ON TM_WZ.WT_TRIAL_NODES (LEAF_NODE)');
   -----------
-  
+  */
   -----------
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Create new LEAF_NODE_IDX',SQL%ROWCOUNT,stepCt,'Done');
@@ -896,7 +891,7 @@ BEGIN
 	)
 	select distinct c.patient_num,
 		   i.c_basecode,
-		   '@',
+		   a.study_id,
 		   a.data_type,
 		   case when a.data_type = 'T' then a.data_value
 				else 'E'  --Stands for Equals for numeric types
@@ -904,8 +899,8 @@ BEGIN
 		   case when a.data_type = 'N' then a.data_value
 				else null --Null for text types
 				end,
-		   FactSet, 
-		  sysdate, 
+		   c.sourcesystem_cd,
+		  sysdate,
 		   '@',
 		   '@',
 		   '@'
@@ -953,7 +948,7 @@ BEGIN
 	update i2b2
 	SET c_columndatatype = 'N',
       --Static XML String
-		c_metadataxml = '<?xml version="1.0"?><ValueMetadata><Version>3.02</Version><CreationDateTime>08/14/2008 01:22:59</CreationDateTime><TestID></TestID><TestName></TestName><DataType>PosFloat</DataType><CodeType></CodeType><Loinc></Loinc><Flagstouse></Flagstouse><Oktousevalues>Y</Oktousevalues><MaxStringLength></MaxStringLength><LowofLowValue>0</LowofLowValue><HighofLowValue>0</HighofLowValue><LowofHighValue>100</LowofHighValue>100<HighofHighValue>100</HighofHighValue><LowofToxicValue></LowofToxicValue><HighofToxicValue></HighofToxicValue><EnumValues></EnumValues><CommentsDeterminingExclusion><Com></Com></CommentsDeterminingExclusion><UnitValues><NormalUnits>ratio</NormalUnits><EqualUnits></EqualUnits><ExcludingUnits></ExcludingUnits><ConvertingUnits><Units></Units><MultiplyingFactor></MultiplyingFactor></ConvertingUnits></UnitValues><Analysis><Enums /><Counts /><New /></Analysis></ValueMetadata>'
+		c_metadataxml = '<:1xml version="1.0":2><ValueMetadata><Version>3.02</Version><CreationDateTime>08/14/2008 01:22:59</CreationDateTime><TestID></TestID><TestName></TestName><DataType>PosFloat</DataType><CodeType></CodeType><Loinc></Loinc><Flagstouse></Flagstouse><Oktousevalues>Y</Oktousevalues><MaxStringLength></MaxStringLength><LowofLowValue>0</LowofLowValue><HighofLowValue>0</HighofLowValue><LowofHighValue>100</LowofHighValue>100<HighofHighValue>100</HighofHighValue><LowofToxicValue></LowofToxicValue><HighofToxicValue></HighofToxicValue><EnumValues></EnumValues><CommentsDeterminingExclusion><Com></Com></CommentsDeterminingExclusion><UnitValues><NormalUnits>ratio</NormalUnits><EqualUnits></EqualUnits><ExcludingUnits></ExcludingUnits><ConvertingUnits><Units></Units><MultiplyingFactor></MultiplyingFactor></ConvertingUnits></UnitValues><Analysis><Enums /><Counts /><New /></Analysis></ValueMetadata>'
 	where c_basecode IN (
 		  select xf.concept_cd
 		  from observation_fact xf
@@ -1016,7 +1011,7 @@ BEGIN
 	-----------
   
   -----------
-	--i2b2_create_concept_counts(topNode, FactSet, jobID);
+	i2b2_create_concept_counts(topNode, FactSet, jobID);
 	-----------
   
 	--	delete each node that is hidden after create concept counts  	
@@ -1024,6 +1019,22 @@ BEGIN
 	--i2b2_create_security_for_trial(TrialId, secureStudy, jobID);
 	--i2b2_load_security_data(jobID);
 	
+   FOR r_delNodes in delNodes Loop
+
+    --	deletes hidden nodes for a trial one at a time
+
+		i2b2_delete_1_node(r_delNodes.c_fullname);
+		stepCt := stepCt + 1;
+		tText := 'Deleted node: ' || r_delNodes.c_fullname;
+
+		cz_write_audit(jobId,databaseName,procedureName,tText,SQL%ROWCOUNT,stepCt,'Done');
+
+	END LOOP;
+
+	i2b2_create_security_for_trial(TrialId, secureStudy, jobID);
+	i2b2_load_security_data(jobID);
+  
+  
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'End i2b2_load_clinical_data',0,stepCt,'Done');
 	
@@ -1055,7 +1066,7 @@ BEGIN
 		cz_end_audit (jobID, 'FAIL');
 		rtnCode := 16;
   when index_already_exists then
-    cz_write_audit(jobId,databaseName,procedureName,'Index already exists, not dropping. Obviously....?',0,stepCt,'Done');	
+    cz_write_audit(jobId,databaseName,procedureName,'Index already exists, not dropping. Obviously....:3',0,stepCt,'Done');	
     null;
 	when others then
     --Handle errors.
@@ -1065,5 +1076,3 @@ BEGIN
 		rtnCode := 16;
 	
 end;
-
-
