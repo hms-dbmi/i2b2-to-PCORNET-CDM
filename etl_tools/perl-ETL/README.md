@@ -2,6 +2,10 @@ This code represents the Perl based ETL tool for tranSMART. This will create fil
 
 <h1>Usage</h1>
 
+./etl_main "/path/to/config/" debugFlag
+
+The debug flag is a 1 or 0. 1 for debug, 0 for production. Debug mode will prevent the generation of new numbers from the sequence to prevent us from running out of IDs.
+
 <h1>Pseudo-Code</h1>
 
 <h2>Step1.</h2>
