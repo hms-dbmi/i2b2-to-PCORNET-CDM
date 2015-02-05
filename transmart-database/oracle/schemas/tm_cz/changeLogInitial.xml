@@ -1055,6 +1055,8 @@ WHERE
        <sqlFile endDelimiter="^/$" path='./oracle/schemas/tm_cz/PROCEDURES/UTIL_MAKE_OBJECT_LIST.sql'/>
        <sqlFile endDelimiter="^/$" path='./oracle/schemas/tm_cz/PROCEDURES/UTIL_RECOMPILE_ALL.sql'/>
        <sqlFile endDelimiter="^/$" path='./oracle/schemas/tm_cz/PROCEDURES/UTIL_TRUNCATE_TABLE.sql'/>
+       <sqlFile endDelimiter="^/$" path='./oracle/schemas/tm_cz/PROCEDURES/SEQ_ID.sql'/>
+       <sqlFile endDelimiter="^/$" path='./oracle/schemas/tm_cz/PROCEDURES/JOB_ID.sql'/>
      </changeSet>
 
 
