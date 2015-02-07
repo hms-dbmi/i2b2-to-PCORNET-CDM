@@ -7,7 +7,3 @@
       end if;
     end if;
   end;
-
-
-/
-ALTER TRIGGER "TM_CZ"."TRG_CZ_JOB_ID" ENABLE;
