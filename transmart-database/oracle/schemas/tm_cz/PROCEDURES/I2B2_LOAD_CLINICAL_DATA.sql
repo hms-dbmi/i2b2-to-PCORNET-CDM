@@ -1,4 +1,4 @@
-create or replace PROCEDURE                                       "I2B2_LOAD_CLINICAL_DATA" 
+create or replace PROCEDURE                                       "TM_CZ"."I2B2_LOAD_CLINICAL_DATA" 
 (
   trial_id 			IN	VARCHAR2
  ,top_node			in  varchar2
