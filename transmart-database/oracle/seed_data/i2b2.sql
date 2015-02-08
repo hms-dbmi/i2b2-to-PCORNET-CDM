@@ -8,19 +8,6 @@ Insert into I2B2HIVE.CRC_DB_LOOKUP (C_DOMAIN_ID,C_PROJECT_PATH,C_OWNER_ID,C_DB_F
 
 Insert into I2B2HIVE.HILOSEQUENCES (SEQUENCENAME,HIGHVALUES) values ('general',0);
 
-Insert into I2B2HIVE.JMS_MESSAGES (MESSAGEID,DESTINATION,TXID,TXOP) values (22,'QUEUE.jms.querytool.QueryResponse',null,'A');
-Insert into I2B2HIVE.JMS_MESSAGES (MESSAGEID,DESTINATION,TXID,TXOP) values (23,'QUEUE.jms.querytool.QueryResponse',null,'A');
-Insert into I2B2HIVE.JMS_MESSAGES (MESSAGEID,DESTINATION,TXID,TXOP) values (21,'QUEUE.jms.querytool.QueryResponse',null,'A');
-Insert into I2B2HIVE.JMS_MESSAGES (MESSAGEID,DESTINATION,TXID,TXOP) values (30,'QUEUE.jms.querytool.QueryResponse',null,'A');
-Insert into I2B2HIVE.JMS_MESSAGES (MESSAGEID,DESTINATION,TXID,TXOP) values (34,'QUEUE.jms.querytool.QueryResponse',null,'A');
-Insert into I2B2HIVE.JMS_MESSAGES (MESSAGEID,DESTINATION,TXID,TXOP) values (37,'QUEUE.jms.querytool.QueryResponse',null,'A');
-Insert into I2B2HIVE.JMS_MESSAGES (MESSAGEID,DESTINATION,TXID,TXOP) values (38,'QUEUE.jms.querytool.QueryResponse',null,'A');
-Insert into I2B2HIVE.JMS_MESSAGES (MESSAGEID,DESTINATION,TXID,TXOP) values (35,'QUEUE.jms.querytool.QueryResponse',null,'A');
-Insert into I2B2HIVE.JMS_MESSAGES (MESSAGEID,DESTINATION,TXID,TXOP) values (33,'QUEUE.jms.querytool.QueryResponse',null,'A');
-Insert into I2B2HIVE.JMS_MESSAGES (MESSAGEID,DESTINATION,TXID,TXOP) values (31,'QUEUE.jms.querytool.QueryResponse',null,'A');
-Insert into I2B2HIVE.JMS_MESSAGES (MESSAGEID,DESTINATION,TXID,TXOP) values (32,'QUEUE.jms.querytool.QueryResponse',null,'A');
-Insert into I2B2HIVE.JMS_MESSAGES (MESSAGEID,DESTINATION,TXID,TXOP) values (36,'QUEUE.jms.querytool.QueryResponse',null,'A');
-
 Insert into I2B2HIVE.JMS_ROLES (ROLEID,USERID) values ('durpublisher','dynsub');
 Insert into I2B2HIVE.JMS_ROLES (ROLEID,USERID) values ('publisher','dynsub');
 Insert into I2B2HIVE.JMS_ROLES (ROLEID,USERID) values ('guest','guest');
