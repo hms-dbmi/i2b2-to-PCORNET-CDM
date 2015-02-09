@@ -120,7 +120,7 @@ Begin
 		  ,rootPath as c_dimcode
 		  ,null as c_comment
 		  ,rootPath as c_tooltip
-		  ,null as update_date
+		  ,sysdate as update_date
 		  ,null as download_date
 		  ,sysdate as import_date
 		  ,null as sourcesystem_cd
