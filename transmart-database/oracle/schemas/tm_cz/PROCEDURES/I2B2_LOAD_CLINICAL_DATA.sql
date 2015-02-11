@@ -54,6 +54,29 @@ AS
   pragma exception_init( index_already_exists, -01418 );
 
 BEGIN
+
+
+EXECUTE IMMEDIATE 'alter index I2B2METADATA.I2B2_IDX1_PART unusable';
+EXECUTE IMMEDIATE 'alter index i2b2metadata.I2B2_INDEX1_PART unusable';
+EXECUTE IMMEDIATE 'alter index i2b2metadata.I2B2_INDEX2_PART unusable';
+EXECUTE IMMEDIATE 'alter index i2b2metadata.I2B2_INDEX3_PART unusable';
+EXECUTE IMMEDIATE 'alter index i2b2metadata.I2B2_INDEX4_PART unusable';
+EXECUTE IMMEDIATE 'alter index i2b2metadata.I2B2_C_HLEVEL_BASECODE_PART unusable';
+EXECUTE IMMEDIATE 'alter index i2b2metadata.META_APPLIED_PATH_I2B2_PART unusable';
+EXECUTE IMMEDIATE 'alter index i2b2metadata.I2B2_S_IDX1 unusable';
+EXECUTE IMMEDIATE 'alter index i2b2demodata.INDEX1 unusable';
+EXECUTE IMMEDIATE 'alter index i2b2demodata.CONCEPT_COUNTS_INDEX1 unusable';
+EXECUTE IMMEDIATE 'alter index i2b2demodata.IDX_CONCEPT_DIM3 unusable';
+EXECUTE IMMEDIATE 'alter index i2b2demodata.IDX_CONCEPT_DIM_1 unusable';
+EXECUTE IMMEDIATE 'alter index i2b2demodata.OB_FACT_PK unusable';
+EXECUTE IMMEDIATE 'alter index i2b2demodata.IDX_OB_FACT_1 unusable';
+EXECUTE IMMEDIATE 'alter index i2b2demodata.IDX_OB_FACT_2 unusable';
+EXECUTE IMMEDIATE 'alter index i2b2demodata.FACT_MOD_PAT_ENC unusable';
+EXECUTE IMMEDIATE 'alter index i2b2demodata.FACT_CNPT_PAT_ENCT_IDX unusable';
+EXECUTE IMMEDIATE 'alter index i2b2demodata.PD_IDX_ALLPATIENTDIM unusable';
+EXECUTE IMMEDIATE 'alter index i2b2demodata.PATIENT_DIMENSION_INDEX1 unusable';
+EXECUTE IMMEDIATE 'alter index i2b2demodata.PATIENT_TRIAL_INDEX1 UNUSABLE';
+
   
   ----------- 
   --SET Variables
@@ -891,7 +914,7 @@ BEGIN
 	)
 	select distinct c.patient_num,
 		   i.c_basecode,
-		   a.study_id,
+		   '@',
 		   a.data_type,
 		   case when a.data_type = 'T' then a.data_value
 				else 'E'  --Stands for Equals for numeric types
@@ -1011,8 +1034,17 @@ BEGIN
 	-----------
   
   -----------
+execute immediate 'ALTER INDEX I2B2DEMODATA.INDEX1 UNUSABLE';
+execute immediate 'ALTER INDEX I2B2DEMODATA.CONCEPT_COUNTS_INDEX1 UNUSABLE';
 	i2b2_create_concept_counts(topNode, FactSet, jobID);
+execute immediate 'ALTER INDEX I2B2DEMODATA.INDEX1 REBUILD';
+execute immediate 'ALTER INDEX I2B2DEMODATA.CONCEPT_COUNTS_INDEX1 REBUILD'; 
 	-----------
+
+
+
+
+
   
 	--	delete each node that is hidden after create concept counts  	
 
