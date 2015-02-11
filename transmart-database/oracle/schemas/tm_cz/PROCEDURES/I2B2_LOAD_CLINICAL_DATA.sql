@@ -898,6 +898,8 @@ EXECUTE IMMEDIATE 'alter index i2b2demodata.PATIENT_TRIAL_INDEX1 UNUSABLE';
   
   -----------	
     --Insert into observation_fact
+
+EXECUTE IMMEDIATE 'alter index i2b2demodata.OB_FACT_PK REBUILD';
 	
 	insert into observation_fact
 	(patient_num,
