@@ -95,8 +95,8 @@
     </changeSet>
     <changeSet author="mmcduffie (generated)" id="1418321432519-21" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <createTable schemaName="I2B2DEMODATA" tableName="CONCEPT_COUNTS">
-            <column name="CONCEPT_PATH" type="VARCHAR2(700)"/>
-            <column name="PARENT_CONCEPT_PATH" type="VARCHAR2(700)"/>
+            <column name="CONCEPT_PATH" type="VARCHAR2(4000)"/>
+            <column name="PARENT_CONCEPT_PATH" type="VARCHAR2(2000)"/>
             <column name="PATIENT_COUNT" type="NUMBER(38, 0)"/>
         </createTable>
     </changeSet>
@@ -105,7 +105,7 @@
             <column name="CONCEPT_CD" type="VARCHAR2(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="CONCEPT_PATH" type="VARCHAR2(700)"/>
+            <column name="CONCEPT_PATH" type="VARCHAR2(4000)"/>
             <column name="NAME_CHAR" type="VARCHAR2(2000)"/>
             <column name="CONCEPT_BLOB" type="CLOB"/>
             <column name="UPDATE_DATE" type="date"/>
