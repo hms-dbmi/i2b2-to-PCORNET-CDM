@@ -6,8 +6,8 @@
             <column name="SITE_ID" type="VARCHAR2(50)"/>
             <column name="SUBJECT_ID" type="VARCHAR2(20)"/>
             <column name="VISIT_NAME" type="VARCHAR2(100)"/>
-            <column name="DATA_LABEL" type="VARCHAR2(500)"/>
-            <column name="DATA_VALUE" type="VARCHAR2(500)"/>
+            <column name="DATA_LABEL" type="VARCHAR2(2000)"/>
+            <column name="DATA_VALUE" type="VARCHAR2(4000)"/>
             <column name="CATEGORY_CD" type="VARCHAR2(250)"/>
             <column name="ETL_JOB_ID" type="NUMBER(22, 0)"/>
             <column name="ETL_DATE" type="date"/>
@@ -29,7 +29,7 @@
             <column name="SITE_ID" type="VARCHAR2(50)"/>
             <column name="SUBJECT_ID" type="VARCHAR2(20)"/>
             <column name="VISIT_NAME" type="VARCHAR2(100)"/>
-            <column name="DATA_LABEL" type="VARCHAR2(500)"/>
+            <column name="DATA_LABEL" type="VARCHAR2(1000)"/>
             <column name="CATEGORY_CD" type="VARCHAR2(250)"/>
         </createTable>
     </changeSet>
@@ -82,7 +82,7 @@
     <changeSet author="mmcduffie (generated)" id="1418322730766-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <createTable schemaName="TM_WZ" tableName="WT_NUM_DATA_TYPES">
             <column name="CATEGORY_CD" type="VARCHAR2(200)"/>
-            <column name="DATA_LABEL" type="VARCHAR2(500)"/>
+            <column name="DATA_LABEL" type="VARCHAR2(2000)"/>
             <column name="SAMPLE_TYPE" type="VARCHAR2(100)"/>
             <column name="VISIT_NAME" type="VARCHAR2(100)"/>
         </createTable>
@@ -178,9 +178,9 @@
             <column name="CATEGORY_CD" type="VARCHAR2(200)"/>
             <column name="VISIT_NAME" type="VARCHAR2(100)"/>
             <column name="SAMPLE_TYPE" type="VARCHAR2(100)"/>
-            <column name="DATA_LABEL" type="VARCHAR2(500)"/>
+            <column name="DATA_LABEL" type="VARCHAR2(2000)"/>
             <column name="NODE_NAME" type="VARCHAR2(500)"/>
-            <column name="DATA_VALUE" type="VARCHAR2(500)"/>
+            <column name="DATA_VALUE" type="VARCHAR2(4000)"/>
             <column name="DATA_TYPE" type="VARCHAR2(20)"/>
         </createTable>
     </changeSet>
