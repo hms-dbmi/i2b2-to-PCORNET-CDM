@@ -28,3 +28,10 @@ GRANT SELECT ANY DICTIONARY TO biomart;
 grant all on "I2B2METADATA"."I2B2" to "BIOMART" ;
 grant all on "I2B2DEMODATA"."CONCEPT_DIMENSION"  to "BIOMART" ;
 grant all on "I2B2DEMODATA"."OBSERVATION_FACT"  to "BIOMART" ;
+
+ CREATE TABLE "BIOMART"."WEB_LINKS" 
+   (	"NAME" VARCHAR2(100 BYTE), 
+	"URL" VARCHAR2(500 BYTE), 
+	"ID" NUMBER
+   );
+create sequence biomart.web_id;
