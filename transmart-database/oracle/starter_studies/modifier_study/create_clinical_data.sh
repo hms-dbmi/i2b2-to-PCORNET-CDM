@@ -1,0 +1,14 @@
+/usr/local/data-integration/kitchen.sh \
+-norep=Y \
+-file=/mnt/nfs/etl/src/tranSMART-ETL/Kettle-GPL/Kettle-ETL/create_clinical_data.kjb \
+-log=load_clinical_data.log \
+-level=Basic \
+-param:COLUMN_MAP_FILE='columnMapping.txt' \
+-param:DATA_LOCATION='./' \
+-param:STUDY_ID=TEST_MODIFIERS1 \
+-param:TOP_NODE='\Public Studies\' \
+-param:SORT_DIR='./' \
+-param:LOAD_TYPE=L \
+-param:LOADER_PATH=/app/oracle/product/11.2.0/client_1/bin/sqlldr \
+-param:SECURITY_REQUIRED=Y \
+-param:FACT_SET="TEST_MODIFIERS1"
