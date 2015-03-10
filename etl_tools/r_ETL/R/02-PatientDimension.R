@@ -76,14 +76,14 @@ extractPatientList <- function(conf = config) {
     } else {
       tempColsToKeep <- c('SUBJECT_ID',names(temp)[!(names(temp) %in% names(patientList))])
       patientList <-merge(as.data.frame(patientList),
-                          as.data.frame(subset(temp,select=tempColsToKeep)), 
-                          all.x=T, all.y =T, 
+                          as.data.frame(subset(temp,select=tempColsToKeep)),
+                          all.x=T, all.y =T,
                           by = 'SUBJECT_ID')
     }
     # -------
   }
   patientList <- patientList[!duplicated(patientList$SUBJECT_ID),]
-  
+
   time <- Sys.time() - start
 
   toLog(paste0('Patient Dimension - Retrieved ',nrow(patientList),' patients from ',nFile,'files in'),time)
@@ -115,8 +115,8 @@ findNewPatients <- function(patients, patientHash) {
     patientMappingData <- data.frame(PATIENT_NUM = newPatients$PATIENT_NUM,
                                      PATIENT_IDE = newPatients$SUBJECT_ID,
                                      PATIENT_IDE_SOURCE = config$FACT_SET,
-                                     SOURCESYSTEM_CD = config$SOURCESYSTEM)
-    
+                                     SOURCESYSTEM_CD = config$STUDY_ID)
+
     patientTrialData <- data.frame(PATIENT_NUM = newPatients$PATIENT_NUM,
                                    TRIAL = config$SOURCESYSTEM,
                                    SECURE_OBJ_TOKEN = config$SECURE_OBJ_TOKEN)
@@ -132,6 +132,7 @@ findNewPatients <- function(patients, patientHash) {
         patientDimensionData[,col] <- newPatients[,col]
       }
     }
+    patientDimensionData$SOURCESYSTEM_CD <- paste(config$SOURCESYSTEM,patientDimensionData$SOURCESYSTEM_CD,sep=':')
 
   } else {
     # ----- if no new patients: create empty datasets
@@ -152,6 +153,7 @@ findNewPatients <- function(patients, patientHash) {
 
 mergePatients <- function(existingPatients, newPatients) {
   setnames(existingPatients, 'SUBJECT_ID', 'SOURCESYSTEM_CD')
+
   if (nrow(newPatients)>0) {
     return(rbind(existingPatients,newPatients))
   } else {return(existingPatients)

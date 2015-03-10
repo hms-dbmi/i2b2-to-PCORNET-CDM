@@ -1,6 +1,8 @@
 rm(list=ls())
 
-r_scripts_path = 'r_etl/R/'
+setwd('/mnt/nfs/etl/projects/AUTISM/SSC/r_clinical/')
+
+r_scripts_path = 'R/'
 
 source(paste0(r_scripts_path,'getConfig.R'))
 source(paste0(r_scripts_path,'toLog.R'))
@@ -65,7 +67,7 @@ conceptDimension()
 # --------
 
 # create observation facts and concepts_folders -------
-rm(temp)
+#rm(temp)
 ObservationFact()
 # --------
 
