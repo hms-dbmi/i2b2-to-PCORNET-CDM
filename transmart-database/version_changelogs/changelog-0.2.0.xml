@@ -29,4 +29,85 @@ CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."QUERY_GLOBAL_TEMP"
 	</sql>
   </changeSet>
 
+  <changeSet author="mmcduffie" id="3">
+  <comment>Dropping this table to recreate it as a global temp table.</comment>
+        <dropTable cascadeConstraints="true"
+            schemaName="I2B2DEMODATA"
+            tableName="MASTER_QUERY_GLOBAL_TEMP" />
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="4">
+  <comment>This table needs to be created as a global temp table.</comment>
+        <sql>
+  CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."MASTER_QUERY_GLOBAL_TEMP" 
+   (	"ENCOUNTER_NUM" NUMBER(22,0), 
+	"PATIENT_NUM" NUMBER(22,0), 
+	"INSTANCE_NUM" NUMBER(18,0), 
+	"CONCEPT_CD" VARCHAR2(50 BYTE), 
+	"START_DATE" DATE, 
+	"PROVIDER_ID" VARCHAR2(50 BYTE), 
+	"MASTER_ID" VARCHAR2(50 BYTE), 
+	"LEVEL_NO" NUMBER(5,0)
+   ) ON COMMIT PRESERVE ROWS ;
+        </sql>
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="5">
+  <comment>Dropping this table to recreate it as a global temp table.</comment>
+        <dropTable cascadeConstraints="true"
+            schemaName="I2B2DEMODATA"
+            tableName="GLOBAL_TEMP_FACT_PARAM_TABLE" />
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="6">
+  <comment>This table needs to be created as a global temp table.</comment>
+        <sql>
+  CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."GLOBAL_TEMP_FACT_PARAM_TABLE" 
+   (	"SET_INDEX" NUMBER(*,0), 
+	"CHAR_PARAM1" VARCHAR2(500 BYTE), 
+	"CHAR_PARAM2" VARCHAR2(500 BYTE), 
+	"NUM_PARAM1" NUMBER(*,0), 
+	"NUM_PARAM2" NUMBER(*,0)
+   ) ON COMMIT PRESERVE ROWS ;
+        </sql>
+  </changeSet>
+
+<changeSet author="mmcduffie" id="7">
+  <comment>Dropping this table to recreate it as a global temp table.</comment>
+        <dropTable cascadeConstraints="true"
+            schemaName="I2B2DEMODATA"
+            tableName="GLOBAL_TEMP_PARAM_TABLE" />
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="8">
+  <comment>This table needs to be created as a global temp table.</comment>
+        <sql>
+  CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."GLOBAL_TEMP_PARAM_TABLE" 
+   (	"SET_INDEX" NUMBER(*,0), 
+	"CHAR_PARAM1" VARCHAR2(500 BYTE), 
+	"CHAR_PARAM2" VARCHAR2(500 BYTE), 
+	"NUM_PARAM1" NUMBER(*,0), 
+	"NUM_PARAM2" NUMBER(*,0)
+   ) ON COMMIT PRESERVE ROWS ;
+        </sql>
+  </changeSet>
+
+<changeSet author="mmcduffie" id="9">
+  <comment>Dropping this table to recreate it as a global temp table.</comment>
+        <dropTable cascadeConstraints="true"
+            schemaName="I2B2DEMODATA"
+            tableName="DX" />
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="10">
+  <comment>This table needs to be created as a global temp table.</comment>
+        <sql>
+ CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."DX" 
+   (	"ENCOUNTER_NUM" NUMBER(22,0), 
+	"PATIENT_NUM" NUMBER(22,0)
+   ) ON COMMIT PRESERVE ROWS ;
+
+        </sql>
+  </changeSet>
+
 </databaseChangeLog>
