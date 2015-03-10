@@ -1,5 +1,5 @@
 # rm(list=ls())
-# 
+#
 # source('../MyPheWAS/R/getConfig.R')
 # # source('../MyPheWAS/R/toLog.R')
 # # source('R/getNewIdentifiers.R')
@@ -15,9 +15,9 @@ config <- getConfig('config_file')
 
 conf = config
 
-generateControlFiles <- function(inFileName, outFileName, dbTable, columns, base_path = config$DATA_BASE_PATH ) {
+generateControlFiles <- function(inFileName, outFileName, dbTable, columns, base_path = config$OUTPUT_BASE_PATH ) {
   extension = conf$DATA_FILE_EXTENSION
-  
+
   if (!file.exists(paste0(base_path,"scripts"))) {
     dir.create(paste0(base_path,"scripts"))
   }
@@ -96,9 +96,9 @@ generateControlFiles(inFileName = 'patient_mapping.dat',
                        columns = config$CONCEPTS_FOLDER_PATIENTS_COLUMNS)
 
 
-script_list <- list.files(paste0(config$DATA_BASE_PATH,'scripts'), 'load_')
+script_list <- list.files(paste0(config$OUTPUT_BASE_PATH,'scripts'), 'load_')
 
-generateMasterScript <- function(scripts_list, base_path = config$DATA_BASE_PATH) {
+generateMasterScript <- function(scripts_list, base_path = config$OUTPUT_BASE_PATH) {
   con <-file(paste0(base_path,"scripts/masterScript.sh"),open='w')
   close(con)
 
