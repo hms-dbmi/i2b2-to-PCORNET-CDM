@@ -131,7 +131,7 @@ conceptDimension <- function(conf = config) {
                                        UPDATE_DATE = Sys.time(),
                                        DOWNLOAD_DATE = Sys.time(),
                                        IMPORT_DATE= Sys.time(),
-                                       SOURCESYSTEM_CD= FACT_SET,
+                                       SOURCESYSTEM_CD= STUDY_ID,
                                        UPLOAD_ID= '',
                                        TABLE_NAME= '')
 
@@ -223,7 +223,7 @@ conceptDimension <- function(conf = config) {
                                            UPDATE_DATE = Sys.time(),
                                            DOWNLOAD_DATE = Sys.time(),
                                            IMPORT_DATE= Sys.time(),
-                                           SOURCESYSTEM_CD= FACT_SET,
+                                           SOURCESYSTEM_CD= STUDY_ID,
                                            UPLOAD_ID= '',
                                            TABLE_NAME= '')
 
@@ -281,7 +281,7 @@ conceptDimension <- function(conf = config) {
                                            UPDATE_DATE = Sys.time(),
                                            DOWNLOAD_DATE = Sys.time(),
                                            IMPORT_DATE= Sys.time(),
-                                           SOURCESYSTEM_CD= FACT_SET,
+                                           SOURCESYSTEM_CD= STUDY_ID,
                                            UPLOAD_ID= '',
                                            TABLE_NAME= '')
 
@@ -362,7 +362,7 @@ conceptDimension <- function(conf = config) {
                                                              UPDATE_DATE = Sys.time(),
                                                              DOWNLOAD_DATE = Sys.time(),
                                                              IMPORT_DATE= Sys.time(),
-                                                             SOURCESYSTEM_CD= FACT_SET,
+                                                             SOURCESYSTEM_CD= STUDY_ID,
                                                              UPLOAD_ID= '',
                                                              TABLE_NAME= ''))
 
@@ -460,7 +460,7 @@ conceptDimension <- function(conf = config) {
                                      UPDATE_DATE = Sys.time(),
                                      DOWNLOAD_DATE = Sys.time(),
                                      IMPORT_DATE= Sys.time(),
-                                     SOURCESYSTEM_CD= FACT_SET,
+                                     SOURCESYSTEM_CD= STUDY_ID,
                                      UPLOAD_ID= '',
                                      TABLE_NAME= '')
 
