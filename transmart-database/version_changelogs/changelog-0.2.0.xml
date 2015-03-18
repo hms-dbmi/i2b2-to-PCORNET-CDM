@@ -110,4 +110,12 @@ CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."QUERY_GLOBAL_TEMP"
         </sql>
   </changeSet>
 
+  <changeSet author="mmcduffie" id="10>
+  <comment>Adding more privs for TM_CZ</comment>
+  <sql>
+	GRANT DROP ANY PROCEDURE TO TM_CZ;
+	GRANT CREATE ANY PROCEDURE TO TM_CZ;
+  </sql>
+  </changeSet>
+
 </databaseChangeLog>
