@@ -1,9 +1,0 @@
-/usr/bin/time -v sqlplus -s biomart_user/dwtst@BCH_DWTST<<EOF
-
-CREATE TABLE TRIMMED_CONCEPTS AS
-SELECT DISTINCT CONCEPT_CD 
-FROM TM_WZ.OBSF3;
-
-
-exit;
-EOF
