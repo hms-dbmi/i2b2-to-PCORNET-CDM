@@ -37,6 +37,14 @@ while(my($k, $v) = each %conceptHash)
 }
 close($srcFileOut);
 
+open $srcFileOut, '>' , "$srcFile.outcff";
+while(my($k, $v) = each %conceptHash)
+{
+        my $keyCount = keys(%$v);
+        print $srcFileOut "$k,$keyCount\n";
+}
+close($srcFileOut);
+
 my $keyCount = keys(%patientHash);
 
 print("COUNT : $keyCount\n");

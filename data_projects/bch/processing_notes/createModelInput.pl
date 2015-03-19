@@ -6,10 +6,10 @@ use Data::Dumper;
 use Time::Local;
 use Time::Piece;
 use POSIX;
+use DBI;
 
 my $srcFile 		= $ARGV[0];
 my $outDir 		= $ARGV[1];
-my $patientBirthDateFile= $ARGV[2];
 my $debugFlag 		= $ARGV[3];
 
 my $F;
@@ -17,25 +17,39 @@ my $patientFile;
 
 print("DEBUG - parseNLP.pl : Attemping to open input file directory $srcFile\n");
 
-open($F, "<", $patientBirthDateFile ) or die $!;
-
 my %patientBirthDateHash;
 
-while(my $line = <$F>) {
-chomp $line;
-	#my @values = split/\|/,$line,2;
-	
-	#$patientBirthDateHash{$values[0]} = $values[1];
+my $dbh = DBI->connect('dbi:Oracle:host=dwtst.tch.harvard.edu;sid=DWTST;port=1521', 'BIOMART_USER', 'dwtst') or die "Couldn't open database: $DBI::errstr; stopped";
+
+my $sql = qq{ SELECT PD.PATIENT_NUM,TO_CHAR(TO_TIMESTAMP(PD.BIRTH_DATE,'DD-MON-YY HH12.MI.SS.FF AM'),'DD-MON-YY HH12.MI.SS') FROM TM_WZ.DISTINCT_PATIENTS DP INNER JOIN TM_LZ.PATIENT_DIMENSION_I2B2_MTM PD ON PD.PATIENT_NUM = DP.PATIENT_NUM }; 
+my $sth = $dbh->prepare($sql);
+$sth->execute();
+
+my($patientNum, $birthDate);                     
+$sth->bind_columns(undef, \$patientNum, \$birthDate);
+
+while( $sth->fetch() ) {
+		$patientBirthDateHash{$patientNum} = $birthDate;
+
+	}
+$sth->finish();         
 
 
-	my $start = timegm 0,0,0,1,0,80;
-	my $end = timegm 0,0,0,1,0,12;
-	my $randodate = scalar gmtime $start + rand $end - $start;
-	$patientBirthDateHash{$line} = $randodate;
+#Precreate the age directories.
+my $directoryCounter=1;
+
+while($directoryCounter<16)
+{
+	my $ageDir = "$outDir/$directoryCounter";
+	if(!-d $ageDir)
+        {
+        	mkdir $ageDir or die "Error creating directory: $ageDir";
+        }
+
+	$directoryCounter++;
 
 }
 
-close($F);
 
 open($F, "<", $srcFile ) or die $!;
 
@@ -47,32 +61,26 @@ while(my $line = <$F>) {
 	my $patientBirthDate = $patientBirthDateHash{$values[2]};
 	my $factDate	     = $values[5];
 
-	my $format = '%a %b %d %H:%M:%S %Y';
+	my $format = '%d-%b-%y %H.%M.%S';
 	my $format2 = '%Y-%d-%M %H:%M:%S';
 
 	my $diff = Time::Piece->strptime($patientBirthDate, $format) - Time::Piece->strptime($factDate, $format2);
 
 	$diff = ceil(abs $diff/(365*24*60*60));
 
-	my $ageDir = "$outDir/$diff";
+	if ($diff < 16)
+	{	
+		my $ageDir = "$outDir/$diff";
 
-	if(!-d $ageDir) 
-	{
-		mkdir $ageDir or die "Error creating directory: $ageDir";
-	}
+		my $strippedSNOMED = $values[3];
+		$strippedSNOMED =~ s/SNO\://g;
 
-	if(-e "$ageDir/$values[2]")
-	{
 		open($patientFile, ">>", "$ageDir/$values[2]" ) or die $!;	
-		print $patientFile " $values[3]";
-	}
-	else
-	{
-		open($patientFile, ">", "$ageDir/$values[2]" ) or die $!;	
-		print $patientFile "$values[2],$diff,$values[3]"; 
-	}		
+		print $patientFile " $strippedSNOMED";
 
-	close($patientFile);
+		close($patientFile);
+	}
+
 }
 
 close($F);

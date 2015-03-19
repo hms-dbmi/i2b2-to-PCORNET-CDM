@@ -5,7 +5,7 @@ use warnings;
 use Data::Dumper;
 use Benchmark qw( cmpthese );
 
-my $srcFile = "emerge_asd_15k.txt.pre_pms_dn.out.snowmed.positive";
+my $srcFile = $ARGV[0];
 
 print("DEBUG - parseNLP.pl : Attemping to open input file directory $srcFile\n");
 
