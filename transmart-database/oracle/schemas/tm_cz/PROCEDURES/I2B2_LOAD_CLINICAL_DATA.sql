@@ -882,7 +882,7 @@ EXECUTE IMMEDIATE 'alter index i2b2demodata.PATIENT_TRIAL_INDEX1 UNUSABLE';
 		  ,c.concept_cd
 		  ,'LIKE'
 		  ,'T'
-		  ,'trial:' || FactSet 
+		  ,FactSet 
 		  ,i2b2_id_seq.nextval
     from concept_dimension c
     where c.concept_path in
