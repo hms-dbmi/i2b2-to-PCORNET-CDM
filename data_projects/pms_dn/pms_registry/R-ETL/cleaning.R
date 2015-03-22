@@ -14,7 +14,7 @@ clinical <- clinical[!is.na(clinical$Survey.Session.ID),]
 # Create dir for output, create empty mapping file and ontology object
 dir.create("output")
 cat("Filename\tCategory Code\tColumn Number\tData Label\n",file = "output/mapping.txt")
-ontology<-c("PMS DN","PMS Ontology")
+ontology<-c("PMS DN new ETL","PMS Ontology")
 
 # ==== Extract basic demographic informations (patient ID, SEX, AGE, RACE, COUNTRY) ====
 adult[c("Patient.ID","Birthdate","Gender","Ancestral.Background","Country")] %>%
