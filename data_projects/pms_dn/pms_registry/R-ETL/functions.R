@@ -18,16 +18,32 @@ pop<-function(vector)
 #' Concatenate two headers and clean them
 catClean<-function(header1,header2)
 {
-  header=paste(header1,header2,sep=" - ")
+  # Clean variable names
+  header1<-gsub(" \\(.*?\\)","",header1,perl = T)
+  header1<-gsub("Please enter either pounds or kilograms","",header1,perl = T)
+  header1<-gsub("Please enter either feet and inches or centimeters","",header1,perl = T)
+  header1<-gsub("Please answer the following questions\\.","",header1,perl = T)
+  header1<-gsub("If you answer yes to any of the following questions, please select the age of occurrence\\.","",header1,perl = T)
+  header1<-gsub("[^[:alnum:]]","\\.",header1, perl = T)
+  
+  header2<-gsub("^Responses$","",header2,perl = T)
+  header2<-gsub(" - APGAR score$","",header2,perl = T)
+  header2<-gsub(" - Frequency$","",header2,perl = T)
+  header2<-gsub("([^\\d]) - Age at milestones?$","\\1",header2,perl = T)
+  header2<-gsub("([^\\d]) - Age$","\\1",header2,perl = T)
+  header2<-gsub("-","_",header2,perl = T)
+  header2<-gsub("[^[:alnum:]_]","\\.",header2,perl = T)
+    
+  # Merge the two headers
+  header=paste(header1,header2,sep="_")
   
   # Clean the variable names
-  header<-sub("^ - ","",header)
-  header<-gsub("[^[:alnum:]-]","\\.",header)
-  header<-gsub(".-.Responses$","",header)
-  header<-gsub("\\.+","\\.",header)
-  header<-gsub("-","_",header)
-  header<-gsub("\\.+$","",header)
-  
+  header<-sub("^_","",header,perl = T)
+  header<-sub("_$","",header,perl = T)
+  header<-gsub("\\.+","\\.",header,perl = T)
+  header<-gsub("\\.+$","",header,perl = T)
+  header<-gsub("\\.*_\\.*","_",header,perl = T)
+
   header
 }
 
