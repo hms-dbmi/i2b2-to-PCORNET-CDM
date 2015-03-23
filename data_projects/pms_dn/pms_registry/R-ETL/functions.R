@@ -20,8 +20,8 @@ catClean<-function(header1,header2)
 {
   # Clean variable names
   header1<-gsub(" \\(.*?\\)","",header1,perl = T)
-  header1<-gsub("Please enter either pounds or kilograms","",header1,perl = T)
-  header1<-gsub("Please enter either feet and inches or centimeters","",header1,perl = T)
+  header1<-gsub("Please (enter|select) either pounds( and ounces)? or kilograms\\.","",header1,perl = T)
+  header1<-gsub("Please enter either feet and inches or centimeters\\.","",header1,perl = T)
   header1<-gsub("Please answer the following questions\\.","",header1,perl = T)
   header1<-gsub("If you answer yes to any of the following questions, please select the age of occurrence\\.","",header1,perl = T)
   header1<-gsub("[^[:alnum:]]","\\.",header1, perl = T)
@@ -116,4 +116,60 @@ addMapping <- function(dataFile,categoryCode,columnNum,dataLabel)
   categoryCode <- gsub(" ","_",categoryCode)
   mapping<-data.frame(Filename=dataFile,Category.Code=categoryCode,Column.Number=columnNum,Data.Label=dataLabel)
   write.table(mapping,file="output/mapping.txt",row.names=F,sep="\t",append = T,col.names=F,quote=F)
+}
+
+
+#' Write an empty template premapping file from the data file
+#' @encoding UTF-8
+#' @param datafile The data frame holding the data to premap
+#' @param premapfile The premap filename to save to
+writePremap <- function(datafile,premapfile)
+{
+  header1<-scan(datafile,what=character(),nlines=1,sep=",",quote="\"")
+  header2<-scan(datafile,what=character(),nlines=1,sep=",",quote="\"",skip=1)
+  
+  tmpHead<-""
+  tmpHeader1<-character(0)
+  for (head in header1)
+  {
+    if (head == "")
+      head<-tmpHead
+    
+    tmpHeader1<-c(tmpHeader1,head)
+    tmpHead<-head
+  }
+  
+  header1<-tmpHeader1
+  
+  header1<-gsub(" \\(.*?\\)","",header1,perl = T)
+  header1<-gsub("Please (enter|select) either pounds( and ounces)? or kilograms\\.","",header1,perl = T)
+  header1<-gsub("Please enter either feet and inches or centimeters\\.","",header1,perl = T)
+  header1<-gsub("Please answer the following questions\\.","",header1,perl = T)
+  header1<-gsub("If you answer yes to any of the following questions, please select the age of occurrence\\.","",header1,perl = T)
+    
+  header2<-gsub("^Responses$","",header2,perl = T)
+  header2<-gsub(" - APGAR score$","",header2,perl = T)
+  header2<-gsub(" - Frequency$","",header2,perl = T)
+  header2<-gsub("([^\\d]) - Age at milestones?$","\\1",header2,perl = T)
+  header2<-gsub("([^\\d]) - Age$","\\1",header2,perl = T)
+  header2<-gsub("\"","",header2,perl=T)
+  
+  header<-paste(header1,header2,sep=" - ")
+  header<-sub("^ - ","",header,perl = T)
+  header<-sub(" - $","",header,perl = T)
+  
+  Head1<-sub("(^.*?) - .*$","\\1",header,perl=T)
+  Head2<-sub("^.*? - (.*$)","\\1",header,perl=T)
+  Head1[Head2==Head1]<-""
+
+  ColNum<-1:length(Head1)
+  premap<-data.frame(ColNum,Head1,Head2,stringsAsFactors=F)
+  premap<-mutate(premap,SubFile="",DemoEvo="",Reformat=0,VarName=Head2,Linked="")
+  premap[grepl("\\d+ -",premap$Head2),] <- premap %>%
+    filter(grepl("\\d+ -",Head2)) %>%
+    mutate(Linked=sub("(^\\d+) -.*","\\1",Head2)) %>%
+    mutate(VarName=sub("\\d+ - (.*$)","\\1",Head2))
+  premap <- mutate(premap,Header=catClean(Head1,Head2))
+  
+  write.table(premap,file=premapfile,row.names=F,sep=",",quote=T)
 }

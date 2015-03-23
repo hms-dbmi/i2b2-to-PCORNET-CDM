@@ -107,15 +107,6 @@ processFile<-function(data,premapFile)
   
   premap<-read.csv(premapFile,stringsAsFactors=F)
   
-  # Prepare premap
-  premap$Reformat[is.na(premap$Reformat)]<-0
-  premap <- mutate(premap,VarName=Head2,Linked=NA)
-  premap[grepl("\\d+ -",premap$Head2),] <- premap %>%
-    filter(grepl("\\d+ -",Head2)) %>%
-    mutate(Linked=sub("(\\d+) -.*","\\1",Head2)) %>%
-    mutate(VarName=sub("\\d+ - (.*)","\\1",Head2))
-  premap <- mutate(premap,Header=catClean(Head1,Head2))
-  
   ontology<<-push(ontology,sub("premap(.*?).csv","\\1",premapFile,perl=T))
 
   for (subfile in levels(factor(premap$SubFile,exclude="")))
