@@ -17,16 +17,16 @@ cat("Filename\tCategory Code\tColumn Number\tData Label\n",file = "output/mappin
 ontology<-c("PMS DN new ETL","PMS Ontology")
 
 # ==== Extract basic demographic informations (patient ID, SEX, AGE, RACE, COUNTRY) ====
+export_date=as.Date("2015-03-20")
+
 adult[c("Patient.ID","Birthdate","Gender","Ancestral.Background","Country")] %>%
   bind_rows(clinical[c("Patient.ID","Birthdate","Gender","Ancestral.Background","Country")]) %>%
-  bind_rows(developmental[c("Patient.ID","Birthdate","Gender")]) %>%
+  bind_rows(developmental[c("Patient.ID","Birthdate","Gender","Ancestral.Background","Country")]) %>%
   unique() %>%
   arrange(Patient.ID) %>%
   group_by(Patient.ID) %>%
-  filter(!is.na(Ancestral.Background)) %>%
-  filter(!is.na(Country)) %>%
-  mutate(Birthdate = as.Date(Birthdate,format="%m/%d/%Y")) %>%
-  mutate(Age = as.numeric(Sys.Date() - Birthdate)/365.25) %>%
+  mutate(Birthdate = as.Date(Birthdate)) %>%
+  mutate(Age = as.numeric(export_date - Birthdate)/365.25) %>%
   select(-Birthdate) -> Demographics
 
 write.table(Demographics,"output/Demographics.txt",row.names = F,sep="\t",quote=F)
