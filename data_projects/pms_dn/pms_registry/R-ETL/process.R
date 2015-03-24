@@ -93,12 +93,8 @@ processHead1<-function(head1,data,premap)
   data2
 }
 
-processSubfile<-function(subfile,data,premap)
+processSubfile<-function(filename,subfile,data,premap)
 {
-  ##
-  #subfile<-"Diagnosis"
-  ##
-  
   premap<-filter(premap,SubFile==subfile)
   
   # Create new data frame to contain transformed/curated data
@@ -112,7 +108,7 @@ processSubfile<-function(subfile,data,premap)
   
   ontology<<-push(ontology,subfile)
   
-  addMapping(paste0(subfile,".txt"),ontology,1,"SUBJ_ID")
+  addMapping(paste0("output/",filename),paste0(subfile,".txt"),ontology,1,"SUBJ_ID")
   varNum<-2
   ontoLevel<-0
   for (varName in names(data2[-1]))
@@ -124,7 +120,7 @@ processSubfile<-function(subfile,data,premap)
       varName<-sub("^.*?_","",varName)
     }
     
-    addMapping(paste0(subfile,".txt"),ontology,varNum,varName)
+    addMapping(paste0("output/",filename),paste0(subfile,".txt"),ontology,varNum,varName)
     
     while(ontoLevel>0)
     {
@@ -137,24 +133,23 @@ processSubfile<-function(subfile,data,premap)
   
   ontology<<-pop(ontology)
   
-  write.table(data2,file=paste0("output/",subfile,".txt"),row.names=F,sep="\t",quote=F)
+  write.table(data2,file=paste0("output/",filename,"/",subfile,".txt"),row.names=F,sep="\t",quote=F)
 }
 
-processFile<-function(data,premapFile)
+processFile<-function(filename)
 {
-  ##
-  #data<-clinical
-  #premapFile<-"premapClinical.csv"
-  ##
+  # Create dir for output, create empty mapping file and ontology object
+  dir.create(paste0("output/",filename),recursive=T)
+  cat("Filename\tCategory Code\tColumn Number\tData Label\n",file = paste0("output/",filename,"/mapping.txt"))
+  ontology<-c("PMS DN new ETL","PMS Ontology",filename)
   
-  premap<-read.csv(premapFile,stringsAsFactors=F)
+  data<-read.csv.2header(paste0("data",filename,".csv"))
+  data<-data[!is.na(adult$Survey.Session.ID),]
   
-  ontology<<-push(ontology,sub("premap(.*?).csv","\\1",premapFile,perl=T))
-
+  premap<-read.csv(paste0("premap",filename,".csv"),stringsAsFactors=F)
+  
   for (subfile in levels(factor(premap$SubFile,exclude="")))
   {
-    processSubfile(subfile,data,premap)
+    processSubfile(filename,subfile,data,premap)
   }
-  
-  ontology<<-pop(ontology)
 }
