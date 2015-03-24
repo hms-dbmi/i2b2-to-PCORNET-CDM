@@ -3,7 +3,7 @@ source("functions.R")
 processHead1<-function(head1,data,premap)
 {
   ##
-  head1<-"Has the patient been tested for any of the following conditions?"
+  #head1<-"Has the patient been tested for any of the following conditions?"
   ##
   
   premap<-filter(premap,Head1==head1)
@@ -24,8 +24,8 @@ processHead1<-function(head1,data,premap)
   data<-data[c(1:3,premap$ColNum)]
   
   # Delete records made less than 24 hours before the next
-  data$Survey.Date<-as.numeric(strptime(data$Survey.Date,format="%m/%d/%Y %H:%M"))
-  data<-filter(data,(lead(Survey.Date)-Survey.Date)>24*3600 | lead(Patient.ID)!=Patient.ID)
+  data$Survey.Date<-as.numeric(strptime(data$Survey.Date,format="%Y-%m-%d %H:%M:%S"))
+  data<-filter(data,(lead(Survey.Date)-Survey.Date)>24*3600 | lead(Patient.ID)!=Patient.ID | Patient.ID==max(Patient.ID))
   data<-select(data,-Survey.Date)
   
   # Filter for the last line of data for each patient
@@ -73,6 +73,21 @@ processHead1<-function(head1,data,premap)
         }
       }
     }
+    
+    for (varName in names(data2))
+    {
+      data2[[varName]]<-unlist(data2[[varName]])
+    }
+    
+    varnames<-names(data2)
+    varnames[-1]<-paste(head1,varnames[-1],sep="_")
+    varnames<-gsub("^_","",varnames)
+    
+    colnames(data2)<-varnames
+  }
+  else
+  {
+    data2<-select(data,-Survey.Session.ID)
   }
   
   data2
@@ -81,28 +96,55 @@ processHead1<-function(head1,data,premap)
 processSubfile<-function(subfile,data,premap)
 {
   ##
-  subfile<-"Diagnosis"
+  #subfile<-"Diagnosis"
   ##
   
   premap<-filter(premap,SubFile==subfile)
   
-  for (head1 in levels(factor(premap$Head1,exclude="")))
+  # Create new data frame to contain transformed/curated data
+  data2<-data["Patient.ID"]
+  data2<-data2 %>% distinct()
+  
+  for (head1 in unique(premap$Head1))
   {
-    ontology<<-push(ontology,head1)
-      processHead1(head1,data,premap)
-      #merge data
-      #addMapping
-    ontology<<-pop(ontology)
+    data2<-merge(data2,processHead1(head1,data,premap),by="Patient.ID")
   }
   
-  #write.table(data,file=paste0("output/",subfile,".txt"),row.names=F)
+  ontology<<-push(ontology,subfile)
+  
+  addMapping(paste0(subfile,".txt"),ontology,1,"SUBJ_ID")
+  varNum<-2
+  ontoLevel<-0
+  for (varName in names(data2[-1]))
+  {
+    while(grepl("_",varName))
+    {
+      ontoLevel<-ontoLevel+1
+      ontology<<-push(ontology,sub("_.*$","",varName))
+      varName<-sub("^.*?_","",varName)
+    }
+    
+    addMapping(paste0(subfile,".txt"),ontology,varNum,varName)
+    
+    while(ontoLevel>0)
+    {
+      ontoLevel<-ontoLevel-1
+      ontology<<-pop(ontology)
+    }
+    
+    varNum<-varNum+1
+  }
+  
+  ontology<<-pop(ontology)
+  
+  write.table(data2,file=paste0("output/",subfile,".txt"),row.names=F,sep="\t",quote=F)
 }
 
 processFile<-function(data,premapFile)
 {
   ##
-  data<-clinical
-  premapFile<-"premapClinical.csv"
+  #data<-clinical
+  #premapFile<-"premapClinical.csv"
   ##
   
   premap<-read.csv(premapFile,stringsAsFactors=F)
@@ -111,9 +153,7 @@ processFile<-function(data,premapFile)
 
   for (subfile in levels(factor(premap$SubFile,exclude="")))
   {
-    ontology<<-push(ontology,subfile)
-      processSubfile(subfile,data,premap)
-    ontology<<-pop(ontology)
+    processSubfile(subfile,data,premap)
   }
   
   ontology<<-pop(ontology)
