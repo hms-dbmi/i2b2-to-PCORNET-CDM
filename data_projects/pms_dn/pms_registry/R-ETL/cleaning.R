@@ -16,7 +16,7 @@ clinical <- clinical[!is.na(clinical$Survey.Session.ID),]
 # Create dir for output, create empty mapping file and ontology object
 dir.create("output/Demographics",recursive=T)
 cat("Filename\tCategory Code\tColumn Number\tData Label\n",file = "output/Demographics/mapping.txt")
-ontology<-c("PMS DN new ETL","PMS Ontology")
+ontology<-c("DBMI","PMS_DN","01 PMS Registry (Patient Reported Outcomes)","01 PMS Patient Reported Outcomes")
 
 # Extract basic demographic informations (patient ID, SEX, AGE, RACE, COUNTRY)
 export_date=as.Date("2015-03-20")
