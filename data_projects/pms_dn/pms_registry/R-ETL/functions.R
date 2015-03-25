@@ -161,7 +161,7 @@ writePremap <- function(datafile,premapfile)
   
   Head1<-sub("(^.*?) - .*$","\\1",header,perl=T)
   Head2<-sub("^.*? - (.*$)","\\1",header,perl=T)
-  Head1[Head2==Head1]<-""
+  Head2[Head2==Head1]<-""
 
   ColNum<-1:length(Head1)
   premap<-data.frame(ColNum,Head1,Head2,stringsAsFactors=F)
