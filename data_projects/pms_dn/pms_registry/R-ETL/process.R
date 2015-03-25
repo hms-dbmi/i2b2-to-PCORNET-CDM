@@ -86,6 +86,26 @@ processHead1<-function(head1,data,premap)
     data2<-select(data,-Survey.Session.ID)
   }
   
+  data2<-ungroup(data2)
+  # Manage 'Other Value' columns
+  if (length(select(data2,ends_with("_Other.Value"))) != 0)
+  {
+    # When there is an 'Other' column
+    if (length(select(data2,ends_with("_Other"))) != 0)
+    {
+      varNameOther<-names(select(data2,ends_with("_Other")))
+      varNameOtherValue<-names(select(data2,ends_with("_Other.Value")))
+      data2[[varNameOther]][!is.na(data2[[varNameOther]])]<-data2[[varNameOtherValue]][!is.na(data2[[varNameOther]])]
+    } # When there are only two columns (+1 for Patient.ID)
+    else if (length(data2)==3)
+    {
+      varNameOther<-names(select(data2,-Patient.ID,-ends_with("_Other.Value")))
+      varNameOtherValue<-names(select(data2,ends_with("_Other.Value")))
+      data2[[varNameOther]][data2[[varNameOther]]=="Other"]<-data2[[varNameOtherValue]][data2[[varNameOther]]=="Other"]
+    }
+    data2<-select(data2,-ends_with("_Other.Value"))
+  }
+  
   data2
 }
 
