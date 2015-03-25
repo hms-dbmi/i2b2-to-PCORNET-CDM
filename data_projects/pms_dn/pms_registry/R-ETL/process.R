@@ -2,10 +2,6 @@ source("functions.R")
 
 processHead1<-function(head1,data,premap)
 {
-  ##
-  #head1<-"Has the patient been tested for any of the following conditions?"
-  ##
-  
   premap<-filter(premap,Head1==head1)
   
   # Anchor-based filtering of variables from the data file
@@ -101,12 +97,12 @@ processSubfile<-function(filename,subfile,data,premap)
   data2<-data["Patient.ID"]
   data2<-data2 %>% distinct()
   
+  ontology<<-push(ontology,subfile)
+  
   for (head1 in unique(premap$Head1))
   {
     data2<-merge(data2,processHead1(head1,data,premap),by="Patient.ID")
   }
-  
-  ontology<<-push(ontology,subfile)
   
   addMapping(paste0("output/",filename),paste0(subfile,".txt"),ontology,1,"SUBJ_ID")
   varNum<-2
@@ -141,8 +137,9 @@ processFile<-function(filename)
   # Create dir for output, create empty mapping file and ontology object
   dir.create(paste0("output/",filename),recursive=T)
   cat("Filename\tCategory Code\tColumn Number\tData Label\n",file = paste0("output/",filename,"/mapping.txt"))
-  ontology<-c("PMS DN new ETL","PMS Ontology",filename)
   
+  ontology<<-push(ontology,filename)
+
   data<-read.csv.2header(paste0("data",filename,".csv"))
   data<-data[!is.na(adult$Survey.Session.ID),]
   
@@ -152,4 +149,6 @@ processFile<-function(filename)
   {
     processSubfile(filename,subfile,data,premap)
   }
+  
+  ontology<<-pop(ontology)
 }
