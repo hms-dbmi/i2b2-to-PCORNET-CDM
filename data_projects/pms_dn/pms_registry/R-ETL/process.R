@@ -129,7 +129,7 @@ processSubfile<-function(filename,subfile,data,premap)
   
   ontology<<-pop(ontology)
   
-  write.table(data2,file=paste0("output/",filename,"/",subfile,".txt"),row.names=F,sep="\t",quote=F)
+  write.table(data2,file=paste0("output/",filename,"/",subfile,".txt"),row.names=F,sep="\t",quote=F,na="")
 }
 
 processFile<-function(filename)
