@@ -31,7 +31,7 @@ catClean<-function(header1,header2)
   header2<-gsub(" - Frequency$","",header2,perl = T)
   header2<-gsub("([^\\d]) - Age at milestones?$","\\1",header2,perl = T)
   header2<-gsub("([^\\d]) - Age$","\\1",header2,perl = T)
-  header2<-gsub("-","_",header2,perl = T)
+  header2<-gsub(" - ","_",header2,perl = T)
   header2<-gsub("[^[:alnum:]_]","\\.",header2,perl = T)
     
   # Merge the two headers
