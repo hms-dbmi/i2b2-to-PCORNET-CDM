@@ -15,6 +15,32 @@ pop<-function(vector)
   vector
 }
 
+#' Read headers from a two headers file and propagate the first one
+read2headers<-function(file)
+{
+  header1<-scan(file,what=character(),nlines=1,sep=",",quote="\"")
+  header2<-scan(file,what=character(),nlines=1,sep=",",quote="\"",skip=1)
+  
+  # Fill the first header line with values, propagating them forward
+  tmpHead<-""
+  tmpHeader1<-character(0)
+  for (head in header1)
+  {
+    if (head == "")
+      head<-tmpHead
+    
+    tmpHeader1<-c(tmpHeader1,head)
+    tmpHead<-head
+  }
+  
+  header1<-tmpHeader1
+  
+  # Return the two headers as a list
+  headers<-list(header1,header2)
+  
+  headers
+}
+
 #' Concatenate two headers and clean them
 catClean<-function(header1,header2)
 {
@@ -66,22 +92,9 @@ catClean<-function(header1,header2)
 #' @export
 read.csv.2header<-function(file,...)
 {
-  # Fill the first header line with values, propagating them forward
-  header1<-scan(file,what=character(),nlines=1,sep=",",quote="\"")
-  header2<-scan(file,what=character(),nlines=1,sep=",",quote="\"",skip=1)
-  
-  tmpHead<-""
-  tmpHeader1<-character(0)
-  for (head in header1)
-  {
-    if (head == "")
-      head<-tmpHead
-    
-    tmpHeader1<-c(tmpHeader1,head)
-    tmpHead<-head
-  }
-  
-  header1<-tmpHeader1
+  headers<-read2headers(file)
+  header1<-headers[[1]]
+  header2<-headers[[2]]
   
   # Concatenate and clean the two header lines
   header<-catClean(header1,header2)
@@ -126,21 +139,9 @@ addMapping <- function(dataFile,categoryCode,columnNum,dataLabel)
 #' @param premapfile The premap filename to save to
 writePremap <- function(datafile,premapfile)
 {
-  header1<-scan(datafile,what=character(),nlines=1,sep=",",quote="\"")
-  header2<-scan(datafile,what=character(),nlines=1,sep=",",quote="\"",skip=1)
-  
-  tmpHead<-""
-  tmpHeader1<-character(0)
-  for (head in header1)
-  {
-    if (head == "")
-      head<-tmpHead
-    
-    tmpHeader1<-c(tmpHeader1,head)
-    tmpHead<-head
-  }
-  
-  header1<-tmpHeader1
+  headers<-read2headers(file)
+  header1<-headers[[1]]
+  header2<-headers[[2]]
   
   header1<-gsub(" \\(.*?\\)","",header1,perl = T)
   header1<-gsub("Please (enter|select) either pounds( and ounces)? or kilograms\\.","",header1,perl = T)
