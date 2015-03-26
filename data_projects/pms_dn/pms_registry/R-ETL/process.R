@@ -87,6 +87,7 @@ processHead1<-function(head1,data,premap)
   }
   
   data2<-ungroup(data2)
+  
   # Manage 'Other Value' columns
   if (length(select(data2,ends_with("_Other.Value"))) != 0)
   {
