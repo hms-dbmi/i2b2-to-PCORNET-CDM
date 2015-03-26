@@ -124,7 +124,7 @@ processSubfile<-function(questionnaire,subfile,data,premap)
     data2<-merge(data2,processHead1(head1,data,premap),by="Patient.ID")
   }
   
-  addMapping(paste0(questionnaire,"/",subfile,".txt"),ontology,1,"SUBJ_ID")
+  addMapping(paste0(questionnaire,"-",subfile,".txt"),ontology,1,"SUBJ_ID")
   varNum<-2
   ontoLevel<-0
   for (varName in names(data2[-1]))
@@ -136,7 +136,7 @@ processSubfile<-function(questionnaire,subfile,data,premap)
       varName<-sub("^.*?_","",varName)
     }
     
-    addMapping(paste0(questionnaire,"/",subfile,".txt"),ontology,varNum,varName)
+    addMapping(paste0(questionnaire,"-",subfile,".txt"),ontology,varNum,varName)
     
     while(ontoLevel>0)
     {
@@ -149,14 +149,11 @@ processSubfile<-function(questionnaire,subfile,data,premap)
   
   ontology<<-pop(ontology)
   
-  write.table(data2,file=paste0("output/",questionnaire,"/",subfile,".txt"),row.names=F,sep="\t",quote=F,na="")
+  write.table(data2,file=paste0("output/",questionnaire,"-",subfile,".txt"),row.names=F,sep="\t",quote=F,na="")
 }
 
 processFile<-function(questionnaire)
 {
-  # Create dir for output, create empty mapping file and ontology object
-  dir.create(paste0("output/",questionnaire),recursive=T)
-  
   ontology<<-push(ontology,questionnaire)
 
   data<-read.csv.2header(paste0("data",questionnaire,".csv"))
