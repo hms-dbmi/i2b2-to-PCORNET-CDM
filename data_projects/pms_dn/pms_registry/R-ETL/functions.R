@@ -111,12 +111,12 @@ read.csv.2header<-function(file,...)
 #' @examples
 #' \dontrun{mapping <- addMapping("data.txt",1,SUBJ_ID,"New ontology","Demographics")}
 #' @export
-addMapping <- function(path,dataFile,categoryCode,columnNum,dataLabel)
+addMapping <- function(dataFile,categoryCode,columnNum,dataLabel)
 {
   categoryCode <- paste(categoryCode,collapse="+")
   categoryCode <- gsub(" ","_",categoryCode)
   mapping<-data.frame(Filename=dataFile,Category.Code=categoryCode,Column.Number=columnNum,Data.Label=dataLabel)
-  write.table(mapping,file=paste0(path,"/mapping.txt"),row.names=F,sep="\t",append = T,col.names=F,quote=F)
+  write.table(mapping,file="output/mapping.txt",row.names=F,sep="\t",append = T,col.names=F,quote=F)
 }
 
 

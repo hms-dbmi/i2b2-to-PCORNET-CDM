@@ -14,8 +14,8 @@ clinical <- clinical[!is.na(clinical$Survey.Session.ID),]
 # ==== Demographics ====
 
 # Create dir for output, create empty mapping file and ontology object
-dir.create("output/Demographics",recursive=T)
-cat("Filename\tCategory Code\tColumn Number\tData Label\n",file = "output/Demographics/mapping.txt")
+dir.create("output",recursive=T)
+cat("Filename\tCategory Code\tColumn Number\tData Label\n",file = "output/mapping.txt")
 ontology<-c("DBMI","PMS_DN","01 PMS Registry (Patient Reported Outcomes)","01 PMS Patient Reported Outcomes")
 
 # Extract basic demographic informations (patient ID, SEX, AGE, RACE, COUNTRY)
@@ -31,13 +31,13 @@ adult[c("Patient.ID","Birthdate","Gender","Ancestral.Background","Country")] %>%
   mutate(Age = as.numeric(export_date - Birthdate)/365.25) %>%
   select(-Birthdate) -> Demographics
 
-write.table(Demographics,"output/Demographics/Demographics.txt",row.names = F,sep="\t",quote=F)
+write.table(Demographics,"output/Demographics.txt",row.names = F,sep="\t",quote=F)
 ontology<-push(ontology,"Demographics")
-  addMapping("output/Demographics","Demographics.txt",ontology,1,"SUBJ_ID")
-  addMapping("output/Demographics","Demographics.txt",ontology,2,"SEX")
-  addMapping("output/Demographics","Demographics.txt",ontology,3,"RACE")
-  addMapping("output/Demographics","Demographics.txt",ontology,4,"COUNTRY")
-  addMapping("output/Demographics","Demographics.txt",ontology,5,"AGE")
+  addMapping("Demographics.txt",ontology,1,"SUBJ_ID")
+  addMapping("Demographics.txt",ontology,2,"SEX")
+  addMapping("Demographics.txt",ontology,3,"RACE")
+  addMapping("Demographics.txt",ontology,4,"COUNTRY")
+  addMapping("Demographics.txt",ontology,5,"AGE")
 ontology<-pop(ontology)
 
 # ==== Genetic information ====
