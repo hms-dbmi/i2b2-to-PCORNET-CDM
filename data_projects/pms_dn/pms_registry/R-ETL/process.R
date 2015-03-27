@@ -15,6 +15,12 @@ processHead1<-function(head1,data,premap)
     warning("Variable not found: \"",premap$Header[1],"\" in data file at ontology level \"",paste(ontology,collapse="+"),"\"")
     return()
   }
+  # If real homonyms at first position of head1, use an heuristic (pick the nearest one)
+  if (length(idx2)>1)
+  {
+    idx2<-idx2[order(abs(idx2-idx1))[1]]
+  }
+  
   # Update indexes in the premap
   premap<-mutate(premap,ColNum=ColNum+(idx2-idx1))
   # Filter columns in data based on the updated index
