@@ -74,6 +74,8 @@ catClean<-function(header1,header2)
   # Clean the merging
   header<-sub("^_","",header,perl = T)
   header<-sub("_$","",header,perl = T)
+  
+  # Replace spaces with dots
   header<-gsub(" +",".",header,perl = T)
     
   header

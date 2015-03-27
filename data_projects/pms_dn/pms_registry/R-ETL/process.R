@@ -140,10 +140,7 @@ processSubfile<-function(questionnaire,subfile,data,premap)
     while(grepl("_",varName))
     {
       ontoLevel<-ontoLevel+1
-      
-      onto<-sub("_.*$","",varName)
-      onto<-gsub("\\."," ",onto)
-      ontology<<-push(ontology,sub("_.*$","",onto))
+      ontology<<-push(ontology,sub("_.*$","",varName))
       
       varName<-sub("^.*?_","",varName)
     }

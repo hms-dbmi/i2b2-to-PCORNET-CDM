@@ -19,7 +19,11 @@
 addMapping <- function(dataFile,categoryCode,columnNum,dataLabel)
 {
   categoryCode <- paste(categoryCode,collapse="+")
-  categoryCode <- gsub(" ","_",categoryCode)
+  # Revert dots to spaces
+  # underscores for categoryCode
+  categoryCode <- gsub("\\.","_",categoryCode)
+  # spaces for variable names
+  dataLabel <- gsub("\\."," ",dataLabel)
   mapping<-data.frame(Filename=dataFile,Category.Code=categoryCode,Column.Number=columnNum,Data.Label=dataLabel)
   write.table(mapping,file="output/mapping.txt",row.names=F,sep="\t",append = T,col.names=F,quote=F)
 }
