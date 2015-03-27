@@ -1,4 +1,5 @@
 source("functions.R")
+source("functions-mapping.R")
 
 processHead1<-function(head1,data,premap)
 {
@@ -133,7 +134,11 @@ processSubfile<-function(questionnaire,subfile,data,premap)
     while(grepl("_",varName))
     {
       ontoLevel<-ontoLevel+1
-      ontology<<-push(ontology,sub("_.*$","",varName))
+      
+      onto<-sub("_.*$","",varName)
+      onto<-gsub("\\."," ",onto)
+      ontology<<-push(ontology,sub("_.*$","",onto))
+      
       varName<-sub("^.*?_","",varName)
     }
     
