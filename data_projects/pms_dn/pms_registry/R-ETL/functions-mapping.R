@@ -38,6 +38,10 @@ push<-function(vector,value)
 #' Simple pop mechanism. Does not return the popped value
 pop<-function(vector)
 {
+  if (length(vector)==1)
+  {
+    return(character(0))
+  }
   vector<-vector[1:(length(vector)-1)]
   vector
 }
