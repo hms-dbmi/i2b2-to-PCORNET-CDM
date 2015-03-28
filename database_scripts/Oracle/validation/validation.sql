@@ -1,3 +1,4 @@
+BEGIN
 
 alter session set current_schema=I2B2DEMODATA;
 
