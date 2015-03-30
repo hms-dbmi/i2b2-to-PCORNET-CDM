@@ -98,7 +98,7 @@ BEGIN
       sysdate,
       sysdate,
       sysdate,
-      TrialID,
+      FactSet,
       'CONCEPT_DIMENSION');
 	stepCt := stepCt + 1;
 	cz_write_audit(jobId,databaseName,procedureName,'Inserted concept for path into I2B2DEMODATA concept_dimension',SQL%ROWCOUNT,stepCt,'Done');

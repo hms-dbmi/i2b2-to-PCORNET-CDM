@@ -810,7 +810,7 @@ EXECUTE IMMEDIATE 'alter index i2b2demodata.PATIENT_TRIAL_INDEX1 UNUSABLE';
 		 ,sysdate
 		 ,sysdate
 		 ,sysdate
-		 ,TrialId
+		 ,FactSet
 		 ,'CONCEPT_DIMENSION'
 	from (select distinct c.leaf_node
 				,to_char(c.node_name) as node_name
@@ -878,11 +878,11 @@ EXECUTE IMMEDIATE 'alter index i2b2demodata.PATIENT_TRIAL_INDEX1 UNUSABLE';
 		  ,sysdate
 		  ,sysdate
 		  ,sysdate
-		  ,c.sourcesystem_cd
+		  ,FactSet
 		  ,c.concept_cd
 		  ,'LIKE'
 		  ,'T'
-		  ,'trial:' || TrialID 
+		  ,FactSet 
 		  ,i2b2_id_seq.nextval
     from concept_dimension c
     where c.concept_path in
@@ -924,7 +924,7 @@ EXECUTE IMMEDIATE 'alter index i2b2demodata.OB_FACT_PK REBUILD';
 		   case when a.data_type = 'N' then a.data_value
 				else null --Null for text types
 				end,
-		   c.sourcesystem_cd,
+		   FactSet,
 		  sysdate,
 		   '@',
 		   '@',
