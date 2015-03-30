@@ -118,4 +118,19 @@ CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."QUERY_GLOBAL_TEMP"
   </sql>
   </changeSet>
 
+  <changeSet author="mmcduffie" id="11">
+  <comment>Missing Index</comment>
+  <sql>
+	  CREATE INDEX "I2B2DEMODATA"."CD_CONCEPT_PATH_TEXT" ON "I2B2DEMODATA"."CONCEPT_DIMENSION" ("CONCEPT_PATH") INDEXTYPE IS "CTXSYS"."CONTEXT" ;
+  </sql>
+  </changeSet>
+
+
+  <changeSet author="mmcduffie" id="12">
+  <comment>Missing Index</comment>
+  <sql>
+ 	CREATE INDEX "I2B2METADATA"."I2B2_FULLNAME_TEXT" ON "I2B2METADATA"."I2B2" ("C_FULLNAME") INDEXTYPE IS "CTXSYS"."CONTEXT" ;
+  </sql>
+  </changeSet>
+
 </databaseChangeLog>
