@@ -1,8 +1,81 @@
 source("functions.R")
 source("functions-mapping.R")
 
+# Process at the file level
+processFile<-function(questionnaire)
+{
+  # Add the questionnaire level to the ontology
+  ontology<<-push(ontology,questionnaire)
+  
+  # Read the data and premapping files
+  data<-read.csv.2header(paste0("data",questionnaire,".csv"))
+  data<-data[!is.na(adult$Survey.Session.ID),]
+  
+  premap<-read.csv(paste0("premap",questionnaire,".csv"),stringsAsFactors=F)
+  
+  # Process each SubFile level (excluding the empty SubFile level->Demographics)
+  for (subfile in levels(factor(premap$SubFile,exclude="")))
+  {
+    processSubfile(questionnaire,subfile,data,premap)
+  }
+  
+  ontology<<-pop(ontology)
+}
+
+# Process at the SubFile level
+processSubfile<-function(questionnaire,subfile,data,premap)
+{
+  # Add the SubFile level to the ontology
+  ontology<<-push(ontology,subfile)
+  
+  # Subset the premapping file with only the current SubFile
+  premap<-filter(premap,SubFile==subfile)
+  
+  # Create new data frame to contain transformed/curated data
+  data2<-data["Patient.ID"]
+  data2<-data2 %>% distinct()
+  
+  # Process each Head1 level and merge resulting data
+  for (head1 in unique(premap$Head1))
+  {
+    data2<-merge(data2,processHead1(head1,data,premap),by="Patient.ID")
+  }
+  
+  # Parse resulting var names and write mappings
+  addMapping(paste0(questionnaire,"-",subfile,".txt"),ontology,1,"SUBJ_ID")
+  varNum<-2
+  ontoLevel<-0
+  for (varName in names(data2[-1]))
+  {
+    while(grepl("_",varName))
+    {
+      ontoLevel<-ontoLevel+1
+      ontology<<-push(ontology,sub("_.*$","",varName))
+      
+      varName<-sub("^.*?_","",varName)
+    }
+    
+    addMapping(paste0(questionnaire,"-",subfile,".txt"),ontology,varNum,varName)
+    
+    while(ontoLevel>0)
+    {
+      ontoLevel<-ontoLevel-1
+      ontology<<-pop(ontology)
+    }
+    
+    varNum<-varNum+1
+  }
+  
+  # Write the $SubFile.txt
+  write.table(data2,file=paste0("output/",questionnaire,"-",subfile,".txt"),row.names=F,sep="\t",quote=F,na="")
+  
+  ontology<<-pop(ontology)
+}
+
+# Process at the Head1 level
 processHead1<-function(head1,data,premap)
 {
+  # Subset the premapping file with only the current Head1
   premap<-filter(premap,Head1==head1)
   
   # Anchor-based filtering of variables from the data file
@@ -15,7 +88,7 @@ processHead1<-function(head1,data,premap)
     warning("Variable not found: \"",premap$Header[1],"\" in data file at ontology level \"",paste(ontology,collapse="+"),"\"")
     return()
   }
-  # If real homonyms at first position of head1, use an heuristic (pick the nearest one)
+  # If real homonyms at first position of head1, use an heuristic (pick the nearest one in position)
   if (length(idx2)>1)
   {
     idx2<-idx2[order(abs(idx2-idx1))[1]]
@@ -32,7 +105,6 @@ processHead1<-function(head1,data,premap)
   data<-select(data,-Survey.Date)
   
   # Filter for the last line of data for each patient
-  # TODO : filter for the last line with data ?
   # TODO : take account of HistEvo to modify behavior
   data<-data %>%
     group_by(Patient.ID) %>%
@@ -41,7 +113,7 @@ processHead1<-function(head1,data,premap)
   # Create new data frame to contain transformed/curated data
   data2<-select(data,Patient.ID)
   
-  # Reformating needed
+  # Reformatting needed
   if (any(premap$Reformat==1))
   {
     # new vars prefix
@@ -88,7 +160,7 @@ processHead1<-function(head1,data,premap)
     
     colnames(data2)<-varnames
   }
-  else
+  else # Reformatting not needed
   {
     data2<-select(data,-Survey.Session.ID)
   }
@@ -115,65 +187,4 @@ processHead1<-function(head1,data,premap)
   }
   
   data2
-}
-
-processSubfile<-function(questionnaire,subfile,data,premap)
-{
-  premap<-filter(premap,SubFile==subfile)
-  
-  # Create new data frame to contain transformed/curated data
-  data2<-data["Patient.ID"]
-  data2<-data2 %>% distinct()
-  
-  ontology<<-push(ontology,subfile)
-  
-  for (head1 in unique(premap$Head1))
-  {
-    data2<-merge(data2,processHead1(head1,data,premap),by="Patient.ID")
-  }
-  
-  addMapping(paste0(questionnaire,"-",subfile,".txt"),ontology,1,"SUBJ_ID")
-  varNum<-2
-  ontoLevel<-0
-  for (varName in names(data2[-1]))
-  {
-    while(grepl("_",varName))
-    {
-      ontoLevel<-ontoLevel+1
-      ontology<<-push(ontology,sub("_.*$","",varName))
-      
-      varName<-sub("^.*?_","",varName)
-    }
-    
-    addMapping(paste0(questionnaire,"-",subfile,".txt"),ontology,varNum,varName)
-    
-    while(ontoLevel>0)
-    {
-      ontoLevel<-ontoLevel-1
-      ontology<<-pop(ontology)
-    }
-    
-    varNum<-varNum+1
-  }
-  
-  ontology<<-pop(ontology)
-  
-  write.table(data2,file=paste0("output/",questionnaire,"-",subfile,".txt"),row.names=F,sep="\t",quote=F,na="")
-}
-
-processFile<-function(questionnaire)
-{
-  ontology<<-push(ontology,questionnaire)
-
-  data<-read.csv.2header(paste0("data",questionnaire,".csv"))
-  data<-data[!is.na(adult$Survey.Session.ID),]
-  
-  premap<-read.csv(paste0("premap",questionnaire,".csv"),stringsAsFactors=F)
-  
-  for (subfile in levels(factor(premap$SubFile,exclude="")))
-  {
-    processSubfile(questionnaire,subfile,data,premap)
-  }
-  
-  ontology<<-pop(ontology)
 }

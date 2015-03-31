@@ -1,23 +1,6 @@
 library(dplyr)
-library(tidyr)
 
-#' Load a csv file with 2 header lines
-#' 
-#' Load a csv file with 2 header lines, the first one consisting of merged cells
-#' 
-#' This function loads a csv file (sep=",", quote="\"", encoding="UTF-8") with 2 header lines.
-#' The first line of headers is broad categories, represented by merged cells in the original
-#' excel data file.
-#' The function concatenates the category with the underlying item question, separating them
-#' with an hyphen. Spaces are replaced by dots, single quotes, apostrophe, commas and question marks are deleted.
-#' Hyphens are deleted for questions without category.
-#' @encoding UTF-8
-#' @param file The csv file to load
-#' @param ... Additional arguments to pass to read.csv
-#' @return A dataframe with corrected column names
-#' @examples
-#' \dontrun{df <- read.csv.2header("data.csv")}
-#' @export
+# Load a csv file with 2 header rows
 read.csv.2header<-function(file,...)
 {
   headers<-read2headers(file)
@@ -32,10 +15,7 @@ read.csv.2header<-function(file,...)
   data
 }
 
-#' Write an empty template premapping file from the data file
-#' @encoding UTF-8
-#' @param datafile The data frame holding the data to premap
-#' @param premapfile The premap filename to save to
+# Create a template premapping file from a data file
 writePremap <- function(datafile,premapfile)
 {
   headers<-read2headers(datafile)
@@ -46,12 +26,14 @@ writePremap <- function(datafile,premapfile)
   # Re-split the header for the mapping file
   Head1<-sub("(^.*?)_.*$","\\1",header,perl=T)
   Head2<-sub("^.*?_(.*$)","\\1",header,perl=T)
+  
+  # If only one header, put it in first header
   Head2[Head2==Head1]<-""
 
   # Create all columns for mapping file
   ColNum<-1:length(Head1)
   premap<-data.frame(ColNum,Head1,Head2,stringsAsFactors=F)
-  premap<-mutate(premap,SubFile="",DemoEvo="",Reformat=0,VarName="",Linked="")
+  premap<-mutate(premap,SubFile="",HistEvo="",Reformat=0,VarName="",Linked="")
   premap[grepl("\\d+_",premap$Head2),] <- premap %>%
     filter(grepl("\\d+_",Head2)) %>%
     mutate(Linked=sub("(^\\d+)_.*","\\1",Head2)) %>%
@@ -61,7 +43,7 @@ writePremap <- function(datafile,premapfile)
   write.table(premap,file=premapfile,row.names=F,sep=",",quote=T)
 }
 
-#' Concatenate two headers and clean them
+# Clean and concatenate two headers
 catClean<-function(header1,header2)
 {
   # Clean variable names
@@ -71,7 +53,7 @@ catClean<-function(header1,header2)
   # Merge the two headers
   header=paste(header1,header2,sep="_")
   
-  # Clean the merging
+  # Clean the merging (trailing "_")
   header<-sub("^_","",header,perl = T)
   header<-sub("_$","",header,perl = T)
   
@@ -81,6 +63,7 @@ catClean<-function(header1,header2)
   header
 }
 
+# Clean the first header
 cleanHeader1<-function(header1)
 {
   header1<-gsub(" \\(.*?\\)","",header1,perl = T)
@@ -92,6 +75,7 @@ cleanHeader1<-function(header1)
   header1
 }
 
+# Clean the second header
 cleanHeader2<-function(header2)
 {
   header2<-gsub("^Responses$","",header2,perl = T)
@@ -104,7 +88,7 @@ cleanHeader2<-function(header2)
   header2
 }
 
-#' Read headers from a two headers file and propagate the first one
+# Read headers from a two headers file and propagate the first one to all corresponding columns
 read2headers<-function(file)
 {
   header1<-scan(file,what=character(),nlines=1,sep=",",quote="\"")

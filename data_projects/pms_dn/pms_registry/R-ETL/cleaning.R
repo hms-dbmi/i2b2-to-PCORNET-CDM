@@ -7,17 +7,17 @@ adult<-read.csv.2header("dataAdult.csv")
 developmental<-read.csv.2header("dataDevelopmental.csv")
 clinical<-read.csv.2header("dataClinical.csv")
 
-# Delete rows with no SurveySessionID
+# Delete rows with no Survey Session ID
 adult <- adult[!is.na(adult$Survey.Session.ID),]
 developmental <- developmental[!is.na(developmental$Survey.Session.ID),]
 clinical <- clinical[!is.na(clinical$Survey.Session.ID),]
 
-# ==== Demographics ====
-
-# Create dir for output, create empty mapping file and ontology object
+# ==== Create dir for output, create empty mapping file and ontology object
 dir.create("output",recursive=T)
 cat("Filename\tCategory Code\tColumn Number\tData Label\n",file = "output/mapping.txt")
 ontology<-character(0)
+
+# ==== Demographics ====
 
 # Extract basic demographic informations (patient ID, SEX, AGE, RACE, COUNTRY)
 export_date=as.Date("2015-03-20")
@@ -32,7 +32,10 @@ adult[c("Patient.ID","Birthdate","Gender","Ancestral.Background","Country")] %>%
   mutate(Age = as.numeric(export_date - Birthdate)/365.25) %>%
   select(-Birthdate) -> Demographics
 
+# Write Demographics.txt
 write.table(Demographics,"output/Demographics.txt",row.names = F,sep="\t",quote=F)
+
+# Write the mappings
 ontology<-push(ontology,"Demographics")
   addMapping("Demographics.txt",ontology,1,"SUBJ_ID")
   addMapping("Demographics.txt",ontology,2,"SEX")
