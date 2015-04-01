@@ -9,7 +9,7 @@ processFile<-function(questionnaire)
   
   # Read the data and premapping files
   data<-read.csv.2header(paste0("data",questionnaire,".csv"))
-  data<-data[!is.na(adult$Survey.Session.ID),]
+  data<-data[!is.na(data$Survey.Session.ID),]
   
   premap<-read.csv(paste0("premap",questionnaire,".csv"),stringsAsFactors=F)
   
@@ -99,8 +99,11 @@ processHead1<-function(head1,data,premap)
   # Filter columns in data based on the updated index
   data<-data[c(1:3,premap$ColNum)]
   
-  # Delete records made less than 24 hours before the next
+  # Sort by Survey Date
   data$Survey.Date<-as.numeric(strptime(data$Survey.Date,format="%Y-%m-%d %H:%M:%S"))
+  data<-arrange(data,Patient.ID,Survey.Date)
+  
+  # Delete records made less than 24 hours before the next
   data<-filter(data,(lead(Survey.Date)-Survey.Date)>24*3600 | lead(Patient.ID)!=Patient.ID | Patient.ID==max(Patient.ID))
   data<-select(data,-Survey.Date)
   
