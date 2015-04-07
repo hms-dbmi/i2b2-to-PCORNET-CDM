@@ -1,9 +1,4 @@
---------------------------------------------------------
---  DDL for Procedure I2B2_PROCESS_MRNA_DATA
---------------------------------------------------------
-
-
-  CREATE OR REPLACE PROCEDURE "TM_CZ"."I2B2_PROCESS_MRNA_DATA" 
+create or replace PROCEDURE         "I2B2_PROCESS_MRNA_DATA" 
 (
   trial_id 		VARCHAR2
  ,top_node		varchar2
@@ -13,6 +8,7 @@
  ,log_base		number := 2			--	log base value for conversion back to raw
  ,secure_study	varchar2			--	security setting if new patients added to patient_dimension
  ,currentJobID 	NUMBER := null
+ ,FactSet VARCHAR2
  ,rtn_code		OUT	NUMBER
 )
 AS
@@ -232,7 +228,7 @@ BEGIN
 	select length(tPath) - length(replace(tPath,'\',null)) into pCount from dual;
 
 	if pCount > 2 then
-		i2b2_fill_in_tree(null, tPath, jobId);
+		i2b2_fill_in_tree(null, tPath, jobId, FactSet);
 	end if;
 
 	--	uppercase study_id in lt_src_mrna_subj_samp_map in case curator forgot
@@ -543,13 +539,13 @@ BEGIN
 
     --Add nodes for all types (ALSO DELETES EXISTING NODE)
 
-		i2b2_add_node(TrialID, r_addNodes.leaf_node, r_addNodes.node_name, jobId);
+		i2b2_add_node(TrialID, r_addNodes.leaf_node, r_addNodes.node_name, jobId, FactSet);
 		stepCt := stepCt + 1;
 		tText := 'Added Leaf Node: ' || r_addNodes.leaf_node || '  Name: ' || r_addNodes.node_name;
 		
 		cz_write_audit(jobId,databaseName,procedureName,tText,SQL%ROWCOUNT,stepCt,'Done');
 		
-		i2b2_fill_in_tree(TrialId, r_addNodes.leaf_node, jobID);
+		i2b2_fill_in_tree(TrialId, r_addNodes.leaf_node, jobID, FactSet);
 
 	END LOOP;  
 	
@@ -822,7 +818,7 @@ BEGIN
 	update i2b2
 	SET c_columndatatype = 'N',
       --Static XML String
-		c_metadataxml = '<?xml version="1.0"?><ValueMetadata><Version>3.02</Version><CreationDateTime>08/14/2008 01:22:59</CreationDateTime><TestID></TestID><TestName></TestName><DataType>PosFloat</DataType><CodeType></CodeType><Loinc></Loinc><Flagstouse></Flagstouse><Oktousevalues>Y</Oktousevalues><MaxStringLength></MaxStringLength><LowofLowValue>0</LowofLowValue><HighofLowValue>0</HighofLowValue><LowofHighValue>100</LowofHighValue>100<HighofHighValue>100</HighofHighValue><LowofToxicValue></LowofToxicValue><HighofToxicValue></HighofToxicValue><EnumValues></EnumValues><CommentsDeterminingExclusion><Com></Com></CommentsDeterminingExclusion><UnitValues><NormalUnits>ratio</NormalUnits><EqualUnits></EqualUnits><ExcludingUnits></ExcludingUnits><ConvertingUnits><Units></Units><MultiplyingFactor></MultiplyingFactor></ConvertingUnits></UnitValues><Analysis><Enums /><Counts /><New /></Analysis></ValueMetadata>'
+		c_metadataxml = '<?xml version="1.0":2><ValueMetadata><Version>3.02</Version><CreationDateTime>08/14/2008 01:22:59</CreationDateTime><TestID></TestID><TestName></TestName><DataType>PosFloat</DataType><CodeType></CodeType><Loinc></Loinc><Flagstouse></Flagstouse><Oktousevalues>Y</Oktousevalues><MaxStringLength></MaxStringLength><LowofLowValue>0</LowofLowValue><HighofLowValue>0</HighofLowValue><LowofHighValue>100</LowofHighValue>100<HighofHighValue>100</HighofHighValue><LowofToxicValue></LowofToxicValue><HighofToxicValue></HighofToxicValue><EnumValues></EnumValues><CommentsDeterminingExclusion><Com></Com></CommentsDeterminingExclusion><UnitValues><NormalUnits>ratio</NormalUnits><EqualUnits></EqualUnits><ExcludingUnits></ExcludingUnits><ConvertingUnits><Units></Units><MultiplyingFactor></MultiplyingFactor></ConvertingUnits></UnitValues><Analysis><Enums /><Counts /><New /></Analysis></ValueMetadata>'
 	where c_basecode IN (
 		  select xd.concept_cd
 		  from wt_mrna_nodes xd
@@ -1035,5 +1031,3 @@ BEGIN
 		cz_end_audit (jobID, 'FAIL');
 		select 16 into rtn_code from dual;
 END;
-
-
