@@ -5,7 +5,7 @@ create or replace PROCEDURE                                       "TM_CZ"."I2B2_
  ,secure_study		in varchar2 := 'N'
  ,highlight_study	in	varchar2 := 'N'
  ,currentJobID		IN	NUMBER := null
- ,fact_set		IN	VARCHAR2 := null
+ ,fact_set		IN	VARCHAR2 
 )
 AS
   
