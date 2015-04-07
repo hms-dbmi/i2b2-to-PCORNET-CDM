@@ -163,13 +163,13 @@ reformat<-function(data,premap)
 otherValue<-function(data)
 {
   colOtherValue<-grep("_Other.Value$",names(data))
-  # When there is an 'Other' column
-  if (any(grepl("_Other$",names(data))))
+  
+  if (any(grepl("_Other$",names(data)))) # When there is an 'Other' column
   {
     colOther<-grep("_Other$",names(data))
     data[data[colOther]=="1",colOther]<-data[data[colOther]=="1",colOtherValue]
-  } # When there are only two columns (+3 for Patient.ID,Survey.Date,Birthdate)
-  else if (length(data)==5)
+  }
+  else if (length(data)==5) # When there are only two columns (+3 for Patient.ID,Survey.Date,Birthdate)
   {
     colOther<-grep("_Other.Value",names(data[-(1:3)]),invert=T)+3
     data[data[colOther]=="Other",colOther]<-data[data[colOther]=="Other",colOtherValue]
