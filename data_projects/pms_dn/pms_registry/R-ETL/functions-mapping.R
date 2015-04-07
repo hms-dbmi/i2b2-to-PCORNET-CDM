@@ -1,3 +1,31 @@
+# Add mappings for a subfile
+addMappings<-function(questionnaire,subfile,ontology,data)
+{
+  addMapping(paste0(questionnaire,"-",subfile,".txt"),ontology,1,"SUBJ_ID")
+  varNum<-2
+  ontoLevel<-0
+  for (varName in names(data[-1]))
+  {
+    while(grepl("_",varName))
+    {
+      ontoLevel<-ontoLevel+1
+      ontology<-push(ontology,sub("_.*$","",varName))
+      
+      varName<-sub("^.*?_","",varName)
+    }
+    
+    addMapping(paste0(questionnaire,"-",subfile,".txt"),ontology,varNum,varName)
+    
+    while(ontoLevel>0)
+    {
+      ontoLevel<-ontoLevel-1
+      ontology<-pop(ontology)
+    }
+    
+    varNum<-varNum+1
+  }
+}
+
 #' Add a line to the mapping file
 #' 
 #' Add one new line to the mapping file object
@@ -35,7 +63,7 @@ push<-function(vector,value)
   vector
 }
 
-#' Simple pop mechanism. Does not return the popped value
+#' Simple pop mechanism. Does not return the popped value but the modified vector
 pop<-function(vector)
 {
   if (length(vector)==1)
