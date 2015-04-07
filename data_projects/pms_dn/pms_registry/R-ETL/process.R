@@ -119,7 +119,7 @@ reformat<-function(data,premap)
   data2<-select(data,Patient.ID,Survey.Date,Birthdate)
   
   # new vars prefix
-  varPre<-levels(factor(unlist(data[premap$Header[premap$Reformat=="1"]]),exclude=""))
+  varPre<-levels(factor(unlist(data[premap$Header[premap$Reformat=="1"]]),exclude=c("","No")))
   # new vars suffix
   varSuff<-levels(factor(premap$VarName[premap$Linked!=""]))
   # Create new vars after transform
@@ -128,20 +128,22 @@ reformat<-function(data,premap)
       data2[[paste(pre,suff,sep="_")]]<-NA
   
   #Effectively reformat the variable, keeping linked variables together
-  for (patient in data2$Patient.ID)
+  for (row in 1:nrow(data2))
   {
-    for (link in levels(factor(premap$Linked),exclude=""))
+    for (link in levels(factor(premap$Linked,exclude="")))
     {
-      pre<-data[data$Patient.ID==patient,premap$Header[premap$Linked==link & premap$Reformat=="1"]]
+      pre<-data[row,premap$Header[premap$Linked==link & premap$Reformat=="1"]]
+      if (pre=="" | pre=="No")
+        next
       for (suff in varSuff)
       {
         if (premap$Reformat[premap$Linked==link & premap$VarName==suff]=="1")
         {
-          data2[data2$Patient.ID==patient,][[paste(pre,suff,sep="_")]]<-"Yes"
+          data2[row,paste(pre,suff,sep="_")]<-"Yes"
         }
         else
         {
-          data2[data2$Patient.ID==patient,][[paste(pre,suff,sep="_")]]<-data[data$Patient.ID==patient,premap$Header[premap$Linked==link & premap$VarName==suff]]
+          data2[row,paste(pre,suff,sep="_")]<-data[row,premap$Header[premap$Linked==link & premap$VarName==suff]]
         }
       }
     }
