@@ -9,7 +9,7 @@ read.csv.2header<-function(file,...)
   header<-catClean(headers[[1]],headers[[2]])
   
   # Read the data itself and attribute column names
-  data<-read.csv(file,header = F,skip=2,stringsAsFactors=F,...)
+  data<-read.csv(file,header = F,skip=2,stringsAsFactors=F,colClasses="character",...)
   colnames(data)<-header
   
   data
@@ -33,14 +33,14 @@ writePremap <- function(datafile,premapfile)
   # Create all columns for mapping file
   ColNum<-1:length(Head1)
   premap<-data.frame(ColNum,Head1,Head2,stringsAsFactors=F)
-  premap<-mutate(premap,SubFile="",HistEvo="",Reformat=0,VarName="",Linked="")
+  premap<-mutate(premap,SubFile="",Evo="",Reformat="",VarName="",Linked="")
   premap[grepl("\\d+_",premap$Head2),] <- premap %>%
     filter(grepl("\\d+_",Head2)) %>%
     mutate(Linked=sub("(^\\d+)_.*","\\1",Head2)) %>%
     mutate(VarName=sub("\\d+_(.*$)","\\1",Head2))
   premap <- mutate(premap,Header=header)
   
-  write.table(premap,file=premapfile,row.names=F,sep=",",quote=T)
+  write.table(premap,file=premapfile,row.names=F,sep=",",quote=T,na="")
 }
 
 # Clean and concatenate two headers

@@ -8,9 +8,9 @@ developmental<-read.csv.2header("dataDevelopmental.csv")
 clinical<-read.csv.2header("dataClinical.csv")
 
 # Delete rows with no Survey Session ID
-adult <- adult[!is.na(adult$Survey.Session.ID),]
-developmental <- developmental[!is.na(developmental$Survey.Session.ID),]
-clinical <- clinical[!is.na(clinical$Survey.Session.ID),]
+adult <- adult[adult$Survey.Session.ID!="",]
+developmental <- developmental[developmental$Survey.Session.ID!="",]
+clinical <- clinical[clinical$Survey.Session.ID!="",]
 
 # ==== Create dir for output, create empty mapping file and ontology object
 dir.create("output",recursive=T)
