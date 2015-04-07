@@ -130,7 +130,7 @@ reformat<-function(data,premap)
   #Effectively reformat the variable, keeping linked variables together
   for (patient in data2$Patient.ID)
   {
-    for (link in unique(premap$Linked))
+    for (link in levels(factor(premap$Linked),exclude=""))
     {
       pre<-data[data$Patient.ID==patient,premap$Header[premap$Linked==link & premap$Reformat=="1"]]
       for (suff in varSuff)
@@ -204,7 +204,9 @@ checkboxes<-function(data)
   for (col in colSpe)
     data[data[col]=="1",col]<-gsub("\\."," ",sub(".*_([^_]+)$","\\1",names(data[col])))
   
-  data[sumSpe==1 & sumData==0,colData]<-apply(data[colSpe],1,paste,collapse="")[sumSpe==1 & sumData==0]
+  varSpe<-apply(data[colSpe],1,paste,collapse="")
+  varSpe<-sub("No(ne.*| intervention)?","No",varSpe)
+  data[sumSpe==1 & sumData==0,colData]<-varSpe[sumSpe==1 & sumData==0]
   
   ## Normal case
   for (col in colData)
