@@ -67,14 +67,7 @@ processHead1<-function(head1,data,premap)
   # Delete records made less than 24 hours before the next
   data<-filter(data,(lead(Survey.Date)-Survey.Date)>24*3600 | lead(Patient.ID)!=Patient.ID | Patient.ID==max(Patient.ID))
   
-  # Filter for the last line of data for each patient
-  # TODO : take account of Evo to modify behavior
-  data<-data %>%
-    group_by(Patient.ID) %>%
-    filter(Survey.Date==last(Survey.Date))
-  data<-ungroup(data)
-  
-  # Reformatting needed
+ # Reformatting needed
   if (any(premap$Reformat!=""))
     if (any(premap$Reformat=="1"))
       data<-reformat(data,premap)
@@ -86,8 +79,46 @@ processHead1<-function(head1,data,premap)
   # Manage "checkbox" items
   if (any(grepl("_Unsure$",names(data))))
     data<-checkboxes(data)
+ 
+  # Manage longitudinal data
+  if (any(premap$Evo=="1"))
+  {
+    data$Birthdate<-as.numeric(strptime(data$Birthdate,format="%Y-%m-%d"))
+    data<-mutate(data,Age=as.integer((Survey.Date-Birthdate)/(365.25*24*3600))) %>%
+      group_by(Patient.ID,Age) %>%
+      filter(Survey.Date==last(Survey.Date)) %>%
+      ungroup
+    
+    data2<-data %>%
+      group_by(Patient.ID) %>%
+      filter(Survey.Date==last(Survey.Date)) %>%
+      select(-Age,-Survey.Date,-Birthdate) %>%
+      ungroup
+    varnames<-names(data2)
+    varnames[-1]<-paste0(varnames[-1],"_current")
+    names(data2)<-varnames
+    
+    for (var in names(data[-c(1:3,length(data))]))
+    {
+      data3<-spread_(data[c("Patient.ID","Age",var)],"Age",var,fill="")
+      varnames<-names(data3)
+      varnames[-1]<-paste0(var,"_at age ",varnames[-1])
+      names(data3)<-varnames
+      data2<-merge(data2,data3)
+    }
+    
+    data<-data2
+  }
+  else
+  {
+    data<-data %>%
+      group_by(Patient.ID) %>%
+      filter(Survey.Date==last(Survey.Date)) %>%
+      select(-Survey.Date,-Birthdate)
+      ungroup
+  }
   
-  select(data,-Survey.Date,-Birthdate)
+  data
 }
 
 # Anchor-based filtering of data from the mapping file
