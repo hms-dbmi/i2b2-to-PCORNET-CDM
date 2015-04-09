@@ -135,3 +135,45 @@ checkboxes<-function(data)
   ## Remove special columns
   select(data,-matches("_(Unsure|Not applicable|No(ne.*| intervention)?)"))
 }
+
+# Create at age X/current variables for evolutive variables
+evolutive<-function(data)
+{
+  data$Birthdate<-as.numeric(strptime(data$Birthdate,format="%Y-%m-%d"))
+  data<-mutate(data,Age=as.integer((Survey.Date-Birthdate)/(365.25*24*3600))) %>%
+    group_by(Patient.ID,Age) %>%
+    filter(Survey.Date==last(Survey.Date)) %>%
+    ungroup
+  
+  data2<-data %>%
+    group_by(Patient.ID) %>%
+    filter(Survey.Date==last(Survey.Date)) %>%
+    select(-Age,-Survey.Date,-Birthdate) %>%
+    ungroup
+  varnames<-names(data2)
+  varnames[-1]<-paste0(varnames[-1],"_ currently")
+  names(data2)<-varnames
+  
+  for (var in names(data[-c(1:3,length(data))]))
+  {
+    data3<-spread_(data[c("Patient.ID","Age",var)],"Age",var,fill="")
+    varnames<-names(data3)
+    varnames<-sub("^(\\d)$","0\\1",varnames)
+    varnames<-sub("^00$","<1",varnames)
+    varnames[-1]<-paste0(var,"_at age ",varnames[-1])
+    names(data3)<-varnames
+    data2<-merge(data2,data3)
+  }
+  
+  data2
+}
+
+#
+historical<-function(data)
+{
+  data %>%
+    group_by(Patient.ID) %>%
+    filter(Survey.Date==last(Survey.Date)) %>%
+    select(-Survey.Date,-Birthdate) %>%
+    ungroup
+}
