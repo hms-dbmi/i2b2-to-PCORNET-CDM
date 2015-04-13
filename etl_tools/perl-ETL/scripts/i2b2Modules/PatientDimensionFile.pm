@@ -43,7 +43,7 @@ sub generatePatientDimensionFile
 	#In order to get the count of patients we need to parse through the patient files, find the SUBJECT_ID column and create a distinct list.
 	
 	#Open the mapping files.
-	my %mappingFileHash = tranSMARTTextParsing::generateMasterMappingHash($configurationObject->{BASE_PATH});
+	my %mappingFileHash = tranSMARTTextParsing::generateMasterMappingHash($configurationObject->{MAPPING_FILE_DIRECTORY});
 	my %subjectIDHash = ();
 	
 	while(my($k, $v) = each %mappingFileHash) 
@@ -136,7 +136,7 @@ sub _extractPatientList {
 	my $subjectIDHash			= shift;
 	my $subjectIdColumn			= "";
 	
-	my $field_mapping_file = $configurationObject->{BASE_PATH} . "mapping_files/$currentMappingFile";
+	my $field_mapping_file = $configurationObject->{MAPPING_FILE_DIRECTORY} . "$currentMappingFile";
 
 	print("DEBUG - PatientDimensionFile.pm : Attemping to open mapping file $field_mapping_file\n");
 

@@ -33,7 +33,7 @@ sub generateI2b2File
 	open (i2b2_output,">$i2b2_table_output_file") || die "Can't open output file ($i2b2_table_output_file) : $!\n";;
 
 	#Get the mapping of mapping files.
-	my %mappingFileHash = tranSMARTTextParsing::generateMasterMappingHash($configurationObject->{BASE_PATH});
+	my %mappingFileHash = tranSMARTTextParsing::generateMasterMappingHash($configurationObject->{MAPPING_FILE_DIRECTORY});
 
 	#We need to prefetch an ID per entry in the concept hashes.
 	my $conceptCount = keys %$individualNumericConcepts;

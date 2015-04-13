@@ -8,11 +8,11 @@ use Data::Dumper;
 
 sub generateMasterMappingHash {
 	
-	my $basePath = shift;
+	my $mappingPath = shift;
 	
 	my %mappingFileHash = ();
 	
-	my $masterMappingFile = $basePath . "mapping_files/master_mapping";
+	my $masterMappingFile = $mappingPath . "master_mapping";
 	
 	print("DEBUG - tranSMARTTextParsing.pm : Attemping to open master mapping file $masterMappingFile\n");
 	
