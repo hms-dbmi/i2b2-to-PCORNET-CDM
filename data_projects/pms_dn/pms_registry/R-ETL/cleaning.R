@@ -1,5 +1,5 @@
 source("functions-mapping.R")
-source("functions.R")
+source("functions-loading.R")
 source("process.R")
 
 # ==== Read raw data files ====
@@ -30,7 +30,7 @@ adult[c("Patient.ID","Birthdate","Gender","Ancestral.Background","Country")] %>%
   group_by(Patient.ID) %>%
   mutate(Birthdate = as.Date(Birthdate)) %>%
   mutate(Age = as.numeric(export_date - Birthdate)/365.25) %>%
-  select(-Birthdate) -> Demographics
+  mutate(Age_months = Age*12) -> Demographics
 
 # Write Demographics.txt
 write.table(Demographics,"output/Demographics.txt",row.names = F,sep="\t",quote=F)
@@ -38,13 +38,17 @@ write.table(Demographics,"output/Demographics.txt",row.names = F,sep="\t",quote=
 # Write the mappings
 ontology<-push(ontology,"Demographics")
   addMapping("Demographics.txt",ontology,1,"SUBJ_ID")
-  addMapping("Demographics.txt",ontology,2,"SEX")
-  addMapping("Demographics.txt",ontology,3,"RACE")
-  addMapping("Demographics.txt",ontology,4,"COUNTRY")
-  addMapping("Demographics.txt",ontology,5,"AGE")
+  addMapping("Demographics.txt",ontology,2,"BIRTHDATE")
+  addMapping("Demographics.txt",ontology,3,"SEX")
+  addMapping("Demographics.txt",ontology,4,"RACE")
+  addMapping("Demographics.txt",ontology,5,"COUNTRY")
+  addMapping("Demographics.txt",ontology,6,"AGE_IN_YEARS")
+  addMapping("Demographics.txt",ontology,7,"AGE")
 ontology<-pop(ontology)
 
 # ==== Genetic information ====
+
+
 
 
 # ==== Phenotypic information ====
