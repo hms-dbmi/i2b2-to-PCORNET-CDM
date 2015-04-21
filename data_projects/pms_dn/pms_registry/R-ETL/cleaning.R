@@ -47,8 +47,41 @@ ontology<-push(ontology,"Demographics")
 ontology<-pop(ontology)
 
 # ==== Genetic information ====
+# Extract the information to an external file
+# clinical[c(1,5,19:67)] %>%
+#   mutate(Test.Date=gsub("/","-",Test.Date,perl=T)) %>%
+#   mutate(Test.Date=gsub("^(\\d)-","0\\1-",Test.Date,perl=T)) %>%
+#   mutate(Test.Date=gsub("-(\\d)-","-0\\1-",Test.Date,perl=T)) %>%
+#   mutate(Test.Date=gsub("-(\\d{2})$","-20\\1",Test.Date,perl=T)) %>%
+#   mutate(Test.Date=gsub("(^\\d{2}-\\d{4}$)","01-\\1",Test.Date,perl=T)) %>%
+#   mutate(Test.Date=gsub("^[\\w ]+$","",Test.Date,perl=T)) %>%
+#   mutate(Test.Date=as.Date(Test.Date,format="%m-%d-%Y")) %>%
+#   arrange(Patient.ID,Test.Date) %>%
+#   distinct -> Genetics
+# write.csv(Genetics,"Genetics.csv")
+
+###############################################
+###############################################
+### MANUALLY PROCESS THE FILE IF NEEDED !!! ###
+###############################################
+###############################################
+
+# Read back the curated genetic data
+Genetics<-read.csv("Genetics.csv")
+
+# Read refGene position tables for all genome assemblies
+hg17<-read.delim("refGene.txt.hg17")
+hg18<-read.delim("refGene.txt.hg18")
+hg19<-read.delim("refGene.txt.hg19")
+hg38<-read.delim("refGene.txt.hg38")
+
+# Process each patient for gene copy numbers
+for (patient in Genetics$Patient.ID)
+  extractGenes(patient)
 
 
+# Call liftOver tool to translate chromosomic coordinates to a common genome build and set aside (not delete) original coordinates
+# Get gene status from table browser using original genome assembly
 
 
 # ==== Phenotypic information ====
