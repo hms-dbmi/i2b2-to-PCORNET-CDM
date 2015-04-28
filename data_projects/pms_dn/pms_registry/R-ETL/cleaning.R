@@ -1,5 +1,6 @@
 source("functions-mapping.R")
 source("functions-loading.R")
+source("functions-genes.R")
 source("process.R")
 
 # ==== Read raw data files ====
@@ -67,20 +68,28 @@ ontology<-pop(ontology)
 ###############################################
 
 # Read back the curated genetic data
-Genetics<-read.csv("Genetics.csv")
+Genetics_raw<-read.csv("Genetics.csv",stringsAsFactors=F)
 
 # Read refGene position tables for all genome assemblies
-hg17<-read.delim("refGene.txt.hg17")
-hg18<-read.delim("refGene.txt.hg18")
-hg19<-read.delim("refGene.txt.hg19")
-hg38<-read.delim("refGene.txt.hg38")
-
-# Process each patient for gene copy numbers
-for (patient in Genetics$Patient.ID)
-  extractGenes(patient)
-
+hg17<-read.delim("refGene.txt.hg17",stringsAsFactors=F)
+hg18<-read.delim("refGene.txt.hg18",stringsAsFactors=F)
+hg19<-read.delim("refGene.txt.hg19",stringsAsFactors=F)
+hg38<-read.delim("refGene.txt.hg38",stringsAsFactors=F)
 
 # Call liftOver tool to translate chromosomic coordinates to a common genome build and set aside (not delete) original coordinates
+Genetics_raw<-liftOver(Genetics_raw)
+
+# Get a list of all involved genes
+genes<-getGeneNames(Genetics_raw)
+
+# Create the data frame to hold the annotated genetic data
+Genetics<-data_frame(Patient.ID=unique(Genetics_raw$Patient.ID))
+for (gene in genes)
+  Genetics[[gene]]<-2
+
+# Extract the information from the raw genetic test reports into the data frame
+Genetics<-extractGenes(Genetics_raw,Genetics)
+
 # Get gene status from table browser using original genome assembly
 
 
