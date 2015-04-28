@@ -126,7 +126,7 @@ checkboxes<-function(data)
   
   ## Normal case
   for (col in colData)
-    data[sumData>0 & sumSpe==0,col]<-ifelse(data[sumData>0 & sumSpe==0,col]=="1","Yes","No")
+    data[sumData>0 & sumSpe==0,col]<-ifelse(data[sumData>0 & sumSpe==0,col]=="1","Yes","No (by imputation)")
   
   ## Re-fill "Other" columns with its values
   if (any(grepl("_Other$",names(data))))
