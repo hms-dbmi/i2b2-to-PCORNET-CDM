@@ -1,0 +1,132 @@
+require("dplyr")
+
+extractGenes <- function(genetics_raw, genetics_post)
+{
+  for (row in 1:nrow(genetics_raw))
+  {
+    patient <- genetics_raw$Patient.ID[row]
+    chr.gene <- genetics_raw$Chr.Gene[row]
+
+    if (genetics_raw$Result.type[row] == "mutation")
+    {
+      genetics_post[genetics_post$Patient.ID == patient, chr.gene] <- genetics_post[genetics_post$Patient.ID == patient, chr.gene] - 1
+    }
+    else if (genetics_raw$Result.type[row] == "gene")
+    {
+      if (genetics_raw$Gain.Loss[row] == "Gain")
+        genetics_post[genetics_post$Patient.ID == patient, chr.gene] <- genetics_post[genetics_post$Patient.ID == patient, chr.gene] + 1
+      else
+        genetics_post[genetics_post$Patient.ID == patient, chr.gene] <- genetics_post[genetics_post$Patient.ID == patient, chr.gene] - 1
+    }
+    else if (genetics_raw$Result.type[row] == "coordinates")
+    {
+      if      (genetics_raw$Genome.Browser.Build[row] == "GRCh37/hg19")
+        genome <- hg19
+      else if (genetics_raw$Genome.Browser.Build[row] == "GRCh38/hg38")
+        genome <- hg38
+      else if (genetics_raw$Genome.Browser.Build[row] == "NCBI35/hg17")
+        genome <- hg17
+      else if (genetics_raw$Genome.Browser.Build[row] == "NCBI36/hg18")
+        genome <- hg18
+      else
+        genome <- hg18
+
+      if (genetics_raw$Gain.Loss[row] == "Loss")
+      {
+        genes <- unique(genome$name2[((genome$txEnd > genetics_raw$Start[row] & genome$txEnd < genetics_raw$End[row]) | (genome$txStart > genetics_raw$Start[row] & genome$txStart < genetics_raw$End[row])) & genome$chrom == paste0("chr", chr.gene)])
+        genetics_post[genetics_post$Patient.ID == patient, genes] <- genetics_post[genetics_post$Patient.ID == patient, genes] - 1
+      }
+      else
+      {
+        genes <- unique(genome$name2[genome$txStart > genetics_raw$Start[row] & genome$txEnd < genetics_raw$End[row] & genome$chrom == paste0("chr", chr.gene)])
+        genetics_post[genetics_post$Patient.ID == patient, genes] <- genetics_post[genetics_post$Patient.ID == patient, genes] + 1
+      }
+
+    }
+  }
+
+  genetics_post
+}
+
+getGeneNames <- function(genetics)
+{
+  genes <- character(0)
+
+  for (row in 1:nrow(genetics))
+  {
+    if (genetics$Result.type[row] == "mutation" | genetics$Result.type[row] == "gene")
+    {
+      genes <- c(genes, genetics$Chr.Gene[row])
+    }
+    else if (genetics$Result.type[row] == "coordinates")
+    {
+      if      (genetics$Genome.Browser.Build[row] == "GRCh37/hg19")
+        genome <- hg19
+      else if (genetics$Genome.Browser.Build[row] == "GRCh38/hg38")
+        genome <- hg38
+      else if (genetics$Genome.Browser.Build[row] == "NCBI35/hg17")
+        genome <- hg17
+      else if (genetics$Genome.Browser.Build[row] == "NCBI36/hg18")
+        genome <- hg18
+      else
+        genome <- hg18
+
+      if (genetics$Gain.Loss[row] == "Loss")
+      {
+        genes <- c(genes, genome$name2[((genome$txEnd > genetics$Start[row] & genome$txEnd < genetics$End[row]) | (genome$txStart > genetics$Start[row] & genome$txStart < genetics$End[row])) & genome$chrom == paste0("chr", genetics$Chr.Gene[row])])
+      }
+      else
+      {
+        genes <- c(genes, genome$name2[genome$txStart > genetics$Start[row] & genome$txEnd < genetics$End[row] & genome$chrom == paste0("chr", genetics$Chr.Gene[row])])
+      }
+
+    }
+  }
+
+  genes %>% sort %>% unique
+}
+
+liftOver <- function(Genetics_raw)
+{
+  # Create input bed files
+  Genetics_raw <- add_rownames(Genetics_raw)
+  Genetics_raw %>%
+    filter(Result.type == "coordinates", Genome.Browser.Build == "NCBI35/hg17") %>%
+    select(Chr.Gene, Start, End, rowname) %>%
+    mutate(Chr.Gene = paste0("chr", Chr.Gene)) -> bed17
+
+  Genetics_raw %>%
+    filter(Result.type == "coordinates", Genome.Browser.Build == "NCBI36/hg18") %>%
+    select(Chr.Gene, Start, End, rowname) %>%
+    mutate(Chr.Gene = paste0("chr", Chr.Gene)) -> bed18
+
+  Genetics_raw %>%
+    filter(Result.type == "coordinates", Genome.Browser.Build == "GRCh37/hg19") %>%
+    select(Chr.Gene, Start, End, rowname) %>%
+    mutate(Chr.Gene = paste0("chr", Chr.Gene)) -> bed19
+
+  write.table(bed17, file = "bed17", sep = "\t", row.names = F, col.names = F, quote = F)
+  write.table(bed18, file = "bed18", sep = "\t", row.names = F, col.names = F, quote = F)
+  write.table(bed19, file = "bed19", sep = "\t", row.names = F, col.names = F, quote = F)
+
+  # Run liftOver
+  system("./liftOver bed17 hg17ToHg19.over.chain out17 unmap17")
+  system("./liftOver out17 hg19ToHg38.over.chain out17b unmap17b")
+  system("./liftOver bed18 hg18ToHg38.over.chain out18 unmap18")
+  system("./liftOver bed19 hg19ToHg38.over.chain out19 unmap19")
+
+  out17 <- read.delim("out17b", header = F, stringsAsFactors = F)
+  out18 <- read.delim("out18",  header = F, stringsAsFactors = F)
+  out19 <- read.delim("out19",  header = F, stringsAsFactors = F)
+
+  Genetics_raw[out17$V4, c("Start", "End")] <- out17[, 2:3]
+  Genetics_raw$Genome.Browser.Build[out17$V4] <- "GRCh38/hg38"
+
+  Genetics_raw[out18$V4, c("Start", "End")] <- out18[, 2:3]
+  Genetics_raw$Genome.Browser.Build[out18$V4] <- "GRCh38/hg38"
+
+  Genetics_raw[out19$V4, c("Start", "End")] <- out19[, 2:3]
+  Genetics_raw$Genome.Browser.Build[out19$V4] <- "GRCh38/hg38"
+
+  select(Genetics_raw, -rowname)
+}
