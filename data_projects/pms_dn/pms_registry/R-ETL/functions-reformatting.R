@@ -134,7 +134,21 @@ height <- function(data, premap)
   data2 <- select(data, Patient.ID, Survey.Date, Birthdate)
 
   # Create new var
-  data2[[premap$Head1]] <- NA
+  varname <- unique(premap$Head1)
+  feet        <- data[[premap$Header[grepl("Feet$",        premap$Head2)]]]
+  inches      <- data[[premap$Header[grepl("Inches$",      premap$Head2)]]]
+  centimeters <- data[[premap$Header[grepl("Centimeters$", premap$Head2)]]]
+  data2[[varname]] <- centimeters
+
+  feet   <- as.numeric(sub(" \\w+$", "", feet)) * conv_foot
+  inches <- as.numeric(sub(" \\w+$", "", inches)) * conv_inch
+
+  cm <- ifelse(is.na(inches), feet, feet + inches)
+  cm <- ifelse(is.na(cm), "", paste0(floor(cm / 10) * 10, " - ", floor(cm / 10) * 10 + 9, " cm"))
+
+  for (row in 1:nrow(data2))
+    if ((centimeters[row] == "") & (cm[row] != ""))
+      data2[row, varname] <- cm[row]
 
   data2
 }
@@ -346,8 +360,7 @@ height_neo <- function(data, premap)
   # Create new data frame to contain transformed/curated data
   data2 <- select(data, Patient.ID, Survey.Date, Birthdate)
 
-  # Create new var
-  data2[[premap$Head1]] <- NA
+
 
   data2
 }
