@@ -236,7 +236,7 @@ head_circum <- function(data, premap)
     "29.25 inches", "74.3",
     "29.50 inches", "74.93",
     "29.75 inches", "75.67",
-    "30 inches +",  "76.20 +"), ncol = 2, byrow = T)
+    "30 inches + inches",  "76.20 +"), ncol = 2, byrow = T)
 
   # Create new data frame to contain transformed/curated data
   data2 <- select(data, Patient.ID, Survey.Date, Birthdate)
@@ -248,8 +248,12 @@ head_circum <- function(data, premap)
   data2[[varname]] <- centimeters
 
   for (row in 1:nrow(data2))
-    if ((centimeters[row] == "") & (inches[row] != ""))
+  {
+    if ((centimeters[row] == "") & (inches[row] == "Unsure"))
+      data2[row, varname] <- "Unsure"
+    else if ((centimeters[row] == "") & (inches[row] != ""))
       data2[row, varname] <- head_circum_map[which(head_circum_map == inches[row]), 2]
+  }
 
   data2
 }
@@ -360,7 +364,23 @@ height_neo <- function(data, premap)
   # Create new data frame to contain transformed/curated data
   data2 <- select(data, Patient.ID, Survey.Date, Birthdate)
 
+  for (link in premap$Linked)
+  {
+    # Create new var
+    varname <- strsplit(unique(premap$Head1),"\\?\\.")[[1]][as.numeric(link)]
+    inches      <- data[[premap$Header[grepl("Inches$",      premap$Head2) & premap$Linked == link]]]
+    centimeters <- data[[premap$Header[grepl("Centimeters$", premap$Head2) & premap$Linked == link]]]
+    data2[[varname]] <- centimeters
 
+    for (row in 1:nrow(data2))
+    {
+      if ((centimeters[row] == "") & (inches[row] == "Unsure"))
+        data2[row, varname] <- "Unsure"
+      else if ((centimeters[row] == "") & (inches[row] != ""))
+        data2[row, varname] <- height_neo_map[which(height_neo_map == inches[row]), 2]
+    }
+
+  }
 
   data2
 }
