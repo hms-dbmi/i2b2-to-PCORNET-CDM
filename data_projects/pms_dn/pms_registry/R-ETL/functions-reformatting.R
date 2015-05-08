@@ -416,8 +416,8 @@ checkboxes <- function(data)
   }
 
   ## Create helping columns
-  colSpe  <- grep("_(Unsure|Not applicable|No(ne.*| intervention)?)", names(data))
-  colData <- grep("_(Unsure|Not applicable|No(ne.*| intervention)?)", names(data[-(1:3)]), invert = T) + 3
+  colSpe  <- grep("_(Unsure|Not applicable|No(ne.*| intervention)?)$", names(data))
+  colData <- grep("_(Unsure|Not applicable|No(ne.*| intervention)?)$", names(data[-(1:3)]), invert = T) + 3
   sumSpe  <- apply(data[colSpe],  1, function(x){sum(as.integer(x), na.rm = T)})
   sumData <- apply(data[colData], 1, function(x){sum(as.integer(x), na.rm = T)})
 
@@ -432,7 +432,7 @@ checkboxes <- function(data)
     data[data[col] == "1", col] <- gsub("\\.", " ", sub(".*_([^_]+)$", "\\1", names(data[col])))
 
   varSpe <- apply(data[colSpe], 1, paste, collapse = "")
-  varSpe <- sub("No(ne.*| intervention)?", "No", varSpe)
+  varSpe <- sub("No(ne.*| intervention)?$", "No", varSpe)
   data[sumSpe == 1 & sumData == 0, colData] <- varSpe[sumSpe == 1 & sumData == 0]
 
   ## Normal case
@@ -444,7 +444,7 @@ checkboxes <- function(data)
     data[data[colOther] == "Yes", colOther] <- varOther[data[colOther] == "Yes"]
 
   ## Remove special columns
-  select(data, -matches("_(Unsure|Not applicable|No(ne.*| intervention)?)"))
+  select(data, -matches("_(Unsure|Not applicable|No(ne.*| intervention)?)$"))
 }
 
 # Create at age X/current variables for evolutive variables
