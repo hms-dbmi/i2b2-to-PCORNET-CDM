@@ -130,3 +130,33 @@ liftOver <- function(Genetics_raw)
 
   select(Genetics_raw, -rowname)
 }
+
+getPathways <- function(genes)
+{
+  kegg_genes <- read.delim("KEGG_genes.txt", header = F, stringsAsFactors = F)
+  kegg_pathways <- read.delim("KEGG_pathways.txt", header = F, stringsAsFactors = F)
+  kegg_links <- read.delim("KEGG_link_genes_pathways.txt", header = F, stringsAsFactors = F)
+
+  df <- data.frame(genes)
+  df$kegg_gene <- NA
+  for (gene in genes)
+  {
+    kegg <- kegg_genes$V1[grep(paste0(gene,"[,;]|",gene,"$"), kegg_genes$V2)]
+    df$kegg_gene[df$genes == gene] <- ifelse(length(kegg) > 0, kegg, NA)
+  }
+
+  df <- left_join(df, kegg_links[kegg_links$V1 %in% df$kegg_gene,], by = c("kegg_gene" = "V1"))
+  df <- rename(df, kegg_pathway = V2)
+  df <- left_join(df, kegg_pathways, by = c("kegg_pathway" = "V1"))
+  df <- rename(df, pathway = V2)
+  df$pathway <- sub(" - Homo sapiens \\(human\\)$","",df$pathway)
+
+  df
+}
+
+updateKEGGFiles <- function()
+{
+  system("wget -O KEGG_genes.txt http://rest.kegg.jp/list/hsa")
+  system("wget -O KEGG_pathways.txt http://rest.kegg.jp/list/pathway/hsa")
+  system("wget -O KEGG_link_genes_pathways.txt http://rest.kegg.jp/link/pathway/hsa")
+}

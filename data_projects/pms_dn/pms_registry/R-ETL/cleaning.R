@@ -47,8 +47,17 @@ ontology <- push(ontology, "Demographics")
   addMapping("Demographics.txt", ontology, 7, "AGE")
 ontology <- pop(ontology)
 
+rm(clinical, adult, developmental)
+
+# ==== Phenotypic information ====
+# Create the mapping and data files for loading in tranSMART
+processFile("Clinical")
+processFile("Adult")
+processFile("Developmental")
+
 # ==== Genetic information ====
 # Extract the information to an external file
+# clinical      <- read.csv.2header("dataClinical.csv")
 # clinical[c(1,5,19:67)] %>%
 #   mutate(Test.Date=gsub("/","-",Test.Date,perl=T)) %>%
 #   mutate(Test.Date=gsub("^(\\d)-","0\\1-",Test.Date,perl=T)) %>%
@@ -68,7 +77,7 @@ ontology <- pop(ontology)
 ###############################################
 
 # Read back the curated genetic data
-Genetics_raw <- read.csv("Genetics.csv", stringsAsFactors = F)
+Genetics <- read.csv("Genetics.csv", stringsAsFactors = F)
 
 # Read refGene position tables for all genome assemblies
 hg17 <- read.delim("refGene.txt.hg17", stringsAsFactors = F)
@@ -76,24 +85,27 @@ hg18 <- read.delim("refGene.txt.hg18", stringsAsFactors = F)
 hg19 <- read.delim("refGene.txt.hg19", stringsAsFactors = F)
 hg38 <- read.delim("refGene.txt.hg38", stringsAsFactors = F)
 
+# ==== Deletions ====
+Genetics_deletions <- filter(Genetics, Gain.Loss == "Loss", Chr.Gene == "22") %>% select(Patient.ID, Genome.Browser.Build, Start, End)
+
 # Call liftOver tool to translate chromosomic coordinates to a common genome build and set aside (not delete) original coordinates
-Genetics_raw <- liftOver(Genetics_raw)
+Genetics_deletions <- liftOver(Genetics_deletions)
 
 # Get a list of all involved genes
 genes <- getGeneNames(Genetics_raw)
 
+# Re-download KEGG data
+#updateKEGGFiles()
+# Enrich genes with pathways annotation
+genes <- getPathways(genes)
+
 # Create the data frame to hold the annotated genetic data
-Genetics <- data_frame(Patient.ID = unique(Genetics_raw$Patient.ID))
-for (gene in genes)
-  Genetics[[gene]] <- 2
+Genetics_genes <- data_frame(Patient.ID = unique(Genetics_raw$Patient.ID))
+for (gene in genes$genes)
+  Genetics_genes[[gene]] <- 2
 
 # Extract the information from the raw genetic test reports into the data frame
-Genetics <- extractGenes(Genetics_raw, Genetics)
+Genetics_genes <- extractGenes(Genetics_raw, Genetics_genes)
 
-# Get gene status from table browser using original genome assembly
-
-
-# ==== Phenotypic information ====
-processFile("Clinical")
-processFile("Adult")
-processFile("Developmental")
+# Genes modified in at least 5 patients
+which(apply(Genetics_genes, 2, function(x){summary(factor(x))["2"] <= nrow(Genetics_genes) - 5}))
