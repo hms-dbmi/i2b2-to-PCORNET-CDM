@@ -99,3 +99,47 @@ processHead1 <- function(head1, data, premap)
 
   data
 }
+
+processDemographics <- function(noOutput = F)
+{
+  # Read raw data files
+  adult         <- read.csv.2header("dataAdult.csv")
+  developmental <- read.csv.2header("dataDevelopmental.csv")
+  clinical      <- read.csv.2header("dataClinical.csv")
+
+  # Delete rows with no Survey Session ID
+  adult         <- adult[adult$Survey.Session.ID != "", ]
+  developmental <- developmental[developmental$Survey.Session.ID != "", ]
+  clinical      <- clinical[clinical$Survey.Session.ID != "", ]
+
+  # Extract basic demographic informations (patient ID, SEX, AGE, RACE, COUNTRY)
+  adult[                    c("Patient.ID", "Birthdate", "Gender", "Ancestral.Background", "Country")] %>%
+    bind_rows(clinical[     c("Patient.ID", "Birthdate", "Gender", "Ancestral.Background", "Country")]) %>%
+    bind_rows(developmental[c("Patient.ID", "Birthdate", "Gender", "Ancestral.Background", "Country")]) %>%
+    unique() %>%
+    arrange(Patient.ID) %>%
+    group_by(Patient.ID) %>%
+    mutate(Birthdate = as.Date(Birthdate)) %>%
+    mutate(Age = as.numeric(export_date - Birthdate) / 365.25) %>%
+    mutate(Age_months = Age * 12) -> Demographics
+
+  if (!noOutput)
+  {
+    # Write Demographics.txt
+    write.table(Demographics, "output/Demographics.txt", row.names = F, sep = "\t", quote = F)
+
+    # Write the mappings
+    ontology <- push(ontology, "Demographics")
+    addMapping("Demographics.txt", ontology, 1, "SUBJ_ID")
+    addMapping("Demographics.txt", ontology, 2, "BIRTHDATE")
+    addMapping("Demographics.txt", ontology, 3, "SEX")
+    addMapping("Demographics.txt", ontology, 4, "RACE")
+    addMapping("Demographics.txt", ontology, 5, "COUNTRY")
+    addMapping("Demographics.txt", ontology, 6, "AGE_IN_YEARS")
+    addMapping("Demographics.txt", ontology, 7, "AGE")
+    ontology <- pop(ontology)
+  }
+
+  if (noOutput)
+    return(Demographics)
+}
