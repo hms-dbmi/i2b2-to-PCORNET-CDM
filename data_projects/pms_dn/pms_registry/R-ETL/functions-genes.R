@@ -128,6 +128,8 @@ liftOver <- function(Genetics_raw)
   Genetics_raw[out19$V4, c("Start", "End")] <- out19[, 2:3]
   Genetics_raw$Genome.Browser.Build[out19$V4] <- "GRCh38/hg38"
 
+  unlink(c("bed*","out*","unmap*"))
+
   select(Genetics_raw, -rowname)
 }
 
