@@ -76,6 +76,11 @@ processFile("Developmental")
 ###############################################
 ###############################################
 
+# Download external files
+#downloadKEGGFiles()
+#downloadRefGeneFiles()
+#downloadLiftOverFiles()
+
 # Read back the curated genetic data
 Genetics <- read.csv("Genetics.csv", stringsAsFactors = F)
 
@@ -94,8 +99,6 @@ Genetics_deletions <- liftOver(Genetics_deletions)
 # Get a list of all involved genes
 genes <- getGeneNames(Genetics_raw)
 
-# Re-download KEGG data
-#updateKEGGFiles()
 # Enrich genes with pathways annotation
 genes <- getPathways(genes)
 

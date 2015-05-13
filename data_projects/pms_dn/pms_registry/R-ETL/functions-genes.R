@@ -154,9 +154,25 @@ getPathways <- function(genes)
   df
 }
 
-updateKEGGFiles <- function()
+downloadKEGGFiles <- function()
 {
   system("wget -O KEGG_genes.txt http://rest.kegg.jp/list/hsa")
   system("wget -O KEGG_pathways.txt http://rest.kegg.jp/list/pathway/hsa")
   system("wget -O KEGG_link_genes_pathways.txt http://rest.kegg.jp/link/pathway/hsa")
+}
+
+downloadLiftOverFiles <- function()
+{
+  system("wget -O liftOver http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/liftOver")
+  system("wget http://hgdownload.soe.ucsc.edu/goldenPath/hg19/liftOver/hg19ToHg38.over.chain.gz -O - | gunzip > hg19ToHg38.over.chain")
+  system("wget http://hgdownload.soe.ucsc.edu/goldenPath/hg18/liftOver/hg18ToHg38.over.chain.gz -O - | gunzip > hg18ToHg38.over.chain")
+  system("wget http://hgdownload.soe.ucsc.edu/goldenPath/hg17/liftOver/hg17ToHg19.over.chain.gz -O - | gunzip > hg17ToHg19.over.chain")
+}
+
+downloadRefGeneFiles <- function()
+{
+  system("wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/refGene.txt.gz -O - | gunzip > refGene.txt.hg38")
+  system("wget http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/refGene.txt.gz -O - | gunzip > refGene.txt.hg19")
+  system("wget http://hgdownload.soe.ucsc.edu/goldenPath/hg18/database/refGene.txt.gz -O - | gunzip > refGene.txt.hg18")
+  system("wget http://hgdownload.soe.ucsc.edu/goldenPath/hg17/database/refGene.txt.gz -O - | gunzip > refGene.txt.hg17")
 }
