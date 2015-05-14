@@ -51,25 +51,25 @@ hg18 <- read.delim("refGene.txt.hg18", stringsAsFactors = F)
 hg19 <- read.delim("refGene.txt.hg19", stringsAsFactors = F)
 hg38 <- read.delim("refGene.txt.hg38", stringsAsFactors = F)
 
-# ==== Deletions ====
-Genetics_deletions <- filter(Genetics, Gain.Loss == "Loss", Chr.Gene == "22") %>% select(Patient.ID, Genome.Browser.Build, Start, End)
+# ==== Ranges ====
+Genetics_ranges <- processRanges(Genetics)
 
-# Call liftOver tool to translate chromosomic coordinates to a common genome build and set aside (not delete) original coordinates
-Genetics_deletions <- liftOver(Genetics_deletions)
-
+# ==== Genes ====
 # Get a list of all involved genes
-genes <- getGeneNames(Genetics_raw)
-
-# Enrich genes with pathways annotation
-genes <- getPathways(genes)
+genes <- getGeneNames(Genetics)
 
 # Create the data frame to hold the annotated genetic data
-Genetics_genes <- data_frame(Patient.ID = unique(Genetics_raw$Patient.ID))
-for (gene in genes$genes)
+Genetics_genes <- data_frame(Patient.ID = unique(Genetics$Patient.ID))
+for (gene in genes)
   Genetics_genes[[gene]] <- 2
 
 # Extract the information from the raw genetic test reports into the data frame
-Genetics_genes <- extractGenes(Genetics_raw, Genetics_genes)
+Genetics_genes <- extractGenes(Genetics, Genetics_genes)
 
 # Genes modified in at least 5 patients
 which(apply(Genetics_genes, 2, function(x){summary(factor(x))["2"] <= nrow(Genetics_genes) - 5}))
+
+
+# ==== Pathways ====
+# Enrich genes with pathways annotation
+genes <- getPathways(genes)
