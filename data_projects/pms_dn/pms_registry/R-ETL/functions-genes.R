@@ -208,14 +208,12 @@ extractGenes <- function(genetics_pre, genetics_post)
 
 getGeneNames <- function(genetics)
 {
-  genes <- character(0)
+  genes <- data.frame(name = character(0), chrom = character(0))
 
   for (row in 1:nrow(genetics))
   {
     if (genetics$Result.type[row] == "mutation" | genetics$Result.type[row] == "gene")
-    {
-      genes <- c(genes, genetics$Chr.Gene[row])
-    }
+      genes <- rbind(genes, data.frame(name = genetics$Chr.Gene[row], chrom = "", stringsAsFactors = F))
     else if (genetics$Result.type[row] == "coordinates")
     {
       if      (genetics$Genome.Browser.Build[row] == "GRCh37/hg19")
@@ -231,17 +229,25 @@ getGeneNames <- function(genetics)
 
       if (genetics$Gain.Loss[row] == "Loss")
       {
-        genes <- c(genes, genome$name2[((genome$txEnd > genetics$Start[row] & genome$txEnd < genetics$End[row]) | (genome$txStart > genetics$Start[row] & genome$txStart < genetics$End[row])) & genome$chrom == paste0("chr", genetics$Chr.Gene[row])])
+        name <- genome$name2[((genome$txEnd > genetics$Start[row] & genome$txEnd < genetics$End[row]) | (genome$txStart > genetics$Start[row] & genome$txStart < genetics$End[row])) & genome$chrom == paste0("chr", genetics$Chr.Gene[row])]
+        if (length(name) > 0)
+          genes <- rbind(genes, data.frame(name, chrom = genetics$Chr.Gene[row], stringsAsFactors = F))
       }
       else
       {
-        genes <- c(genes, genome$name2[genome$txStart > genetics$Start[row] & genome$txEnd < genetics$End[row] & genome$chrom == paste0("chr", genetics$Chr.Gene[row])])
+        name <- genome$name2[genome$txStart > genetics$Start[row] & genome$txEnd < genetics$End[row] & genome$chrom == paste0("chr", genetics$Chr.Gene[row])]
+        if (length(name) > 0)
+          genes <- rbind(genes, data.frame(name, chrom = genetics$Chr.Gene[row], stringsAsFactors = F))
       }
 
     }
   }
 
-  genes %>% sort %>% unique
+  genes <- genes %>% arrange(name, chrom) %>% distinct
+  genes$chrom[genes$chrom == ""] <- sub("chr", "", (hg38[hg38$name2 %in% genes$name[genes$chrom == ""], c("chrom","name2")] %>% arrange(name2, chrom) %>% distinct)$chrom)
+  genes <- genes %>% arrange(name, chrom) %>% distinct
+
+  genes
 }
 
 getPathways <- function(genes)
