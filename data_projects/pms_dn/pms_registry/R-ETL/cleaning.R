@@ -1,4 +1,3 @@
-source("functions-genes.R")
 source("process.R")
 
 export_date = as.Date("2015-03-20")
@@ -55,19 +54,8 @@ hg38 <- read.delim("refGene.txt.hg38", stringsAsFactors = F)
 Genetics_ranges <- processRanges(Genetics)
 
 # ==== Genes ====
-# Get a list of all involved genes
-genes <- getGeneNames(Genetics)
+Genetics_genes  <- processGenes(Genetics)
 
-# Create the data frame to hold the annotated genetic data
-Genetics_genes <- data_frame(Patient.ID = unique(Genetics$Patient.ID))
-for (gene in genes)
-  Genetics_genes[[gene]] <- 2
-
-# Extract the information from the raw genetic test reports into the data frame
-Genetics_genes <- extractGenes(Genetics, Genetics_genes)
-
-# Genes modified in at least 5 patients
-which(apply(Genetics_genes, 2, function(x){summary(factor(x))["2"] <= nrow(Genetics_genes) - 5}))
 
 
 # ==== Pathways ====

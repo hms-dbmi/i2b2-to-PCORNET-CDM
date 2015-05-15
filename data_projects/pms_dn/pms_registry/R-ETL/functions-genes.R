@@ -1,29 +1,5 @@
 require("dplyr")
 
-processRanges <- function(genetics)
-{
-  genetics <- select(genetics, Patient.ID, Genome.Browser.Build, Result.type, Gain.Loss, Chr.Gene, Start, End)
-  for (i in 1:nrow(genetics))
-  {
-    if (genetics$Result.type[i] == "gene")
-    {
-      genetics$Genome.Browser.Build[i] <- "GRCh38/hg38"
-      genetics$Start[i]                <-                hg38$txStart[hg38$name2 == genetics$Chr.Gene[i]][1]
-      genetics$End[i]                  <-                hg38$txEnd  [hg38$name2 == genetics$Chr.Gene[i]][1]
-      genetics$Chr.Gene[i]             <- sub("chr", "", hg38$chrom  [hg38$name2 == genetics$Chr.Gene[i]][1])
-    }
-    else if (genetics$Result.type[i] == "mutation")
-    {
-      genetics$Genome.Browser.Build[i] <- "GRCh38/hg38"
-      genetics$Start[i]                <- genetics$Start[i] + hg38$txStart[hg38$name2 == genetics$Chr.Gene[i]][1]
-      genetics$End[i]                  <- genetics$End[i]   + hg38$txStart[hg38$name2 == genetics$Chr.Gene[i]][1]
-      genetics$Chr.Gene[i]             <- sub("chr", "", hg38$chrom  [hg38$name2 == genetics$Chr.Gene[i]][1])
-    }
-  }
-
-  liftOver(genetics)
-}
-
 liftOver <- function(genetics)
 {
   # Create input bed files

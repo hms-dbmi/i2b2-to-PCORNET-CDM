@@ -1,6 +1,7 @@
 source("functions-loading.R")
 source("functions-mapping.R")
 source("functions-reformatting.R")
+source("functions-genes.R")
 
 # Process at the file level
 processFile <- function(questionnaire, noOutput = F)
@@ -142,4 +143,60 @@ processDemographics <- function(noOutput = F)
 
   if (noOutput)
     return(Demographics)
+}
+
+processGenes <- function(genetics)
+{
+  # Get a list of all involved genes
+  genes <- getGeneNames(genetics)
+
+  # Create the data frame to hold the annotated genetic data
+  Genetics_genes <- data_frame(Patient.ID = unique(genetics$Patient.ID))
+  Demographics <- processDemographics(noOutput = T)
+  Demographics$Patient.ID <- as.numeric(Demographics$Patient.ID)
+  Genetics_genes <- left_join(Genetics_genes, Demographics[c("Patient.ID", "Gender")])
+  for (gene in genes$name)
+  {
+    if (genes$chrom[genes$name == gene] == "Y")
+    {
+      Genetics_genes[[gene]][Genetics_genes$Gender == "Male"] <- 1
+      Genetics_genes[[gene]][Genetics_genes$Gender == "Female"] <- 0
+    }
+    else if (genes$chrom[genes$name == gene] == "X")
+    {
+      Genetics_genes[[gene]][Genetics_genes$Gender == "Male"] <- 1
+      Genetics_genes[[gene]][Genetics_genes$Gender == "Female"] <- 2
+    }
+    else
+      Genetics_genes[[gene]] <- 2
+  }
+
+  # Extract the information from the raw genetic test reports into the data frame
+  Genetics_genes <- extractGenes(genetics, Genetics_genes)
+
+  Genetics_genes
+}
+
+processRanges <- function(genetics)
+{
+  genetics <- select(genetics, Patient.ID, Genome.Browser.Build, Result.type, Gain.Loss, Chr.Gene, Start, End)
+  for (i in 1:nrow(genetics))
+  {
+    if (genetics$Result.type[i] == "gene")
+    {
+      genetics$Genome.Browser.Build[i] <- "GRCh38/hg38"
+      genetics$Start[i]                <-                hg38$txStart[hg38$name2 == genetics$Chr.Gene[i]][1]
+      genetics$End[i]                  <-                hg38$txEnd  [hg38$name2 == genetics$Chr.Gene[i]][1]
+      genetics$Chr.Gene[i]             <- sub("chr", "", hg38$chrom  [hg38$name2 == genetics$Chr.Gene[i]][1])
+    }
+    else if (genetics$Result.type[i] == "mutation")
+    {
+      genetics$Genome.Browser.Build[i] <- "GRCh38/hg38"
+      genetics$Start[i]                <- genetics$Start[i] + hg38$txStart[hg38$name2 == genetics$Chr.Gene[i]][1]
+      genetics$End[i]                  <- genetics$End[i]   + hg38$txStart[hg38$name2 == genetics$Chr.Gene[i]][1]
+      genetics$Chr.Gene[i]             <- sub("chr", "", hg38$chrom  [hg38$name2 == genetics$Chr.Gene[i]][1])
+    }
+  }
+
+  liftOver(genetics)
 }
