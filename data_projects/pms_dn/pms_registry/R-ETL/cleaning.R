@@ -37,27 +37,16 @@ processFile("Developmental")
 ###############################################
 
 # Download external files
-#downloadKEGGFiles()
-#downloadRefGeneFiles()
-#downloadLiftOverFiles()
+#downloadExternalFiles()
 
 # Read back the curated genetic data
 Genetics <- read.csv("Genetics.csv", stringsAsFactors = F)
 
-# Read refGene position tables for all genome assemblies
-hg17 <- read.delim("refGene.txt.hg17", stringsAsFactors = F)
-hg18 <- read.delim("refGene.txt.hg18", stringsAsFactors = F)
-hg19 <- read.delim("refGene.txt.hg19", stringsAsFactors = F)
-hg38 <- read.delim("refGene.txt.hg38", stringsAsFactors = F)
-
 # ==== Ranges ====
-Genetics_ranges <- processRanges(Genetics)
+Genetics_ranges   <- processRanges(Genetics)
 
 # ==== Genes ====
-Genetics_genes  <- processGenes(Genetics)
-
-
+Genetics_genes    <- processGenes(Genetics)
 
 # ==== Pathways ====
-# Enrich genes with pathways annotation
-genes <- getPathways(genes)
+Genetics_pathways <- processPathways(Genetics, Genetics_genes)

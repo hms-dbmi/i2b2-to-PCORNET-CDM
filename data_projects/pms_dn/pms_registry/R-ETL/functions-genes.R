@@ -134,8 +134,64 @@ liftOver <- function(genetics)
   select(genetics, -rowname)
 }
 
+getGenes <- function(genetics)
+{
+  # Read refGene position tables for all genome assemblies
+  hg17 <- read.delim("refGene.txt.hg17", stringsAsFactors = F)
+  hg18 <- read.delim("refGene.txt.hg18", stringsAsFactors = F)
+  hg19 <- read.delim("refGene.txt.hg19", stringsAsFactors = F)
+  hg38 <- read.delim("refGene.txt.hg38", stringsAsFactors = F)
+
+  genes <- data.frame(name = character(0), chrom = character(0))
+
+  for (row in 1:nrow(genetics))
+  {
+    if (genetics$Result.type[row] == "mutation" | genetics$Result.type[row] == "gene")
+      genes <- rbind(genes, data.frame(name = genetics$Chr.Gene[row], chrom = "", stringsAsFactors = F))
+    else if (genetics$Result.type[row] == "coordinates")
+    {
+      if      (genetics$Genome.Browser.Build[row] == "GRCh37/hg19")
+        genome <- hg19
+      else if (genetics$Genome.Browser.Build[row] == "GRCh38/hg38")
+        genome <- hg38
+      else if (genetics$Genome.Browser.Build[row] == "NCBI35/hg17")
+        genome <- hg17
+      else if (genetics$Genome.Browser.Build[row] == "NCBI36/hg18")
+        genome <- hg18
+      else
+        genome <- hg18
+
+      if (genetics$Gain.Loss[row] == "Loss")
+      {
+        name <- genome$name2[((genome$txEnd > genetics$Start[row] & genome$txEnd < genetics$End[row]) | (genome$txStart > genetics$Start[row] & genome$txStart < genetics$End[row])) & genome$chrom == paste0("chr", genetics$Chr.Gene[row])]
+        if (length(name) > 0)
+          genes <- rbind(genes, data.frame(name, chrom = genetics$Chr.Gene[row], stringsAsFactors = F))
+      }
+      else
+      {
+        name <- genome$name2[genome$txStart > genetics$Start[row] & genome$txEnd < genetics$End[row] & genome$chrom == paste0("chr", genetics$Chr.Gene[row])]
+        if (length(name) > 0)
+          genes <- rbind(genes, data.frame(name, chrom = genetics$Chr.Gene[row], stringsAsFactors = F))
+      }
+
+    }
+  }
+
+  genes <- genes %>% arrange(name, chrom) %>% distinct
+  genes$chrom[genes$chrom == ""] <- sub("chr", "", (hg38[hg38$name2 %in% genes$name[genes$chrom == ""], c("chrom","name2")] %>% arrange(name2, chrom) %>% distinct)$chrom)
+  genes <- genes %>% arrange(name, chrom) %>% distinct
+
+  genes
+}
+
 extractGenes <- function(genetics_pre, genetics_post)
 {
+  # Read refGene position tables for all genome assemblies
+  hg17 <- read.delim("refGene.txt.hg17", stringsAsFactors = F)
+  hg18 <- read.delim("refGene.txt.hg18", stringsAsFactors = F)
+  hg19 <- read.delim("refGene.txt.hg19", stringsAsFactors = F)
+  hg38 <- read.delim("refGene.txt.hg38", stringsAsFactors = F)
+
   for (row in 1:nrow(genetics_pre))
   {
     patient <- genetics_pre$Patient.ID[row]
@@ -182,90 +238,64 @@ extractGenes <- function(genetics_pre, genetics_post)
   genetics_post
 }
 
-getGeneNames <- function(genetics)
-{
-  genes <- data.frame(name = character(0), chrom = character(0))
-
-  for (row in 1:nrow(genetics))
-  {
-    if (genetics$Result.type[row] == "mutation" | genetics$Result.type[row] == "gene")
-      genes <- rbind(genes, data.frame(name = genetics$Chr.Gene[row], chrom = "", stringsAsFactors = F))
-    else if (genetics$Result.type[row] == "coordinates")
-    {
-      if      (genetics$Genome.Browser.Build[row] == "GRCh37/hg19")
-        genome <- hg19
-      else if (genetics$Genome.Browser.Build[row] == "GRCh38/hg38")
-        genome <- hg38
-      else if (genetics$Genome.Browser.Build[row] == "NCBI35/hg17")
-        genome <- hg17
-      else if (genetics$Genome.Browser.Build[row] == "NCBI36/hg18")
-        genome <- hg18
-      else
-        genome <- hg18
-
-      if (genetics$Gain.Loss[row] == "Loss")
-      {
-        name <- genome$name2[((genome$txEnd > genetics$Start[row] & genome$txEnd < genetics$End[row]) | (genome$txStart > genetics$Start[row] & genome$txStart < genetics$End[row])) & genome$chrom == paste0("chr", genetics$Chr.Gene[row])]
-        if (length(name) > 0)
-          genes <- rbind(genes, data.frame(name, chrom = genetics$Chr.Gene[row], stringsAsFactors = F))
-      }
-      else
-      {
-        name <- genome$name2[genome$txStart > genetics$Start[row] & genome$txEnd < genetics$End[row] & genome$chrom == paste0("chr", genetics$Chr.Gene[row])]
-        if (length(name) > 0)
-          genes <- rbind(genes, data.frame(name, chrom = genetics$Chr.Gene[row], stringsAsFactors = F))
-      }
-
-    }
-  }
-
-  genes <- genes %>% arrange(name, chrom) %>% distinct
-  genes$chrom[genes$chrom == ""] <- sub("chr", "", (hg38[hg38$name2 %in% genes$name[genes$chrom == ""], c("chrom","name2")] %>% arrange(name2, chrom) %>% distinct)$chrom)
-  genes <- genes %>% arrange(name, chrom) %>% distinct
-
-  genes
-}
-
 getPathways <- function(genes)
 {
   kegg_genes <- read.delim("KEGG_genes.txt", header = F, stringsAsFactors = F)
   kegg_pathways <- read.delim("KEGG_pathways.txt", header = F, stringsAsFactors = F)
   kegg_links <- read.delim("KEGG_link_genes_pathways.txt", header = F, stringsAsFactors = F)
 
-  df <- data.frame(genes)
-  df$kegg_gene <- NA
-  for (gene in genes)
+  genes$kegg_gene <- NA
+  for (gene in genes$name)
   {
-    kegg <- kegg_genes$V1[grep(paste0(gene,"[,;]|",gene,"$"), kegg_genes$V2)]
-    df$kegg_gene[df$genes == gene] <- ifelse(length(kegg) > 0, kegg, NA)
+    kegg <- kegg_genes$V1[grep(paste0("^", gene, "[,;]"), kegg_genes$V2)]
+    genes$kegg_gene[genes$name == gene] <- ifelse(length(kegg) > 0, kegg, NA)
   }
 
-  df <- left_join(df, kegg_links[kegg_links$V1 %in% df$kegg_gene,], by = c("kegg_gene" = "V1"))
-  df <- rename(df, kegg_pathway = V2)
-  df <- left_join(df, kegg_pathways, by = c("kegg_pathway" = "V1"))
-  df <- rename(df, pathway = V2)
-  df$pathway <- sub(" - Homo sapiens \\(human\\)$","",df$pathway)
+  genes <- left_join(genes, kegg_links[kegg_links$V1 %in% genes$kegg_gene,], by = c("kegg_gene" = "V1"))
+  genes <- rename(genes, kegg_pathway = V2)
+  genes <- left_join(genes, kegg_pathways, by = c("kegg_pathway" = "V1"))
+  genes <- rename(genes, pathway = V2)
+  genes$pathway <- sub(" - Homo sapiens \\(human\\)$","",genes$pathway)
 
-  df
+  genes %>% filter(!is.na(pathway))
 }
 
-downloadKEGGFiles <- function()
+extractPathways <- function(genetics_genes, genes, genetics_post)
 {
+  for (patient in genetics_genes$Patient.ID)
+  {
+    for (gene in unique(genes$name))
+    {
+      # Getting expected number of copies depending on gender and chromosome
+      if ((genetics_genes$Gender == "Male" && genes$chrom[genes$name == gene] == "X") | (genetics_genes$Gender == "Male" && genes$chrom[genes$name == gene] == "Y"))
+        normal <- 1
+      else
+        normal <- 2
+
+      if (is.na(genetics_genes[[gene]][genetics_genes$Patient.ID == patient]))
+        NA
+      else if (genetics_genes[[gene]][genetics_genes$Patient.ID == patient] != normal)
+        genetics_post[genetics_post$Patient.ID == patient, genes$pathway[genes$name == gene]] <- genetics_post[genetics_post$Patient.ID == patient, genes$pathway[genes$name == gene]] + 1
+    }
+  }
+
+  genetics_post
+}
+
+downloadExternalFiles <- function()
+{
+  # KEGG
   system("wget -O KEGG_genes.txt http://rest.kegg.jp/list/hsa")
   system("wget -O KEGG_pathways.txt http://rest.kegg.jp/list/pathway/hsa")
   system("wget -O KEGG_link_genes_pathways.txt http://rest.kegg.jp/link/pathway/hsa")
-}
 
-downloadLiftOverFiles <- function()
-{
+  # LiftOver
   system("wget -O liftOver http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/liftOver")
   system("wget http://hgdownload.soe.ucsc.edu/goldenPath/hg19/liftOver/hg19ToHg38.over.chain.gz -O - | gunzip > hg19ToHg38.over.chain")
   system("wget http://hgdownload.soe.ucsc.edu/goldenPath/hg18/liftOver/hg18ToHg38.over.chain.gz -O - | gunzip > hg18ToHg38.over.chain")
   system("wget http://hgdownload.soe.ucsc.edu/goldenPath/hg17/liftOver/hg17ToHg19.over.chain.gz -O - | gunzip > hg17ToHg19.over.chain")
-}
 
-downloadRefGeneFiles <- function()
-{
+  # RefGene
   system("wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/refGene.txt.gz -O - | gunzip > refGene.txt.hg38")
   system("wget http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/refGene.txt.gz -O - | gunzip > refGene.txt.hg19")
   system("wget http://hgdownload.soe.ucsc.edu/goldenPath/hg18/database/refGene.txt.gz -O - | gunzip > refGene.txt.hg18")

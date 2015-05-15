@@ -145,10 +145,36 @@ processDemographics <- function(noOutput = F)
     return(Demographics)
 }
 
+processRanges <- function(genetics)
+{
+  hg38 <- read.delim("refGene.txt.hg38", stringsAsFactors = F)
+
+  genetics <- select(genetics, Patient.ID, Genome.Browser.Build, Result.type, Gain.Loss, Chr.Gene, Start, End)
+  for (i in 1:nrow(genetics))
+  {
+    if (genetics$Result.type[i] == "gene")
+    {
+      genetics$Genome.Browser.Build[i] <- "GRCh38/hg38"
+      genetics$Start[i]                <-                hg38$txStart[hg38$name2 == genetics$Chr.Gene[i]][1]
+      genetics$End[i]                  <-                hg38$txEnd  [hg38$name2 == genetics$Chr.Gene[i]][1]
+      genetics$Chr.Gene[i]             <- sub("chr", "", hg38$chrom  [hg38$name2 == genetics$Chr.Gene[i]][1])
+    }
+    else if (genetics$Result.type[i] == "mutation")
+    {
+      genetics$Genome.Browser.Build[i] <- "GRCh38/hg38"
+      genetics$Start[i]                <- genetics$Start[i] + hg38$txStart[hg38$name2 == genetics$Chr.Gene[i]][1]
+      genetics$End[i]                  <- genetics$End[i]   + hg38$txStart[hg38$name2 == genetics$Chr.Gene[i]][1]
+      genetics$Chr.Gene[i]             <- sub("chr", "", hg38$chrom  [hg38$name2 == genetics$Chr.Gene[i]][1])
+    }
+  }
+
+  liftOver(genetics)
+}
+
 processGenes <- function(genetics)
 {
   # Get a list of all involved genes
-  genes <- getGeneNames(genetics)
+  genes <- getGenes(genetics)
 
   # Create the data frame to hold the annotated genetic data
   Genetics_genes <- data_frame(Patient.ID = unique(genetics$Patient.ID))
@@ -172,31 +198,18 @@ processGenes <- function(genetics)
   }
 
   # Extract the information from the raw genetic test reports into the data frame
-  Genetics_genes <- extractGenes(genetics, Genetics_genes)
-
-  Genetics_genes
+  extractGenes(genetics, Genetics_genes)
 }
 
-processRanges <- function(genetics)
+processPathways <- function(genetics, genetics_genes)
 {
-  genetics <- select(genetics, Patient.ID, Genome.Browser.Build, Result.type, Gain.Loss, Chr.Gene, Start, End)
-  for (i in 1:nrow(genetics))
-  {
-    if (genetics$Result.type[i] == "gene")
-    {
-      genetics$Genome.Browser.Build[i] <- "GRCh38/hg38"
-      genetics$Start[i]                <-                hg38$txStart[hg38$name2 == genetics$Chr.Gene[i]][1]
-      genetics$End[i]                  <-                hg38$txEnd  [hg38$name2 == genetics$Chr.Gene[i]][1]
-      genetics$Chr.Gene[i]             <- sub("chr", "", hg38$chrom  [hg38$name2 == genetics$Chr.Gene[i]][1])
-    }
-    else if (genetics$Result.type[i] == "mutation")
-    {
-      genetics$Genome.Browser.Build[i] <- "GRCh38/hg38"
-      genetics$Start[i]                <- genetics$Start[i] + hg38$txStart[hg38$name2 == genetics$Chr.Gene[i]][1]
-      genetics$End[i]                  <- genetics$End[i]   + hg38$txStart[hg38$name2 == genetics$Chr.Gene[i]][1]
-      genetics$Chr.Gene[i]             <- sub("chr", "", hg38$chrom  [hg38$name2 == genetics$Chr.Gene[i]][1])
-    }
-  }
+  # Enrich genes with pathways annotation
+  genes <- getGenes(genetics)
+  genes <- getPathways(genes)
 
-  liftOver(genetics)
+  # Create the data frame to hold the annotated genetic data
+  Genetics_pathways <- data.frame(Patient.ID = unique(genetics$Patient.ID))
+  Genetics_pathways[unique(sort(genes$pathway))] <- 0
+
+  extractPathways(genetics_genes, genes, Genetics_pathways)
 }
