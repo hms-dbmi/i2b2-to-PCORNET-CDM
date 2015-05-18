@@ -163,7 +163,7 @@ getGenes <- function(genetics)
 
       if (genetics$Gain.Loss[row] == "Loss")
       {
-        name <- genome$name2[((genome$txEnd > genetics$Start[row] & genome$txEnd < genetics$End[row]) | (genome$txStart > genetics$Start[row] & genome$txStart < genetics$End[row])) & genome$chrom == paste0("chr", genetics$Chr.Gene[row])]
+        name <- genome$name2[((genome$txEnd > genetics$Start[row] & genome$txEnd < genetics$End[row]) | (genome$txStart > genetics$Start[row] & genome$txStart < genetics$End[row]) | (genome$txStart < genetics$Start[row] & genome$txEnd > genetics$End[row])) & genome$chrom == paste0("chr", genetics$Chr.Gene[row])]
         if (length(name) > 0)
           genes <- rbind(genes, data.frame(name, chrom = genetics$Chr.Gene[row], stringsAsFactors = F))
       }
@@ -223,7 +223,7 @@ extractGenes <- function(genetics_pre, genetics_post)
 
       if (genetics_pre$Gain.Loss[row] == "Loss")
       {
-        genes <- unique(genome$name2[((genome$txEnd > genetics_pre$Start[row] & genome$txEnd < genetics_pre$End[row]) | (genome$txStart > genetics_pre$Start[row] & genome$txStart < genetics_pre$End[row])) & genome$chrom == paste0("chr", chr.gene)])
+        genes <- unique(genome$name2[((genome$txEnd > genetics_pre$Start[row] & genome$txEnd < genetics_pre$End[row]) | (genome$txStart > genetics_pre$Start[row] & genome$txStart < genetics_pre$End[row]) | (genome$txStart < genetics_pre$Start[row] & genome$txEnd > genetics_pre$End[row])) & genome$chrom == paste0("chr", chr.gene)])
         genetics_post[genetics_post$Patient.ID == patient, genes] <- genetics_post[genetics_post$Patient.ID == patient, genes] - 1
       }
       else
