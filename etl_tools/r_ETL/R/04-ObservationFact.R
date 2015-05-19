@@ -1,20 +1,21 @@
-#rm(list=ls())
+rm(list=ls())
 
 # Load libraries and external functions ------
-# source('../MyPheWAS/R/getConfig.R')
-# source('../MyPheWAS/R/toLog.R')
-# source('R/getNewIdentifiers.R')
-# source('R/columnsUtilities.R')
-# source("R/conceptsUtilities.R")
+ source('R/getConfig.R')
+ source('R/toLog.R')
+ source('R/getNewIdentifiers.R')
+ source('R/columnsUtilities.R')
+ source("R/conceptsUtilities.R")
+ source('R/JDBCConnect.R')
 #
-# require(data.table)
-# require(dplyr)
-# require(reshape2)
+ require(data.table)
+ require(dplyr)
+ require(reshape2)
 #
-# require(foreach)
-# require(doSNOW)
+ require(foreach)
+ require(doSNOW)
 #
-# config <- getConfig('config_file')
+ config <- getConfig('config_file')
 
 conf = config
 

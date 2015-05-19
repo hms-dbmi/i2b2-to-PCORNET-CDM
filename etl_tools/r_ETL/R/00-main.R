@@ -1,6 +1,6 @@
 rm(list=ls())
 
-setwd('/mnt/nfs/etl/projects/AUTISM/SSC/r_clinical/')
+setwd('/opt/etl/projects/AUTISM/SSC/Clinical/r_etl/')
 
 r_scripts_path = 'R/'
 
@@ -17,10 +17,10 @@ source(paste0(r_scripts_path,'getNewIdentifiers.R'))
 source(paste0(r_scripts_path,'01-createMappingFile.R'))
 source(paste0(r_scripts_path,'02-PatientDimension.R'))
 source(paste0(r_scripts_path,'03-ConceptDimension.R'))
-source(paste0(r_scripts_path,'04-ObservationFact.R'))
+#source(paste0(r_scripts_path,'04-ObservationFact.R'))
 
 require(data.table)
-require(dplyr)
+#require(dplyr)
 require(foreach)
 require(doSNOW)
 require(reshape2)
@@ -29,7 +29,7 @@ config <- getConfig('config_file')
 
 # setwd(config$DATA_BASE_PATH)
 
-createMappingFile(conf = config)
+#createMappingFile(conf = config)
 
 ### Warning: special columns (except for SUBJECT_ID) must appear in only 1 file
 ### Currently: special columns are SUBJECT_ID, RACE, SEX, AGE, DOB, DEATH, FAMILY, ROLE
@@ -68,12 +68,13 @@ conceptDimension()
 
 # create observation facts and concepts_folders -------
 #rm(temp)
-ObservationFact()
+source(paste0(r_scripts_path,'04-ObservationFact.R'))
+#ObservationFact()
 # --------
 
 # create control files --------
 source(paste0(r_scripts_path,'controlFiles.R'))
 # ----------
 
-source(paste0(r_scripts_path,'alterIndexes.R'))
+#source(paste0(r_scripts_path,'alterIndexes.R'))
 
