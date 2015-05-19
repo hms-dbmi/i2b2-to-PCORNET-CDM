@@ -184,7 +184,7 @@ getGenes <- function(genetics)
   genes
 }
 
-extractGenes <- function(genetics_pre, genetics_post)
+extractGenes <- function(genetics_pre, genetics_post, bin)
 {
   # Read refGene position tables for all genome assemblies
   hg17 <- read.delim("refGene.txt.hg17", stringsAsFactors = F)
@@ -199,14 +199,22 @@ extractGenes <- function(genetics_pre, genetics_post)
 
     if (genetics_pre$Result.type[row] == "mutation")
     {
-      genetics_post[genetics_post$Patient.ID == patient, chr.gene] <- genetics_post[genetics_post$Patient.ID == patient, chr.gene] - 1
+      if (bin)
+        genetics_post[genetics_post$Patient.ID == patient, chr.gene] <- T
+      else
+        genetics_post[genetics_post$Patient.ID == patient, chr.gene] <- genetics_post[genetics_post$Patient.ID == patient, chr.gene] - 1
     }
     else if (genetics_pre$Result.type[row] == "gene")
     {
-      if (genetics_pre$Gain.Loss[row] == "Gain")
-        genetics_post[genetics_post$Patient.ID == patient, chr.gene] <- genetics_post[genetics_post$Patient.ID == patient, chr.gene] + 1
+      if (bin)
+        genetics_post[genetics_post$Patient.ID == patient, chr.gene] <- T
       else
-        genetics_post[genetics_post$Patient.ID == patient, chr.gene] <- genetics_post[genetics_post$Patient.ID == patient, chr.gene] - 1
+      {
+        if (genetics_pre$Gain.Loss[row] == "Gain")
+          genetics_post[genetics_post$Patient.ID == patient, chr.gene] <- genetics_post[genetics_post$Patient.ID == patient, chr.gene] + 1
+        else
+          genetics_post[genetics_post$Patient.ID == patient, chr.gene] <- genetics_post[genetics_post$Patient.ID == patient, chr.gene] - 1
+      }
     }
     else if (genetics_pre$Result.type[row] == "coordinates")
     {
@@ -224,14 +232,19 @@ extractGenes <- function(genetics_pre, genetics_post)
       if (genetics_pre$Gain.Loss[row] == "Loss")
       {
         genes <- unique(genome$name2[((genome$txEnd > genetics_pre$Start[row] & genome$txEnd < genetics_pre$End[row]) | (genome$txStart > genetics_pre$Start[row] & genome$txStart < genetics_pre$End[row]) | (genome$txStart < genetics_pre$Start[row] & genome$txEnd > genetics_pre$End[row])) & genome$chrom == paste0("chr", chr.gene)])
-        genetics_post[genetics_post$Patient.ID == patient, genes] <- genetics_post[genetics_post$Patient.ID == patient, genes] - 1
+        if (bin)
+          genetics_post[genetics_post$Patient.ID == patient, genes] <- T
+        else
+          genetics_post[genetics_post$Patient.ID == patient, genes] <- genetics_post[genetics_post$Patient.ID == patient, genes] - 1
       }
       else
       {
         genes <- unique(genome$name2[genome$txStart > genetics_pre$Start[row] & genome$txEnd < genetics_pre$End[row] & genome$chrom == paste0("chr", chr.gene)])
-        genetics_post[genetics_post$Patient.ID == patient, genes] <- genetics_post[genetics_post$Patient.ID == patient, genes] + 1
+        if (bin)
+          genetics_post[genetics_post$Patient.ID == patient, genes] <- T
+        else
+          genetics_post[genetics_post$Patient.ID == patient, genes] <- genetics_post[genetics_post$Patient.ID == patient, genes] + 1
       }
-
     }
   }
 

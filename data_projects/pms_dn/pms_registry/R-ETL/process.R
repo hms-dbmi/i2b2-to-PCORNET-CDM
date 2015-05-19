@@ -164,14 +164,14 @@ processRanges <- function(genetics)
       genetics$Genome.Browser.Build[i] <- "GRCh38/hg38"
       genetics$Start[i]                <- genetics$Start[i] + hg38$txStart[hg38$name2 == genetics$Chr.Gene[i]][1]
       genetics$End[i]                  <- genetics$End[i]   + hg38$txStart[hg38$name2 == genetics$Chr.Gene[i]][1]
-      genetics$Chr.Gene[i]             <- sub("chr", "", hg38$chrom  [hg38$name2 == genetics$Chr.Gene[i]][1])
+      genetics$Chr.Gene[i]             <- sub("chr", "",      hg38$chrom  [hg38$name2 == genetics$Chr.Gene[i]][1])
     }
   }
 
   liftOver(genetics)
 }
 
-processGenes <- function(genetics)
+processGenes <- function(genetics, bin = F)
 {
   # Get a list of all involved genes
   genes <- getGenes(genetics)
@@ -183,22 +183,35 @@ processGenes <- function(genetics)
   Genetics_genes <- left_join(Genetics_genes, Demographics[c("Patient.ID", "Gender")])
   for (gene in genes$name)
   {
-    if (genes$chrom[genes$name == gene] == "Y")
+    if (bin)
     {
-      Genetics_genes[[gene]][Genetics_genes$Gender == "Male"] <- 1
-      Genetics_genes[[gene]][Genetics_genes$Gender == "Female"] <- 0
-    }
-    else if (genes$chrom[genes$name == gene] == "X")
-    {
-      Genetics_genes[[gene]][Genetics_genes$Gender == "Male"] <- 1
-      Genetics_genes[[gene]][Genetics_genes$Gender == "Female"] <- 2
+      if (genes$chrom[genes$name == gene] == "Y")
+      {
+        Genetics_genes[[gene]][Genetics_genes$Gender == "Male"]   <- F
+        Genetics_genes[[gene]][Genetics_genes$Gender == "Female"] <- NA
+      }
+      else
+        Genetics_genes[[gene]] <- F
     }
     else
-      Genetics_genes[[gene]] <- 2
+    {
+      if (genes$chrom[genes$name == gene] == "Y")
+      {
+        Genetics_genes[[gene]][Genetics_genes$Gender == "Male"]   <- 1
+        Genetics_genes[[gene]][Genetics_genes$Gender == "Female"] <- 0
+      }
+      else if (genes$chrom[genes$name == gene] == "X")
+      {
+        Genetics_genes[[gene]][Genetics_genes$Gender == "Male"]   <- 1
+        Genetics_genes[[gene]][Genetics_genes$Gender == "Female"] <- 2
+      }
+      else
+        Genetics_genes[[gene]] <- 2
+    }
   }
 
   # Extract the information from the raw genetic test reports into the data frame
-  extractGenes(genetics, Genetics_genes)
+  extractGenes(genetics, Genetics_genes, bin)
 }
 
 processPathways <- function(genetics, genetics_genes)
