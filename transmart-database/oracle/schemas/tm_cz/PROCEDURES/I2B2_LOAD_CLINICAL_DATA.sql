@@ -68,7 +68,7 @@ EXECUTE IMMEDIATE 'alter index i2b2demodata.INDEX1 unusable';
 EXECUTE IMMEDIATE 'alter index i2b2demodata.CONCEPT_COUNTS_INDEX1 unusable';
 EXECUTE IMMEDIATE 'alter index i2b2demodata.IDX_CONCEPT_DIM3 unusable';
 EXECUTE IMMEDIATE 'alter index i2b2demodata.IDX_CONCEPT_DIM_1 unusable';
-EXECUTE IMMEDIATE 'alter index i2b2demodata.OB_FACT_PK unusable';
+
 EXECUTE IMMEDIATE 'alter index i2b2demodata.IDX_OB_FACT_1 unusable';
 EXECUTE IMMEDIATE 'alter index i2b2demodata.IDX_OB_FACT_2 unusable';
 EXECUTE IMMEDIATE 'alter index i2b2demodata.FACT_MOD_PAT_ENC unusable';
@@ -898,9 +898,9 @@ EXECUTE IMMEDIATE 'alter index i2b2demodata.PATIENT_TRIAL_INDEX1 UNUSABLE';
   
   -----------	
     --Insert into observation_fact
-
+/*
 EXECUTE IMMEDIATE 'alter index i2b2demodata.OB_FACT_PK REBUILD';
-	
+	*/
 	insert into observation_fact
 	(patient_num,
      concept_cd,
