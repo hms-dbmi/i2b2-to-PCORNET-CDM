@@ -153,4 +153,11 @@ CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."QUERY_GLOBAL_TEMP"
   </sql>
   </changeSet>
 
+  <changeSet author="amihailo" id="14">
+  <comment>These permissions need to be applied after the tables are created.</comment>
+  <sql>
+        GRANT SELECT ON I2B2DEMODATA.OBSERVATION_FACT TO TM_CZ;
+  </sql>
+  </changeSet>
+
 </databaseChangeLog>
