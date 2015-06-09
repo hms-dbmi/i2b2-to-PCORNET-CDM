@@ -142,18 +142,20 @@ CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."QUERY_GLOBAL_TEMP"
   <changeSet author="mmcduffie" id="14" failOnError="false">
   <comment>Missing Index</comment>
   <sql>
-          CREATE INDEX "I2B2DEMODATA"."CD_CONCEPT_PATH_TEXT" ON "I2B2DEMODATA"."CONCEPT_DIMENSION" ("CONCEPT_PATH") INDEXTYPE IS "CTXSYS"."CONTEXT" ;
+          -- Index interferes with ETL.  Add this index after ETL.  May need RESOURCE grant to succeed, make sure to revoke and restore other privs as needed.
+          --CREATE INDEX "I2B2DEMODATA"."CD_CONCEPT_PATH_TEXT" ON "I2B2DEMODATA"."CONCEPT_DIMENSION" ("CONCEPT_PATH") INDEXTYPE IS "CTXSYS"."CONTEXT" ;
   </sql>
   </changeSet>
 
   <changeSet author="mmcduffie" id="15" failOnError="false">
   <comment>Missing Index</comment>
   <sql>
- 	CREATE INDEX "I2B2METADATA"."I2B2_FULLNAME_TEXT" ON "I2B2METADATA"."I2B2" ("C_FULLNAME") INDEXTYPE IS "CTXSYS"."CONTEXT" ;
+        -- Index interferes with ETL.  Add this index after ETL.  May need RESOURCE grant to succeed, make sure to revoke and restore other privs as needed.
+ 	--CREATE INDEX "I2B2METADATA"."I2B2_FULLNAME_TEXT" ON "I2B2METADATA"."I2B2" ("C_FULLNAME") INDEXTYPE IS "CTXSYS"."CONTEXT" ;
   </sql>
   </changeSet>
 
-  <changeSet author="amihailo" id="14">
+  <changeSet author="amihailo" id="16">
   <comment>These permissions need to be applied after the tables are created.</comment>
   <sql>
         GRANT SELECT ON I2B2DEMODATA.OBSERVATION_FACT TO TM_CZ;
