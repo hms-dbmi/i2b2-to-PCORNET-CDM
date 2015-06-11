@@ -141,13 +141,13 @@ CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."QUERY_GLOBAL_TEMP"
 
   <changeSet author="mmcduffie" id="14" failOnError="false">
   <comment>Missing Index</comment>
-         <comment>Index interferes with ETL.  Add this index after ETL.  May need RESOURCE grant to succeed, make sure to revoke and restore other privs as needed.</comment>
+         <comment>Index interferes with ETL.  Add this index ONLY after ETL.  Needs CREATE TABLE and CREATE TRIGGER grant to succeed.</comment>
          <comment>CREATE INDEX "I2B2DEMODATA"."CD_CONCEPT_PATH_TEXT" ON "I2B2DEMODATA"."CONCEPT_DIMENSION" ("CONCEPT_PATH") INDEXTYPE IS "CTXSYS"."CONTEXT" ;</comment>
   </changeSet>
 
   <changeSet author="mmcduffie" id="15" failOnError="false">
   <comment>Missing Index</comment>
-        <comment>Index interferes with ETL.  Add this index after ETL.  May need RESOURCE grant to succeed, make sure to revoke and restore other privs as needed.</comment>
+        <comment>Index interferes with ETL.  Add this index ONLY after ETL.  Needs CREATE TABLE and CREATE TRIGGER grant to succeed.</comment>
  	<comment>CREATE INDEX "I2B2METADATA"."I2B2_FULLNAME_TEXT" ON "I2B2METADATA"."I2B2" ("C_FULLNAME") INDEXTYPE IS "CTXSYS"."CONTEXT" ;</comment>
   </changeSet>
 
