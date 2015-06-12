@@ -1,7 +1,6 @@
 create or replace PROCEDURE         INSERT_LINKS AS 
 BEGIN
 insert into biomart.web_links values('PubMed','http://www.ncbi.nlm.nih.gov/pubmed/?term=',biomart.web_id.NEXTVAL);
-insert into biomart.web_links values('NCBI','http://www.ncbi.nlm.nih.gov/gquery/?term=${conceptName.c_name}',biomart.web_id.NEXTVAL);
 insert into biomart.web_links values('EMBASE','http://www.elsevier.com/s/search.html?profile=_default&form=sitesearch&collection=elsevier-meta&query=',biomart.web_id.NEXTVAL);
 insert into biomart.web_links values('COCHRANE','http://onlinelibrary.wiley.com/cochranelibrary/search?searchRow.searchCriteria.term=',biomart.web_id.NEXTVAL);
 insert into biomart.web_links values('Wikipedia','https://en.wikipedia.org/wiki/',biomart.web_id.NEXTVAL);
@@ -25,6 +24,7 @@ insert into biomart.web_links values('ExAC-Variant','http://exac.broadinstitute.
 insert into biomart.web_links values('ExAC Multi-allelic Variant','http://exac.broadinstitute.org/dbsnp/',biomart.web_id.NEXTVAL);
 insert into biomart.web_links values('ExAC-Region','http://exac.broadinstitute.org/region/',biomart.web_id.NEXTVAL);
 insert into biomart.web_links values('EMBASE','http://www.elsevier.com/s/search.html?profile=_default&form=sitesearch&collection=elsevier-meta&query=',biomart.web_id.NEXTVAL);
+insert into biomart.web_links values('NCBI','http://www.ncbi.nlm.nih.gov/gquery/?term=',biomart.web_id.NEXTVAL);
 commit;
   NULL;
 END INSERT_LINKS;
