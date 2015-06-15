@@ -157,5 +157,56 @@ CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."QUERY_GLOBAL_TEMP"
         GRANT SELECT ON I2B2DEMODATA.OBSERVATION_FACT TO TM_CZ;
   </sql>
   </changeSet>
+  
+  <changeSet author="SushmaHanawal" id="17">
+  <comment>Health Dashboard Queries.</comment>
+  <sql>
+  CREATE TABLE BIOMART.COMPUTE_STATS 
+   (	"C_FULLNAME" VARCHAR2(4000 BYTE) NOT NULL ENABLE, 
+	"DISTINCT_PATIENTS" NUMBER, 
+	"DISTINCT_CONCEPTS" NUMBER, 
+	"NUMBER_OF_FACTS" NUMBER
+   );
+   </sql>
+   <sql>
+    CREATE TABLE "BIOMART"."CONCEPT_STATS" 
+   (	"SOURCESYSTEM_CD" VARCHAR2(50 BYTE), 
+	"COUNT_OF_CONCEPTS" NUMBER
+   );
+   </sql>
+   <sql>
+   CREATE TABLE "BIOMART"."OBSERVATION_STATS" 
+   (	"SOURCESYSTEM_CD" VARCHAR2(100 BYTE), 
+	"NB_OBSERVATION_FACT" NUMBER, 
+	"DISTINCT_PATIENT_NUM" NUMBER, 
+	"DISTINT_CONCEPT_CD" NUMBER, 
+	"MIN_START_DATE" DATE, 
+	"MAX_START_DATE" DATE
+   );
+   </sql>
+   <sql>
+   CREATE TABLE "BIOMART"."SCHEMA_STATS" 
+   (	"OWNER" VARCHAR2(30 BYTE), 
+	"GB" VARCHAR2(9 BYTE)
+   );
+   </sql>
+   <sql>
+    CREATE TABLE "BIOMART"."WEB_LINKS" 
+   (	"NAME" VARCHAR2(100 BYTE), 
+	"URL" VARCHAR2(500 BYTE), 
+	"ID" NUMBER
+   );
+   </sql>
+   <sql>
+   GRANT SELECT ANY DICTIONARY TO "BIOMART";
+grant SELECT on "I2B2METADATA"."I2B2" to "BIOMART" ;
+grant SELECT on "I2B2DEMODATA"."CONCEPT_DIMENSION"  to "BIOMART" ;
+grant SELECT on "I2B2DEMODATA"."OBSERVATION_FACT"  to "BIOMART" ;
+create sequence "BIOMART".web_id;
+</sql>
+<sqlFile path='./version_changelogs/0.2.0/INSERT_LINKS.sql'/>
+<sqlFile path='./version_changelogs/0.2.0/COMPUTE_STATISTICS.sql' />
+</changeSet>
+
 
 </databaseChangeLog>
