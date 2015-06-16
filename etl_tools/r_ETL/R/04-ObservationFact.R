@@ -25,9 +25,10 @@ conf = config
   ncore <- conf$CORES
   extension <- conf$DATA_FILE_EXTENSION
   OBSERVATION_FACTS_COLUMNS <- conf$OBSERVATION_FACTS_COLUMNS
-  obsFile <- conf$OBSERVATION_FACT_OUT_FILE
-  folderFile <- conf$CONCEPTS_FOLDERS_PATIENTS_OUT_FILE
-  conceptCountFile <- conf$CONCEPT_COUNT_OUT_FILE
+  OUTPUT_BASE_PATH <- conf$OUTPUT_BASE_PATH
+  obsFile <- paste0(OUTPUT_BASE_PATH,conf$OBSERVATION_FACT_OUT_FILE)
+  folderFile <- paste0(OUTPUT_BASE_PATH,conf$CONCEPTS_FOLDERS_PATIENTS_OUT_FILE)
+  conceptCountFile <- paste0(OUTPUT_BASE_PATH,conf$CONCEPT_COUNT_OUT_FILE)
   CONCEPTS_FOLDER_PATIENTS_COLUMNS <- conf$CONCEPTS_FOLDER_PATIENTS_COLUMNS
   MAPPING_FILE_DIRECTORY <- conf$MAPPING_FILE_DIRECTORY
   OBSERVATION_FACTS_COLUMNS <- conf$OBSERVATION_FACTS_COLUMNS
@@ -49,9 +50,9 @@ conf = config
   # -------
 
   # load patients and concepts --------
-  load('temp//patients.RData')
+  load(paste0(OUTPUT_BASE_PATH,'temp//patients.RData'))
   #concepts <- read.table('data//i2b2_load_tables//concept_dimension.dat', sep='\t', header=T,as.is=T)
-  concepts <- fread('data//i2b2_load_tables//concept_dimension.dat')
+  concepts <- fread(paste0(OUTPUT_BASE_PATH,'data//i2b2_load_tables//concept_dimension.dat'))
   # ----------
 
   # Load master mapping ---------
@@ -114,7 +115,7 @@ conf = config
       patientFolderTemp <- patientFolderTemp[patientFolderTemp$CONCEPT_PATH != '\\',]
       patientFolder <- rbind(patientFolder, patientFolderTemp)
     }
-    patientFolder <- distinct(patientFolder)
+    patientFolder <- dplyr::distinct(patientFolder)
     return(patientFolder)
   }
   # ------------
@@ -213,7 +214,7 @@ conf = config
                             CONCEPT_CD = concepts$CONCEPT_CD[obsPathMap],
                             PROVIDER_ID = '@',
                             START_DATE = NA,
-                            MODIFIER_CD = paste0('ROLE:',temp$ROLE),
+                            MODIFIER_CD = '@',
                             VALTYPE_CD = valtype,
                             TVAL_CHAR = tval,
                             NVAL_NUM = nval,
@@ -309,7 +310,7 @@ conf = config
                           CONCEPT_CD = unlist(temp$CONCEPT_CD),
                           PROVIDER_ID = '@',
                           START_DATE = NA,
-                          MODIFIER_CD = paste0('ROLE:',temp$ROLE),
+                          MODIFIER_CD = '@',
                           VALTYPE_CD = 'T',
                           TVAL_CHAR = temp$TVAL_CHAR,
                           NVAL_NUM = NA,
