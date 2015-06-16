@@ -4,7 +4,7 @@ execute immediate('truncate table "BIOMART"."COMPUTE_STATS"');
 
 insert into BIOMART.compute_stats
 select i.c_fullname as C_FULLNAME, count(distinct o.patient_num) AS DISTINCT_PATIENTS, count(distinct o.concept_cd) AS DISTINCT_CONCEPTS, count(o.concept_cd) AS NUMBER_OF_FACTS
-from i2b2metadata.i2b2 i, i2b2demodata.observation_fact o, concept_dimension c
+from i2b2metadata.i2b2 i, i2b2demodata.observation_fact o, i2b2demodata.concept_dimension c
 where i.c_hlevel=1 and o.concept_cd=c.concept_cd and  c.concept_path like concat(i.C_FULLNAME,'%')
  and i.c_fullname not like '\Public Studies\%'
 group by i.c_fullname;
