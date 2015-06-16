@@ -22,7 +22,7 @@ generateControlFiles <- function(inFileName, outFileName, dbTable, columns, base
     dir.create(paste0(base_path,"scripts"))
   }
   con <-file(paste0(base_path,"scripts/load_",outFileName,"_data.sh"))
-  cat(paste0('sqlldr ','TM_CZ','/','TM_CZ','@',conf$db_name,
+  cat(paste0('sqlldr ',config$db_user,'/',config$db_pass,'@',conf$db_name,
              ' control=',base_path,'control_files/',outFileName,'.ctl',
              ' log=',base_path,'log_files/',outFileName,'.log\n',"exit 0"),file=con)
   close(con)
