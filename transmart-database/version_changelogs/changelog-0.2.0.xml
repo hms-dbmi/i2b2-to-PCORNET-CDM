@@ -241,7 +241,7 @@ create sequence "BIOMART".web_id;
       <loadData file="./version_changelogs/0.2.0/password_dictionary.csv"
                 schemaName="searchapp"
                 tableName="password_dictionary">
-                <column name="TERM" type="varchar(200)"/>
+                <column name="TERM" type="STRING"/>
       </loadData>
   </changeSet>
 </databaseChangeLog>
