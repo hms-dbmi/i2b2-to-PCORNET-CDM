@@ -243,5 +243,8 @@ create sequence "BIOMART".web_id;
                 tableName="password_dictionary">
                 <column name="TERM" type="STRING"/>
       </loadData>
+  <sql>
+    CREATE OR REPLACE SYNONYM "BIOMART_USER"."PASSWORD_DICTIONARY" FOR "SEARCHAPP"."PASSWORD_DICTIONARY";
+  </sql>
   </changeSet>
 </databaseChangeLog>
