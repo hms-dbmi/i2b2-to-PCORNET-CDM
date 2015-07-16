@@ -247,4 +247,12 @@ create sequence "BIOMART".web_id;
     CREATE OR REPLACE SYNONYM "BIOMART_USER"."PASSWORD_DICTIONARY" FOR "SEARCHAPP"."PASSWORD_DICTIONARY";
   </sql>
   </changeSet>
+
+  <changeSet author="amihailo" id="22">
+  <comment>Add R code in JSON format for plugin modules.</comment>
+  <sql>
+    DELETE FROM "SEARCHAPP"."PLUGIN_MODULE";
+  </sql>
+  <sqlFile path='./version_changelogs/0.2.0/plugin_module.sql'/>
+  </changeSet>
 </databaseChangeLog>
