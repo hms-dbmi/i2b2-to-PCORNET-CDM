@@ -1,0 +1,33 @@
+load data
+infile 'ICD10_2014AA_short_i2b2.txt'
+CONTINUEIF LAST <> '"'
+into table "BIOPORTAL_I2B2"."I2B2_ICD10CM_FULL" 
+fields terminated by "|" OPTIONALLY ENCLOSED BY '"'
+TRAILING NULLCOLS
+(
+  c_hlevel,
+  c_fullname NULLIF c_fullname=BLANKS,
+  c_name char(2000)  NULLIF c_name=BLANKS,
+  c_synonym_cd  NULLIF c_synonym_cd=BLANKS,
+  c_visualattributes  NULLIF c_visualattributes=BLANKS,
+  c_basecode  NULLIF c_basecode=BLANKS,
+  c_facttablecolumn  NULLIF c_facttablecolumn=BLANKS,
+  c_tablename  NULLIF c_tablename=BLANKS,
+  c_columnname  NULLIF c_columnname=BLANKS,
+  c_columndatatype  NULLIF c_columndatatype=BLANKS,
+  c_operator  NULLIF c_operator=BLANKS,
+  c_dimcode  NULLIF c_dimcode=BLANKS,
+  c_tooltip char(2000) NULLIF c_tooltip=BLANKS,
+    sourcesystem_cd  NULLIF sourcesystem_cd=BLANKS,
+  c_symbol  NULLIF c_symbol=BLANKS,
+  c_path  NULLIF c_path=BLANKS,
+i_snomed_ct  NULLIF i_snomed_ct=BLANKS,
+i_snomed_rt  NULLIF i_snomed_rt=BLANKS,
+i_cui  NULLIF i_cui=BLANKS,
+i_tui  NULLIF i_tui=BLANKS,
+i_ctv3  NULLIF i_ctv3=BLANKS,
+i_full_id  NULLIF i_full_id=BLANKS,
+  update_date  NULLIF update_date=BLANKS,
+  parent_fullIds  NULLIF parent_fullIds=BLANKS,
+  m_applied_path  NULLIF m_applied_path=BLANKS
+)
