@@ -141,13 +141,13 @@ CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."QUERY_GLOBAL_TEMP"
 
   <changeSet author="mmcduffie" id="14" failOnError="false">
   <comment>Missing Index</comment>
-         <comment>Index interferes with ETL.  Add this index after ETL.  May need RESOURCE grant to succeed, make sure to revoke and restore other privs as needed.</comment>
+         <comment>Index interferes with ETL.  Add this index ONLY after ETL.  Needs CREATE TABLE and CREATE TRIGGER grant to succeed.</comment>
          <comment>CREATE INDEX "I2B2DEMODATA"."CD_CONCEPT_PATH_TEXT" ON "I2B2DEMODATA"."CONCEPT_DIMENSION" ("CONCEPT_PATH") INDEXTYPE IS "CTXSYS"."CONTEXT" ;</comment>
   </changeSet>
 
   <changeSet author="mmcduffie" id="15" failOnError="false">
   <comment>Missing Index</comment>
-        <comment>Index interferes with ETL.  Add this index after ETL.  May need RESOURCE grant to succeed, make sure to revoke and restore other privs as needed.</comment>
+        <comment>Index interferes with ETL.  Add this index ONLY after ETL.  Needs CREATE TABLE and CREATE TRIGGER grant to succeed.</comment>
  	<comment>CREATE INDEX "I2B2METADATA"."I2B2_FULLNAME_TEXT" ON "I2B2METADATA"."I2B2" ("C_FULLNAME") INDEXTYPE IS "CTXSYS"."CONTEXT" ;</comment>
   </changeSet>
 
@@ -157,5 +157,102 @@ CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."QUERY_GLOBAL_TEMP"
         GRANT SELECT ON I2B2DEMODATA.OBSERVATION_FACT TO TM_CZ;
   </sql>
   </changeSet>
+  
+  <changeSet author="SushmaHanawal" id="17">
+  <comment>Health Dashboard Queries.</comment>
+  <sql>
+  CREATE TABLE BIOMART.COMPUTE_STATS 
+   (	"C_FULLNAME" VARCHAR2(4000 BYTE) NOT NULL ENABLE, 
+	"DISTINCT_PATIENTS" NUMBER, 
+	"DISTINCT_CONCEPTS" NUMBER, 
+	"NUMBER_OF_FACTS" NUMBER
+   );
+   </sql>
+   <sql>
+    CREATE TABLE "BIOMART"."CONCEPT_STATS" 
+   (	"SOURCESYSTEM_CD" VARCHAR2(50 BYTE), 
+	"COUNT_OF_CONCEPTS" NUMBER
+   );
+   </sql>
+   <sql>
+   CREATE TABLE "BIOMART"."OBSERVATION_STATS" 
+   (	"SOURCESYSTEM_CD" VARCHAR2(100 BYTE), 
+	"NB_OBSERVATION_FACT" NUMBER, 
+	"DISTINCT_PATIENT_NUM" NUMBER, 
+	"DISTINT_CONCEPT_CD" NUMBER, 
+	"MIN_START_DATE" DATE, 
+	"MAX_START_DATE" DATE
+   );
+   </sql>
+   <sql>
+   CREATE TABLE "BIOMART"."SCHEMA_STATS" 
+   (	"OWNER" VARCHAR2(30 BYTE), 
+	"GB" VARCHAR2(9 BYTE)
+   );
+   </sql>
+   <sql>
+    CREATE TABLE "BIOMART"."WEB_LINKS" 
+   (	"NAME" VARCHAR2(100 BYTE), 
+	"URL" VARCHAR2(500 BYTE), 
+	"ID" NUMBER
+   );
+   </sql>
+   <sql>
+   GRANT SELECT ANY DICTIONARY TO "BIOMART_USER";
+grant SELECT on "I2B2METADATA"."I2B2" to "BIOMART" ;
+grant SELECT on "I2B2DEMODATA"."CONCEPT_DIMENSION"  to "BIOMART" ;
+grant SELECT on "I2B2DEMODATA"."OBSERVATION_FACT"  to "BIOMART" ;
+create sequence "BIOMART".web_id;
+</sql>
+<sqlFile path='./version_changelogs/0.2.0/INSERT_LINKS.sql'/>
+<sqlFile splitStatements="false" path='./version_changelogs/0.2.0/COMPUTE_STATISTICS.sql' />
+</changeSet>
 
+  <changeSet author="amihailo" id="18">
+  <comment>Required for creation of text indexes.</comment>
+  <sql>
+        GRANT CREATE TABLE TO I2B2DEMODATA;
+        GRANT CREATE TRIGGER TO I2B2DEMODATA;
+        GRANT CREATE TABLE TO I2B2METADATA;
+        GRANT CREATE TRIGGER TO I2B2METADATA;
+  </sql>
+  </changeSet>
+
+  <changeSet author="amihailo" id="19">
+  <comment>New role for external users with Oracle logins.</comment>
+  <sql>
+        CREATE ROLE I2B2_USER;
+  </sql>
+  </changeSet>
+
+  <changeSet author="amihailo" id="20">
+  <comment>Grants external user role read-only permissions on i2b2 tables.</comment>
+  <createProcedure>
+  BEGIN
+    FOR x IN (SELECT * FROM dba_tables WHERE owner IN ('I2B2DEMODATA','I2B2HIVE','I2B2METADATA','I2B2PM','I2B2WORKDATA'))
+    LOOP
+  	 EXECUTE IMMEDIATE 'GRANT SELECT ON ' || x.owner ||'.'||x.table_name ||' TO i2b2_user';
+    END LOOP;
+  END;
+  </createProcedure>
+  </changeSet>
+  <changeSet author="amihailo" id="21">
+  <comment>Needed for password change using GUI in tranSMART/i2b2.</comment>
+      <loadData file="./version_changelogs/0.2.0/password_dictionary.csv"
+                schemaName="searchapp"
+                tableName="password_dictionary">
+                <column name="TERM" type="STRING"/>
+      </loadData>
+  <sql>
+    CREATE OR REPLACE SYNONYM "BIOMART_USER"."PASSWORD_DICTIONARY" FOR "SEARCHAPP"."PASSWORD_DICTIONARY";
+  </sql>
+  </changeSet>
+
+  <changeSet author="amihailo" id="22">
+  <comment>Add R code in JSON format for plugin modules.</comment>
+  <sql>
+    DELETE FROM "SEARCHAPP"."PLUGIN_MODULE";
+  </sql>
+  <sqlFile path='./version_changelogs/0.2.0/plugin_module.sql'/>
+  </changeSet>
 </databaseChangeLog>

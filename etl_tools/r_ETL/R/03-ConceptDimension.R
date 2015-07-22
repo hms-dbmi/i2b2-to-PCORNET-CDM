@@ -42,7 +42,7 @@ conceptDimension <- function(conf = config) {
   hideLeaveThreshold <- conf$HIDE_LEAVE_LIMIT
 
   lowLevelsCreated  = F
-  patients_file <- 'temp/patients.RData'
+  patients_file <- paste0(OUTPUT_BASE_PATH,'temp/patients.RData')
 
   options(stringsAsFactors = F)
   # ------
@@ -230,7 +230,9 @@ conceptDimension <- function(conf = config) {
         # set visualAtrribute to hide if the number of levels > hideLeaveThreshold ------
         if (hideLeaveThreshold != -1) {
           if (nrow(varLevels) > hideLeaveThreshold) {visualAttribute <- 'LH'} else {visualAttribute <- 'LA'}
-        }
+        } else {
+          visualAttribute <- 'LA'
+	}
         # -------
 
         i2b2Temp <- data.frame(C_HLEVEL = 0,

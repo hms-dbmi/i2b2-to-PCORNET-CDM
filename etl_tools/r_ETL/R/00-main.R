@@ -1,6 +1,6 @@
 rm(list=ls())
-
-setwd('/opt/etl/projects/AUTISM/SSC/Clinical/r_etl/')
+projectDir <- '/opt/etl/projects/SSC/Clinical/r_etl/'
+setwd(projectDir)
 
 r_scripts_path = 'R/'
 
@@ -29,7 +29,7 @@ config <- getConfig('config_file')
 
 # setwd(config$DATA_BASE_PATH)
 
-#createMappingFile(conf = config)
+createMappingFile(conf = config)
 
 ### Warning: special columns (except for SUBJECT_ID) must appear in only 1 file
 ### Currently: special columns are SUBJECT_ID, RACE, SEX, AGE, DOB, DEATH, FAMILY, ROLE
@@ -49,16 +49,16 @@ patients <- mergePatients(existingPatients, dataFiles$newPatients)
 # ---------
 
 # create temp dir --------
-if(!file.exists('temp')){
-  dir.create('temp')
+if(!file.exists(paste0(config$OUTPUT_BASE_PATH,'temp'))){
+  dir.create(paste0(config$OUTPUT_BASE_PATH,'temp'))
 }
 # ---------
 
 # save patients and write tables -------
-save(patients,file='temp/patients.RData')
-write.table(dataFiles$patientDimensionData,file(paste0(config$PATIENT_DIMENSION_OUT_FILE)),quote = F, sep = '\t', na = '', row.names = F)
-write.table(dataFiles$patientMappingData,file(paste0(config$PATIENT_MAPPING_OUT_FILE)),quote = F, sep = '\t', na = '', row.names = F)
-write.table(dataFiles$patientTrialData,file(paste0(config$PATIENT_TRIAL_OUT_FILE)),quote = F, sep = '\t', na = '', row.names = F)
+save(patients,file=paste0(config$OUTPUT_BASE_PATH,'temp/patients.RData'))
+write.table(dataFiles$patientDimensionData,file(paste0(config$OUTPUT_BASE_PATH,config$PATIENT_DIMENSION_OUT_FILE)),quote = F, sep = '\t', na = '', row.names = F)
+write.table(dataFiles$patientMappingData,file(paste0(config$OUTPUT_BASE_PATH,config$PATIENT_MAPPING_OUT_FILE)),quote = F, sep = '\t', na = '', row.names = F)
+write.table(dataFiles$patientTrialData,file(paste0(config$OUTPUT_BASE_PATH,config$PATIENT_TRIAL_OUT_FILE)),quote = F, sep = '\t', na = '', row.names = F)
 
 # ------------
 
@@ -68,6 +68,7 @@ conceptDimension()
 
 # create observation facts and concepts_folders -------
 #rm(temp)
+setwd(projectDir)
 source(paste0(r_scripts_path,'04-ObservationFact.R'))
 #ObservationFact()
 # --------
