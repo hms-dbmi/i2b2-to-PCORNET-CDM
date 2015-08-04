@@ -42,6 +42,9 @@ html2csv <- function(filename)
   # Get rid of trailing commas
   html <- gsub(',\n',                                              '\n',  html, perl = T)
 
+  # Replace &reg; with ®
+  html <- gsub('&reg;',                                            '®',   html)
+
   # Write final csv file
   cat(html,file = paste0(filename, ".csv"))
 }
