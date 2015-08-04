@@ -22,8 +22,8 @@ html2csv <- function(filename)
   }
 
   # Process second header row
-  html <- gsub("[[:space:]]*</th>[[:space:]]*<th.*?>[[:space:]]*", '|,|', html)
-  html <- gsub("[[:space:]]*</?th.*?>[[:space:]]*",                '|',   html)
+  html <- gsub("[[:space:]]*</th>[[:space:]]*<th.*?>[[:space:]]*(?s)", '|,|', html, perl = T)
+  html <- gsub("[[:space:]]*</?th.*?>[[:space:]]*(?s)",                '|',   html, perl = T)
 
   # Process body of the table
   html <- gsub("[[:space:]]*</td>[[:space:]]*<td.*?>[[:space:]]*", '|,|', html)
@@ -44,6 +44,9 @@ html2csv <- function(filename)
 
   # Replace &reg; with ®
   html <- gsub('&reg;',                                            '®',   html)
+
+  # Delete empty fields
+  html <- gsub("\\|\\|",                                                "",   html)
 
   # Write final csv file
   cat(html,file = paste0(filename, ".csv"))
