@@ -9,7 +9,7 @@ read.csv.2header <- function(file, ...)
   header <- catClean(headers[[1]], headers[[2]])
 
   # Read the data itself and attribute column names
-  data <- read.csv(file, header = F, skip = 2, stringsAsFactors = F, colClasses = "character", ...)
+  data <- read.csv(file, quote = "|", header = F, skip = 2, stringsAsFactors = F, colClasses = "character", ...)
   colnames(data) <- header
 
   data
@@ -66,7 +66,7 @@ catClean <- function(header1, header2)
 # Clean the first header
 cleanHeader1 <- function(header1)
 {
-  header1 <- gsub(" \\(.*?\\)",                                                                                  "", header1, perl = T)
+  header1 <- gsub(" +\\(.*?\\)",                                                                                  "", header1, perl = T)
   header1 <- gsub("Please (enter|select) either pounds( and ounces)? or kilograms\\.",                           "", header1, perl = T)
   header1 <- gsub("Please enter either feet and inches or centimeters\\.",                                       "", header1, perl = T)
   header1 <- gsub("Please answer the following questions\\.",                                                    "", header1, perl = T)
@@ -91,22 +91,8 @@ cleanHeader2 <- function(header2)
 # Read headers from a two headers file and propagate the first one to all corresponding columns
 read2headers <- function(file)
 {
-  header1 <- scan(file, what = character(), nlines = 1, sep = ",", quote = "\"")
-  header2 <- scan(file, what = character(), nlines = 1, sep = ",", quote = "\"", skip = 1)
-
-  # Fill the first header line with values, propagating them forward
-  tmpHead <- ""
-  tmpHeader1 <- character(0)
-  for (head in header1)
-  {
-    if (head == "")
-      head <- tmpHead
-
-    tmpHeader1 <- c(tmpHeader1, head)
-    tmpHead <- head
-  }
-
-  header1 <- tmpHeader1
+  header1 <- scan(file, what = character(), nlines = 1, sep = ",", quote = "|")
+  header2 <- scan(file, what = character(), nlines = 1, sep = ",", quote = "|", skip = 1)
 
   # Return the two headers as a list
   headers <- list(header1, header2)
