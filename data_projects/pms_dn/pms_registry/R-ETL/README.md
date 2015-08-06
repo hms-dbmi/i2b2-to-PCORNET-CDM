@@ -165,7 +165,8 @@ For example:
 			+ Unsure
 
 The structure of the file is as follows:
-ColNum|Head1|Head2|SubFile|Evo|Reformat|VarName|Linked|Header
-------|-----|-----|-------|---|--------|-------|-------------
-The column number in which to find the variable in the data file|The first header|The second header|The "subfile" in which it should reside|The evolutive status|The reformatting function to use|The new variable name after reformatting|A number to show links between variables|The complete name of the variable found in the data files
+
+ColNum | Head1 | Head2 | SubFile | Evo | Reformat | VarName | Linked | Header
+------ | ----- | ----- | ------- | --- | -------- | ------- | -------------
+The column number in which to find the variable in the data file | The first header | The second header | The "subfile" in which it should reside | The evolutive status | The reformatting function to use | The new variable name after reformatting | A number to show links between variables | The complete name of the variable found in the data files
 
