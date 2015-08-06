@@ -3,7 +3,7 @@ README
 
 R scripts to load and clean PMSIR raw data files.
 
-This diagram is an overview of the process. On the left are the data manipulated by each steps. On the right are the R scripts called for each step.
+This diagram is an overview of the process. On the left are the data manipulated by each steps. On the right are the R scripts called for each step.  
 Each step is detailed after the diagram.
 
 ![](Data integration pipeline.png)
