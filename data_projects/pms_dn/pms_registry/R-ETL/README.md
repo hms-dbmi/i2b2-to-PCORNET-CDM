@@ -18,13 +18,12 @@ Three input files are obtained from the registry:
 * Developmental Questionnaire
 * Adolescent and Adults Questionnaire
 
-These three files are HTML tables in .xls files.  
-**Do not open these files with excel !**
+These three files are HTML tables in .xls files. **Do not open these files with excel !**
 
 They must first be renamed as following:
-* dataClinical.xls
-* dataDevelopmental.xls
-* dataAdult.xls
+* dataClinical.xls for the Clinical&Genetic Questionnaire
+* dataDevelopmental.xls for the Developmental Questionnaire
+* dataAdult.xls for the Adolescent and Adults Questionnaire
 
 and placed in the scripts folder.
 
@@ -39,7 +38,7 @@ Three new files are created:
 * dataDevelopmental.csv
 * dataAdult.csv
 
-These files are UTF-8 encoded, comma (,) separated, with pipes (|) as quotes to delimit text fields.  
+These files are **UTF-8 encoded**, **comma (,) separated**, with **pipes (|) as quotes** to delimit text fields.  
 You can check the csv files by opening them in LibreOffice (excel doesn't accept pipes as text delimiters)
 
 ![](libreoffice.png)
@@ -95,17 +94,17 @@ Step 4 (optional)
 Download or update the files and tools used to process the genetic data.
 The *04_opt_download_files.sh* script calls the *04_opt_download_files.R* R script which in turn uses a function from the *functions-genes.R* script.  
 This downloads the following files:
-* liftOver
+* **liftOver**
 	+ the liftOver tool itself
 	+ the hg17ToHg19.over.chain.gz mapping file from Human Genome Assembly Hg17 to Hg19
 	+ the hg18ToHg38.over.chain.gz mapping file from Human Genome Assembly Hg18 to Hg38
 	+ the hg19ToHg38.over.chain.gz mapping file from Human Genome Assembly Hg19 to Hg38
-* RefGene
+* **RefGene**
 	+ refGene.txt.hg17 gene references for Human Genome Assembly Hg17
 	+ refGene.txt.hg18 gene references for Human Genome Assembly Hg18
 	+ refGene.txt.hg19 gene references for Human Genome Assembly Hg19
 	+ refGene.txt.hg38 gene references for Human Genome Assembly Hg38
-* KEGG
+* **KEGG**
 	+ the KEGG_genes.txt KEGG Genes list
 	+ the KEGG_pathways.txt KEGG Pathways list
 	+ the KEGG_link_genes_pathways.txt KEGG relations between genes and pathways
