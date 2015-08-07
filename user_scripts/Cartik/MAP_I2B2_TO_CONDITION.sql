@@ -24,13 +24,13 @@ INSERT /*+ APPEND NOLOGGING */
 INTO PCORI_CDMV3.CONDITION
 SELECT DISTINCT 
 i2.c_basecode, ob.patient_num, ob.encounter_num, 
-ob.download_date, ob.end_date, ob.start_date, NULL, 
-i2.c_name, NULL, i2.sourcesystem_cd, NULL, 
-NULL, NULL, NULL
+i2.import_date, ob.end_date, ob.start_date, 'UN', 
+i2.c_name, '09', 'OT-'||i2.sourcesystem_cd, NULL, 
+NULL, 'ICD-9-CM', NULL
 from (i2b2metadata.i2b2) i2, (i2b2demodata.observation_fact) ob 
 where
 i2.c_basecode = ob.concept_cd and
-ob.sourcesystem_cd LIKE 'HMS_PMS_NLP_IC%' and
+ob.sourcesystem_cd LIKE 'HMS_PMS_NLP_IC9' and
 i2.c_hlevel > 5;
 COMMIT;
 
@@ -38,9 +38,23 @@ INSERT /*+ APPEND NOLOGGING */
 INTO PCORI_CDMV3.CONDITION
 SELECT DISTINCT 
 i2.c_basecode, ob.patient_num, ob.encounter_num, 
-ob.download_date, ob.end_date, ob.start_date, NULL, 
-i2.c_name, NULL, i2.sourcesystem_cd, NULL, 
-NULL, NULL, NULL
+i2.import_date, ob.end_date, ob.start_date, 'UN', 
+i2.c_name, '10', 'OT-'||i2.sourcesystem_cd, NULL, 
+NULL, 'ICD-10-CM', NULL
+from (i2b2metadata.i2b2) i2, (i2b2demodata.observation_fact) ob 
+where
+i2.c_basecode = ob.concept_cd and
+ob.sourcesystem_cd LIKE 'HMS_PMS_NLP_ICX' and
+i2.c_hlevel > 5;
+COMMIT;
+
+INSERT /*+ APPEND NOLOGGING */ 
+INTO PCORI_CDMV3.CONDITION
+SELECT DISTINCT 
+i2.c_basecode, ob.patient_num, ob.encounter_num, 
+i2.import_date, ob.end_date, ob.start_date, 'UN', 
+i2.c_name, 'SM', 'OT-'||i2.sourcesystem_cd, NULL, 
+NULL, 'SNOMED CT', NULL
 from (i2b2metadata.i2b2) i2, (i2b2demodata.observation_fact) ob 
 where
 i2.c_basecode = ob.concept_cd and
@@ -51,13 +65,11 @@ INSERT /*+ APPEND NOLOGGING */
 INTO PCORI_CDMV3.CONDITION
 SELECT DISTINCT 
 i2.c_basecode, ob.patient_num, ob.encounter_num, 
-ob.download_date, ob.end_date, ob.start_date, NULL, 
-i2.c_name, NULL, i2.sourcesystem_cd, NULL, 
-NULL, NULL, NULL
+i2.import_date, ob.end_date, ob.start_date, 'UN',
+i2.c_name, 'HP', 'OT-'||i2.sourcesystem_cd, NULL, 
+NULL, 'Human Phenotype Ontology', NULL
 from (i2b2metadata.i2b2) i2, (i2b2demodata.observation_fact) ob 
 where
 i2.c_basecode = ob.concept_cd and
 ob.sourcesystem_cd LIKE 'HMS_PMS_NLP_HPO';
 COMMIT;
-
-SELECT * FROM PCORI_CDMV3.CONDITION;
