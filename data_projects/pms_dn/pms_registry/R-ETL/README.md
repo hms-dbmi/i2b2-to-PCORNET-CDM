@@ -182,17 +182,21 @@ A prototype for such a function (here it does nothing and just uses the data as-
 ```R
 new_reformat_fn <- function(data, premap)
 {
-  # The 'premap' object is the subset of the premapping corresponding to the current First Header level of the ontology processed
+  # The 'premap' object is the subset of the premapping corresponding to the
+  # current First Header level of the ontology processed
   # The 'data' object is the subset of data corresponding to the subset of the premap object passed
   # So in theory, only one reformatting function can be used for one "First Header" subset of variables.
-  # Which cells are marked with the reformatting option, and the content of the Linked cell can be used as hints to control the behavior of the function
-  # The whole function could be written as just "data" to return the data exactly as-is. But here I show how to use relevant information from the two passed objects
+  # Which cells are marked with the reformatting option, and the content of the
+  # Linked cell can be used as hints to control the behavior of the function
+  # The whole function could be written as just "data" to return the data
+  # exactly as-is. But here I show how to use relevant information from the two passed objects
 
   # Create new data frame to contain transformed/curated data
   # This object must always contain the three variables Patient.ID, Survey.Date and Birthdate
   data2 <- select(data, Patient.ID, Survey.Date, Birthdate)
 
-  # Create the variables in the output object, here with the same names as originally, which can be found in the premap object
+  # Create the variables in the output object, here with the same names as
+  # originally, which can be found in the premap object
   # This is where variable selection and/or creation can be done.
   varnames <- premap$Header 
 
