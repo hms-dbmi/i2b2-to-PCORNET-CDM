@@ -200,10 +200,17 @@ new_reformat_fn <- function(data, premap)
   # This is where variable selection and/or creation can be done.
   varnames <- premap$Header 
 
-  # Here we just copy the contents from the original data to the output data2. This is where transformation can be done.
+  # Here we just copy the contents from the original data to the output data2.
+  # This is where transformation can be done.
   data2[varnames] <- data[varnames]
 
   # Return the new object
   data2
 
-}```
+}
+```
+
+Cleaning the genetic results
+============================
+
+
