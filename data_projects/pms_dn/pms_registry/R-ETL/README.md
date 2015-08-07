@@ -26,6 +26,10 @@ They must first be renamed as following:
 * dataAdult.xls for the Adolescent and Adults Questionnaire
 
 and placed in the scripts folder.
+The scripts need the dplyr and tidyr R packages that you can install with this command:
+```R
+install.packages(c("dplyr","tidyr"))
+```
 
 Step 1
 ------
@@ -169,4 +173,33 @@ The structure of the file is as follows:
 ColNum | Head1 | Head2 | SubFile | Evo | Reformat | VarName | Linked | Header
 ------ | ----- | ----- | ------- | --- | -------- | ------- | ------ | ------
 The column number in which to find the variable in the data file | The first header | The second header | The "subfile" in which it should reside | The evolutive status | The reformatting function to use | The new variable name after reformatting | A number to show links between variables | The complete name of the variable found in the data files
+Auto   | Auto  | Auto  | Manual | Manual | Manual | Auto    | Auto   | Auto
+ |       |       | From the registry structure, absent from the export files | From epidemiologist expertise. Any variable refering to the current status of the patient | Function to use to reformat the variable | | |
+ |       |       | Plain text string | 1 if evolutive, nothing if not | name of the R function to use | | |
 
+If you want to add new reformatting options, write an R function in *functions-reformatting.R* with a unique name that will be used to reformat the data, such as the *refactor* function.
+A prototype for such a function (here it does nothing and just uses the data as-is) is:
+```R
+new_reformat_fn <- function(data, premap)
+{
+  # The 'premap' object is the subset of the premapping corresponding to the current First Header level of the ontology processed
+  # The 'data' object is the subset of data corresponding to the subset of the premap object passed
+  # So in theory, only one reformatting function can be used for one "First Header" subset of variables.
+  # Which cells are marked with the reformatting option, and the content of the Linked cell can be used as hints to control the behavior of the function
+  # The whole function could be written as just "data" to return the data exactly as-is. But here I show how to use relevant information from the two passed objects
+
+  # Create new data frame to contain transformed/curated data
+  # This object must always contain the three variables Patient.ID, Survey.Date and Birthdate
+  data2 <- select(data, Patient.ID, Survey.Date, Birthdate)
+
+  # Create the variables in the output object, here with the same names as originally, which can be found in the premap object
+  # This is where variable selection and/or creation can be done.
+  varnames <- premap$Header 
+
+  # Here we just copy the contents from the original data to the output data2. This is where transformation can be done.
+  data2[varnames] <- data[varnames]
+
+  # Return the new object
+  data2
+
+}```
