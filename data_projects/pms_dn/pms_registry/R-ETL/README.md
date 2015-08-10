@@ -136,8 +136,9 @@ The *05_clean_data.sh* scripts calls the *05_clean_data.R* R script, which in tu
 
 This final script creates the *output/* directory containing the cleaned data files (one for each section of each questionnaire) and the Kettle mapping file.
 
-The files **[](Cleaning data overview.pdf)** and **[](PMSIR Data Management Algorithm Detailed.pdf)** illustrate how this step works internally.  
+The files **[Cleaning data overview.pdf](Cleaning data overview.pdf)** and **[PMSIR Data Management Algorithm Detailed.pdf](PMSIR Data Management Algorithm Detailed.pdf)** illustrate how this step works internally.  
 The source files (**.svg) for these diagrams are provided.
+
 
 ***
 
@@ -212,6 +213,8 @@ new_reformat_fn <- function(data, premap)
   data2
 }
 ```
+
+
 ***
 
 Cleaning the genetic results
