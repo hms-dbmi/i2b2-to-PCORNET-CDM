@@ -138,8 +138,6 @@ This final script creates the *output/* directory containing the cleaned data fi
 
 The files **[Cleaning data overview.pdf](Cleaning data overview.pdf)** and **[PMSIR Data Management Algorithm Detailed.pdf](PMSIR Data Management Algorithm Detailed.pdf)** illustrate how this step works internally.  
 The source files (*.svg) for these diagrams are provided.
-  
-
 ***
 
 Premapping files
@@ -213,8 +211,6 @@ new_reformat_fn <- function(data, premap)
   data2
 }
 ```
-  
-
 ***
 
 Cleaning the genetic results
