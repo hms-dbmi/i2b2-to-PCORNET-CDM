@@ -13,4 +13,4 @@ clinical[c(1,5,19:67)] %>%
   mutate(Test.Date = as.Date(Test.Date, format = "%m-%d-%Y")) %>%
   arrange(Patient.ID, Test.Date) %>%
   distinct -> Genetics
-write.csv(Genetics, "Genetics.csv")
+write.csv(Genetics, "dataGenetics.csv")

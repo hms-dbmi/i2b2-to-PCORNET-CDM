@@ -206,7 +206,6 @@ new_reformat_fn <- function(data, premap)
 
   # Return the new object
   data2
-
 }
 ```
 
