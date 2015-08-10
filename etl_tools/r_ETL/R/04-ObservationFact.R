@@ -1,31 +1,34 @@
 rm(list=ls())
 
 # Load libraries and external functions ------
-# source('../MyPheWAS/R/getConfig.R')
-# source('../MyPheWAS/R/toLog.R')
-# source('R/getNewIdentifiers.R')
-# source('R/columnsUtilities.R')
-# source("R/conceptsUtilities.R")
-# 
-# require(data.table)
-# require(dplyr)
-# require(reshape2)
-# 
-# require(foreach)
-# require(doSNOW)
-# 
-# config <- getConfig('config_file')
-# conf = config
+ source('R/getConfig.R')
+ source('R/toLog.R')
+ source('R/getNewIdentifiers.R')
+ source('R/columnsUtilities.R')
+ source("R/conceptsUtilities.R")
+ source('R/JDBCConnect.R')
+#
+ require(data.table)
+ require(dplyr)
+ require(reshape2)
+#
+ require(foreach)
+ require(doSNOW)
+#
+ config <- getConfig('config_file')
+
+conf = config
 
 # --------
-ObservationFact <- function(conf = config) {
+#ObservationFact <- function(conf = config) {
   # Load parameters ---------
   ncore <- conf$CORES
   extension <- conf$DATA_FILE_EXTENSION
   OBSERVATION_FACTS_COLUMNS <- conf$OBSERVATION_FACTS_COLUMNS
-  obsFile <- conf$OBSERVATION_FACT_OUT_FILE
-  folderFile <- conf$CONCEPTS_FOLDERS_PATIENTS_OUT_FILE
-  conceptCountFile <- conf$CONCEPT_COUNT_OUT_FILE
+  OUTPUT_BASE_PATH <- conf$OUTPUT_BASE_PATH
+  obsFile <- paste0(OUTPUT_BASE_PATH,conf$OBSERVATION_FACT_OUT_FILE)
+  folderFile <- paste0(OUTPUT_BASE_PATH,conf$CONCEPTS_FOLDERS_PATIENTS_OUT_FILE)
+  conceptCountFile <- paste0(OUTPUT_BASE_PATH,conf$CONCEPT_COUNT_OUT_FILE)
   CONCEPTS_FOLDER_PATIENTS_COLUMNS <- conf$CONCEPTS_FOLDER_PATIENTS_COLUMNS
   MAPPING_FILE_DIRECTORY <- conf$MAPPING_FILE_DIRECTORY
   OBSERVATION_FACTS_COLUMNS <- conf$OBSERVATION_FACTS_COLUMNS
@@ -33,8 +36,9 @@ ObservationFact <- function(conf = config) {
   DATA_BASE_PATH <- conf$DATA_BASE_PATH
   PATIENT_DATA_DIRECTORY <- conf$PATIENT_DATA_DIRECTORY
   ENCOUNTER_TYPE <- conf$ENCOUNTER_TYPE
-  FACT_SET <- conf$FACT_SET
+  STUDY_ID <- conf$STUDY_ID
   debug <- conf$debug
+  encounterNumRetrieved = F
   # ----------
 
 
@@ -46,9 +50,9 @@ ObservationFact <- function(conf = config) {
   # -------
 
   # load patients and concepts --------
-  load('temp//patients.RData')
+  load(paste0(OUTPUT_BASE_PATH,'temp//patients.RData'))
   #concepts <- read.table('data//i2b2_load_tables//concept_dimension.dat', sep='\t', header=T,as.is=T)
-  concepts <- fread('data//i2b2_load_tables//concept_dimension.dat')
+  concepts <- fread(paste0(OUTPUT_BASE_PATH,'data//i2b2_load_tables//concept_dimension.dat'))
   # ----------
 
   # Load master mapping ---------
@@ -75,11 +79,11 @@ ObservationFact <- function(conf = config) {
   # ----------
 
   # utility functions ---------
-  getEncounterIds <- function( conf = config) {
+  getEncounterIds <- function(conf = config) {
     nobs <- nrow(temp)
     if (ENCOUNTER_TYPE == 'FAMILY') {
 
-      if (!exists('encounterNumsRetrieved')){
+      if (encounterNumRetrieved == F){
         families <- data.frame(FAMILY=patients$FAMILY[!duplicated(patients$FAMILY)])
 
         if(debug == 0) {
@@ -88,7 +92,7 @@ ObservationFact <- function(conf = config) {
           families$ENCOUNTER_NUM <- seq(1:nrow(families))
         }
         patients <- merge(patients,families, by='FAMILY')
-        assign('encounterNumsRetrieved',T, envir = .GlobalEnv )
+        assign('encounterNumRetrieved',T, envir = .GlobalEnv )
         return(patients)
       } else {
         return(patients)
@@ -111,7 +115,7 @@ ObservationFact <- function(conf = config) {
       patientFolderTemp <- patientFolderTemp[patientFolderTemp$CONCEPT_PATH != '\\',]
       patientFolder <- rbind(patientFolder, patientFolderTemp)
     }
-    patientFolder <- distinct(patientFolder)
+    patientFolder <- dplyr::distinct(patientFolder)
     return(patientFolder)
   }
   # ------------
@@ -146,6 +150,7 @@ ObservationFact <- function(conf = config) {
 
     if (!is.null(patients$ROLE)) {
       patient_roles <- patients$ROLE[patients$SOURCESYSTEM_CD %in% unlist(f[,idColumn,with=F])]
+
     }
     # -----------
 
@@ -164,8 +169,10 @@ ObservationFact <- function(conf = config) {
       if(mappingFile$DATATYPE[j] == 'N' | mappingFile$DATATYPE[j] == 'B') {
 
         # create temp data.frame --------
-        temp <- data.frame(PATIENT_NUM = patient_nums, NVAL_NUM = unlist(f[,var,with=F]))
-        # ---------
+        temp <- data.frame(SOURCESYSTEM_CD = unlist(f[,idColumn,with=F]), NVAL_NUM = unlist(f[,var,with=F]))
+        temp <- merge(temp, subset(patients,select=c('PATIENT_NUM','SOURCESYSTEM_CD')),by='SOURCESYSTEM_CD')
+        temp$SOURCESYSTEM_CD <- c()
+        # ----------
 
         # add roles -------
         if (exists('patient_roles')) {
@@ -207,7 +214,7 @@ ObservationFact <- function(conf = config) {
                             CONCEPT_CD = concepts$CONCEPT_CD[obsPathMap],
                             PROVIDER_ID = '@',
                             START_DATE = NA,
-                            MODIFIER_CD = paste0('ROLE:',temp$ROLE),
+                            MODIFIER_CD = '@',
                             VALTYPE_CD = valtype,
                             TVAL_CHAR = tval,
                             NVAL_NUM = nval,
@@ -220,7 +227,7 @@ ObservationFact <- function(conf = config) {
                             UPDATE_DATE = Sys.time(),
                             DOWNLOAD_DATE = Sys.time(),
                             IMPORT_DATE = Sys.time(),
-                            SOURCESYSTEM_CD = FACT_SET,
+                            SOURCESYSTEM_CD = STUDY_ID,
                             UPLOAD_ID = NA,
                             OBSERVATION_BLOB = blob,
                             INSTANCE_NUM = 1)
@@ -254,7 +261,9 @@ ObservationFact <- function(conf = config) {
       } else if (mappingFile$DATATYPE[j] == 'T') {
 
         # create temp data.frame --------
-        temp <- data.frame(PATIENT_NUM = patient_nums, TVAL_CHAR = unlist(f[,var,with=F]))
+        temp <- data.frame(SOURCESYSTEM_CD = unlist(f[,idColumn,with=F]), TVAL_CHAR = unlist(f[,var,with=F]))
+        temp <- merge(temp, subset(patients,select=c('PATIENT_NUM','SOURCESYSTEM_CD')),by='SOURCESYSTEM_CD')
+        temp$SOURCESYSTEM_CD <- c()
         # ----------
 
         # add roles -------
@@ -278,7 +287,9 @@ ObservationFact <- function(conf = config) {
         # extract and clean levels --------
         temp$TVAL_TEMP <- temp$TVAL_CHAR
         temp$TVAL_TEMP <- clearLevels(temp$TVAL_TEMP)
-        levels <- data.frame(TVAL_TEMP = levels(as.factor(temp$TVAL_TEMP)))
+        temp <- temp[temp$TVAL_TEMP != 'NA',]
+        levels <- data.frame(TVAL_TEMP = levels(as.factor(temp$TVAL_TEMP[temp$TVAL_TEMP != 'NA'])))
+
         # ----------
 
         # match extracted levels to concepts ---------
@@ -299,7 +310,7 @@ ObservationFact <- function(conf = config) {
                           CONCEPT_CD = unlist(temp$CONCEPT_CD),
                           PROVIDER_ID = '@',
                           START_DATE = NA,
-                          MODIFIER_CD = paste0('ROLE:',temp$ROLE),
+                          MODIFIER_CD = '@',
                           VALTYPE_CD = 'T',
                           TVAL_CHAR = temp$TVAL_CHAR,
                           NVAL_NUM = NA,
@@ -312,7 +323,7 @@ ObservationFact <- function(conf = config) {
                           UPDATE_DATE = Sys.time(),
                           DOWNLOAD_DATE = Sys.time(),
                           IMPORT_DATE = Sys.time(),
-                          SOURCESYSTEM_CD = FACT_SET,
+                          SOURCESYSTEM_CD = STUDY_ID,
                           UPLOAD_ID = NA,
                           OBSERVATION_BLOB = NA,
                           INSTANCE_NUM = 1)
@@ -336,7 +347,7 @@ ObservationFact <- function(conf = config) {
         write.table(patientFolder, file = folderFile,append=T, sep = '\t', na = "", col.names = F,row.names=F, quote = F,fileEncoding= 'latin1')
 
         nfacts <- nfacts + nrow(obs)
-        rm(obs,temp,patientFolder,patientFolderTemp)
+        rm(obs,temp,patientFolder)
         # ---------
         #     if(exists('observationFact')) {
         #       observationFact<- rbind(observationFact,obs)
@@ -357,27 +368,27 @@ ObservationFact <- function(conf = config) {
   # keep only distinct lines in concepts_folders_patients ----------
   conceptFolders <- fread(folderFile)
   conceptFolders  <- distinct(conceptFolders )
-  conceptFolders$PATIENT_COUNT <- 1
   # -----------
-  
-  
+
+
   # calculate concept counts from concept_folders_patients --------
+  conceptFolders$PATIENT_COUNT <- 1
   conceptCount <- aggregate(PATIENT_COUNT ~ CONCEPT_PATH, data = conceptFolders, FUN =sum )
   conceptCount$PARENT_CONCEPT_PATH <- gsub('[^\\]+[\\]$','',conceptCount$CONCEPT_PATH)
   conceptCount <- conceptCount[grepl(conf$MAPPING_BASE_PATH,conceptCount$CONCEPT_PATH),]
   conceptCount <- conceptCount[,c('CONCEPT_PATH','PARENT_CONCEPT_PATH','PATIENT_COUNT')]
   conceptFolders$PATIENT_COUNT <- c()
   # ------------
-  
+
   # write tables, concepts_folder and concept_count
   write.table(conceptFolders, file = folderFile, sep = '\t', na = "", col.names = T,row.names=F, quote = F,fileEncoding= 'latin1')
   write.table(conceptCount, file = conceptCountFile, sep = '\t', na = "", col.names = T,row.names=F, quote = F,fileEncoding= 'latin1')
-  
+
   # -----------
 
   Sys.time() - start
   # stopCluster(cl)
-}
+#}
 
 #ObservationFact()
 

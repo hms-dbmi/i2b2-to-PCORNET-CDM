@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<databaseChangeLog 
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd"> 
+
+  <changeSet author="mmcduffie" id="1">
+  <comment>Dropping this table to recreate it as a global temp table.</comment>
+	<dropTable cascadeConstraints="true"
+            schemaName="I2B2DEMODATA"
+            tableName="QUERY_GLOBAL_TEMP" />
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="2">
+  <comment>This table needs to be created as a global temp table.</comment>
+	<sql>
+CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."QUERY_GLOBAL_TEMP" 
+   (	"ENCOUNTER_NUM" NUMBER(22,0), 
+	"PATIENT_NUM" NUMBER(22,0), 
+	"INSTANCE_NUM" NUMBER(18,0), 
+	"CONCEPT_CD" VARCHAR2(50 BYTE), 
+	"START_DATE" DATE, 
+	"PROVIDER_ID" VARCHAR2(50 BYTE), 
+	"PANEL_COUNT" NUMBER(5,0), 
+	"FACT_COUNT" NUMBER(22,0), 
+	"FACT_PANELS" NUMBER(5,0)
+   ) ON COMMIT PRESERVE ROWS ;
+	</sql>
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="3">
+  <comment>Dropping this table to recreate it as a global temp table.</comment>
+        <dropTable cascadeConstraints="true"
+            schemaName="I2B2DEMODATA"
+            tableName="MASTER_QUERY_GLOBAL_TEMP" />
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="4">
+  <comment>This table needs to be created as a global temp table.</comment>
+        <sql>
+  CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."MASTER_QUERY_GLOBAL_TEMP" 
+   (	"ENCOUNTER_NUM" NUMBER(22,0), 
+	"PATIENT_NUM" NUMBER(22,0), 
+	"INSTANCE_NUM" NUMBER(18,0), 
+	"CONCEPT_CD" VARCHAR2(50 BYTE), 
+	"START_DATE" DATE, 
+	"PROVIDER_ID" VARCHAR2(50 BYTE), 
+	"MASTER_ID" VARCHAR2(50 BYTE), 
+	"LEVEL_NO" NUMBER(5,0)
+   ) ON COMMIT PRESERVE ROWS ;
+        </sql>
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="5">
+  <comment>Dropping this table to recreate it as a global temp table.</comment>
+        <dropTable cascadeConstraints="true"
+            schemaName="I2B2DEMODATA"
+            tableName="GLOBAL_TEMP_FACT_PARAM_TABLE" />
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="6">
+  <comment>This table needs to be created as a global temp table.</comment>
+        <sql>
+  CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."GLOBAL_TEMP_FACT_PARAM_TABLE" 
+   (	"SET_INDEX" NUMBER(*,0), 
+	"CHAR_PARAM1" VARCHAR2(500 BYTE), 
+	"CHAR_PARAM2" VARCHAR2(500 BYTE), 
+	"NUM_PARAM1" NUMBER(*,0), 
+	"NUM_PARAM2" NUMBER(*,0)
+   ) ON COMMIT PRESERVE ROWS ;
+        </sql>
+  </changeSet>
+
+<changeSet author="mmcduffie" id="7">
+  <comment>Dropping this table to recreate it as a global temp table.</comment>
+        <dropTable cascadeConstraints="true"
+            schemaName="I2B2DEMODATA"
+            tableName="GLOBAL_TEMP_PARAM_TABLE" />
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="8">
+  <comment>This table needs to be created as a global temp table.</comment>
+        <sql>
+  CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."GLOBAL_TEMP_PARAM_TABLE" 
+   (	"SET_INDEX" NUMBER(*,0), 
+	"CHAR_PARAM1" VARCHAR2(500 BYTE), 
+	"CHAR_PARAM2" VARCHAR2(500 BYTE), 
+	"NUM_PARAM1" NUMBER(*,0), 
+	"NUM_PARAM2" NUMBER(*,0)
+   ) ON COMMIT PRESERVE ROWS ;
+        </sql>
+  </changeSet>
+
+<changeSet author="mmcduffie" id="9">
+  <comment>Dropping this table to recreate it as a global temp table.</comment>
+        <dropTable cascadeConstraints="true"
+            schemaName="I2B2DEMODATA"
+            tableName="DX" />
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="10">
+  <comment>This table needs to be created as a global temp table.</comment>
+        <sql>
+ CREATE GLOBAL TEMPORARY TABLE "I2B2DEMODATA"."DX" 
+   (	"ENCOUNTER_NUM" NUMBER(22,0), 
+	"PATIENT_NUM" NUMBER(22,0)
+   ) ON COMMIT PRESERVE ROWS ;
+
+        </sql>
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="11">
+  <comment>Adding more privs for TM_CZ</comment>
+  <sql>
+	GRANT DROP ANY PROCEDURE TO TM_CZ;
+	GRANT CREATE ANY PROCEDURE TO TM_CZ;
+  </sql>
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="12">
+  <comment>Missing Index</comment>
+  <sql>
+	GRANT CTXAPP TO i2b2metadata;
+	GRANT CTXAPP TO i2b2demodata;
+  </sql>
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="13">
+  <comment>These permissions need to be applied after the tables are created.</comment>
+  <sql>
+        GRANT SELECT ON I2B2DEMODATA.CONCEPT_COUNTS TO TM_CZ;
+        GRANT SELECT ON I2B2DEMODATA.CONCEPT_DIMENSION TO TM_CZ;
+        GRANT SELECT ON I2B2DEMODATA.CONCEPTS_FOLDERS_PATIENTS TO TM_CZ;
+        GRANT SELECT ON I2B2METADATA.I2B2 TO TM_CZ;
+        GRANT SELECT ON I2B2DEMODATA.PATIENT_DIMENSION TO TM_CZ;
+        GRANT SELECT ON I2B2DEMODATA.PATIENT_MAPPING TO TM_CZ;
+        GRANT SELECT ON I2B2DEMODATA.PATIENT_TRIAL TO TM_CZ;
+  </sql>
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="14" failOnError="false">
+  <comment>Missing Index</comment>
+         <comment>Index interferes with ETL.  Add this index ONLY after ETL.  Needs CREATE TABLE and CREATE TRIGGER grant to succeed.</comment>
+         <comment>CREATE INDEX "I2B2DEMODATA"."CD_CONCEPT_PATH_TEXT" ON "I2B2DEMODATA"."CONCEPT_DIMENSION" ("CONCEPT_PATH") INDEXTYPE IS "CTXSYS"."CONTEXT" ;</comment>
+  </changeSet>
+
+  <changeSet author="mmcduffie" id="15" failOnError="false">
+  <comment>Missing Index</comment>
+        <comment>Index interferes with ETL.  Add this index ONLY after ETL.  Needs CREATE TABLE and CREATE TRIGGER grant to succeed.</comment>
+ 	<comment>CREATE INDEX "I2B2METADATA"."I2B2_FULLNAME_TEXT" ON "I2B2METADATA"."I2B2" ("C_FULLNAME") INDEXTYPE IS "CTXSYS"."CONTEXT" ;</comment>
+  </changeSet>
+
+  <changeSet author="amihailo" id="16">
+  <comment>These permissions need to be applied after the tables are created.</comment>
+  <sql>
+        GRANT SELECT ON I2B2DEMODATA.OBSERVATION_FACT TO TM_CZ;
+  </sql>
+  </changeSet>
+  
+  <changeSet author="SushmaHanawal" id="17">
+  <comment>Health Dashboard Queries.</comment>
+  <sql>
+  CREATE TABLE BIOMART.COMPUTE_STATS 
+   (	"C_FULLNAME" VARCHAR2(4000 BYTE) NOT NULL ENABLE, 
+	"DISTINCT_PATIENTS" NUMBER, 
+	"DISTINCT_CONCEPTS" NUMBER, 
+	"NUMBER_OF_FACTS" NUMBER
+   );
+   </sql>
+   <sql>
+    CREATE TABLE "BIOMART"."CONCEPT_STATS" 
+   (	"SOURCESYSTEM_CD" VARCHAR2(50 BYTE), 
+	"COUNT_OF_CONCEPTS" NUMBER
+   );
+   </sql>
+   <sql>
+   CREATE TABLE "BIOMART"."OBSERVATION_STATS" 
+   (	"SOURCESYSTEM_CD" VARCHAR2(100 BYTE), 
+	"NB_OBSERVATION_FACT" NUMBER, 
+	"DISTINCT_PATIENT_NUM" NUMBER, 
+	"DISTINT_CONCEPT_CD" NUMBER, 
+	"MIN_START_DATE" DATE, 
+	"MAX_START_DATE" DATE
+   );
+   </sql>
+   <sql>
+   CREATE TABLE "BIOMART"."SCHEMA_STATS" 
+   (	"OWNER" VARCHAR2(30 BYTE), 
+	"GB" VARCHAR2(9 BYTE)
+   );
+   </sql>
+   <sql>
+    CREATE TABLE "BIOMART"."WEB_LINKS" 
+   (	"NAME" VARCHAR2(100 BYTE), 
+	"URL" VARCHAR2(500 BYTE), 
+	"ID" NUMBER
+   );
+   </sql>
+   <sql>
+   GRANT SELECT ANY DICTIONARY TO "BIOMART_USER";
+grant SELECT on "I2B2METADATA"."I2B2" to "BIOMART" ;
+grant SELECT on "I2B2DEMODATA"."CONCEPT_DIMENSION"  to "BIOMART" ;
+grant SELECT on "I2B2DEMODATA"."OBSERVATION_FACT"  to "BIOMART" ;
+create sequence "BIOMART".web_id;
+</sql>
+<sqlFile path='./version_changelogs/0.2.0/INSERT_LINKS.sql'/>
+<sqlFile splitStatements="false" path='./version_changelogs/0.2.0/COMPUTE_STATISTICS.sql' />
+</changeSet>
+
+  <changeSet author="amihailo" id="18">
+  <comment>Required for creation of text indexes.</comment>
+  <sql>
+        GRANT CREATE TABLE TO I2B2DEMODATA;
+        GRANT CREATE TRIGGER TO I2B2DEMODATA;
+        GRANT CREATE TABLE TO I2B2METADATA;
+        GRANT CREATE TRIGGER TO I2B2METADATA;
+  </sql>
+  </changeSet>
+
+  <changeSet author="amihailo" id="19">
+  <comment>New role for external users with Oracle logins.</comment>
+  <sql>
+        CREATE ROLE I2B2_USER;
+  </sql>
+  </changeSet>
+
+  <changeSet author="amihailo" id="20">
+  <comment>Grants external user role read-only permissions on i2b2 tables.</comment>
+  <createProcedure>
+  BEGIN
+    FOR x IN (SELECT * FROM dba_tables WHERE owner IN ('I2B2DEMODATA','I2B2HIVE','I2B2METADATA','I2B2PM','I2B2WORKDATA'))
+    LOOP
+  	 EXECUTE IMMEDIATE 'GRANT SELECT ON ' || x.owner ||'.'||x.table_name ||' TO i2b2_user';
+    END LOOP;
+  END;
+  </createProcedure>
+  </changeSet>
+  <changeSet author="amihailo" id="21">
+  <comment>Needed for password change using GUI in tranSMART/i2b2.</comment>
+      <loadData file="./version_changelogs/0.2.0/password_dictionary.csv"
+                schemaName="searchapp"
+                tableName="password_dictionary">
+                <column name="TERM" type="STRING"/>
+      </loadData>
+  <sql>
+    CREATE OR REPLACE SYNONYM "BIOMART_USER"."PASSWORD_DICTIONARY" FOR "SEARCHAPP"."PASSWORD_DICTIONARY";
+  </sql>
+  </changeSet>
+
+  <changeSet author="amihailo" id="22">
+  <comment>Add R code in JSON format for plugin modules.</comment>
+  <sql>
+    DELETE FROM "SEARCHAPP"."PLUGIN_MODULE";
+  </sql>
+  <sqlFile path='./version_changelogs/0.2.0/plugin_module.sql'/>
+  </changeSet>
+</databaseChangeLog>

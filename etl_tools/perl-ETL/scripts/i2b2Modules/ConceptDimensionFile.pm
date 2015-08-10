@@ -34,7 +34,7 @@ sub generateConceptDimensionFile
 	$currentStudyId						=	$configurationObject->{STUDY_ID};
 	
 	#We could have many different types of mapping files. To that end we'll have a file to map our mapping files. This hash is {filename} = filetype
-	my %mappingFileHash = tranSMARTTextParsing::generateMasterMappingHash($configurationObject->{BASE_PATH});
+	my %mappingFileHash = tranSMARTTextParsing::generateMasterMappingHash($configurationObject->{MAPPING_FILE_DIRECTORY});
 	while(my($k, $v) = each %mappingFileHash) 
 	{
 		if($v eq "INDIVIDUAL")	

@@ -1,6 +1,8 @@
 rm(list=ls())
+projectDir <- '/opt/etl/projects/SSC/Clinical/r_etl/'
+setwd(projectDir)
 
-r_scripts_path = 'r_etl/R/'
+r_scripts_path = 'R/'
 
 source(paste0(r_scripts_path,'getConfig.R'))
 source(paste0(r_scripts_path,'toLog.R'))
@@ -15,10 +17,10 @@ source(paste0(r_scripts_path,'getNewIdentifiers.R'))
 source(paste0(r_scripts_path,'01-createMappingFile.R'))
 source(paste0(r_scripts_path,'02-PatientDimension.R'))
 source(paste0(r_scripts_path,'03-ConceptDimension.R'))
-source(paste0(r_scripts_path,'04-ObservationFact.R'))
+#source(paste0(r_scripts_path,'04-ObservationFact.R'))
 
 require(data.table)
-require(dplyr)
+#require(dplyr)
 require(foreach)
 require(doSNOW)
 require(reshape2)
@@ -47,16 +49,16 @@ patients <- mergePatients(existingPatients, dataFiles$newPatients)
 # ---------
 
 # create temp dir --------
-if(!file.exists('temp')){
-  dir.create('temp')
+if(!file.exists(paste0(config$OUTPUT_BASE_PATH,'temp'))){
+  dir.create(paste0(config$OUTPUT_BASE_PATH,'temp'))
 }
 # ---------
 
 # save patients and write tables -------
-save(patients,file='temp/patients.RData')
-write.table(dataFiles$patientDimensionData,file(paste0(config$PATIENT_DIMENSION_OUT_FILE)),quote = F, sep = '\t', na = '', row.names = F)
-write.table(dataFiles$patientMappingData,file(paste0(config$PATIENT_MAPPING_OUT_FILE)),quote = F, sep = '\t', na = '', row.names = F)
-write.table(dataFiles$patientTrialData,file(paste0(config$PATIENT_TRIAL_OUT_FILE)),quote = F, sep = '\t', na = '', row.names = F)
+save(patients,file=paste0(config$OUTPUT_BASE_PATH,'temp/patients.RData'))
+write.table(dataFiles$patientDimensionData,file(paste0(config$OUTPUT_BASE_PATH,config$PATIENT_DIMENSION_OUT_FILE)),quote = F, sep = '\t', na = '', row.names = F)
+write.table(dataFiles$patientMappingData,file(paste0(config$OUTPUT_BASE_PATH,config$PATIENT_MAPPING_OUT_FILE)),quote = F, sep = '\t', na = '', row.names = F)
+write.table(dataFiles$patientTrialData,file(paste0(config$OUTPUT_BASE_PATH,config$PATIENT_TRIAL_OUT_FILE)),quote = F, sep = '\t', na = '', row.names = F)
 
 # ------------
 
@@ -65,13 +67,15 @@ conceptDimension()
 # --------
 
 # create observation facts and concepts_folders -------
-rm(temp)
-ObservationFact()
+#rm(temp)
+setwd(projectDir)
+source(paste0(r_scripts_path,'04-ObservationFact.R'))
+#ObservationFact()
 # --------
 
 # create control files --------
 source(paste0(r_scripts_path,'controlFiles.R'))
 # ----------
 
-source(paste0(r_scripts_path,'alterIndexes.R'))
+#source(paste0(r_scripts_path,'alterIndexes.R'))
 

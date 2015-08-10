@@ -1,13 +1,13 @@
 # rm(list=ls())
-# 
-# source('../MyPheWAS/R/getConfig.R')
-# # source('../MyPheWAS/R/toLog.R')
-# # source('R/getNewIdentifiers.R')
+#
+ source('R/getConfig.R')
+ source('R/toLog.R')
+ source('R/getNewIdentifiers.R')
 config <- getConfig('config_file')
-# # require(data.table)
-# # require(dplyr)
-# # require(reshape2)
-# conf = config
+ require(data.table)
+ require(dplyr)
+ require(reshape2)
+ conf = config
 # # require(foreach)
 # # require(doSNOW)
 # #
@@ -15,14 +15,14 @@ config <- getConfig('config_file')
 
 conf = config
 
-generateControlFiles <- function(inFileName, outFileName, dbTable, columns, base_path = config$DATA_BASE_PATH ) {
+generateControlFiles <- function(inFileName, outFileName, dbTable, columns, base_path = config$OUTPUT_BASE_PATH ) {
   extension = conf$DATA_FILE_EXTENSION
-  
+
   if (!file.exists(paste0(base_path,"scripts"))) {
     dir.create(paste0(base_path,"scripts"))
   }
   con <-file(paste0(base_path,"scripts/load_",outFileName,"_data.sh"))
-  cat(paste0('/usr/bin/time -v sqlldr ','tm_lz/',conf$db_pass,'@','BCH_',conf$db_name,
+  cat(paste0('sqlldr ',config$db_user,'/',config$db_pass,'@',conf$db_name,
              ' control=',base_path,'control_files/',outFileName,'.ctl',
              ' log=',base_path,'log_files/',outFileName,'.log\n',"exit 0"),file=con)
   close(con)
@@ -96,9 +96,9 @@ generateControlFiles(inFileName = 'patient_mapping.dat',
                        columns = config$CONCEPTS_FOLDER_PATIENTS_COLUMNS)
 
 
-script_list <- list.files(paste0(config$DATA_BASE_PATH,'scripts'), 'load_')
+script_list <- list.files(paste0(config$OUTPUT_BASE_PATH,'scripts'), 'load_')
 
-generateMasterScript <- function(scripts_list, base_path = config$DATA_BASE_PATH) {
+generateMasterScript <- function(scripts_list, base_path = config$OUTPUT_BASE_PATH) {
   con <-file(paste0(base_path,"scripts/masterScript.sh"),open='w')
   close(con)
 

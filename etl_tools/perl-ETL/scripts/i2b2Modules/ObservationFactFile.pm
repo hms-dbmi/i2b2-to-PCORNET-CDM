@@ -309,7 +309,7 @@ sub getSubjectColumns
 {
 	my $configurationObject 	= shift;
 
-	my %mappingFileHash = tranSMARTTextParsing::generateMasterMappingHash($configurationObject->{BASE_PATH});
+	my %mappingFileHash = tranSMARTTextParsing::generateMasterMappingHash($configurationObject->{MAPPING_FILE_DIRECTORY});
 	my %fileSubjectColumnHash;
 	
 	while(my($fileName, $v) = each %mappingFileHash) 
