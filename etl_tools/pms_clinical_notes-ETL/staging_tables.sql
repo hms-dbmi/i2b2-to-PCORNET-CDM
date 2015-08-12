@@ -275,3 +275,15 @@ grant select on "I2B2DEMODATA"."PROVIDER_ID_SEQ" to tm_lz;
 alter user TM_LZ quota unlimited on TRANSMART;
 
 alter user tm_lz quota UNLIMITED on I2B2_DATA; 
+
+CREATE SEQUENCE TM_LZ.node_metadata_id
+ START WITH     160000
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE;
+ 
+ CREATE SEQUENCE TM_LZ.provider_id_seq
+ START WITH     1000000
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE;
