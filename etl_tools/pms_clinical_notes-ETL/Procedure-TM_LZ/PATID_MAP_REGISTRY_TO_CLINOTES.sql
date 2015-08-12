@@ -9,7 +9,7 @@ New_Var NUMBER;
 BEGIN
 for rec in (SELECT distinct PATIENT_NUM,  SOURCESYSTEM_CD FROM I2B2DEMODATA.PATIENT_DIMENSION WHERE sourcesystem_cd LIKE study_id||'%')
 LOOP
-Original_Var := SUBSTR(rec.SOURCESYSTEM_CD,9);
+Original_Var := substr(rec.SOURCESYSTEM_CD,instr(rec.SOURCESYSTEM_CD,':')+1);
 New_Var := rec.PATIENT_NUM;
 
 update TM_LZ.OBSERVATION_FACT_TEMP

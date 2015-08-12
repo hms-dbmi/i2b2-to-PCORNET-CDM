@@ -392,7 +392,7 @@ clinical_notes_write_audit(stepCt,databaseName,procedureName,'Inserted data into
 commit;
 
 execute immediate 'update "NODE_METADATA_TEMP"
-set NODE_METADATA_ID=I2B2DEMODATA.node_metadata_id.NEXTVAL';
+set NODE_METADATA_ID=TM_LZ.node_metadata_id.NEXTVAL';
 
 stepCt := stepCt +1;
 clinical_notes_write_audit(stepCt,databaseName,procedureName,'Inserted data into node_metadata_temp table with nodemetadata id','Done');
@@ -408,7 +408,7 @@ clinical_notes_write_audit(stepCt,databaseName,procedureName,'Inserted data into
 commit;
 
 execute immediate 'update OBSERVATION_FACT_TEMP
-  set provider_id = I2B2DEMODATA.provider_id_seq.NEXTVAL
+  set provider_id = TM_LZ.provider_id_seq.NEXTVAL
   where SOURCESYSTEM_CD= :FactSet'
   USING FactSet;
   
