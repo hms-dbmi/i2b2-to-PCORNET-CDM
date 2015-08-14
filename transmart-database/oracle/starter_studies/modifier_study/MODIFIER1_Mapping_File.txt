@@ -1,5 +1,0 @@
-Filename	Category Code	Column Number	Data Label	Controlled Vocab Cd
-MODIFIERS1.txt	Modifier_Study+Demographics	1	SUBJ_ID	
-MODIFIERS1.txt	Modifier_Study+Demographics	2	SEX	
-MODIFIERS1.txt	Modifier_Study+Demographics	3	AGE	
-MODIFIERS1.txt	Modifier_Study	4	Allergy	

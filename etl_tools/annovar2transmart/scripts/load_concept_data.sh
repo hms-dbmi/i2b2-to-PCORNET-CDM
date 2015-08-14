@@ -1,1 +1,0 @@
-/usr/bin/time -v sqlldr tm_lz/tm_lz@ORCL control=../control_files/conceptDimension.ctl log=../log_files/concept_dimension.log

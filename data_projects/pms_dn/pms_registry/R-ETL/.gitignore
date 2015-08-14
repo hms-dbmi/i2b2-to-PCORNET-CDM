@@ -1,7 +1,0 @@
-data*.csv
-.R*
-output/
-KEGG*
-hg*
-refGene*
-liftOver
